@@ -201,4 +201,6 @@ chroot /target apt-get clean
 db_progress STEP 30
 db_progress STOP
 
+touch /target/etc/default/google-chrome
+
 load_install_cd
