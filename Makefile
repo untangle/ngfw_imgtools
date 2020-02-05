@@ -66,18 +66,6 @@ unpatch-installer:
 	  rm -f patch-installer-stamp ; \
 	fi
 
-debian-installer: debian-installer-stamp
-debian-installer-stamp: d-i/build/config/common d-i/build/config/i386.cfg d-i/build/config/i386/hd-media.cfg d-i/build/config/i386/hd-media.cfg
-	echo TARGET
-	ls -l $@ || true
-	echo PREREQS
-	ls -l $^
-	echo NEWER
-	ls -l $?
-	perl -pe 's|\+DISTRIBUTION\+|'$(DISTRIBUTION)'| ; s|\+REPOSITORY\+|'$(REPOSITORY)'|' $(IMGTOOLS_DIR)/d-i.sources.template >| $(IMGTOOLS_DIR)/d-i/build/sources.list.udeb.local
-	cd $(IMGTOOLS_DIR)/d-i ; fakeroot debian/rules clean binary
-	touch $@
-
 repoint-stable:
 	$(PKGTOOLS_DIR)/package-server-proxy.sh $(PKGTOOLS_DIR)/create-di-links.sh $(REPOSITORY) $(DISTRIBUTION)
 

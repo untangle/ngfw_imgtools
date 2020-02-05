@@ -1,1 +1,0 @@
-deb [trusted=yes] http://package-server/public/+REPOSITORY+ +DISTRIBUTION+ main main/debian-installer

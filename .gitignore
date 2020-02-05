@@ -2,4 +2,3 @@ resources
 tmp/
 debian-installer*
 !debian-installer.d
-d-i/build/sources.list.udeb.local
