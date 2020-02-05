@@ -50,7 +50,7 @@ CUSTOMSIZE := $(shell echo $$(( 680 * 1024 * 1024 / 2048 )) ) # from MB to 2kB b
 all:
 
 installer-clean:
-	cd $(IMGTOOLS_DIR)/d-i ; sudo fakeroot debian/rules clean ; cd ..
+	cd $(IMGTOOLS_DIR)/d-i ; fakeroot debian/rules clean ; cd ..
 	rm debian-installer-stamp debian-installer*.deb debian-installer*.tar.gz
 
 patch-installer: patch-installer-stamp
@@ -75,7 +75,7 @@ debian-installer-stamp: d-i/build/config/common d-i/build/config/i386.cfg d-i/bu
 	echo NEWER
 	ls -l $?
 	perl -pe 's|\+DISTRIBUTION\+|'$(DISTRIBUTION)'| ; s|\+REPOSITORY\+|'$(REPOSITORY)'|' $(IMGTOOLS_DIR)/d-i.sources.template >| $(IMGTOOLS_DIR)/d-i/build/sources.list.udeb.local
-	cd $(IMGTOOLS_DIR)/d-i ; sudo fakeroot debian/rules clean binary
+	cd $(IMGTOOLS_DIR)/d-i ; fakeroot debian/rules clean binary
 	touch $@
 
 repoint-stable:
