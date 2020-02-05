@@ -94,7 +94,7 @@ iso/%-image: debian-installer iso-conf repoint-stable
 	$(eval flavor := $*)
 	$(eval iso_dir := /tmp/untangle-images-$(REPOSITORY)-$(DISTRIBUTION)-$(flavor))
 	mkdir -p $(iso_dir)
-	export TMP_DIR=$(shell mktemp -d /tmp/imgtools-stretch-$(flavor)-XXXXXX) ; \
+	export TMP_DIR=$(shell mktemp -d /tmp/imgtools-$(DISTRIBUTION)-$(flavor)-XXXXXX) ; \
 	cd $${TMP_DIR} ; \
 	cp -rl $(IMGTOOLS_DIR)/* . 2> /dev/null ; \
 	export CODENAME=$(REPOSITORY) DEBVERSION=$(DEBVERSION) OUT=$(iso_dir) ; \
