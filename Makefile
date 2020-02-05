@@ -51,7 +51,7 @@ all:
 
 installer-clean:
 	cd $(IMGTOOLS_DIR)/d-i ; fakeroot debian/rules clean ; cd ..
-	rm debian-installer-stamp debian-installer*.deb debian-installer*.tar.gz
+	rm -f debian-installer-stamp debian-installer*.deb debian-installer*.tar.gz
 
 patch-installer: patch-installer-stamp
 patch-installer-stamp:
