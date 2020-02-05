@@ -1,8 +1,8 @@
 PKGS := bf-utf-source debiandoc-sgml genext2fs glibc-pic grub-common grub-efi-amd64-bin isolinux libbogl-dev libnewt-pic librsvg2-bin libslang2-pic mklibs module-init-tools pxelinux syslinux-utils tofrodos win32-loader xorriso
 
-ISOTOOLS_DIR := $(shell readlink -f $(shell dirname $(MAKEFILE_LIST)))
+IMGTOOLS_DIR := $(shell readlink -f $(shell dirname $(MAKEFILE_LIST)))
 
-PKGTOOLS_DIR := $(ISOTOOLS_DIR)/../ngfw_pkgtools
+PKGTOOLS_DIR := $(IMGTOOLS_DIR)/../ngfw_pkgtools
 
 ## overridables
 # repository
@@ -24,13 +24,13 @@ ISO_IMAGE := +FLAVOR+-$(VERSION)_$(REPOSITORY)_$(ARCH)_$(DISTRIBUTION)_$(shell d
 USB_IMAGE := $(subst .iso,.img,$(ISO_IMAGE))
 IMAGES_DIR := /data/untangle-images-$(REPOSITORY)
 MOUNT_SCRIPT := /data/image-manager/mounts.py
-NETBOOT_DIR_TXT := $(ISOTOOLS_DIR)/d-i/build/dest/netboot/debian-installer/$(ARCH)
-NETBOOT_DIR_GTK := $(ISOTOOLS_DIR)/d-i/build/dest/netboot/gtk/debian-installer/$(ARCH)
+NETBOOT_DIR_TXT := $(IMGTOOLS_DIR)/d-i/build/dest/netboot/debian-installer/$(ARCH)
+NETBOOT_DIR_GTK := $(IMGTOOLS_DIR)/d-i/build/dest/netboot/gtk/debian-installer/$(ARCH)
 NETBOOT_INITRD_TXT := $(NETBOOT_DIR_TXT)/initrd.gz
 NETBOOT_INITRD_GTK := $(NETBOOT_DIR_GTK)/initrd.gz
 NETBOOT_KERNEL := $(NETBOOT_DIR_TXT)/linux
-BOOT_IMG := $(ISOTOOLS_DIR)/d-i/build/dest/hd-media/boot.img.gz
-PROFILES_DIR := $(ISOTOOLS_DIR)/profiles
+BOOT_IMG := $(IMGTOOLS_DIR)/d-i/build/dest/hd-media/boot.img.gz
+PROFILES_DIR := $(IMGTOOLS_DIR)/profiles
 COMMON_PRESEED :=  $(PROFILES_DIR)/common.preseed
 AUTOPARTITION_PRESEED :=  $(PROFILES_DIR)/auto-partition.preseed
 UNTANGLE_PRESEED := $(PROFILES_DIR)/untangle.preseed
@@ -43,14 +43,14 @@ DEFAULT_PRESEED_EXPERT := $(PROFILES_DIR)/expert.preseed
 DEFAULT_PRESEED_EXTRA := $(DEFAULT_PRESEED_FINAL).extra
 CONF_FILE := $(PROFILES_DIR)/default.conf
 CONF_FILE_TEMPLATE := $(CONF_FILE).template
-DEBIAN_INSTALLER_PATCH := $(ISOTOOLS_DIR)/d-i.patch
-DEBIAN_CD_PATCH := $(ISOTOOLS_DIR)/debian-cd.patch
+DEBIAN_INSTALLER_PATCH := $(IMGTOOLS_DIR)/d-i.patch
+DEBIAN_CD_PATCH := $(IMGTOOLS_DIR)/debian-cd.patch
 CUSTOMSIZE := $(shell echo $$(( 680 * 1024 * 1024 / 2048 )) ) # from MB to 2kB blocks
 
 all:
 
 installer-clean:
-	cd $(ISOTOOLS_DIR)/d-i ; sudo fakeroot debian/rules clean ; cd ..
+	cd $(IMGTOOLS_DIR)/d-i ; sudo fakeroot debian/rules clean ; cd ..
 	rm debian-installer-stamp debian-installer*.deb debian-installer*.tar.gz
 
 patch-installer: patch-installer-stamp
@@ -74,16 +74,16 @@ debian-installer-stamp: d-i/build/config/common d-i/build/config/i386.cfg d-i/bu
 	ls -l $^
 	echo NEWER
 	ls -l $?
-	perl -pe 's|\+DISTRIBUTION\+|'$(DISTRIBUTION)'| ; s|\+REPOSITORY\+|'$(REPOSITORY)'|' $(ISOTOOLS_DIR)/d-i.sources.template >| $(ISOTOOLS_DIR)/d-i/build/sources.list.udeb.local
-	cd $(ISOTOOLS_DIR)/d-i ; sudo fakeroot debian/rules clean binary
+	perl -pe 's|\+DISTRIBUTION\+|'$(DISTRIBUTION)'| ; s|\+REPOSITORY\+|'$(REPOSITORY)'|' $(IMGTOOLS_DIR)/d-i.sources.template >| $(IMGTOOLS_DIR)/d-i/build/sources.list.udeb.local
+	cd $(IMGTOOLS_DIR)/d-i ; sudo fakeroot debian/rules clean binary
 	touch $@
 
 repoint-stable:
 	$(PKGTOOLS_DIR)/package-server-proxy.sh $(PKGTOOLS_DIR)/create-di-links.sh $(REPOSITORY) $(DISTRIBUTION)
 
 iso-conf:
-	perl -pe 's|\+DISTRIBUTION\+|'$(DISTRIBUTION)'| ; s|\+REPOSITORY\+|'$(REPOSITORY)'|' $(ISOTOOLS_DIR)/d-i.sources.template >| $(ISOTOOLS_DIR)/d-i/build/sources.list.udeb.local
-	perl -pe 's|\+ISOTOOLS_DIR\+|'$(ISOTOOLS_DIR)'|g' $(CONF_FILE_TEMPLATE) >| $(CONF_FILE)
+	perl -pe 's|\+DISTRIBUTION\+|'$(DISTRIBUTION)'| ; s|\+REPOSITORY\+|'$(REPOSITORY)'|' $(IMGTOOLS_DIR)/d-i.sources.template >| $(IMGTOOLS_DIR)/d-i/build/sources.list.udeb.local
+	perl -pe 's|\+IMGTOOLS_DIR\+|'$(IMGTOOLS_DIR)'|g' $(CONF_FILE_TEMPLATE) >| $(CONF_FILE)
 
 	cat $(COMMON_PRESEED) $(AUTOPARTITION_PRESEED) $(NETBOOT_PRESEED_EXTRA) $(UNTANGLE_PRESEED) | perl -pe 's|\+VERSION\+|'$(VERSION)'|g ; s|\+ARCH\+|'$(ARCH)'|g ; s|\+REPOSITORY\+|'$(REPOSITORY)'|g ; s|\+KERNELS\+|'$(KERNELS_$(ARCH))'|g ; s/^(d-i preseed\/early_command string anna-install.*)/#$1/' >| $(NETBOOT_PRESEED_FINAL)
 	cat $(COMMON_PRESEED) $(AUTOPARTITION_PRESEED) $(DEFAULT_PRESEED_EXTRA) | perl -pe 's|\+VERSION\+|'$(VERSION)'|g ; s|\+ARCH\+|'$(ARCH)'|g ; s|\+REPOSITORY\+|'$(REPOSITORY)'|g ; s|\+KERNELS\+|'$(KERNELS_$(ARCH))'|g' >| $(DEFAULT_PRESEED_FINAL)
@@ -94,44 +94,44 @@ iso/%-image: debian-installer iso-conf repoint-stable
 	$(eval flavor := $*)
 	$(eval iso_dir := /tmp/untangle-images-$(REPOSITORY)-$(DISTRIBUTION)-$(flavor))
 	mkdir -p $(iso_dir)
-	export TMP_DIR=$(shell mktemp -d /tmp/isotools-stretch-$(flavor)-XXXXXX) ; \
+	export TMP_DIR=$(shell mktemp -d /tmp/imgtools-stretch-$(flavor)-XXXXXX) ; \
 	cd $${TMP_DIR} ; \
-	cp -rl $(ISOTOOLS_DIR)/* . 2> /dev/null ; \
+	cp -rl $(IMGTOOLS_DIR)/* . 2> /dev/null ; \
 	export CODENAME=$(REPOSITORY) DEBVERSION=$(DEBVERSION) OUT=$(iso_dir) ; \
 	export CDNAME=$(flavor) DISKTYPE=CUSTOM CUSTOMSIZE=$(CUSTOMSIZE) ; \
-	build-simple-cdd --keyring /usr/share/keyrings/untangle-archive-keyring.gpg --force-root --auto-profiles default,untangle,$(flavor) --profiles untangle,$(flavor),expert --debian-mirror http://package-server/public/$(REPOSITORY)/ --security-mirror http://package-server/public/$(REPOSITORY)/ --dist $(REPOSITORY) --require-optional-packages --mirror-tools reprepro --extra-udeb-dist $(DISTRIBUTION) --do-mirror --verbose --logfile $(ISOTOOLS_DIR)/simplecdd.log  ; \
+	build-simple-cdd --keyring /usr/share/keyrings/untangle-archive-keyring.gpg --force-root --auto-profiles default,untangle,$(flavor) --profiles untangle,$(flavor),expert --debian-mirror http://package-server/public/$(REPOSITORY)/ --security-mirror http://package-server/public/$(REPOSITORY)/ --dist $(REPOSITORY) --require-optional-packages --mirror-tools reprepro --extra-udeb-dist $(DISTRIBUTION) --do-mirror --verbose --logfile $(IMGTOOLS_DIR)/simplecdd.log  ; \
 	rm -fr $${TMP_DIR}
 	mv $(iso_dir)/$(flavor)-$(DEBVERSION)*-$(ARCH)-*1.iso $(iso_dir)/$(subst +FLAVOR+,$(flavor),$(ISO_IMAGE))
 
 iso/%-clean:
-	rm -fr $(ISOTOOLS_DIR)/tmp /tmp/untangle-images-$(REPOSITORY)-$(DISTRIBUTION)-$*
+	rm -fr $(IMGTOOLS_DIR)/tmp /tmp/untangle-images-$(REPOSITORY)-$(DISTRIBUTION)-$*
 
 usb/%-image:
 	$(eval flavor := $*)
 	$(eval iso_dir := /tmp/untangle-images-$(REPOSITORY)-$(DISTRIBUTION)-$(flavor))
 	$(eval iso_image := $(shell ls --sort=time $(iso_dir)/*$(VERSION)*$(REPOSITORY)*$(ARCH)*$(DISTRIBUTION)*.iso | head -1))
-	$(ISOTOOLS_DIR)/make_usb.sh $(BOOT_IMG) $(iso_image) $(iso_dir)/$(subst +FLAVOR+,$(flavor),$(USB_IMAGE)) $(flavor)
+	$(IMGTOOLS_DIR)/make_usb.sh $(BOOT_IMG) $(iso_image) $(iso_dir)/$(subst +FLAVOR+,$(flavor),$(USB_IMAGE)) $(flavor)
 
 ova/%-image:
-	make -C $(ISOTOOLS_DIR)/ova FLAVOR=$* image
+	make -C $(IMGTOOLS_DIR)/ova FLAVOR=$* image
 ova/%-push:
-	make -C $(ISOTOOLS_DIR)/ova FLAVOR=$* push
+	make -C $(IMGTOOLS_DIR)/ova FLAVOR=$* push
 ova/%-clean:
-	make -C $(ISOTOOLS_DIR)/ova FLAVOR=$* clean
+	make -C $(IMGTOOLS_DIR)/ova FLAVOR=$* clean
 
 # cloud/<provider>/<license> -> make LICENSE=<license> <provider>-image
 cloud/%-image:
 	$(eval license := $(shell basename $*))
 	$(eval provider := $(shell dirname $(subst cloud/,"",$*)))
-	make -C $(ISOTOOLS_DIR)/cloud LICENSE=$(license) $(provider)-image
+	make -C $(IMGTOOLS_DIR)/cloud LICENSE=$(license) $(provider)-image
 cloud/%-push:
 	$(eval license := $(shell basename $*))
 	$(eval provider := $(shell dirname $(subst cloud/,"",$*)))
-	make -C $(ISOTOOLS_DIR)/cloud LICENSE=$(license) $(provider)-push
+	make -C $(IMGTOOLS_DIR)/cloud LICENSE=$(license) $(provider)-push
 cloud/%-clean:
 	$(eval license := $(shell basename $*))
 	$(eval provider := $(shell dirname $(subst cloud/,"",$*)))
-	make -C $(ISOTOOLS_DIR)/cloud LICENSE=$(license) clean
+	make -C $(IMGTOOLS_DIR)/cloud LICENSE=$(license) clean
 
 iso/%-push: # pushes the most recent images
 	$(eval iso_dir := /tmp/untangle-images-$(REPOSITORY)-$(DISTRIBUTION)-$*)
@@ -151,12 +151,12 @@ iso/%-push: # pushes the most recent images
 # "make -C firmware/buffalo-wzr1900dhp image"
 
 %-image:
-	make -C $(ISOTOOLS_DIR)/firmware/$(subst /,-,$*) image
+	make -C $(IMGTOOLS_DIR)/firmware/$(subst /,-,$*) image
 %-rootfs:
-	make -C $(ISOTOOLS_DIR)/firmware/$(subst /,-,$*) rootfs
+	make -C $(IMGTOOLS_DIR)/firmware/$(subst /,-,$*) rootfs
 %-push:
-	make -C $(ISOTOOLS_DIR)/firmware/$(subst /,-,$*) push
+	make -C $(IMGTOOLS_DIR)/firmware/$(subst /,-,$*) push
 %-clean:
-	make -C $(ISOTOOLS_DIR)/firmware/$(subst /,-,$*) clean
+	make -C $(IMGTOOLS_DIR)/firmware/$(subst /,-,$*) clean
 
 .PHONY: all debian-installer
