@@ -1,5 +1,5 @@
-diff --git d-i/build/config/amd64/hd-media.cfg b/isotools-stretch/d-i/build/config/amd64/hd-media.cfg
-index 9e1e49c..e3ace1d 100644
+diff --git d-i/build/config/amd64/hd-media.cfg d-i/build/config/amd64/hd-media.cfg
+index 9e1e49c..f18cb4e 100644
 --- d-i/build/config/amd64/hd-media.cfg
 +++ d-i/build/config/amd64/hd-media.cfg
 @@ -4,7 +4,7 @@ FLAVOUR_SUPPORTED = "" gtk
@@ -11,8 +11,8 @@ index 9e1e49c..e3ace1d 100644
  
  DISK_LABEL = "bootable drive"
  MEDIA_TYPE = bootable drive
-diff --git a/d-i/build/config/common b/d-i/build/config/common
-index c473b11..3e68d29 100644
+diff --git d-i/build/config/common d-i/build/config/common
+index 7a4bd8e..bde6250 100644
 --- d-i/build/config/common
 +++ d-i/build/config/common
 @@ -11,7 +11,7 @@
@@ -24,7 +24,7 @@ index c473b11..3e68d29 100644
  
  # Always "di" these days
  KERNEL_FLAVOUR ?= di
-@@ -96,7 +96,7 @@ LSB_DISTRIB_RELEASE="$(DEBIAN_VERSION) - installer build $(BUILD_DATE)"
+@@ -104,7 +104,7 @@ LSB_DISTRIB_RELEASE="$(DEBIAN_VERSION) - installer build $(BUILD_DATE)"
  
  # This keyring is only used to verify udeb downloads using apt. Since the
  # build process does not run as root, apt cannot read /etc/apt/trusted.gpg.
@@ -33,20 +33,8 @@ index c473b11..3e68d29 100644
  
  # All images that include cdebconf should include symbols needed by these
  # plugins.
-diff --git d-i/build/config/i386/hd-media.cfg b/isotools-stretch/d-i/build/config/i386/hd-media.cfg
-index 9e1e49c..e3ace1d 100644
---- d-i/build/config/i386/hd-media.cfg
-+++ d-i/build/config/i386/hd-media.cfg
-@@ -4,7 +4,7 @@ FLAVOUR_SUPPORTED = "" gtk
- # netinst iso in (being able to fit the full CD on it is just a bonus..),
- # and small enough to fit on a low-end memory stick, such as those
- # advertised as being 1 gigabyte in size.
--FLOPPY_SIZE = 976560
-+FLOPPY_SIZE = 760000
- 
- DISK_LABEL = "bootable drive"
- MEDIA_TYPE = bootable drive
-diff --git a/d-i/build/config/i386.cfg b/d-i/build/config/i386.cfg
+diff --git d-i/build/config/i386.cfg d-i/build/config/i386.cfg
+index b0ae222..9dee8cb 100644
 --- d-i/build/config/i386.cfg
 +++ d-i/build/config/i386.cfg
 @@ -3,7 +3,7 @@ MEDIUM_SUPPORTED_EXTRA = monolithic
@@ -58,3 +46,16 @@ diff --git a/d-i/build/config/i386.cfg b/d-i/build/config/i386.cfg
  KERNELMAJOR = 2.6
  KERNELNAME = vmlinuz
  
+diff --git d-i/build/config/i386/hd-media.cfg d-i/build/config/i386/hd-media.cfg
+index 9e1e49c..f18cb4e 100644
+--- d-i/build/config/i386/hd-media.cfg
++++ d-i/build/config/i386/hd-media.cfg
+@@ -4,7 +4,7 @@ FLAVOUR_SUPPORTED = "" gtk
+ # netinst iso in (being able to fit the full CD on it is just a bonus..),
+ # and small enough to fit on a low-end memory stick, such as those
+ # advertised as being 1 gigabyte in size.
+-FLOPPY_SIZE = 976560
++FLOPPY_SIZE = 760000
+ 
+ DISK_LABEL = "bootable drive"
+ MEDIA_TYPE = bootable drive
