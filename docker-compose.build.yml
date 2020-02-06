@@ -39,7 +39,7 @@ services:
         - "package-server:${PACKAGE_SERVER_IP:-173.14.28.193}"
       volumes:
         - .:/opt/untangle/build
-        - pkgtools:/opt/untangle/ngfw_pkgtools:ro
+        - pkgtools:/opt/untangle/ngfw_pkgtools
         - /tmp/travis-buildbot.rsa:/tmp/travis-buildbot.rsa
         - /etc/apt/apt.conf.d/01proxy:/etc/apt/apt.conf.d/01proxy
 
