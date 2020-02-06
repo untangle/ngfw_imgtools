@@ -1,22 +1,13 @@
-PKGS := bf-utf-source debiandoc-sgml genext2fs glibc-pic grub-common grub-efi-amd64-bin isolinux libbogl-dev libnewt-pic librsvg2-bin libslang2-pic mklibs module-init-tools pxelinux syslinux-utils tofrodos win32-loader xorriso
-
-IMGTOOLS_DIR := $(shell readlink -f $(shell dirname $(MAKEFILE_LIST)))
-
-PKGTOOLS_DIR := $(IMGTOOLS_DIR)/../ngfw_pkgtools
-
 ## overridables
-# repository
-REPOSITORY ?= jessie
-# distribution to draw packages from
-DISTRIBUTION ?= testing
-# upstream d-i
-UPSTREAM_DI ?= ~/svn/d-i_lenny
+REPOSITORY ?= buster
+DISTRIBUTION ?= current
 
-NETBOOT_HOST := netboot-server
-
-# constants
+## variables
+IMGTOOLS_DIR := $(shell readlink -f $(shell dirname $(MAKEFILE_LIST)))
+PKGTOOLS_DIR := $(IMGTOOLS_DIR)/../ngfw_pkgtools
+PKGS := bf-utf-source debiandoc-sgml genext2fs glibc-pic grub-common grub-efi-amd64-bin isolinux libbogl-dev libnewt-pic librsvg2-bin libslang2-pic mklibs module-init-tools pxelinux syslinux-utils tofrodos win32-loader xorriso
 ARCH := $(shell dpkg-architecture -qDEB_BUILD_ARCH)
-DEBVERSION := 9.0
+DEBVERSION := 10.0
 KERNELS_i386 := "linux-image-4.19.0-6-untangle-686-pae"
 KERNELS_amd64 := "linux-image-4.19.0-6-untangle-amd64"
 VERSION = $(shell cat $(PKGTOOLS_DIR)/resources/VERSION)
@@ -24,6 +15,7 @@ ISO_IMAGE := +FLAVOR+-$(VERSION)_$(REPOSITORY)_$(ARCH)_$(DISTRIBUTION)_$(shell d
 USB_IMAGE := $(subst .iso,.img,$(ISO_IMAGE))
 IMAGES_DIR := /data/untangle-images-$(REPOSITORY)
 MOUNT_SCRIPT := /data/image-manager/mounts.py
+NETBOOT_HOST := netboot-server
 NETBOOT_DIR_TXT := $(IMGTOOLS_DIR)/d-i/build/dest/netboot/debian-installer/$(ARCH)
 NETBOOT_DIR_GTK := $(IMGTOOLS_DIR)/d-i/build/dest/netboot/gtk/debian-installer/$(ARCH)
 NETBOOT_INITRD_TXT := $(NETBOOT_DIR_TXT)/initrd.gz
@@ -46,26 +38,26 @@ CONF_FILE_TEMPLATE := $(CONF_FILE).template
 DEBIAN_INSTALLER_PATCH := $(IMGTOOLS_DIR)/d-i.patch
 DEBIAN_CD_PATCH := $(IMGTOOLS_DIR)/debian-cd.patch
 CUSTOMSIZE := $(shell echo $$(( 680 * 1024 * 1024 / 2048 )) ) # from MB to 2kB blocks
+DI_PATCH_STAMP := patch-installer-stamp
 
-all:
+## main section
+all: # do nothing by default
 
-installer-clean:
-	cd $(IMGTOOLS_DIR)/d-i ; fakeroot debian/rules clean ; cd ..
-	rm -f debian-installer-stamp debian-installer*.deb debian-installer*.tar.gz
-
-patch-installer: patch-installer-stamp
-patch-installer-stamp:
+## d-i section
+d-i/patch: $(DI_PATCH_STAMP)
+$(DI_PATCH_STAMP):
 	patch -p0 < $(DEBIAN_INSTALLER_PATCH)
 	patch -p0 < $(DEBIAN_CD_PATCH)
 	touch $@
 
-unpatch-installer:
-	if [ -f patch-installer-stamp ] ; then \
+d-i/unpatch:
+	if [ -f $(DI_PATCH_STAMP) ] ; then \
 	  patch -p0 -R < $(DEBIAN_INSTALLER_PATCH) ; \
 	  patch -p0 -R < $(DEBIAN_CD_PATCH) ; \
-	  rm -f patch-installer-stamp ; \
+	  rm -f $(DI_PATCH_STAMP) ; \
 	fi
 
+## iso section
 repoint-stable:
 	$(PKGTOOLS_DIR)/package-server-proxy.sh $(PKGTOOLS_DIR)/create-di-links.sh $(REPOSITORY) $(DISTRIBUTION)
 
@@ -94,12 +86,14 @@ iso/%-image: debian-installer iso-conf repoint-stable
 iso/%-clean:
 	rm -fr $(IMGTOOLS_DIR)/tmp /tmp/untangle-images-$(REPOSITORY)-$(DISTRIBUTION)-$*
 
+## usb-section
 usb/%-image:
 	$(eval flavor := $*)
 	$(eval iso_dir := /tmp/untangle-images-$(REPOSITORY)-$(DISTRIBUTION)-$(flavor))
 	$(eval iso_image := $(shell ls --sort=time $(iso_dir)/*$(VERSION)*$(REPOSITORY)*$(ARCH)*$(DISTRIBUTION)*.iso | head -1))
 	$(IMGTOOLS_DIR)/make_usb.sh $(BOOT_IMG) $(iso_image) $(iso_dir)/$(subst +FLAVOR+,$(flavor),$(USB_IMAGE)) $(flavor)
 
+## ova-section
 ova/%-image:
 	make -C $(IMGTOOLS_DIR)/ova FLAVOR=$* image
 ova/%-push:
@@ -107,6 +101,7 @@ ova/%-push:
 ova/%-clean:
 	make -C $(IMGTOOLS_DIR)/ova FLAVOR=$* clean
 
+## cloud-section
 # cloud/<provider>/<license> -> make LICENSE=<license> <provider>-image
 cloud/%-image:
 	$(eval license := $(shell basename $*))
@@ -134,6 +129,8 @@ iso/%-push: # pushes the most recent images
 
 	ssh $(NETBOOT_HOST) "sudo python $(MOUNT_SCRIPT) all $(VERSION) foo $(ARCH) $(REPOSITORY)"
 
+## firmware section
+
 # the next 4 rules are generic ones meant for firmware images; they
 # take something like "buffalo/wzr1900dhp-image" and make it into
 # "make -C firmware/buffalo-wzr1900dhp image"
@@ -146,5 +143,3 @@ iso/%-push: # pushes the most recent images
 	make -C $(IMGTOOLS_DIR)/firmware/$(subst /,-,$*) push
 %-clean:
 	make -C $(IMGTOOLS_DIR)/firmware/$(subst /,-,$*) clean
-
-.PHONY: all debian-installer
