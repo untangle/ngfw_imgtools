@@ -35,26 +35,30 @@ DEFAULT_PRESEED_EXPERT := $(PROFILES_DIR)/expert.preseed
 DEFAULT_PRESEED_EXTRA := $(DEFAULT_PRESEED_FINAL).extra
 CONF_FILE := $(PROFILES_DIR)/default.conf
 CONF_FILE_TEMPLATE := $(CONF_FILE).template
-DEBIAN_INSTALLER_PATCH := $(IMGTOOLS_DIR)/d-i.patch
-DEBIAN_CD_PATCH := $(IMGTOOLS_DIR)/debian-cd.patch
 CUSTOMSIZE := $(shell echo $$(( 680 * 1024 * 1024 / 2048 )) ) # from MB to 2kB blocks
-DI_PATCH_STAMP := patch-installer-stamp
+DEBIAN_INSTALLER_PATCH := $(IMGTOOLS_DIR)/patches/d-i.patch
+DEBIAN_CD_PATCH := $(IMGTOOLS_DIR)/patches/debian-cd.patch
+DEBIAN_PKGS_PATCH := $(IMGTOOLS_DIR)/patches/installer-pkgs.patch
+DEBIAN_PATCHES := $(DEBIAN_INSTALLER_PATCH) $(DEBIAN_CD_PATCH) $(DEBIAN_PKGS_PATCH)
+DEBIAN_PATCH_STAMP := patch-stamp
 
 ## main section
 all: # do nothing by default
 
 ## d-i section
-d-i/patch: $(DI_PATCH_STAMP)
-$(DI_PATCH_STAMP):
-	patch -p0 < $(DEBIAN_INSTALLER_PATCH)
-	patch -p0 < $(DEBIAN_CD_PATCH)
+d-i/patch: $(DEBIAN_PATCH_STAMP)
+$(DEBIAN_PATCH_STAMP):
+	for p in $(DEBIAN_PATCHES) ; do \
+	  patch -p0 < $$p ; \
+	done
 	touch $@
 
 d-i/unpatch:
-	if [ -f $(DI_PATCH_STAMP) ] ; then \
-	  patch -p0 -R < $(DEBIAN_INSTALLER_PATCH) ; \
-	  patch -p0 -R < $(DEBIAN_CD_PATCH) ; \
-	  rm -f $(DI_PATCH_STAMP) ; \
+	if [ -f $(DEBIAN_PATCH_STAMP) ] ; then \
+	  for p in $(DEBIAN_PATCHES) ; do \
+	    patch -p0 -R < $$p ; \
+	  done ; \
+	  rm -f $(DEBIAN_PATCH_STAMP) ; \
 	fi
 
 ## iso section
