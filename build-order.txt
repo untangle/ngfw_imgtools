@@ -1,1 +1,5 @@
-d-i buster
+installer-pkgs-modified/cdebconf	buster
+installer-pkgs-modified/pkgsel		buster
+installer-pkgs-modified/rootskel-gtk	buster
+installer-pkgs-modified/base-installer	buster
+d-i					buster
