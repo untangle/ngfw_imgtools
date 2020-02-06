@@ -124,3 +124,15 @@ index cfa637c..e5da053 100644
  	dark/gtk-2.0/gtkrc
  
  #  I should put Makefiles in all intermediate directories, let's get lazy
+diff --git installer-pkgs-modified/base-installer/UNTANGLE-KEEP-UPSTREAM-VERSION installer-pkgs-modified/base-installer/UNTANGLE-KEEP-UPSTREAM-VERSION
+new file mode 100644
+index 0000000..e69de29
+diff --git installer-pkgs-modified/cdebconf/UNTANGLE-KEEP-UPSTREAM-VERSION installer-pkgs-modified/cdebconf/UNTANGLE-KEEP-UPSTREAM-VERSION
+new file mode 100644
+index 0000000..e69de29
+diff --git installer-pkgs-modified/pkgsel/UNTANGLE-KEEP-UPSTREAM-VERSION installer-pkgs-modified/pkgsel/UNTANGLE-KEEP-UPSTREAM-VERSION
+new file mode 100644
+index 0000000..e69de29
+diff --git installer-pkgs-modified/rootskel-gtk/UNTANGLE-KEEP-UPSTREAM-VERSION installer-pkgs-modified/rootskel-gtk/UNTANGLE-KEEP-UPSTREAM-VERSION
+new file mode 100644
+index 0000000..e69de29
