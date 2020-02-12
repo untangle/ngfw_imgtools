@@ -1,0 +1,39 @@
+sudo: required
+
+git:
+  depth: false
+
+services:
+- docker
+
+env:
+  global:
+    - SSH_KEY: /tmp/travis-buildbot.rsa
+  jobs:
+    - REPOSITORY: buster
+      DISTRIBUTION: current
+      ARCHITECTURE: amd64
+      PKGTOOLS_COMMIT: origin/master
+      UPLOAD: scp
+    - REPOSITORY: buster
+      DISTRIBUTION: current
+      ARCHITECTURE: i386
+      PKGTOOLS_COMMIT: origin/master
+      UPLOAD: scp
+
+before_install:
+- docker pull untangleinc/ngfw:${REPOSITORY}-build
+- openssl aes-256-cbc -K $encrypted_404963842fb3_key -iv $encrypted_404963842fb3_iv -in .travis/buildbot.rsa.enc -out ${SSH_KEY} -d
+- chmod 600 ${SSH_KEY}
+
+script:
+- docker-compose -f docker-compose.build.yml run pkgtools
+- docker-compose -f docker-compose.build.yml run build
+
+notifications:
+  email: false
+  slack:
+    rooms:
+      - secure: SPq7FNnFxWdhOWX8E+rxy7rQuHf4uKodGWN7KkV0Hd1szWpXDike3pCCW6rCR425UJc2jCRLk4cl8oJQRk75g2/H0Vu8Q9anBidKQ+8irdFhmp2b/dO8GVXnK1lUaZ4pCTtbHV7s3KgW4n6sHYL/ovtbZ0JgQCE+LmM/8IuMDItW54PzsbyISxD/NkMZUhMUBWcnBd84PLOvSh6z80g8HKrzBuVaT080Rv2674a/2ad+TPeWFoKELNkKwBrbM/c2EDo/11Nrj+/GaO4kFprU4g1hEx7FnjQiaYFw98bnDBixTN6pP79J6i3eTNx3s3Tm0HhwlmuMNlYV6kljjzD4oNp3HxpBovtZypuwUpQYnBwHGjEMgtTJWJeHha7vGRIdoqPMl/EY4EeozD9fywAzDe2yxFvf0u/MNl3g4me9Gz3gUi+tPnL9RULQfkpOjgImwyWJwVNk0ZA3fBd9AFnJJkqpOIiToELKPjCZfsHQlS4knzVQr+ExN4CpMROWtXRg0qi7nENj28SI/FMtuLrcH1dQ12q8hXPfrkitn0jvMoXgZLdjN8n7nXhYE98sEWBuMc8/SYJC5ADHiZgbdeD8OM7lXZJuJdLc1Vi+By1INvO9BWuuldPoiIPzEaJVpRQljm84lTNwsY+QYYAKpypLaudSEe/nuQUREj4hUpVdkVY=
+    on_success: change
+    on_failure: always
