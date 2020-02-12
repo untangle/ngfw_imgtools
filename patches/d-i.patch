@@ -59,7 +59,7 @@ index 7fa40ac..e50f534 100755
  
  done | perl -ne 'print unless $seen{$_}; $seen{$_}=1'
 +
-+echo "deb [trusted=yes] http://package-server/public/$REPOSITORY $DISTRIBUTION main/debian-installer"
++echo "deb [trusted=yes] http://package-server/public/$REPOSITORY $DISTRIBUTION main/debian-installer" > sources.list.udeb.local
 diff --git debian/rules debian/rules
 index 8e2632f..e4f417d 100755
 --- d-i/debian/rules
