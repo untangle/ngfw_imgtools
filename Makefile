@@ -86,14 +86,23 @@ iso/%-image: repoint-stable iso/dependencies iso/conf
 	$(eval flavor := $*)
 	$(eval iso_dir := /tmp/untangle-images-$(REPOSITORY)-$(DISTRIBUTION)-$(flavor))
 	mkdir -p $(iso_dir)
-	export TMP_DIR=$(shell mktemp -d /tmp/imgtools-$(DISTRIBUTION)-$(flavor)-XXXXXX) ; \
-	cd $${TMP_DIR} ; \
-	cp -rl $(IMGTOOLS_DIR)/* . 2> /dev/null ; \
 	export CODENAME=$(REPOSITORY) DEBVERSION=$(DEBVERSION) OUT=$(iso_dir) ; \
 	export CDNAME=$(flavor) DISKTYPE=CUSTOM CUSTOMSIZE=$(CUSTOMSIZE) ; \
-	build-simple-cdd --keyring /usr/share/keyrings/untangle-archive-keyring.gpg --force-root --auto-profiles default,untangle,$(flavor) --profiles untangle,$(flavor),expert --debian-mirror http://package-server/public/$(REPOSITORY)/ --security-mirror http://package-server/public/$(REPOSITORY)/ --dist $(REPOSITORY) --require-optional-packages --mirror-tools reprepro --extra-udeb-dist $(DISTRIBUTION) --do-mirror --verbose --logfile $(IMGTOOLS_DIR)/simplecdd.log  ; \
-	rm -fr $${TMP_DIR}
+	build-simple-cdd --keyring /usr/share/keyrings/untangle-archive-keyring.gpg --force-root --auto-profiles default,untangle,$(flavor) --profiles untangle,$(flavor),expert --debian-mirror http://package-server/public/$(REPOSITORY)/ --security-mirror http://package-server/public/$(REPOSITORY)/ --dist $(REPOSITORY) --require-optional-packages --mirror-tools reprepro --extra-udeb-dist $(DISTRIBUTION) --do-mirror --verbose --logfile $(IMGTOOLS_DIR)/simplecdd.log  ; 
 	mv $(iso_dir)/$(flavor)-$(DEBVERSION)*-$(ARCH)-*1.iso $(iso_dir)/$(subst +FLAVOR+,$(flavor),$(ISO_IMAGE))
+
+iso/%-push: # pushes the most recent images
+	$(eval iso_dir := /tmp/untangle-images-$(REPOSITORY)-$(DISTRIBUTION)-$*)
+	$(eval iso_image := $(shell ls --sort=time $(iso_dir)/*$(VERSION)*$(REPOSITORY)*$(ARCH)*$(DISTRIBUTION)*.iso | head -1))
+	$(eval usb_image := $(shell ls --sort=time $(iso_dir)/*$(VERSION)*$(REPOSITORY)*$(ARCH)*$(DISTRIBUTION)*.img | head -1))
+	$(eval timestamp := $(shell echo $(iso_image) | perl -pe 's/.*(\d{4}(-\d{2}){2}T(\d{2}:?){3}).*/$$1/'))
+	ssh $(NETBOOT_HOST) "sudo python $(MOUNT_SCRIPT) new $(VERSION) $(timestamp) $(ARCH) $(REPOSITORY)"
+	scp $(iso_image) $(usb_image) $(NETBOOT_PRESEED_FINAL) $(NETBOOT_PRESEED_EXPERT) $(NETBOOT_HOST):$(IMAGES_DIR)/$(VERSION)
+	scp $(NETBOOT_INITRD_TXT) $(NETBOOT_HOST):$(IMAGES_DIR)/$(VERSION)/initrd-$(ARCH)-txt.gz
+	scp $(NETBOOT_INITRD_GTK) $(NETBOOT_HOST):$(IMAGES_DIR)/$(VERSION)/initrd-$(ARCH)-gtk.gz
+	scp $(NETBOOT_KERNEL) $(NETBOOT_HOST):$(IMAGES_DIR)/$(VERSION)/linux-$(ARCH)
+
+	ssh $(NETBOOT_HOST) "sudo python $(MOUNT_SCRIPT) all $(VERSION) foo $(ARCH) $(REPOSITORY)"
 
 iso/%-clean:
 	rm -fr $(IMGTOOLS_DIR)/tmp /tmp/untangle-images-$(REPOSITORY)-$(DISTRIBUTION)-$*
@@ -127,19 +136,6 @@ cloud/%-clean:
 	$(eval license := $(shell basename $*))
 	$(eval provider := $(shell dirname $(subst cloud/,"",$*)))
 	make -C $(IMGTOOLS_DIR)/cloud LICENSE=$(license) clean
-
-iso/%-push: # pushes the most recent images
-	$(eval iso_dir := /tmp/untangle-images-$(REPOSITORY)-$(DISTRIBUTION)-$*)
-	$(eval iso_image := $(shell ls --sort=time $(iso_dir)/*$(VERSION)*$(REPOSITORY)*$(ARCH)*$(DISTRIBUTION)*.iso | head -1))
-	$(eval usb_image := $(shell ls --sort=time $(iso_dir)/*$(VERSION)*$(REPOSITORY)*$(ARCH)*$(DISTRIBUTION)*.img | head -1))
-	$(eval timestamp := $(shell echo $(iso_image) | perl -pe 's/.*(\d{4}(-\d{2}){2}T(\d{2}:?){3}).*/$$1/'))
-	ssh $(NETBOOT_HOST) "sudo python $(MOUNT_SCRIPT) new $(VERSION) $(timestamp) $(ARCH) $(REPOSITORY)"
-	scp $(iso_image) $(usb_image) $(NETBOOT_PRESEED_FINAL) $(NETBOOT_PRESEED_EXPERT) $(NETBOOT_HOST):$(IMAGES_DIR)/$(VERSION)
-	scp $(NETBOOT_INITRD_TXT) $(NETBOOT_HOST):$(IMAGES_DIR)/$(VERSION)/initrd-$(ARCH)-txt.gz
-	scp $(NETBOOT_INITRD_GTK) $(NETBOOT_HOST):$(IMAGES_DIR)/$(VERSION)/initrd-$(ARCH)-gtk.gz
-	scp $(NETBOOT_KERNEL) $(NETBOOT_HOST):$(IMAGES_DIR)/$(VERSION)/linux-$(ARCH)
-
-	ssh $(NETBOOT_HOST) "sudo python $(MOUNT_SCRIPT) all $(VERSION) foo $(ARCH) $(REPOSITORY)"
 
 ## firmware section
 
