@@ -41,7 +41,7 @@ slapd slapd/password1 string
 slapd slapd/password2 string
 
 # kernel choice
-base-installer base-installer/kernel/image string +KERNELS+
+base-installer base-installer/kernel/image string +KERNEL+
 
 
 ### Network configuration
