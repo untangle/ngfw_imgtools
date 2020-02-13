@@ -24,7 +24,6 @@ export CONTRIB=0
 export COPYLINKS=0
 export MKISOFS_OPTS="-r -A 000000"
 
-# Define the CD label
-export DISKINFO="Untangle"
+export DISKTYPE=CUSTOM
 
 #do_mirror="false"
