@@ -1,8 +1,8 @@
 diff --git debian-cd/tools/boot/stretch/boot-x86 debian-cd/tools/boot/stretch/boot-x86
 index 0c250ef..1c61fa1 100644
---- debian-cd/tools/boot/stretch/boot-x86
-+++ debian-cd/tools/boot/stretch/boot-x86
-@@ -449,6 +449,11 @@ if [ -n "$KERNEL_PARAMS" ]; then
+--- debian-cd/tools/boot/buster/boot-x86
++++ debian-cd/tools/boot/buster/boot-x86
+@@ -451,6 +451,11 @@ if [ -n "$KERNEL_PARAMS" ]; then
      done
  fi
  
