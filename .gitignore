@@ -11,3 +11,4 @@ profiles/netboot.preseed.amd64
 images
 *.iso
 *.img
+profiles/untangle.packages
