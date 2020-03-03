@@ -1,16 +1,3 @@
-diff --git d-i/build/config/amd64/hd-media.cfg d-i/build/config/amd64/hd-media.cfg
-index 9e1e49c..f18cb4e 100644
---- d-i/build/config/amd64/hd-media.cfg
-+++ d-i/build/config/amd64/hd-media.cfg
-@@ -4,7 +4,7 @@ FLAVOUR_SUPPORTED = "" gtk
- # netinst iso in (being able to fit the full CD on it is just a bonus..),
- # and small enough to fit on a low-end memory stick, such as those
- # advertised as being 1 gigabyte in size.
--FLOPPY_SIZE = 976560
-+FLOPPY_SIZE = 760000
- 
- DISK_LABEL = "bootable drive"
- MEDIA_TYPE = bootable drive
 diff --git d-i/build/config/common d-i/build/config/common
 index 7a4bd8e..bde6250 100644
 --- d-i/build/config/common
@@ -37,19 +24,6 @@ index b0ae222..9dee8cb 100644
  KERNELMAJOR = 2.6
  KERNELNAME = vmlinuz
  
-diff --git d-i/build/config/i386/hd-media.cfg d-i/build/config/i386/hd-media.cfg
-index 9e1e49c..f18cb4e 100644
---- d-i/build/config/i386/hd-media.cfg
-+++ d-i/build/config/i386/hd-media.cfg
-@@ -4,7 +4,7 @@ FLAVOUR_SUPPORTED = "" gtk
- # netinst iso in (being able to fit the full CD on it is just a bonus..),
- # and small enough to fit on a low-end memory stick, such as those
- # advertised as being 1 gigabyte in size.
--FLOPPY_SIZE = 976560
-+FLOPPY_SIZE = 760000
- 
- DISK_LABEL = "bootable drive"
- MEDIA_TYPE = bootable drive
 diff --git build/util/gen-sources.list.udeb build/util/gen-sources.list.udeb
 index 7fa40ac..e50f534 100755
 --- d-i/build/util/gen-sources.list.udeb
