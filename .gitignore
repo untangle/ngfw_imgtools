@@ -12,3 +12,11 @@ images
 *.iso
 *.img
 profiles/untangle.packages
+d-i/build/boot/x86/pics/futurePrototype.png
+d-i/doc/devel/internals/apa.html
+d-i/doc/devel/internals/apb.html
+d-i/doc/devel/internals/ch01.html
+d-i/doc/devel/internals/ch02.html
+d-i/doc/devel/internals/ch03.html
+d-i/doc/devel/internals/ch04.html
+d-i/doc/devel/internals/ch05.html
