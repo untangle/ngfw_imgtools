@@ -34,6 +34,7 @@ services:
         FORCE: ${FORCE}
         TRAVIS_BRANCH: ${TRAVIS_BRANCH:-master}
         TRAVIS_PULL_REQUEST:
+      privileged: ${PRIVILEGED:-false}
       extra_hosts:
         # from the inside, pass package-server's internal IP instead
         - "package-server:${PACKAGE_SERVER_IP:-173.14.28.193}"

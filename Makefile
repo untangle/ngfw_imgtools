@@ -106,10 +106,10 @@ iso/%-clean:
 	rm -fr $(IMGTOOLS_DIR)/tmp /tmp/untangle-images-$(REPOSITORY)-$(DISTRIBUTION)-$*
 
 ## usb-section
-usb/%-image:
+usb/%-image: iso/conf
 	$(eval flavor := $*)
 	$(eval iso_image := $(shell ls --sort=time *$(VERSION)*$(REPOSITORY)*$(ARCH)*$(DISTRIBUTION)*.iso | head -1))
-	$(IMGTOOLS_DIR)/make_usb.sh $(BOOT_IMG) $(iso_image) $(subst +FLAVOR+,$(flavor),$(USB_IMAGE)) $(flavor)
+	$(IMGTOOLS_DIR)/usb/make_usb.sh $(BOOT_IMG) $(iso_image) $(subst +FLAVOR+,$(flavor),$(USB_IMAGE)) $(flavor)
 
 ## ova-section
 ova/%-image:
