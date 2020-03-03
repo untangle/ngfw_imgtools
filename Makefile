@@ -81,7 +81,7 @@ iso/conf:
 	cat $(COMMON_PRESEED) $(DEFAULT_PRESEED_EXTRA) | perl -pe 's|\+VERSION\+|'$(VERSION)'|g ; s|\+ARCH\+|'$(ARCH)'|g ; s|\+REPOSITORY\+|'$(REPOSITORY)'|g ; s|\+KERNEL\+|'$(KERNEL)'|g' >| $(DEFAULT_PRESEED_EXPERT)
 
 iso/dependencies:
-	apt install -y simple-cdd dose-distcheck
+	apt install -y simple-cdd dose-distcheck mtools dosfstools
 
 iso/%-image: repoint-stable iso/dependencies iso/conf
 	$(eval flavor := $*)
