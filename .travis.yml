@@ -28,18 +28,18 @@ before_install:
 
 jobs:
   include:
-    - stage: create pkgtools volume
-      script:
-        - docker-compose -f docker-compose.build.yml run pkgtools
     - stage: build udebs and d-i
       script:
+        - docker-compose -f docker-compose.build.yml run pkgtools
         - docker-compose -f docker-compose.build.yml run build
     - stage: build and upload ISO image
       script:
+        - docker-compose -f docker-compose.build.yml run pkgtools
         - docker-compose -f docker-compose.build.yml run build make iso/untangle-image
         - docker-compose -f docker-compose.build.yml run build make iso/untangle-push
     - stage: build and upload USB image
       script:
+        - docker-compose -f docker-compose.build.yml run pkgtools
         - docker-compose -f docker-compose.build.yml run build make usb/untangle-image
         - docker-compose -f docker-compose.build.yml run build make usb/untangle-push
 
