@@ -15,11 +15,11 @@ env:
       ARCHITECTURE: amd64
       PKGTOOLS_COMMIT: origin/master
       UPLOAD: scp
-    - REPOSITORY: buster
-      DISTRIBUTION: current
-      ARCHITECTURE: i386
-      PKGTOOLS_COMMIT: origin/master
-      UPLOAD: scp
+    # - REPOSITORY: buster
+    #   DISTRIBUTION: current
+    #   ARCHITECTURE: i386
+    #   PKGTOOLS_COMMIT: origin/master
+    #   UPLOAD: scp
 
 before_install:
 - docker pull untangleinc/ngfw:${REPOSITORY}-build
