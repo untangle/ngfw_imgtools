@@ -35,13 +35,11 @@ jobs:
     - stage: build and upload ISO image
       script:
         - docker-compose -f docker-compose.build.yml run pkgtools
-        - docker-compose -f docker-compose.build.yml run build make iso/untangle-image
-        - docker-compose -f docker-compose.build.yml run build make iso/untangle-push
+        - docker-compose -f docker-compose.build.yml run build bash -c "../ngfw_pkgtools/build.sh setup-only && make iso/untangle-image iso/untangle-push"
     - stage: build and upload USB image
       script:
         - docker-compose -f docker-compose.build.yml run pkgtools
-        - docker-compose -f docker-compose.build.yml run build make usb/untangle-image
-        - docker-compose -f docker-compose.build.yml run build make usb/untangle-push
+        - docker-compose -f docker-compose.build.yml run build bash -c "../ngfw_pkgtools/build.sh setup-only && make usb/untangle-image usb/untangle-push"
 
 notifications:
   email: false
