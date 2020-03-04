@@ -26,9 +26,22 @@ before_install:
 - openssl aes-256-cbc -K $encrypted_404963842fb3_key -iv $encrypted_404963842fb3_iv -in .travis/buildbot.rsa.enc -out ${SSH_KEY} -d
 - chmod 600 ${SSH_KEY}
 
-script:
-- docker-compose -f docker-compose.build.yml run pkgtools
-- docker-compose -f docker-compose.build.yml run build
+jobs:
+  include:
+    - stage: create pkgtools volume
+      script:
+        - docker-compose -f docker-compose.build.yml run pkgtools
+    - stage: build udebs and d-i
+      script:
+        - docker-compose -f docker-compose.build.yml run build
+    - stage: build and upload ISO image
+      script:
+        - docker-compose -f docker-compose.build.yml run build make iso/untangle-image
+        - docker-compose -f docker-compose.build.yml run build make iso/untangle-push
+    - stage: build and upload USB image
+      script:
+        - docker-compose -f docker-compose.build.yml run build make usb/untangle-image
+        - docker-compose -f docker-compose.build.yml run build make usb/untangle-push
 
 notifications:
   email: false
