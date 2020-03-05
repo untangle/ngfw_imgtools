@@ -32,10 +32,10 @@ jobs:
       script:
         - docker-compose -f docker-compose.build.yml run pkgtools
         - docker-compose -f docker-compose.build.yml run build
-    - stage: build d-i, but do not upload it
+    - stage: build d-i, but do not upload it and do not clean its byproducts
       script:
         - docker-compose -f docker-compose.build.yml run pkgtools
-        - PACKAGE=d-i FORCE=1 UPLOAD= docker-compose -f docker-compose.build.yml run build
+        - PACKAGE=d-i FORCE=1 NO_CLEAN=1 UPLOAD= docker-compose -f docker-compose.build.yml run build
     - stage: build and upload ISO image
       script:
         - docker-compose -f docker-compose.build.yml run pkgtools
