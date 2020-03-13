@@ -38,11 +38,11 @@ services:
         TRAVIS_PULL_REQUEST:
       privileged: ${PRIVILEGED:-false}
       extra_hosts:
-        # from the inside, pass package-server's internal IP instead
-        - "package-server:${PACKAGE_SERVER_IP:-173.14.28.193}"
+        # from the outside, pass package-server's outside IP instead
+        - "package-server:${PACKAGE_SERVER_IP:-10.112.11.105}"
       volumes:
         - .:/opt/untangle/build
-        - pkgtools:/opt/untangle/ngfw_pkgtools
+        - pkgtools:/opt/untangle/ngfw_pkgtools:ro
         - /tmp/travis-buildbot.rsa:/tmp/travis-buildbot.rsa
         - /etc/apt/apt.conf.d/01proxy:/etc/apt/apt.conf.d/01proxy
 
