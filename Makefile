@@ -3,8 +3,12 @@ IMGTOOLS_DIR := $(shell readlink -f $(shell dirname $(MAKEFILE_LIST)))
 PKGTOOLS_DIR := $(IMGTOOLS_DIR)/../ngfw_pkgtools
 
 ## overridables
-REPOSITORY ?= buster
-DISTRIBUTION ?= $(shell cat $(PKGTOOLS_DIR)/resources/DISTRIBUTION)
+ifeq ($(REPOSITORY),)
+REPOSITORY := buster
+endif
+ifeq ($(DISTRIBUTION),)
+DISTRIBUTION := $(shell cat $(PKGTOOLS_DIR)/resources/DISTRIBUTION)
+endif
 
 ## variables
 PKGS := bf-utf-source debiandoc-sgml genext2fs glibc-pic grub-common grub-efi-amd64-bin isolinux libbogl-dev libnewt-pic librsvg2-bin libslang2-pic mklibs module-init-tools pxelinux syslinux-utils tofrodos win32-loader xorriso
