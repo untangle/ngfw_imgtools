@@ -1,16 +1,3 @@
-diff --git d-i/build/config/common d-i/build/config/common
-index 7a4bd8e..bde6250 100644
---- d-i/build/config/common
-+++ d-i/build/config/common
-@@ -11,7 +11,7 @@
- 
- # Default kernel ABI version to use. Append a kernel flavour to
- # produce KERNELVERSION.
--LINUX_KERNEL_ABI ?= 4.19.0-8
-+LINUX_KERNEL_ABI ?= 4.19.0-6
- 
- # Always "di" these days
- KERNEL_FLAVOUR ?= di
 diff --git d-i/build/config/i386.cfg d-i/build/config/i386.cfg
 index b0ae222..9dee8cb 100644
 --- d-i/build/config/i386.cfg

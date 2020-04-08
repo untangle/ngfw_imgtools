@@ -24,7 +24,7 @@ before_install:
 
 jobs:
   include:
-    - stage: build udebs and d-i
+    - stage: build udebs
       script:
         - docker-compose -f docker-compose.build.yml run pkgtools
         - docker-compose -f docker-compose.build.yml run build
