@@ -24,7 +24,7 @@ before_install:
 
 jobs:
   include:
-    - stage: build udebs and d-i
+    - stage: build udebs & d-i
       script:
         - docker-compose -f docker-compose.build.yml run pkgtools
         - docker-compose -f docker-compose.build.yml run build
@@ -39,6 +39,6 @@ notifications:
   email: false
   slack:
     rooms:
-      secure: D/60+reAXKlOXdoeDHEoQYhVRDJWZALD5ZIeIVWtOszCSxu2ej/M3tF9adkg4pLjLvROC8JmAFMIKyVXlItTGQMSqqfHGfY2uKEQtqNiWvneyNIL2cVNgDxAPI+YR2VrTuElJJ4jhoQzmIGC7XlZ6O5wls6WBXo+OQwYO8DR24nHiL2nF3RFrVIgzhSXIok0i7o574EETG2inOrPN1NlKL/CQ9Kc5aKG9nv7AOF9S+9e4zYj723KcIaaRC9gNFdhYj5lFU0BElobMgBg69uti05vRYmBf8qNCNssO05AJwJet8cZSGScqN/l9ZKpuEVdjmiN24cUGzcUDZ5LNuPbmJSgaYD+UXo0mrF/IVETv59splxUu9pcak2d9lmYRJ+ZngAara9p3ksbivDbayAFwML77/Na4cq0rm0QKVx02M5H3XF+VMa2Dn8zW6N3N6NDjX1RvGCoJmIOkwbhMZZ7AhdeLKBcdOH+bfh5oFERU+ur0qaHuiXRkcCFWvNYf8Q8HM11HjQApwdoP1SvLX0XeiSb3UCaa4UElwiCDS31IxjkSCYtqKSrTebNiU1r5A6vwE6DMTZ+jVJI/Pk9pIO2RJe922UiPaaGBeV3FzkuBS5+ICb3bRBWqaJaOF5Kqm7gkE1YH7VipThBIzLrDlQxw+Yf/q5280xREcxrpmJickM=
+      secure: plrP2XptL2y33ok5Wvp692FEcdffgQrp8J6Yw6B7sPXZ604ZArPe6K9BCpDzioPMDwOGeFKfKa+tB8yRjO1orKxRzOKbZgO0qI4Acv35kpb/fDvkdGnBgm0gr1q1eKMwP5JlXJMcTN/LMm7INLcr91WXzuRgwYSciiKvz0FVOd8FUEber0TRfnsd4s4FTGLb2OIH/f4W5t+eS2Leeg019OlADvZOUUTk97+k3yqC8Ajl37YmjXytNR3SuEYN83AJIwON+MFMFVdfY8onyMvY+tnQqgVOy06qFnzycW4ZKrEcD0resLZim6J4Gr6FkG7F4+7EI7ZvWulmTz0RzA7WpJPCw7LH4pyEljqP0ofP92oXLpYUGn98cSyySSGCXv6/m8T9BavtpTy8N2DlTx9uDnEW2zibK0ssxRYGwCBAqGpXGGkQqPU9ccz6OzEP9wO5TJohJ9Ufo+XwyOTMyVzJUf48qlMgNN0FdUItxAO37+Yuj7rBz1Mct0UC2qO63gr0592yqP+8W1+Zvdn2R38heXTiLGoyJdDV30FJKczdTwtTUtEHo5cj1EDMECA28i6uton19OTPgchbbETe8Sg4AKhuS6tk61vepZ28jG3AA5/igigZP4f2gs7ejya7gVokAXpWOaYUXYNXHG4DWZk+CrGJqqNPGxkoauQB1RLhFOA=
     on_success: change
     on_failure: always
