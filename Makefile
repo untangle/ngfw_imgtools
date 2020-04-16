@@ -10,7 +10,10 @@ ifeq ($(DISTRIBUTION),)
 DISTRIBUTION := $(shell cat $(PKGTOOLS_DIR)/resources/DISTRIBUTION)
 endif
 
-## variables
+## shell variables
+export http_proxy=$(shell perl -pe 's/.*"(.*?)".*/$1/' 2> /dev/null < /etc/apt/apt.conf.d/01proxy)
+
+## make variables
 PKGS := bf-utf-source debiandoc-sgml genext2fs glibc-pic grub-common grub-efi-amd64-bin isolinux libbogl-dev libnewt-pic librsvg2-bin libslang2-pic mklibs module-init-tools pxelinux syslinux-utils tofrodos win32-loader xorriso
 ARCH := $(shell dpkg-architecture -qDEB_BUILD_ARCH)
 DEBVERSION := 10.0
