@@ -23,7 +23,7 @@ else
   KERNEL_ARCH_FLAVOR := 686-pae
 endif
 KERNEL_VERSION := 4.19.0-8
-KERNEL := linux-image-$(KERNEL_VERSION)-untangle-$(KERNEL_ARCH_FLAVOR)-unsigned
+KERNEL := linux-image-$(KERNEL_VERSION)-untangle-$(KERNEL_ARCH_FLAVOR)
 VERSION = $(shell cat $(PKGTOOLS_DIR)/resources/VERSION)
 ISO_IMAGE := ngfw-+FLAVOR+-$(VERSION)_$(REPOSITORY)_$(ARCH)_$(DISTRIBUTION)_$(shell date --iso-8601=seconds)_$(shell hostname -s).iso
 USB_IMAGE := $(subst .iso,.img,$(ISO_IMAGE))
