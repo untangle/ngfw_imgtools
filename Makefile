@@ -150,7 +150,6 @@ cloud/%-clean:
 	make -C $(IMGTOOLS_DIR)/cloud LICENSE=$(license) clean
 
 ## firmware section
-
 # the next 4 rules are generic ones meant for firmware images; they
 # take something like "buffalo/wzr1900dhp-image" and make it into
 # "make -C firmware/buffalo-wzr1900dhp image"
