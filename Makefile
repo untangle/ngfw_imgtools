@@ -79,8 +79,16 @@ d-i/unpatch:
 	fi
 
 ## iso section
-repoint-stable:
-	$(PKGTOOLS_DIR)/package-server-proxy.sh $(PKGTOOLS_DIR)/create-di-links.sh $(REPOSITORY) $(DISTRIBUTION)
+repoint-stable: repoint-stable-stamp
+repoint-stable-stamp:
+	@$(PKGTOOLS_DIR)/package-server-proxy.sh $(PKGTOOLS_DIR)/create-di-links.sh $(REPOSITORY) $(DISTRIBUTION) || { \
+	echo ; \
+	echo "*** Creating d-i links via SSH failed ***" ; \
+	echo "*** You will need to manually run http://jenkins.untangle.int/job/Create%20d-i%20links ***" ; \
+	echo "*** Please do this and re-run your make command ***" ; \
+	touch $@ ; \
+	exit 1 ; }
+	touch $@
 
 iso/conf:
 	perl -pe 's|\+IMGTOOLS_DIR\+|'$(IMGTOOLS_DIR)'|g' $(CONF_FILE_TEMPLATE) >| $(CONF_FILE)
@@ -111,7 +119,7 @@ iso/%-push: # pushes the most recent image
 	ssh $(NETBOOT_USER)@$(NETBOOT_HOST) "sudo python $(MOUNT_SCRIPT) link $(VERSION) $(timestamp) $(ARCH) $(REPOSITORY)"
 
 iso/%-clean:
-	rm -fr $(IMGTOOLS_DIR)/tmp /tmp/untangle-images-$(REPOSITORY)-$(DISTRIBUTION)-$*
+	rm -fr $(IMGTOOLS_DIR)/tmp /tmp/untangle-images-$(REPOSITORY)-$(DISTRIBUTION)-$* repoint-stable-stamp
 
 ## usb-section
 usb/%-image: iso/conf
