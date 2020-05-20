@@ -1,5 +1,5 @@
-diff --git debian-cd/tools/boot/stretch/boot-x86 debian-cd/tools/boot/stretch/boot-x86
-index 0c250ef..1c61fa1 100644
+diff --git debian-cd/tools/boot/buster/boot-x86 debian-cd/tools/boot/buster/boot-x86
+index 15c5961a..b3ecd530 100644
 --- debian-cd/tools/boot/buster/boot-x86
 +++ debian-cd/tools/boot/buster/boot-x86
 @@ -451,6 +451,11 @@ if [ -n "$KERNEL_PARAMS" ]; then
@@ -14,3 +14,16 @@ index 0c250ef..1c61fa1 100644
  set_default_desktop
  rm -rf cdrom
  
+diff --git debian-cd/tools/boot/buster/parse_isolinux debian-cd/tools/boot/buster/parse_isolinux
+index 21911a70..9b751838 100755
+--- debian-cd/tools/boot/buster/parse_isolinux
++++ debian-cd/tools/boot/buster/parse_isolinux
+@@ -155,7 +155,7 @@ parse_file("isolinux.cfg");
+ 
+ $menu{"number"} = "1";
+ $menu{"label"} = "top";
+-$menu{"title"} = "$tl_distro $tl_kernel UEFI Installer menu";
++$menu{"title"} = "Untangle UEFI Installer menu";
+ $menu_title[$menudepth] = $menu{"title"};
+ 
+ my %kernel;
