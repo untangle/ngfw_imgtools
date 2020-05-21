@@ -1,3 +1,46 @@
+diff --git debian-cd/data/buster/grub-theme.in debian-cd/data/buster/grub-theme.in
+index 3cb9db6f..43b54b47 100644
+--- debian-cd/data/buster/grub-theme.in
++++ debian-cd/data/buster/grub-theme.in
+@@ -15,7 +15,7 @@ terminal-font: "Sans Regular 12"
+ #ifdef MENU0
+   + hbox {
+     left = 0
+-    + label {text = MENU0 font = "Sans 10" color = "#c0c0c0" align = "left"}
++    + label {text = MENU0 font = "Sans 10" color = "#000000" align = "left"}
+   }
+ #endif
+ #ifdef MENU1
+@@ -54,7 +54,7 @@ terminal-font: "Sans Regular 12"
+   top = 200
+   height = 200
+   item_font = "Sans Regular 12"
+-  item_color = #c0c0c0
++  item_color = #000000
+   selected_item_color = "black"
+   selected_item_pixmap_style = "hl_*.png"
+   item_height = 20
+@@ -69,7 +69,7 @@ terminal-font: "Sans Regular 12"
+     top = 0
+     left = 20%
+     + label {text = "Enter: " font = "Sans 10" color = "white" align = "left"}
+-    + label {text = "Select             " font = "Sans 10" color = "#c0c0c0" align = "left"}
++    + label {text = "Select             " font = "Sans 10" color = "#000000" align = "left"}
+ #ifdef MENU1
+     + label {text = "           " font = "Sans 10" color = "white" align = "left"}
+     + label {text = "Esc:   " font = "Sans 10" color = "white" align = "left"}
+@@ -80,9 +80,9 @@ terminal-font: "Sans Regular 12"
+     top = 0
+     left = 20%
+     + label {text = "E:     " font = "Sans 10" color = "white" align = "left"}
+-    + label {text = "Edit Selection     " font = "Sans 10" color = "#c0c0c0" align = "left"}
++    + label {text = "Edit Selection     " font = "Sans 10" color = "#000000" align = "left"}
+     + label {text = "           " font = "Sans 10" color = "white" align = "left"}
+     + label {text = "C:     " font = "Sans 10" color = "white" align = "left"}
+-    + label {text = "GRUB Command line" font = "Sans 10" color = "#c0c0c0" align = "left"}
++    + label {text = "GRUB Command line" font = "Sans 10" color = "#000000" align = "left"}
+   }  
+ }
 diff --git debian-cd/tools/boot/buster/boot-x86 debian-cd/tools/boot/buster/boot-x86
 index 15c5961a..b3ecd530 100644
 --- debian-cd/tools/boot/buster/boot-x86
@@ -15,7 +58,7 @@ index 15c5961a..b3ecd530 100644
  rm -rf cdrom
  
 diff --git debian-cd/tools/boot/buster/parse_isolinux debian-cd/tools/boot/buster/parse_isolinux
-index 21911a70..2b0ad8af 100755
+index 21911a70..5db0c01e 100755
 --- debian-cd/tools/boot/buster/parse_isolinux
 +++ debian-cd/tools/boot/buster/parse_isolinux
 @@ -124,7 +124,7 @@ sub create_theme_file {
@@ -23,7 +66,7 @@ index 21911a70..2b0ad8af 100755
      my @args;
      push(@args, @cpp_and_opts);
 -    push(@args, "-DTITLE=\"$tl_distro $tl_kernel $tl_version\"");
-+    push(@args, "-DTITLE=\"Untangle\"");
++    push(@args, "-DTITLE=\"\"");
      for (my $i = 0; $i < $menudepth; $i++) {
  	push(@args, "-DMENU$i=\"" . $menu_title[$i] . "\"");
      }
