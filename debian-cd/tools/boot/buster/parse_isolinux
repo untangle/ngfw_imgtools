@@ -124,7 +124,7 @@ sub create_theme_file {
     my $filename = shift;
     my @args;
     push(@args, @cpp_and_opts);
-    push(@args, "-DTITLE=\"$tl_distro $tl_kernel $tl_version\"");
+    push(@args, "-DTITLE=\"Untangle\"");
     for (my $i = 0; $i < $menudepth; $i++) {
 	push(@args, "-DMENU$i=\"" . $menu_title[$i] . "\"");
     }

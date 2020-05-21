@@ -15,9 +15,18 @@ index 15c5961a..b3ecd530 100644
  rm -rf cdrom
  
 diff --git debian-cd/tools/boot/buster/parse_isolinux debian-cd/tools/boot/buster/parse_isolinux
-index 21911a70..9b751838 100755
+index 21911a70..2b0ad8af 100755
 --- debian-cd/tools/boot/buster/parse_isolinux
 +++ debian-cd/tools/boot/buster/parse_isolinux
+@@ -124,7 +124,7 @@ sub create_theme_file {
+     my $filename = shift;
+     my @args;
+     push(@args, @cpp_and_opts);
+-    push(@args, "-DTITLE=\"$tl_distro $tl_kernel $tl_version\"");
++    push(@args, "-DTITLE=\"Untangle\"");
+     for (my $i = 0; $i < $menudepth; $i++) {
+ 	push(@args, "-DMENU$i=\"" . $menu_title[$i] . "\"");
+     }
 @@ -155,7 +155,7 @@ parse_file("isolinux.cfg");
  
  $menu{"number"} = "1";
