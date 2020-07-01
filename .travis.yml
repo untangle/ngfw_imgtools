@@ -35,7 +35,6 @@ jobs:
         - docker-compose -f docker-compose.build.yml run pkgtools
         - PACKAGE=d-i FORCE=1 NO_CLEAN=1 UPLOAD= docker-compose -f docker-compose.build.yml run build
         - docker-compose -f docker-compose.build.yml run build bash -c "../ngfw_pkgtools/build.sh setup-only && make iso/untangle-image iso/untangle-push"
-        - docker-compose -f docker-compose.build.yml run build bash -c "../ngfw_pkgtools/build.sh setup-only && make usb/untangle-image usb/untangle-push"
 
 notifications:
   email: false

@@ -26,7 +26,6 @@ KERNEL_VERSION := 4.19.0-8
 KERNEL := linux-image-$(KERNEL_VERSION)-untangle-$(KERNEL_ARCH_FLAVOR)
 VERSION = $(shell cat $(PKGTOOLS_DIR)/resources/VERSION)
 ISO_IMAGE := ngfw-+FLAVOR+-$(VERSION)_$(REPOSITORY)_$(ARCH)_$(DISTRIBUTION)_$(shell date --iso-8601=seconds)_$(shell hostname -s).iso
-USB_IMAGE := $(subst .iso,.img,$(ISO_IMAGE))
 IMAGES_DIR := /data/untangle-images-$(REPOSITORY)
 MOUNT_SCRIPT := /data/image-manager/mounts.py
 NETBOOT_HOST := package-server
@@ -120,19 +119,6 @@ iso/%-push: # pushes the most recent image
 
 iso/%-clean:
 	rm -fr $(IMGTOOLS_DIR)/tmp /tmp/untangle-images-$(REPOSITORY)-$(DISTRIBUTION)-$* repoint-stable-stamp
-
-## usb-section
-usb/%-image: iso/conf
-	$(eval flavor := $*)
-	$(eval iso_image := $(shell ls --sort=time *$(VERSION)*$(REPOSITORY)*$(ARCH)*$(DISTRIBUTION)*.iso | head -1))
-	$(IMGTOOLS_DIR)/usb/make_usb.sh $(BOOT_IMG) $(iso_image) $(subst +FLAVOR+,$(flavor),$(USB_IMAGE)) $(flavor)
-
-usb/%-push: # pushes the most recent image
-	$(eval usb_image := $(shell ls --sort=time *$(VERSION)*$(REPOSITORY)*$(ARCH)*$(DISTRIBUTION)*.img | head -1))
-	$(eval timestamp := $(shell echo $(usb_image) | perl -pe 's/.*(\d{4}(-\d{2}){2}T(\d{2}:?){3}).*/$$1/'))
-	ssh $(NETBOOT_USER)@$(NETBOOT_HOST) "sudo python $(MOUNT_SCRIPT) new $(VERSION) $(timestamp) $(ARCH) $(REPOSITORY)"
-	scp ./$(usb_image) $(NETBOOT_USER)@$(NETBOOT_HOST):$(IMAGES_DIR)/$(VERSION)
-	ssh $(NETBOOT_USER)@$(NETBOOT_HOST) "sudo python $(MOUNT_SCRIPT) link $(VERSION) $(timestamp) $(ARCH) $(REPOSITORY)"
 
 ## ova-section
 ova/%-image:
