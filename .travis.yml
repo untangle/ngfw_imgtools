@@ -30,7 +30,7 @@ jobs:
       script:
         - docker-compose -f docker-compose.build.yml run pkgtools
         - docker-compose -f docker-compose.build.yml run build
-    - stage: build d-i, ISO & USB in one run
+    - stage: build d-i & ISO in one run
       script:
         - docker-compose -f docker-compose.build.yml run pkgtools
         - PACKAGE=d-i FORCE=1 NO_CLEAN=1 UPLOAD= docker-compose -f docker-compose.build.yml run build
