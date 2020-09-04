@@ -66,7 +66,7 @@ index 21911a70..5db0c01e 100755
      my @args;
      push(@args, @cpp_and_opts);
 -    push(@args, "-DTITLE=\"$tl_distro $tl_kernel $tl_version\"");
-+    push(@args, "-DTITLE=\"\"");
++    push(@args, "-DTITLE=\"Untangle\"");
      for (my $i = 0; $i < $menudepth; $i++) {
  	push(@args, "-DMENU$i=\"" . $menu_title[$i] . "\"");
      }
