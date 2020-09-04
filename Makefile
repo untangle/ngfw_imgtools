@@ -52,6 +52,7 @@ CONF_FILE := $(PROFILES_DIR)/default.conf
 CONF_FILE_TEMPLATE := $(CONF_FILE).template
 UNTANGLE_PKGS := $(PROFILES_DIR)/untangle.packages
 UNTANGLE_PKGS_TEMPLATE := $(UNTANGLE_PKGS).template
+UNTANGLE_DOWNLOADS := $(PROFILES_DIR)/untangle.downloads
 CUSTOMSIZE := $(shell echo $$(( 800 * 1024 * 1024 / 2048 )) ) # from MB to 2kB blocks
 DEBIAN_INSTALLER_PATCH := $(IMGTOOLS_DIR)/patches/d-i.patch
 DEBIAN_CD_PATCH := $(IMGTOOLS_DIR)/patches/debian-cd.patch
@@ -93,6 +94,7 @@ repoint-stable-stamp:
 iso/conf:
 	perl -pe 's|\+IMGTOOLS_DIR\+|'$(IMGTOOLS_DIR)'|g' $(CONF_FILE_TEMPLATE) >| $(CONF_FILE)
 	perl -pe 's|\+KERNEL\+|'$(KERNEL)'|g' $(UNTANGLE_PKGS_TEMPLATE) >| $(UNTANGLE_PKGS)
+	cat $(UNTANGLE_DOWNLOADS).any $(UNTANGLE_DOWNLOADS).$(ARCHITECTURE) >| $(UNTANGLE_DOWNLOADS)
 	cat $(COMMON_PRESEED) $(AUTOPARTITION_PRESEED) $(NETBOOT_PRESEED_EXTRA) $(UNTANGLE_PRESEED) | perl -pe 's|\+VERSION\+|'$(VERSION)'|g ; s|\+ARCH\+|'$(ARCHITECTURE)'|g ; s|\+REPOSITORY\+|'$(REPOSITORY)'|g ; s|\+KERNELS\+|'$(KERNEL)'|g ; s/^(d-i preseed\/early_command string anna-install.*)/#$1/' >| $(NETBOOT_PRESEED_FINAL)
 	cat $(COMMON_PRESEED) $(AUTOPARTITION_PRESEED) $(DEFAULT_PRESEED_EXTRA) | perl -pe 's|\+VERSION\+|'$(VERSION)'|g ; s|\+ARCH\+|'$(ARCHITECTURE)'|g ; s|\+REPOSITORY\+|'$(REPOSITORY)'|g ; s|\+KERNEL\+|'$(KERNEL)'|g' >| $(DEFAULT_PRESEED_FINAL)
 	cat $(COMMON_PRESEED) $(NETBOOT_PRESEED_EXTRA) $(UNTANGLE_PRESEED) | perl -pe 's|\+VERSION\+|'$(VERSION)'|g ; s|\+ARCH\+|'$(ARCHITECTURE)'|g ; s|\+REPOSITORY\+|'$(REPOSITORY)'|g ; s|\+KERNEL\+|'$(KERNEL)'|g ; s/^(d-i preseed\/early_command string anna-install.*)/#$1/' >| $(NETBOOT_PRESEED_EXPERT)
