@@ -79,3 +79,26 @@ index 21911a70..5db0c01e 100755
  $menu_title[$menudepth] = $menu{"title"};
  
  my %kernel;
+--- debian-cd/tools/boot/buster/boot-arm64.bak	2020-09-04 14:10:37.487776502 +0200
++++ debian-cd/tools/boot/buster/boot-arm64	2020-09-04 14:29:55.617729525 +0200
+@@ -77,6 +77,11 @@
+ mkdir -pv $PWD/boot$N
+ cat cdrom/debian-cd_info.tar.gz | (cd boot$N/; tar zx)
+ 
++rm -f boot$N/isolinux/{*txt,*cat,ad*,exit*,prompt*,rq*,spk*}
++#cp -f ../../../cd-root/isolinux/* boot$N/isolinux/
++rm -fr CD$N/README.*
++cp -r ../../../cd-root/* CD$N/
++
+ if [ -d boot$N/grub ] ; then
+     echo "  Adding EFI boot code for $ARCH on CD$N"
+ 
+@@ -125,7 +130,7 @@
+     sed -i "s,\%install\%,$INSTALLDIR,g" $CDDIR/boot/grub/grub.cfg
+ 
+     # Substitute custom KERNEL_PARAMS into grub.cfg
+-    sed -i "s,/vmlinuz ,/vmlinuz $KERNEL_PARAMS ,g" $CDDIR/boot/grub/grub.cfg
++    sed -i "s|/vmlinuz |/vmlinuz $KERNEL_PARAMS |g" $CDDIR/boot/grub/grub.cfg
+ 
+ else
+     echo "  No EFI boot code for $ARCH on CD$N"

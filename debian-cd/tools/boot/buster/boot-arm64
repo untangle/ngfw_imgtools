@@ -77,6 +77,11 @@ cp -lf cdrom/initrd.gz $CDDIR/$INSTALLDIR/
 mkdir -pv $PWD/boot$N
 cat cdrom/debian-cd_info.tar.gz | (cd boot$N/; tar zx)
 
+rm -f boot$N/isolinux/{*txt,*cat,ad*,exit*,prompt*,rq*,spk*}
+#cp -f ../../../cd-root/isolinux/* boot$N/isolinux/
+rm -fr CD$N/README.*
+cp -r ../../../cd-root/* CD$N/
+
 if [ -d boot$N/grub ] ; then
     echo "  Adding EFI boot code for $ARCH on CD$N"
 
@@ -125,7 +130,7 @@ if [ -d boot$N/grub ] ; then
     sed -i "s,\%install\%,$INSTALLDIR,g" $CDDIR/boot/grub/grub.cfg
 
     # Substitute custom KERNEL_PARAMS into grub.cfg
-    sed -i "s,/vmlinuz ,/vmlinuz $KERNEL_PARAMS ,g" $CDDIR/boot/grub/grub.cfg
+    sed -i "s|/vmlinuz |/vmlinuz $KERNEL_PARAMS |g" $CDDIR/boot/grub/grub.cfg
 
 else
     echo "  No EFI boot code for $ARCH on CD$N"
