@@ -1,6 +1,4 @@
-arch:
-  - amd64
-  - arm64
+language: generic
 
 git:
   depth: false
