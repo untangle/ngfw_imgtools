@@ -1,5 +1,3 @@
-if: branch =~ /^(master|release-\d\d.\d)$/ AND type IN (push, cron, api)
-
 arch:
   - amd64
   - arm64
