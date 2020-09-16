@@ -23,14 +23,14 @@ before_install:
 
 jobs:
   include:
-    - stage: build udebs & d-i
+    - name: build udebs & d-i
       arch:
         - amd64
         - arm64
       script:
         - docker-compose -f docker-compose.build.yml run pkgtools-multiarch
         - docker-compose -f docker-compose.build.yml run build-multiarch
-    - stage: build d-i & ISO in one run
+    - name: build d-i & ISO in one run
       arch:
         - amd64
         - arm64
