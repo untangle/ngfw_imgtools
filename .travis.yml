@@ -18,8 +18,7 @@ env:
       PKGTOOLS_COMMIT: origin/${TRAVIS_BRANCH}
       UPLOAD: scp
       PRIVILEGED: true
-  jobs:
-    - ARCHITECTURE: amd64
+      DISTRIBUTION: current
 
 before_install:
 - docker pull untangleinc/ngfw:${REPOSITORY}-build-multiarch
