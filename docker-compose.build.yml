@@ -61,7 +61,7 @@ services:
         - /tmp/travis-buildbot.rsa:/tmp/travis-buildbot.rsa
         - /etc/apt/apt.conf.d/01proxy:/etc/apt/apt.conf.d/01proxy
 
-    build-native:
+    build-multiarch:
       image: untangleinc/ngfw:${REPOSITORY:-buster}-build-multiarch
       environment:
         REPOSITORY: ${REPOSITORY:-buster}
