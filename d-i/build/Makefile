@@ -506,8 +506,9 @@ endif
 	mkdir -p $(TREE)/dev
 ifneq ($(DEB_HOST_ARCH_OS),hurd)
 	# Always needed, in case udev is not mounted on boot.
-	mknod $(TREE)/dev/console c 5 1
-	mknod $(TREE)/dev/null c 1 3
+	ls -ld $(TREE)/dev
+	mknod $(TREE)/dev/console c 5 1 || true
+	mknod $(TREE)/dev/null c 1 3 || true
 endif
 
 	mkdir -p $(EXTRAUDEBSDIR)
