@@ -28,8 +28,7 @@ arch:
   - arm64
 
 script:
-  - sudo apt install -y curl
-  - curl -v https://ifconfig.co/
+  - curl https://ifconfig.co/
   - docker-compose -f docker-compose.build.yml run pkgtools-multiarch
   - docker-compose -f docker-compose.build.yml run build-multiarch
   - PACKAGE=d-i FORCE=1 NO_CLEAN=1 UPLOAD= docker-compose -f docker-compose.build.yml run build-multiarch
