@@ -23,7 +23,7 @@ ifeq ($(ARCHITECTURE),i386)
 else
   KERNEL_ARCH := $(ARCHITECTURE)
 endif
-KERNEL_VERSION := 4.19.0-8
+KERNEL_VERSION := 4.19.0-11
 KERNEL := linux-image-$(KERNEL_VERSION)-untangle-$(KERNEL_ARCH)
 VERSION = $(shell cat $(PKGTOOLS_DIR)/resources/VERSION)
 ISO_IMAGE := ngfw-+FLAVOR+-$(VERSION)_$(REPOSITORY)_$(ARCHITECTURE)_$(DISTRIBUTION)_$(shell date --iso-8601=seconds)_$(shell hostname -s).iso
