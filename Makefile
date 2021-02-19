@@ -27,6 +27,7 @@ KERNEL_VERSION := 4.19.0-11
 KERNEL := linux-image-$(KERNEL_VERSION)-untangle-$(KERNEL_ARCH)
 VERSION = $(shell cat $(PKGTOOLS_DIR)/resources/VERSION)
 ISO_IMAGE := ngfw-+FLAVOR+-$(VERSION)_$(REPOSITORY)_$(ARCHITECTURE)_$(DISTRIBUTION)_$(shell date --iso-8601=seconds)_$(shell hostname -s).iso
+ISO_SERIAL_IMAGE := ngfw-serial-+FLAVOR+-$(VERSION)_$(REPOSITORY)_$(ARCHITECTURE)_$(DISTRIBUTION)_$(shell date --iso-8601=seconds)_$(shell hostname -s).iso
 IMAGES_DIR := /data/untangle-images-$(REPOSITORY)
 MOUNT_SCRIPT := /data/image-manager/mounts.py
 NETBOOT_HOST := package-server
@@ -50,6 +51,9 @@ DEFAULT_PRESEED_EXPERT := $(PROFILES_DIR)/expert.preseed
 DEFAULT_PRESEED_EXTRA := $(DEFAULT_PRESEED_FINAL).extra
 CONF_FILE := $(PROFILES_DIR)/default.conf
 CONF_FILE_TEMPLATE := $(CONF_FILE).template
+ISOLINUX_CONF_DIR := $(IMGTOOLS_DIR)/cd-root/isolinux
+ISOLINUX_CONF_FILE := $(ISOLINUX_CONF_DIR)/isolinux.cfg
+ISOLINUX_CONF_FILE_TEMPLATE := $(ISOLINUX_CONF_FILE).template
 UNTANGLE_PKGS := $(PROFILES_DIR)/untangle.packages
 UNTANGLE_PKGS_TEMPLATE := $(UNTANGLE_PKGS).template
 CUSTOMSIZE := $(shell echo $$(( 800 * 1024 * 1024 / 2048 )) ) # from MB to 2kB blocks
@@ -103,10 +107,56 @@ iso/dependencies:
 
 iso/%-image: repoint-stable iso/dependencies iso/conf
 	$(eval flavor := $*)
+	cp -f $(ISOLINUX_CONF_FILE_TEMPLATE) $(ISOLINUX_CONF_FILE) ; \
+	perl -pe 's|\+IMGTOOLS_DIR\+|'$(IMGTOOLS_DIR)'|g' $(CONF_FILE_TEMPLATE) >| $(CONF_FILE); \
 	export CODENAME=$(REPOSITORY) DEBVERSION=$(DEBVERSION) ; \
 	export CDNAME=$(flavor) DISKINFO=$(flavor) CUSTOMSIZE=$(CUSTOMSIZE) ; \
-	build-simple-cdd --keyring /usr/share/keyrings/untangle-archive-keyring.gpg --force-root --auto-profiles default,untangle,$(flavor) --profiles untangle,$(flavor),expert --debian-mirror http://package-server/public/$(REPOSITORY)/ --security-mirror http://package-server/public/$(REPOSITORY)/ --dist $(REPOSITORY) --require-optional-packages --mirror-tools reprepro --extra-udeb-dist $(DISTRIBUTION) --do-mirror --verbose --logfile $(IMGTOOLS_DIR)/simplecdd.log  ; 
+	build-simple-cdd \
+		--keyboard us \
+		--locale en_US.UTF-8 \
+		--keyring /usr/share/keyrings/untangle-archive-keyring.gpg \
+		--force-root \
+		--auto-profiles default,untangle,$(flavor) \
+		--profiles hands-free,client-local,untangle,$(flavor),expert \
+		--debian-mirror http://package-server/public/$(REPOSITORY)/ \
+		--security-mirror http://package-server/public/$(REPOSITORY)/ \
+		--dist $(REPOSITORY) \
+		--require-optional-packages \
+		--mirror-tools reprepro \
+		--extra-udeb-dist $(DISTRIBUTION) \
+		--do-mirror \
+		--verbose \
+		--logfile $(IMGTOOLS_DIR)/simplecdd.log  ;
 	mv images/$(flavor)-$(DEBVERSION)*-$(ARCHITECTURE)-*1.iso $(subst +FLAVOR+,$(flavor),$(ISO_IMAGE))
+	cp -f $(subst +FLAVOR+,$(flavor),$(ISO_IMAGE)) ngfw.iso
+
+iso/%-serial-image: repoint-stable iso/dependencies iso/conf
+	$(eval flavor := $*)
+	perl -pe 's|#(serial\|console)|\$\1|g' $(ISOLINUX_CONF_FILE_TEMPLATE) >| $(ISOLINUX_CONF_FILE);
+	perl -pe 's|\+IMGTOOLS_DIR\+|'$(IMGTOOLS_DIR)'|g' $(CONF_FILE_TEMPLATE) >| $(CONF_FILE);
+	export CODENAME=$(REPOSITORY) DEBVERSION=$(DEBVERSION) ; \
+	export CDNAME=$(flavor) DISKINFO=$(flavor) CUSTOMSIZE=$(CUSTOMSIZE) ; \
+	export serial_console_speed=9600; \
+	export serial_console_opts=ttyS0,9600n8; \
+	build-simple-cdd \
+		--serial-console \
+		--keyboard us \
+		--locale en_US.UTF-8 \
+		--keyring /usr/share/keyrings/untangle-archive-keyring.gpg \
+		--force-root \
+		--auto-profiles default,untangle,$(flavor) \
+		--profiles hands-free,client-local,untangle,$(flavor),expert \
+		--debian-mirror http://package-server/public/$(REPOSITORY)/ \
+		--security-mirror http://package-server/public/$(REPOSITORY)/ \
+		--dist $(REPOSITORY) \
+		--require-optional-packages \
+		--mirror-tools reprepro \
+		--extra-udeb-dist $(DISTRIBUTION) \
+		--do-mirror \
+		--verbose \
+		--logfile $(IMGTOOLS_DIR)/simplecdd.log  ;
+	mv images/$(flavor)-$(DEBVERSION)*-$(ARCHITECTURE)-*1.iso $(subst +FLAVOR+,$(flavor),$(ISO_SERIAL_IMAGE))
+	cp -f $(subst +FLAVOR+,$(flavor),$(ISO_SERIAL_IMAGE)) ngfw_serial.iso
 
 iso/%-push: # pushes the most recent image
 	$(eval iso_image := $(shell ls --sort=time *$(VERSION)*$(REPOSITORY)*$(ARCHITECTURE)*$(DISTRIBUTION)*.iso | head -1))
