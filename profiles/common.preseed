@@ -281,6 +281,8 @@ select 1024x768 @ 60 Hz
 # here's a way to run any shell command you'd like inside the installer,
 # automatically.
 
+# NOTE: Only one of each of these commands work.
+
 # This first command is run as early as possible, just after
 # preseeding is read.
 d-i preseed/early_command string anna-install simple-cdd-profiles
@@ -291,4 +293,13 @@ d-i preseed/early_command string anna-install simple-cdd-profiles
 # packages and run commands in the target system.
 #d-i preseed/late_command string apt-install zsh; in-target chsh -s /bin/zsh
 
-d-i preseed/late_command string apt-install untangle-linux-config ; sh -c "grep -q BOOTIF /proc/cmdline || sed -i -re 's/^root:[^:]+:/root:CHANGEME:/' /target/etc/shadow" ; in-target perl -i -pe 's/(.*[dD]ebian)/# Commented by Untangle: $1/ unless m/^#/' /etc/apt/sources.list ; in-target rm -f /etc/udev/rules.d/70-persistent-net.rules
+## Detect hands free installation
+d-i preseed/include_command \
+      string if [ "`$(dirname $(export | grep preseed | sed "s/^.*='/\1/" ))/hands-free.sh`" = "1" ]; then echo hands-free.preseed; fi
+
+#d-i preseed/late_command string apt-install untangle-linux-config ; sh -c "grep -q BOOTIF /proc/cmdline || sed -i -re 's/^root:[^:]+:/root:CHANGEME:/' /target/etc/shadow" ; in-target perl -i -pe 's/(.*[dD]ebian)/# Commented by Untangle: $1/ unless m/^#/' /etc/apt/sources.list ; in-target rm -f /etc/udev/rules.d/70-persistent-net.rules
+d-i preseed/late_command string "$(dirname $(export | grep preseed | sed "s/^.*='/\1/" ))/late_command.sh"
+
+# Debugging/diagnostics
+#d-i preseed/early_command string sh -c "export > /tmp/early_vars.sh"
+#d-i preseed/late_command string sh -c "export > /tmp/late_vars.sh"
