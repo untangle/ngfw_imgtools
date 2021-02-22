@@ -1,4 +1,21 @@
 #/bin/sh
+script=$0;
+preseed_config_file=$(dirname $script)/preseed.cfg
+preseed_config_keyword=hands_free
+
+if [ -f $preseed_config_file ] ; then
+    # If yes|no found in preseed config, exit.
+    preseed_config_value=$(grep $preseed_config_keyword $preseed_config_file | cut -d= -f2)
+    if [ "$preseed_config_value" = "yes" ] ; then
+        echo 1
+        exit
+    elif [ "$preseed_config_value" = "no" ] ; then
+        echo 0
+        exit
+    fi
+fi
+
+# Detect based on partition
 allow_hands_free=0
 
 mount_test=/tmp/mnt_test

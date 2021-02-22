@@ -1,22 +1,36 @@
 #/bin/sh
+script=$0;
+preseed_config_file=$(dirname $script)/preseed.cfg
 
 # Forcibly install our linux configurator
 apt-install untangle-linux-config
 # sh -c "grep -q BOOTIF /proc/cmdline || sed -i -re 's/^root:[^:]+:/root:CHANGEME:/' /target/etc/shadow"
 chroot /target sh -c "grep -q BOOTIF /proc/cmdline || sed -i -re 's/^root:[^:]+:/root:CHANGEME:/' /etc/shadow" 
 
-# Test for local graphics console support
-# Default to enable.
+# Local client installation
 install_client_local=1
-
-if [ "$TERM_TYPE" = "serial" ]  ; then
-    # Configuring via a serial port - disable
-    install_client_local=0
+preseed_config_value=detect
+if [ -f $preseed_config_file ] ; then
+    preseed_config_keyword=local_client
+    # Pull value
+    preseed_config_value=$(grep $preseed_config_keyword $preseed_config_file | cut -d= -f2)
 fi
 
-if [ ! -d /sys/class/graphics ] ; then
-    # No graphics interface found - disable
+if [ "$preseed_config_value" = "yes" ] ; then
+    install_client_local=1
+elif [ "$preseed_config_value" = "no" ] ; then
     install_client_local=0
+else
+    # Otherwise test for local graphics console support
+    if [ "$TERM_TYPE" = "serial" ]  ; then
+        # Configuring via a serial port - disable
+        install_client_local=0
+    fi
+
+    if [ ! -d /sys/class/graphics ] ; then
+        # No graphics interface found - disable
+        install_client_local=0
+    fi
 fi
 
 if [ $install_client_local -eq 1 ] ; then
