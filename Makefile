@@ -117,7 +117,7 @@ iso/%-image: repoint-stable iso/dependencies iso/conf
 		--keyring /usr/share/keyrings/untangle-archive-keyring.gpg \
 		--force-root \
 		--auto-profiles default,untangle,$(flavor) \
-		--profiles hands-free,client-local,untangle,$(flavor),expert \
+		--profiles hands-free,untangle,$(flavor),expert \
 		--debian-mirror http://package-server/public/$(REPOSITORY)/ \
 		--security-mirror http://package-server/public/$(REPOSITORY)/ \
 		--dist $(REPOSITORY) \
@@ -145,7 +145,7 @@ iso/%-serial-image: repoint-stable iso/dependencies iso/conf
 		--keyring /usr/share/keyrings/untangle-archive-keyring.gpg \
 		--force-root \
 		--auto-profiles default,untangle,$(flavor) \
-		--profiles hands-free,client-local,untangle,$(flavor),expert \
+		--profiles hands-free,untangle,$(flavor),expert \
 		--debian-mirror http://package-server/public/$(REPOSITORY)/ \
 		--security-mirror http://package-server/public/$(REPOSITORY)/ \
 		--dist $(REPOSITORY) \
