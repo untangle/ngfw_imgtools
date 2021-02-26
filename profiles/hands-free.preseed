@@ -9,7 +9,7 @@ d-i debian-installer/locale string en_US
 d-i keyboard-configuration/xkb-keymap select us
 
 # Time zone
-d-i time/zone string US/Eastern
+d-i time/zone string Etc/UTC
 
 # This makes partman automatically partition without confirmation.
 d-i partman-md/confirm boolean true
