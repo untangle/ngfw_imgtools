@@ -12,9 +12,52 @@ services:
         bash -c "
         git remote set-url origin $${PKGTOOLS_URL} &&
         git fetch -a &&
-        git clean -f -d &&
+        git clean -f -d -x &&
         git reset --hard &&
         git checkout $${PKGTOOLS_COMMIT}"
+
+    img_modifier_checkout:
+      image: untangleinc/pkgtools
+      environment:
+        IMG_MODIFIER_URL: ${IMG_MODIFIER_URL:-https://github.com/untangle/ngfw_hades-pkgs}
+        IMG_MODIFIER_COMMIT: ${IMG_MODIFIER_COMMIT:-origin/master}
+      volumes:
+        - img_modifier:/opt/untangle/img_modifier
+      ## !! copy from my directory.
+      entrypoint: >
+        bash -c "
+        mkdir -p /opt/untangle/img_modifier;
+        cd /opt/untangle/img_modifier;
+        [[ ! -d /opt/untangle/img_modifier/$${IMG_MODIFIER_URL##*/} ]] && git clone $${IMG_MODIFIER_URL};
+        cd $$(basename -s .git $${IMG_MODIFIER_URL});
+        git checkout $${IMG_MODIFIER_COMMIT};
+        pwd;"
+
+    img_modifier_apply:
+      image: untangleinc/ngfw:${REPOSITORY:-buster}-build-multiarch
+      environment:
+        IMG_MODIFIER: ${IMG_MODIFIER:-unknown}
+      volumes:
+        - img_modifier:/opt/untangle/img_modifier
+        - .:/opt/untangle/build
+      entrypoint: >
+        bash -c "
+        git clean -f -d -x && git reset --hard;
+        declare -x IMG_MODIFIER_DIR=$$(find ../img_modifier -name $${IMG_MODIFIER} | head -1)/ngfw_imgtools;
+        echo $${IMG_MODIFIER_DIR};
+        if [ -d $${IMG_MODIFIER_DIR} ]; then
+           cp -r $${IMG_MODIFIER_DIR}/* .;
+        fi;
+        pwd"
+
+    build_clean:
+      image: untangleinc/ngfw:${REPOSITORY:-buster}-build-multiarch
+      volumes:
+        - .:/opt/untangle/build
+      entrypoint: >
+        bash -c "
+        git clean -f -d -x && git reset --hard;
+        pwd"
 
     build:
       image: untangleinc/ngfw:${REPOSITORY:-buster}-build-multiarch
@@ -43,8 +86,10 @@ services:
       volumes:
         - .:/opt/untangle/build
         - pkgtools:/opt/untangle/ngfw_pkgtools:ro
+        - img_modifier:/opt/untangle/img_modifier:ro
         - /tmp/travis-buildbot.rsa:/tmp/travis-buildbot.rsa
         - /etc/apt/apt.conf.d/01proxy:/etc/apt/apt.conf.d/01proxy
 
 volumes:
   pkgtools:
+  img_modifier:
