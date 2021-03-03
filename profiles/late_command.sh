@@ -1,5 +1,5 @@
 #/bin/sh
-script=$0;
+script=$0
 preseed_config_file=$(dirname $script)/preseed.cfg
 
 # Forcibly install our linux configurator
@@ -35,10 +35,12 @@ fi
 
 if [ $install_client_local -eq 1 ] ; then
     apt-install untangle-client-local
-fi 
+fi
 
 # Comment out cdrom references in sources.list.
 chroot /target perl -i -pe 's/(.*[dD]ebian)/# Commented by Untangle: $1/ unless m/^#/' /etc/apt/sources.list 
 # Remove persistent rules for network interfaces.
 chroot /target rm -f /etc/udev/rules.d/70-persistent-net.rules
 
+# If oem script exists, run it.
+chroot /target /bin/bash -c "[ -f /usr/share/untangle/bin/oem-apply.sh ] && /usr/share/untangle/bin/oem-apply.sh"
