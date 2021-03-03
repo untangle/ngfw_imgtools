@@ -43,4 +43,4 @@ chroot /target perl -i -pe 's/(.*[dD]ebian)/# Commented by Untangle: $1/ unless 
 chroot /target rm -f /etc/udev/rules.d/70-persistent-net.rules
 
 # If oem script exists, run it.
-chroot /target /bin/bash -c "[ -f /usr/share/untangle/bin/oem-apply.sh ] && /usr/share/untangle/bin/oem-apply.sh"
+chroot /target /bin/bash -c "[ ! -f /usr/share/untangle/bin/oem-apply.sh ] || /usr/share/untangle/bin/oem-apply.sh"
