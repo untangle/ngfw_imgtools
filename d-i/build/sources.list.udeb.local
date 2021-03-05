@@ -1,0 +1,2 @@
+deb [trusted=yes] copy:/opt/untangle/build/d-i/build/ localudebs/
+deb [trusted=yes] http://package-server/public/buster current main/debian-installer

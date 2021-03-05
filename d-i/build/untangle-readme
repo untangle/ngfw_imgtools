@@ -1,0 +1,12 @@
+Documentation indicates that all we need to do to override udebs from target server is to copy replacement udebs into localdebs and 
+copy a new  sources.list.udeb.local file into build directory.
+
+However, the makefile unconditionally rebuilds the sources.list.udeb.local file, preventing the override from working.
+Here is the diff, just removing that section so we can always override with local udebs:
+
+688,692d687
+< 	else \
+< 		gen-sources.list.udeb "$(SYSTEM_SOURCES_LIST)" $(USE_UDEBS_FROM) $(UDEB_COMPONENTS) $(USE_PROPOSED_UPDATES); \
+< 		if [ "$(USE_UNRELEASED)" = 1 ]; then \
+< 			gen-sources.list.udeb "$(SYSTEM_SOURCES_LIST)" unreleased $(UDEB_COMPONENTS); \
+< 		fi \
