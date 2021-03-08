@@ -152,6 +152,8 @@ endif
 	dh_gencontrol -s
 	dh_md5sums -s
 	dh_builddeb -s
+	# Hack for Untangle builds to copy our files directly into localdeb directory for d-i.
+	cp ../*.udeb ../../d-i/build/localudebs
 
 binary: binary-indep binary-arch
 .PHONY: build clean binary-indep binary-arch binary install
