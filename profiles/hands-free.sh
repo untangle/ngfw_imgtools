@@ -30,7 +30,7 @@ while read line; do
    total_parts=`expr $total_parts + 1`
    if [ "$type" = "ext4" ] ; then
         # Mount partition and determine if ngfw.
-        mount $part $mount_test
+        mount -t type $part $mount_test
         if [ -d $mount_test"/etc/untangle" ]; then
                 is_ngfw=1
         fi
