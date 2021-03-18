@@ -71,6 +71,7 @@ format{ } \
 use_filesystem{ } \
 filesystem{ ext4 } \
 mountpoint{ / } \
+label{ NGFW_ROOT } \
 . \
 1000 2000 300% swap \
 method{ swap } \
@@ -87,6 +88,7 @@ format{ } \
 use_filesystem{ } \
 filesystem{ ext4 } \
 mountpoint{ / } \
+label{ NGFW_ROOT } \
 . \
 1000 2000 300% swap \
 method{ swap } \
@@ -104,10 +106,3 @@ if [ -d "/sys/firmware/efi/" ] ; then \
 else \
 	debconf-set partman-auto/choose_recipe select untangle2 ; \
 fi ;
-
-# This makes partman automatically partition without confirmation, provided
-# that you told it what to do using one of the methods above.
-#d-i partman/confirm_write_new_label boolean true
-d-i partman/choose_partition \
-select Finish partitioning and write changes to disk
-d-i partman/confirm boolean true
