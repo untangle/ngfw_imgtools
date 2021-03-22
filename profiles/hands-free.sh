@@ -25,7 +25,7 @@ swap_parts=0
 
 ## Ignore all partitions from the installer media.
 rootname=$(dirname $script | sed -n -e 's#^\(/[^/]*\).*#\1#p')
-installer_dev=$(mount | grep $rootname | cut -d' ' -f1)
+installer_dev=$(mount | grep $rootname | cut -d' ' -f1| head -1)
 echo $installer_dev >> /tmp/dbg.txt
 if [ "$installer_dev" = "" ] ; then
     installer_dev=ignoreme
