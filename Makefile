@@ -63,6 +63,7 @@ DEBIAN_PKGS_PATCH := $(IMGTOOLS_DIR)/patches/installer-pkgs.patch
 DEBIAN_PATCHES := $(DEBIAN_INSTALLER_PATCH) $(DEBIAN_CD_PATCH) $(DEBIAN_PKGS_PATCH)
 DEBIAN_PATCH_STAMP := patch-stamp
 
+
 ## main section
 all: # do nothing by default
 
@@ -112,6 +113,7 @@ iso/%-image: repoint-stable iso/dependencies iso/conf
 	export CODENAME=$(REPOSITORY) DEBVERSION=$(DEBVERSION) ; \
 	export CDNAME=$(flavor) DISKINFO=$(flavor) CUSTOMSIZE=$(CUSTOMSIZE) ; \
 	build-simple-cdd \
+	    --local-packages local-packages \
 		--keyboard us \
 		--locale en_US.UTF-8 \
 		--keyring /usr/share/keyrings/untangle-archive-keyring.gpg \
@@ -139,6 +141,7 @@ iso/%-serial-image: repoint-stable iso/dependencies iso/conf
 	export serial_console_speed=9600; \
 	export serial_console_opts=ttyS0,9600n8; \
 	build-simple-cdd \
+	    --local-packages local-packages \
 		--serial-console \
 		--keyboard us \
 		--locale en_US.UTF-8 \
