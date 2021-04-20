@@ -88,7 +88,7 @@ disable_serial(){
     ## Remove comments.
     sed -i '/if/, /'Install'/ { /'Install'/b; s/^\(#\)// }' $grub_cfg_file_name
 
-    ## Remvoe serial console from kernel
+    ## Remove serial console from kernel
     sed -i -e 's/console=[^ ]\+ //g' $grub_cfg_file_name
 
     ## Remove grub serial support
@@ -143,7 +143,7 @@ local_console(){
         echo "Installer will install local console"
     elif [ "$localconsole" = "n" ] ; then
         echo "$localclient_keyword=no" >> $preseed_cfg_file_name
-        echo "Installer not install install local console"
+        echo "Installer will not install local console"
     elif [ "$localconsole" = "d" ] ; then
         echo "Installer will detect for video and if found, install local console.  Otherwise local console will not be installed."
     fi
