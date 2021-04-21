@@ -1,6 +1,6 @@
 #!/bin/bash
 script=$0;
-root_path=$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )/../../
+root_path=../../
 
 isolinux_cfg_file_name=$root_path/isolinux/isolinux.cfg
 menu_cfg_file_name=$root_path/isolinux/menu.cfg
