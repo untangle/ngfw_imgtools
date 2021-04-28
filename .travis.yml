@@ -42,11 +42,3 @@ script:
   - FORCE=1 NO_CLEAN=1 UPLOAD= docker-compose -f docker-compose.build.yml run build
   # build images
   - docker-compose -f docker-compose.build.yml run build bash -c "../ngfw_pkgtools/build.sh setup-only && make iso/${VENDOR}-image iso/${VENDOR}-push"
-
-notifications:
-  email: false
-  slack:
-    rooms:
-      secure: plrP2XptL2y33ok5Wvp692FEcdffgQrp8J6Yw6B7sPXZ604ZArPe6K9BCpDzioPMDwOGeFKfKa+tB8yRjO1orKxRzOKbZgO0qI4Acv35kpb/fDvkdGnBgm0gr1q1eKMwP5JlXJMcTN/LMm7INLcr91WXzuRgwYSciiKvz0FVOd8FUEber0TRfnsd4s4FTGLb2OIH/f4W5t+eS2Leeg019OlADvZOUUTk97+k3yqC8Ajl37YmjXytNR3SuEYN83AJIwON+MFMFVdfY8onyMvY+tnQqgVOy06qFnzycW4ZKrEcD0resLZim6J4Gr6FkG7F4+7EI7ZvWulmTz0RzA7WpJPCw7LH4pyEljqP0ofP92oXLpYUGn98cSyySSGCXv6/m8T9BavtpTy8N2DlTx9uDnEW2zibK0ssxRYGwCBAqGpXGGkQqPU9ccz6OzEP9wO5TJohJ9Ufo+XwyOTMyVzJUf48qlMgNN0FdUItxAO37+Yuj7rBz1Mct0UC2qO63gr0592yqP+8W1+Zvdn2R38heXTiLGoyJdDV30FJKczdTwtTUtEHo5cj1EDMECA28i6uton19OTPgchbbETe8Sg4AKhuS6tk61vepZ28jG3AA5/igigZP4f2gs7ejya7gVokAXpWOaYUXYNXHG4DWZk+CrGJqqNPGxkoauQB1RLhFOA=
-    on_success: change
-    on_failure: always
