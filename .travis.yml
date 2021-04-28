@@ -17,10 +17,15 @@ env:
       PACKAGE_SERVER_IP: 50.211.244.129
       REPOSITORY: buster
       PKGTOOLS_COMMIT: origin/${TRAVIS_BRANCH}
+      IMG_MODIFIER_COMMIT: origin/${TRAVIS_BRANCH}
       UPLOAD: scp
       PRIVILEGED: true
   jobs:
     - ARCHITECTURE: amd64
+      VENDOR: untangle
+    - ARCHITECTURE: amd64
+      VENDOR: vendor2
+      IMG_MODIFIER_VENDOR: vendor2
 
 before_install:
 - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
@@ -28,17 +33,18 @@ before_install:
 - openssl aes-256-cbc -K $encrypted_404963842fb3_key -iv $encrypted_404963842fb3_iv -in .travis/buildbot.rsa.enc -out ${SSH_KEY} -d
 - chmod 600 ${SSH_KEY}
 
-jobs:
-  include:
-    - stage: build udebs & d-i
-      script:
-        - docker-compose -f docker-compose.build.yml run pkgtools
-        - docker-compose -f docker-compose.build.yml run build
-    - stage: build d-i & ISO in one run
-      script:
-        - docker-compose -f docker-compose.build.yml run pkgtools
-        - PACKAGE=d-i FORCE=1 NO_CLEAN=1 UPLOAD= docker-compose -f docker-compose.build.yml run build
-        - docker-compose -f docker-compose.build.yml run build bash -c "../ngfw_pkgtools/build.sh setup-only && make iso/untangle-image iso/untangle-push"
+script:
+  - docker-compose -f docker-compose.build.yml run pkgtools
+  # build d-i and udebs
+  - docker-compose -f docker-compose.build.yml run build
+  - rm -fr d-i/build/localudebs/*
+  # apply img_modifier
+  - docker-compose -f docker-compose.build.yml run img_modifier_checkout
+  - docker-compose -f docker-compose.build.yml run img_modifier_apply
+  # build modified packages without cleaning or uploading
+  - FORCE=1 NO_CLEAN=1 UPLOAD= docker-compose -f docker-compose.build.yml run build
+  # build images
+  - docker-compose -f docker-compose.build.yml run build bash -c "../ngfw_pkgtools/build.sh setup-only && make iso/${VENDOR}-image iso/${VENDOR}-push"
 
 notifications:
   email: false
