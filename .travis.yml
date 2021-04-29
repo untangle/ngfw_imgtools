@@ -20,8 +20,6 @@ env:
       PRIVILEGED: true
   jobs:
     - ARCHITECTURE: amd64
-      VENDOR: untangle
-    - ARCHITECTURE: amd64
       VENDOR: vendor2
       IMG_MODIFIER_VENDOR: vendor2
 
