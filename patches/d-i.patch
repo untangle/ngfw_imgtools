@@ -15,12 +15,13 @@ diff --git build/util/gen-sources.list.udeb build/util/gen-sources.list.udeb
 index 7fa40ac..e50f534 100755
 --- d-i/build/util/gen-sources.list.udeb
 +++ d-i/build/util/gen-sources.list.udeb
-@@ -97,3 +97,5 @@ for mirror in $MIRRORS; do
+@@ -97,3 +97,6 @@ for mirror in $MIRRORS; do
  	fi
  
  done | perl -ne 'print unless $seen{$_}; $seen{$_}=1'
 +
-+echo "deb [trusted=yes] http://package-server/public/$REPOSITORY $DISTRIBUTION main/debian-installer" > sources.list.udeb.local
++echo "deb [trusted=yes] copy:$(pwd) localudebs/" > sources.list.udeb.local
++echo "deb [trusted=yes] http://package-server/public/$REPOSITORY $DISTRIBUTION main/debian-installer" >> sources.list.udeb.local
 diff --git debian/rules debian/rules
 index 8e2632f..e4f417d 100755
 --- d-i/debian/rules
