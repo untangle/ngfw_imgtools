@@ -22,6 +22,7 @@ env:
     - ARCHITECTURE: amd64
       VENDOR: vendor2
       IMG_MODIFIER_VENDOR: vendor2
+      DISTRIBUTION: current-release163
 
 before_install:
 - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
