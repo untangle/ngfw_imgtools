@@ -1,6 +1,6 @@
 udebs
 debian-installer
-sources.list.udeb
+sources.list*
 dest
 mnt
 tmp
