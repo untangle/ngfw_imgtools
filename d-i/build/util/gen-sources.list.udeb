@@ -98,4 +98,5 @@ for mirror in $MIRRORS; do
 
 done | perl -ne 'print unless $seen{$_}; $seen{$_}=1'
 
-echo "deb [trusted=yes] http://package-server/public/$REPOSITORY $DISTRIBUTION main/debian-installer" > sources.list.udeb.local
+echo "deb [trusted=yes] copy:$(pwd) localudebs/" > sources.list.udeb.local
+echo "deb [trusted=yes] http://package-server/public/$REPOSITORY $DISTRIBUTION main/debian-installer" >> sources.list.udeb.local
