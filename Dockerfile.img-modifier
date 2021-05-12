@@ -1,0 +1,34 @@
+FROM debian:buster-slim
+LABEL maintainer="Sebastien Delafond <sdelafond@gmail.com>"
+
+USER root
+ENV DEBIAN_FRONTEND=noninteractive
+
+RUN echo 'APT::Install-Recommends "false";' > /etc/apt/apt.conf.d/no-recommends && \
+    echo 'APT::Install-Suggests "false";' >> /etc/apt/apt.conf.d/no-recommends
+
+RUN apt update -q
+
+RUN apt install -y git
+RUN apt install -y ca-certificates
+RUN apt install -y openssh-client
+RUN apt install -y rsync
+
+# cleanup
+RUN apt clean
+RUN rm -rf /var/lib/apt/lists/*
+
+# base dir
+ENV UNTANGLE=/opt/untangle
+RUN mkdir -p ${UNTANGLE}
+
+RUN mkdir -p /root/.ssh
+RUN ssh-keyscan github.com >> ~/.ssh/known_hosts
+
+# img-modifier
+ENV IMG_MODIFIER=${UNTANGLE}/img_modifier
+
+WORKDIR ${IMG_MODIFIER}
+
+VOLUME ${IMG_MODIFIER}
+VOLUME ${UNTANGLE}/build

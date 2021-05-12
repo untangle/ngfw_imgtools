@@ -17,38 +17,41 @@ services:
         git checkout $${PKGTOOLS_COMMIT}"
 
     img_modifier_checkout:
-      image: untangleinc/pkgtools
+      image: untangleinc/ngfw:img-modifier
       environment:
-        IMG_MODIFIER_URL: ${IMG_MODIFIER_URL:-https://github.com/untangle/ngfw_hades-pkgs}
+        IMG_MODIFIER_URL: ${IMG_MODIFIER_URL:-git@github.com:untangle/ngfw_hades-pkgs}
         IMG_MODIFIER_COMMIT: ${IMG_MODIFIER_COMMIT:-origin/master}
+        SSH_KEY: ${SSH_KEY} # defaults to empty: "no key"
       volumes:
         - img_modifier:/opt/untangle/img_modifier
-      ## !! copy from my directory.
+        - ${SSH_KEY}:${SSH_KEY}
       entrypoint: >
         bash -c "
-        mkdir -p /opt/untangle/img_modifier;
-        cd /opt/untangle/img_modifier;
-        [[ ! -d /opt/untangle/img_modifier/$${IMG_MODIFIER_URL##*/} ]] && git clone $${IMG_MODIFIER_URL};
-        cd $$(basename -s .git $${IMG_MODIFIER_URL});
-        git checkout $${IMG_MODIFIER_COMMIT};
-        pwd;"
+        export GIT_SSH_COMMAND='ssh -i '$${SSH_KEY} &&
+        [ -d .git ] || git clone $${IMG_MODIFIER_URL} . &&
+        git remote set-url origin $${IMG_MODIFIER_URL} &&
+        git fetch -a &&
+        git clean -f -d -x &&
+        git reset --hard &&
+        git clean -f -d -x &&
+        git reset --hard &&
+        git checkout $${IMG_MODIFIER_COMMIT}"
 
     img_modifier_apply:
-      image: untangleinc/ngfw:${REPOSITORY:-buster}-build-multiarch
+      image: untangleinc/ngfw:img-modifier
       environment:
-        IMG_MODIFIER: ${IMG_MODIFIER:-unknown}
+        IMG_MODIFIER_VENDOR: ${IMG_MODIFIER_VENDOR:-untangle}
       volumes:
-        - img_modifier:/opt/untangle/img_modifier
+        - img_modifier:/opt/untangle/img_modifier:ro
         - .:/opt/untangle/build
       entrypoint: >
         bash -c "
-        git clean -f -d -x && git reset --hard;
-        declare -x IMG_MODIFIER_DIR=$$(find ../img_modifier -name $${IMG_MODIFIER} | head -1)/ngfw_imgtools;
-        echo $${IMG_MODIFIER_DIR};
-        if [ -d $${IMG_MODIFIER_DIR} ]; then
-           cp -r $${IMG_MODIFIER_DIR}/* .;
-        fi;
-        pwd"
+        declare -x IMG_MODIFIER_DIR=/opt/untangle/img_modifier/untangle-oem-$${IMG_MODIFIER_VENDOR}/ngfw_imgtools &&
+        if [ -d "$${IMG_MODIFIER_DIR}" ] ; then
+          echo $${IMG_MODIFIER_DIR} &&
+          cd /opt/untangle/build
+          rsync -aHvP $${IMG_MODIFIER_DIR}/ .
+        fi"
 
     build_clean:
       image: untangleinc/ngfw:${REPOSITORY:-buster}-build-multiarch
@@ -86,7 +89,6 @@ services:
       volumes:
         - .:/opt/untangle/build
         - pkgtools:/opt/untangle/ngfw_pkgtools:ro
-        - img_modifier:/opt/untangle/img_modifier:ro
         - /tmp/travis-buildbot.rsa:/tmp/travis-buildbot.rsa
         - /etc/apt/apt.conf.d/01proxy:/etc/apt/apt.conf.d/01proxy
 
