@@ -80,6 +80,7 @@ services:
         # empty: "do not force the build when that version is already
         # present on the target mirror (default)"
         FORCE: ${FORCE}
+        VERSION: ${VERSION}
         TRAVIS_BRANCH: ${TRAVIS_BRANCH:-master}
         TRAVIS_PULL_REQUEST_BRANCH:
       privileged: ${PRIVILEGED:-false}

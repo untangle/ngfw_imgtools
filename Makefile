@@ -12,6 +12,9 @@ endif
 ifeq ($(ARCHITECTURE),)
 ARCHITECTURE := $(shell dpkg-architecture -qDEB_BUILD_ARCH)
 endif
+ifeq ($(VERSION),)
+VERSION := $(shell cat $(PKGTOOLS_DIR)/resources/VERSION)
+endif
 
 ## shell variables
 export http_proxy=$(shell perl -pe 's/.*"(.*?)".*/$$1/' 2> /dev/null < /etc/apt/apt.conf.d/01proxy)
@@ -25,9 +28,10 @@ else
 endif
 KERNEL_VERSION := 4.19.0-11
 KERNEL := linux-image-$(KERNEL_VERSION)-untangle-$(KERNEL_ARCH)
-VERSION = $(shell cat $(PKGTOOLS_DIR)/resources/VERSION)
 ISO_IMAGE := ngfw-+FLAVOR+-$(VERSION)_$(REPOSITORY)_$(ARCHITECTURE)_$(DISTRIBUTION)_$(shell date --iso-8601=seconds)_$(shell hostname -s).iso
+WAF_ISO_IMAGE := waf-+FLAVOR+-$(VERSION)_$(REPOSITORY)_$(ARCHITECTURE)_$(DISTRIBUTION)_$(shell date --iso-8601=seconds)_$(shell hostname -s).iso
 IMAGES_DIR := /data/untangle-images-$(REPOSITORY)
+WAF_IMAGES_DIR := /data/waf-images-$(REPOSITORY)
 MOUNT_SCRIPT := /data/image-manager/mounts.py
 NETBOOT_HOST := package-server
 NETBOOT_USER := buildbot
@@ -50,6 +54,10 @@ DEFAULT_PRESEED_EXPERT := $(PROFILES_DIR)/expert.preseed
 DEFAULT_PRESEED_EXTRA := $(DEFAULT_PRESEED_FINAL).extra
 CONF_FILE := $(PROFILES_DIR)/default.conf
 CONF_FILE_TEMPLATE := $(CONF_FILE).template
+WAF_CONF_FILE := $(PROFILES_DIR)/waf.conf
+WAF_CONF_FILE_TEMPLATE := $(WAF_CONF_FILE).template
+WAF_PRESEED_FILE := $(PROFILES_DIR)/waf.preseed
+WAF_PRESEED_FILE_TEMPLATE := $(WAF_PRESEED_FILE).template
 UNTANGLE_PKGS := $(PROFILES_DIR)/untangle.packages
 UNTANGLE_PKGS_TEMPLATE := $(UNTANGLE_PKGS).template
 CUSTOMSIZE := $(shell echo $$(( 820 * 1024 * 1024 / 2048 )) ) # from MB to 2kB blocks
@@ -91,7 +99,13 @@ repoint-stable-stamp:
 	exit 1 ; }
 	touch $@
 
-iso/conf:
+iso/dependencies:
+	apt install -y simple-cdd dose-distcheck mtools dosfstools
+
+iso/%-clean:
+	rm -fr $(IMGTOOLS_DIR)/tmp repoint-stable-stamp
+
+ngfw/iso/conf:
 	perl -pe 's|\+IMGTOOLS_DIR\+|'$(IMGTOOLS_DIR)'|g' $(CONF_FILE_TEMPLATE) >| $(CONF_FILE)
 	perl -pe 's|\+KERNEL\+|'$(KERNEL)'|g' $(UNTANGLE_PKGS_TEMPLATE) >| $(UNTANGLE_PKGS)
 	cat $(COMMON_PRESEED) $(AUTOPARTITION_PRESEED) $(NETBOOT_PRESEED_EXTRA) $(UNTANGLE_PRESEED) | perl -pe 's|\+VERSION\+|'$(VERSION)'|g ; s|\+ARCH\+|'$(ARCHITECTURE)'|g ; s|\+REPOSITORY\+|'$(REPOSITORY)'|g ; s|\+KERNELS\+|'$(KERNEL)'|g ; s/^(d-i preseed\/early_command string anna-install.*)/#$1/' >| $(NETBOOT_PRESEED_FINAL)
@@ -99,10 +113,7 @@ iso/conf:
 	cat $(COMMON_PRESEED) $(NETBOOT_PRESEED_EXTRA) $(UNTANGLE_PRESEED) | perl -pe 's|\+VERSION\+|'$(VERSION)'|g ; s|\+ARCH\+|'$(ARCHITECTURE)'|g ; s|\+REPOSITORY\+|'$(REPOSITORY)'|g ; s|\+KERNEL\+|'$(KERNEL)'|g ; s/^(d-i preseed\/early_command string anna-install.*)/#$1/' >| $(NETBOOT_PRESEED_EXPERT)
 	cat $(COMMON_PRESEED) $(DEFAULT_PRESEED_EXTRA) | perl -pe 's|\+VERSION\+|'$(VERSION)'|g ; s|\+ARCH\+|'$(ARCHITECTURE)'|g ; s|\+REPOSITORY\+|'$(REPOSITORY)'|g ; s|\+KERNEL\+|'$(KERNEL)'|g' >| $(DEFAULT_PRESEED_EXPERT)
 
-iso/dependencies:
-	apt install -y simple-cdd dose-distcheck mtools dosfstools
-
-iso/%-image: repoint-stable iso/dependencies iso/conf
+ngfw/iso/%-image: repoint-stable iso/dependencies ngfw/iso/conf
 	$(eval flavor := $*)
 	perl -pe 's|\+IMGTOOLS_DIR\+|'$(IMGTOOLS_DIR)'|g' $(CONF_FILE_TEMPLATE) >| $(CONF_FILE); \
 	export CODENAME=$(REPOSITORY) DEBVERSION=$(DEBVERSION) ; \
@@ -127,7 +138,7 @@ iso/%-image: repoint-stable iso/dependencies iso/conf
 	mv images/$(flavor)-$(DEBVERSION)*-$(ARCHITECTURE)-*1.iso $(subst +FLAVOR+,$(flavor),$(ISO_IMAGE))
 	cp -f $(subst +FLAVOR+,$(flavor),$(ISO_IMAGE)) ngfw.iso
 
-iso/%-push: # pushes the most recent image
+ngfw/iso/%-push: # pushes the most recent image
 	$(eval iso_image := $(shell ls --sort=time *$(VERSION)*$(REPOSITORY)*$(ARCHITECTURE)*$(DISTRIBUTION)*.iso | head -1))
 	$(eval timestamp := $(shell echo $(iso_image) | perl -pe 's/.*(\d{4}(-\d{2}){2}T(\d{2}:?){3}).*/$$1/'))
 	ssh $(NETBOOT_USER)@$(NETBOOT_HOST) "sudo python $(MOUNT_SCRIPT) new $(VERSION) $(timestamp) $(ARCHITECTURE) $(REPOSITORY)"
@@ -137,5 +148,46 @@ iso/%-push: # pushes the most recent image
 	scp $(NETBOOT_KERNEL) $(NETBOOT_USER)@$(NETBOOT_HOST):$(IMAGES_DIR)/$(VERSION)/linux-$(ARCHITECTURE)
 	ssh $(NETBOOT_USER)@$(NETBOOT_HOST) "sudo python $(MOUNT_SCRIPT) link $(VERSION) $(timestamp) $(ARCHITECTURE) $(REPOSITORY)"
 
-iso/%-clean:
-	rm -fr $(IMGTOOLS_DIR)/tmp /tmp/untangle-images-$(REPOSITORY)-$(DISTRIBUTION)-$* repoint-stable-stamp
+waf/iso/conf:
+	perl -pe 's|\+IMGTOOLS_DIR\+|'$(IMGTOOLS_DIR)'|g' $(WAF_CONF_FILE_TEMPLATE) >| $(WAF_CONF_FILE)
+	cat profiles/waf.preseed.template > profiles/waf.preseed
+	cp profiles/waf.preseed $(DEFAULT_PRESEED_FINAL)
+
+waf/iso/%-image: repoint-stable iso/dependencies waf/iso/conf
+	$(eval flavor := $*)
+	export CODENAME=$(REPOSITORY) DEBVERSION=$(DEBVERSION) ; \
+	export CDNAME=waf-$(flavor) DISKINFO=waf-$(flavor) ; \
+	export CUSTOMSIZE=$(shell echo $$(( 700 * 1024 * 1024 / 2048 )) ) ; \
+	export http_proxy="" ; \
+	build-simple-cdd \
+		--keyboard us \
+		--locale en_US.UTF-8 \
+		--force-root \
+		--debian-mirror http://deb.debian.org/debian/ \
+		--dist $(REPOSITORY) \
+		--debug \
+		--verbose \
+		--mirror-only \
+		--logfile $(IMGTOOLS_DIR)/simplecdd-mirror.log ; \
+	build-simple-cdd \
+		--keyboard us \
+		--locale en_US.UTF-8 \
+		--force-root \
+		--profiles waf,auto-partition \
+		--auto-profiles waf,auto-partition \
+		--keyring /usr/share/keyrings/does-not-exist.gpg \
+		--debian-mirror http://package-server/public/$(REPOSITORY)/ \
+		--security-mirror http://package-server/public/$(REPOSITORY)/ \
+		--mirror-tools reprepro \
+		--dist $(REPOSITORY) \
+		--debug \
+		--verbose \
+		--logfile $(IMGTOOLS_DIR)/simplecdd-image.log
+	mv images/waf-$(flavor)-$(DEBVERSION)*-$(ARCHITECTURE)-*1.iso $(subst +FLAVOR+,$(flavor),$(WAF_ISO_IMAGE))
+	cp -f $(subst +FLAVOR+,$(flavor),$(WAF_ISO_IMAGE)) waf.iso
+
+waf/iso/%-push: repoint-stable iso/dependencies waf/iso/conf
+	$(eval iso_image := $(shell ls --sort=time *$(VERSION)*$(REPOSITORY)*$(ARCHITECTURE)*$(DISTRIBUTION)*.iso | head -1))
+	$(eval timestamp := $(shell echo $(iso_image) | perl -pe 's/.*(\d{4}(-\d{2}){2}T(\d{2}:?){3}).*/$$1/'))
+	ssh $(NETBOOT_USER)@$(NETBOOT_HOST) mkdir -p $(WAF_IMAGES_DIR)/$(VERSION)
+	scp ./$(iso_image) $(NETBOOT_USER)@$(NETBOOT_HOST):$(WAF_IMAGES_DIR)/$(VERSION)

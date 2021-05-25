@@ -21,11 +21,17 @@ env:
       UPLOAD: scp
       PRIVILEGED: true
   jobs:
-    - ARCHITECTURE: amd64
+    - PRODUCT: ngfw
+      ARCHITECTURE: amd64
       VENDOR: untangle
-    - ARCHITECTURE: amd64
+    - PRODUCT: ngfw
+      ARCHITECTURE: amd64
       VENDOR: vendor2
       IMG_MODIFIER_VENDOR: vendor2
+    - PRODUCT: waf
+      ARCHITECTURE: amd64
+      VENDOR: untangle
+      VERSION: 0.0.1
 
 before_install:
 - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
@@ -35,16 +41,18 @@ before_install:
 
 script:
   - docker-compose -f docker-compose.build.yml run pkgtools
-  # build d-i and udebs
-  - docker-compose -f docker-compose.build.yml run build
+  # build d-i and udebs for ngfw
+  - |
+    [ ${PRODUCT} = waf ] || docker-compose -f docker-compose.build.yml run build
   - rm -fr d-i/build/localudebs/*
   # apply img_modifier
   - docker-compose -f docker-compose.build.yml run img_modifier_checkout
   - docker-compose -f docker-compose.build.yml run img_modifier_apply
   # build modified packages without cleaning or uploading
-  - FORCE=1 NO_CLEAN=1 UPLOAD= docker-compose -f docker-compose.build.yml run build
+  - |
+    [ ${PRODUCT} = waf ] || FORCE=1 NO_CLEAN=1 UPLOAD= docker-compose -f docker-compose.build.yml run build
   # build images
-  - docker-compose -f docker-compose.build.yml run build bash -c "../ngfw_pkgtools/build.sh setup-only && make iso/${VENDOR}-image iso/${VENDOR}-push"
+  - docker-compose -f docker-compose.build.yml run build bash -c "../ngfw_pkgtools/build.sh setup-only && make ${PRODUCT}/iso/${VENDOR}-image ${PRODUCT}/iso/${VENDOR}-push"
 
 notifications:
   email: false
