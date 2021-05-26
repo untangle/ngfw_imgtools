@@ -45,13 +45,15 @@ script:
   - |
     [ ${PRODUCT} = waf ] || docker-compose -f docker-compose.build.yml run build
   - rm -fr d-i/build/localudebs/*
-  # apply img_modifier
-  - docker-compose -f docker-compose.build.yml run img_modifier_checkout
-  - docker-compose -f docker-compose.build.yml run img_modifier_apply
-  # build modified packages without cleaning or uploading
+  # apply img_modifier, and build modified packages without cleaning or
+  # uploading
   - |
-    [ ${PRODUCT} = waf ] || FORCE=1 NO_CLEAN=1 UPLOAD= docker-compose -f docker-compose.build.yml run build
-  # build images
+    if [ ${PRODUCT} != waf ] ; then
+      docker-compose -f docker-compose.build.yml run img_modifier_checkout
+      docker-compose -f docker-compose.build.yml run img_modifier_apply
+      FORCE=1 NO_CLEAN=1 UPLOAD= docker-compose -f docker-compose.build.yml run build
+    fi
+  # build and upload image
   - docker-compose -f docker-compose.build.yml run build bash -c "../ngfw_pkgtools/build.sh setup-only && make ${PRODUCT}/iso/${VENDOR}-image ${PRODUCT}/iso/${VENDOR}-push"
 
 notifications:
