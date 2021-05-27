@@ -14,7 +14,7 @@ services:
         git fetch -a &&
         git clean -f -d -x &&
         git reset --hard &&
-        git checkout $${PKGTOOLS_COMMIT}"
+        git checkout $${PKGTOOLS_COMMIT} || true"
 
     img_modifier_checkout:
       image: untangleinc/ngfw:img-modifier
