@@ -29,3 +29,5 @@ export DISKTYPE=CUSTOM
 #do_mirror="false"
 
 all_extras="+IMGTOOLS_DIR+/profiles/hands-free.sh +IMGTOOLS_DIR+/profiles/late_command.sh +IMGTOOLS_DIR+/profiles/preseed.cfg"
+
+export KERNEL_PARAMS="net.ifnames=0"
