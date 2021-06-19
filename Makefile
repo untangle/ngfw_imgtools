@@ -16,6 +16,16 @@ ifeq ($(VERSION),)
 VERSION := $(shell cat $(PKGTOOLS_DIR)/resources/VERSION)
 endif
 
+SERIAL_ENV=
+SERIAL_PARAMETER=
+SERIAL_NAME=
+ifneq ($(SERIAL),)
+SERIAL_ENV_CMD=export export serial_console_opts=$(SERIAL);
+SERIAL_BSC_PARAMETER=--serial-console
+SERIAL_NAME=serial-
+else
+endif
+
 ## shell variables
 export http_proxy=$(shell perl -pe 's/.*"(.*?)".*/$$1/' 2> /dev/null < /etc/apt/apt.conf.d/01proxy)
 
@@ -28,7 +38,7 @@ else
 endif
 KERNEL_VERSION := 4.19.0-11
 KERNEL := linux-image-$(KERNEL_VERSION)-untangle-$(KERNEL_ARCH)
-ISO_IMAGE := ngfw-+FLAVOR+-$(VERSION)_$(REPOSITORY)_$(ARCHITECTURE)_$(DISTRIBUTION)_$(shell date --iso-8601=seconds)_$(shell hostname -s).iso
+ISO_IMAGE := ngfw-+FLAVOR+-+SERIAL+$(VERSION)_$(REPOSITORY)_$(ARCHITECTURE)_$(DISTRIBUTION)_$(shell date --iso-8601=seconds)_$(shell hostname -s).iso
 WAF_ISO_IMAGE := waf-+FLAVOR+-$(VERSION)_$(REPOSITORY)_$(ARCHITECTURE)_$(DISTRIBUTION)_$(shell date --iso-8601=seconds)_$(shell hostname -s).iso
 IMAGES_DIR := /data/untangle-images-$(REPOSITORY)
 WAF_IMAGES_DIR := /data/waf-images-$(REPOSITORY)
@@ -118,7 +128,9 @@ ngfw/iso/%-image: repoint-stable iso/dependencies ngfw/iso/conf
 	perl -pe 's|\+IMGTOOLS_DIR\+|'$(IMGTOOLS_DIR)'|g' $(CONF_FILE_TEMPLATE) >| $(CONF_FILE); \
 	export CODENAME=$(REPOSITORY) DEBVERSION=$(DEBVERSION) ; \
 	export CDNAME=$(flavor) DISKINFO=$(flavor) CUSTOMSIZE=$(CUSTOMSIZE) ; \
+	$(SERIAL_ENV_CMD) \
 	build-simple-cdd \
+	    $(SERIAL_BSC_PARAMETER) \
 	    --local-packages local-packages \
 		--keyboard us \
 		--locale en_US.UTF-8 \
@@ -135,8 +147,8 @@ ngfw/iso/%-image: repoint-stable iso/dependencies ngfw/iso/conf
 		--do-mirror \
 		--verbose \
 		--logfile $(IMGTOOLS_DIR)/simplecdd.log  ;
-	mv images/$(flavor)-$(DEBVERSION)*-$(ARCHITECTURE)-*1.iso $(subst +FLAVOR+,$(flavor),$(ISO_IMAGE))
-	cp -f $(subst +FLAVOR+,$(flavor),$(ISO_IMAGE)) ngfw.iso
+	mv images/$(flavor)-$(DEBVERSION)*-$(ARCHITECTURE)-*1.iso $(subst +SERIAL+,$(SERIAL_NAME),$(subst +FLAVOR+,$(flavor),$(ISO_IMAGE)))
+	cp -f $(subst +SERIAL+,$(SERIAL_NAME),$(subst +FLAVOR+,$(flavor),$(ISO_IMAGE))) ngfw.iso
 
 ngfw/iso/%-push: # pushes the most recent image
 	$(eval iso_image := $(shell ls --sort=time *$(VERSION)*$(REPOSITORY)*$(ARCHITECTURE)*$(DISTRIBUTION)*.iso | head -1))

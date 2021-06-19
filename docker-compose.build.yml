@@ -83,6 +83,7 @@ services:
         VERSION: ${VERSION}
         TRAVIS_BRANCH: ${TRAVIS_BRANCH:-master}
         TRAVIS_PULL_REQUEST_BRANCH:
+        SERIAL: ${SERIAL}
       privileged: ${PRIVILEGED:-false}
       extra_hosts:
         # from the outside, pass package-server's outside IP instead
