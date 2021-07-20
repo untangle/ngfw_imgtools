@@ -54,7 +54,7 @@ BOOT_IMG := $(IMGTOOLS_DIR)/d-i/build/dest/hd-media/boot.img.gz
 PROFILES_DIR := $(IMGTOOLS_DIR)/profiles
 COMMON_PRESEED :=  $(PROFILES_DIR)/common.preseed
 AUTOPARTITION_PRESEED :=  $(PROFILES_DIR)/auto-partition.preseed
-UNTANGLE_PRESEED := $(PROFILES_DIR)/untangle.preseed
+NGFW_PRESEED := $(PROFILES_DIR)/ngfw.preseed
 NETBOOT_PRESEED := $(PROFILES_DIR)/netboot.preseed
 NETBOOT_PRESEED_FINAL := $(NETBOOT_PRESEED).$(ARCHITECTURE)
 NETBOOT_PRESEED_EXPERT := $(PROFILES_DIR)/netboot.expert.preseed.$(ARCHITECTURE)
@@ -62,7 +62,7 @@ NETBOOT_PRESEED_EXTRA := $(NETBOOT_PRESEED).extra
 DEFAULT_PRESEED_FINAL := $(PROFILES_DIR)/default.preseed
 DEFAULT_PRESEED_EXPERT := $(PROFILES_DIR)/expert.preseed
 DEFAULT_PRESEED_EXTRA := $(DEFAULT_PRESEED_FINAL).extra
-CONF_FILE := $(PROFILES_DIR)/default.conf
+CONF_FILE := $(PROFILES_DIR)/ngfw.conf
 CONF_FILE_TEMPLATE := $(CONF_FILE).template
 WAF_CONF_FILE := $(PROFILES_DIR)/waf.conf
 WAF_CONF_FILE_TEMPLATE := $(WAF_CONF_FILE).template
@@ -118,9 +118,9 @@ iso/%-clean:
 ngfw/iso/conf:
 	perl -pe 's|\+IMGTOOLS_DIR\+|'$(IMGTOOLS_DIR)'|g' $(CONF_FILE_TEMPLATE) >| $(CONF_FILE)
 	perl -pe 's|\+KERNEL\+|'$(KERNEL)'|g' $(UNTANGLE_PKGS_TEMPLATE) >| $(UNTANGLE_PKGS)
-	cat $(COMMON_PRESEED) $(AUTOPARTITION_PRESEED) $(NETBOOT_PRESEED_EXTRA) $(UNTANGLE_PRESEED) | perl -pe 's|\+VERSION\+|'$(VERSION)'|g ; s|\+ARCH\+|'$(ARCHITECTURE)'|g ; s|\+REPOSITORY\+|'$(REPOSITORY)'|g ; s|\+KERNELS\+|'$(KERNEL)'|g ; s/^(d-i preseed\/early_command string anna-install.*)/#$1/' >| $(NETBOOT_PRESEED_FINAL)
+	cat $(COMMON_PRESEED) $(AUTOPARTITION_PRESEED) $(NETBOOT_PRESEED_EXTRA) $(NGFW_PRESEED) | perl -pe 's|\+VERSION\+|'$(VERSION)'|g ; s|\+ARCH\+|'$(ARCHITECTURE)'|g ; s|\+REPOSITORY\+|'$(REPOSITORY)'|g ; s|\+KERNELS\+|'$(KERNEL)'|g ; s/^(d-i preseed\/early_command string anna-install.*)/#$1/' >| $(NETBOOT_PRESEED_FINAL)
 	cat $(COMMON_PRESEED) $(AUTOPARTITION_PRESEED) $(DEFAULT_PRESEED_EXTRA) | perl -pe 's|\+VERSION\+|'$(VERSION)'|g ; s|\+ARCH\+|'$(ARCHITECTURE)'|g ; s|\+REPOSITORY\+|'$(REPOSITORY)'|g ; s|\+KERNEL\+|'$(KERNEL)'|g' >| $(DEFAULT_PRESEED_FINAL)
-	cat $(COMMON_PRESEED) $(NETBOOT_PRESEED_EXTRA) $(UNTANGLE_PRESEED) | perl -pe 's|\+VERSION\+|'$(VERSION)'|g ; s|\+ARCH\+|'$(ARCHITECTURE)'|g ; s|\+REPOSITORY\+|'$(REPOSITORY)'|g ; s|\+KERNEL\+|'$(KERNEL)'|g ; s/^(d-i preseed\/early_command string anna-install.*)/#$1/' >| $(NETBOOT_PRESEED_EXPERT)
+	cat $(COMMON_PRESEED) $(NETBOOT_PRESEED_EXTRA) $(NGFW_PRESEED) | perl -pe 's|\+VERSION\+|'$(VERSION)'|g ; s|\+ARCH\+|'$(ARCHITECTURE)'|g ; s|\+REPOSITORY\+|'$(REPOSITORY)'|g ; s|\+KERNEL\+|'$(KERNEL)'|g ; s/^(d-i preseed\/early_command string anna-install.*)/#$1/' >| $(NETBOOT_PRESEED_EXPERT)
 	cat $(COMMON_PRESEED) $(DEFAULT_PRESEED_EXTRA) | perl -pe 's|\+VERSION\+|'$(VERSION)'|g ; s|\+ARCH\+|'$(ARCHITECTURE)'|g ; s|\+REPOSITORY\+|'$(REPOSITORY)'|g ; s|\+KERNEL\+|'$(KERNEL)'|g' >| $(DEFAULT_PRESEED_EXPERT)
 
 ngfw/iso/%-image: repoint-stable iso/dependencies ngfw/iso/conf
@@ -136,8 +136,8 @@ ngfw/iso/%-image: repoint-stable iso/dependencies ngfw/iso/conf
 		--locale en_US.UTF-8 \
 		--keyring /usr/share/keyrings/untangle-archive-keyring.gpg \
 		--force-root \
-		--auto-profiles default,untangle,$(flavor) \
-		--profiles hands-free,untangle,$(flavor),expert \
+		--auto-profiles default,ngfw,$(flavor) \
+		--profiles hands-free,ngfw,$(flavor),expert \
 		--debian-mirror http://package-server/public/$(REPOSITORY)/ \
 		--security-mirror http://package-server/public/$(REPOSITORY)/ \
 		--dist $(REPOSITORY) \
