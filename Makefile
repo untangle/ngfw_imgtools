@@ -15,6 +15,9 @@ endif
 ifeq ($(VERSION),)
 VERSION := $(shell cat $(PKGTOOLS_DIR)/resources/VERSION)
 endif
+ifeq ($(PUBVERSION),)
+PUBVERSION := $(shell cat $(PKGTOOLS_DIR)/resources/PUBVERSION)
+endif
 
 SERIAL_ENV=
 SERIAL_PARAMETER=
@@ -113,7 +116,7 @@ iso/dependencies:
 	apt install -y simple-cdd dose-distcheck mtools dosfstools
 
 iso/%-clean:
-	rm -fr $(IMGTOOLS_DIR)/tmp repoint-stable-stamp
+	rm -fr $(IMGTOOLS_DIR)/tmp repoint-stable-stamp profiles/default.preseed profiles/default.conf
 
 ngfw/iso/conf:
 	perl -pe 's|\+IMGTOOLS_DIR\+|'$(IMGTOOLS_DIR)'|g' $(CONF_FILE_TEMPLATE) >| $(CONF_FILE)
@@ -139,7 +142,6 @@ ngfw/iso/%-image: repoint-stable iso/dependencies ngfw/iso/conf
 		--auto-profiles default,ngfw,$(flavor) \
 		--profiles hands-free,ngfw,$(flavor),expert \
 		--debian-mirror http://package-server/public/$(REPOSITORY)/ \
-		--security-mirror http://package-server/public/$(REPOSITORY)/ \
 		--dist $(REPOSITORY) \
 		--require-optional-packages \
 		--mirror-tools reprepro \
@@ -162,8 +164,7 @@ ngfw/iso/%-push: # pushes the most recent image
 
 waf/iso/conf:
 	perl -pe 's|\+IMGTOOLS_DIR\+|'$(IMGTOOLS_DIR)'|g' $(WAF_CONF_FILE_TEMPLATE) >| $(WAF_CONF_FILE)
-	cat profiles/waf.preseed.template > profiles/waf.preseed
-	cp profiles/waf.preseed $(DEFAULT_PRESEED_FINAL)
+	perl -pe 's|\+VERSION\+|'$(VERSION)'|g ; s|\+PUBVERSION\+|'$(PUBVERSION)'|g ; s|\+ARCH\+|'$(ARCHITECTURE)'|g ; s|\+REPOSITORY\+|'$(REPOSITORY)'|g' profiles/waf.preseed.template > profiles/waf.preseed
 
 waf/iso/%-image: repoint-stable iso/dependencies waf/iso/conf
 	$(eval flavor := $*)
@@ -176,6 +177,7 @@ waf/iso/%-image: repoint-stable iso/dependencies waf/iso/conf
 		--locale en_US.UTF-8 \
 		--force-root \
 		--debian-mirror http://deb.debian.org/debian/ \
+		--security-mirror http://security.debian.org/debian-security/ \
 		--dist $(REPOSITORY) \
 		--debug \
 		--verbose \

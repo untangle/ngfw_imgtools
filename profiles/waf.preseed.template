@@ -42,9 +42,9 @@ d-i hw-detect/load_firmware boolean false
 d-i mirror/country string
 # FIXME
 d-i mirror/protocol string http
-d-i mirror/http/hostname string package-server.untangle.int
+d-i mirror/http/hostname string updates.untangle.com
 d-i mirror/http/directory string /public/buster
-d-i mirror/suite string current
+d-i mirror/suite string waf-+PUBVERSION+
 
 ### Localization
 # Preseeding only locale sets language, country and locale.
@@ -87,9 +87,8 @@ d-i apt-setup/services-select multiselect
 #d-i apt-setup/volatile_host string volatile.debian.org
 
 # Additional repositories, local[0-9] available
-# FIXME
-d-i apt-setup/local0/repository string \
-         [trusted=yes] http://package-server.untangle.int/public/buster current main
+# d-i apt-setup/local0/repository string \
+#          [trusted=yes] http://package-server.untangle.int/public/buster current main
 #d-i apt-setup/local0/comment string local server
 # Enable deb-src lines
 #d-i apt-setup/local0/source boolean true
