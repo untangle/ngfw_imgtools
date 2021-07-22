@@ -41,7 +41,6 @@ jobs:
     - name: NGFW Vendor2 amd64
       script:
         - docker-compose -f docker-compose.build.yml run pkgtools
-        - docker-compose -f docker-compose.build.yml run build
         - rm -fr d-i/build/localudebs/*
         - docker-compose -f docker-compose.build.yml run img_modifier_checkout
         - docker-compose -f docker-compose.build.yml run img_modifier_apply
