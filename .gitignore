@@ -2,8 +2,6 @@ resources
 tmp/
 debian-installer*
 !debian-installer.d
-profiles/default.conf
-profiles/default.preseed
 profiles/expert.preseed
 simplecdd*.log
 profiles/netboot.expert.preseed.amd64
