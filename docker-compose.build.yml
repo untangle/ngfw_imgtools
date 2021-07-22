@@ -2,7 +2,7 @@ version: '3'
 
 services:
     pkgtools:
-      image: untangleinc/pkgtools
+      image: untangleinc/${PKGTOOLS_REPOSITORY:-pkgtools}
       environment:
         PKGTOOLS_URL: ${PKGTOOLS_URL:-https://github.com/untangle/ngfw_pkgtools}
         PKGTOOLS_COMMIT: ${PKGTOOLS_COMMIT:-origin/master}

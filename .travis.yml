@@ -56,12 +56,13 @@ jobs:
 
     - name: WAF Untangle amd64
       script:
-        - docker-compose -f docker-compose.build.yml run pkgtools
+        - docker-compose -f docker-compose.build.yml run pkgtools-waf
         - docker-compose -f docker-compose.build.yml run build bash -c "../ngfw_pkgtools/build.sh setup-only && make ${PRODUCT}/iso/${VENDOR}-image ${PRODUCT}/iso/${VENDOR}-push"
       env:
         - PRODUCT: waf
         - ARCHITECTURE: amd64
         - VENDOR: untangle
+        - PKGTOOLS_REPOSITORY: pkgtools-waf
         - PKGTOOLS_COMMIT: origin/waf-${TRAVIS_BRANCH}
 
 notifications:
