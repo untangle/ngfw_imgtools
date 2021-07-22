@@ -142,6 +142,7 @@ ngfw/iso/%-image: repoint-stable iso/dependencies ngfw/iso/conf
 		--auto-profiles default,ngfw,$(flavor) \
 		--profiles hands-free,ngfw,$(flavor),expert \
 		--debian-mirror http://package-server/public/$(REPOSITORY)/ \
+		--security-mirror http://package-server/public/$(REPOSITORY)/ \
 		--dist $(REPOSITORY) \
 		--require-optional-packages \
 		--mirror-tools reprepro \
