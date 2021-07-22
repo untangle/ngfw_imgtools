@@ -200,7 +200,7 @@ waf/iso/%-image: repoint-stable iso/dependencies waf/iso/conf
 	mv images/waf-$(flavor)-$(DEBVERSION)*-$(ARCHITECTURE)-*1.iso $(subst +FLAVOR+,$(flavor),$(WAF_ISO_IMAGE))
 	cp -f $(subst +FLAVOR+,$(flavor),$(WAF_ISO_IMAGE)) waf.iso
 
-waf/iso/%-push: repoint-stable iso/dependencies waf/iso/conf
+waf/iso/%-push:
 	$(eval iso_image := $(shell ls --sort=time *$(VERSION)*$(REPOSITORY)*$(ARCHITECTURE)*$(DISTRIBUTION)*.iso | head -1))
 	$(eval timestamp := $(shell echo $(iso_image) | perl -pe 's/.*(\d{4}(-\d{2}){2}T(\d{2}:?){3}).*/$$1/'))
 	ssh $(NETBOOT_USER)@$(NETBOOT_HOST) mkdir -p $(WAF_IMAGES_DIR)/$(VERSION)
