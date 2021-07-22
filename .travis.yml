@@ -30,8 +30,7 @@ jobs:
     - name: NGFW Untangle amd64
       script:
         - docker-compose -f docker-compose.build.yml run pkgtools
-        - docker-compose -f docker-compose.build.yml run build
-        - rm -fr d-i/build/localudebs/*
+        - NO_CLEAN=1 docker-compose -f docker-compose.build.yml run build
         - docker-compose -f docker-compose.build.yml run build bash -c "../ngfw_pkgtools/build.sh setup-only && make ${PRODUCT}/iso/${VENDOR}-image ${PRODUCT}/iso/${VENDOR}-push"
         - SERIAL=ttyS0,115200n8 docker-compose -f docker-compose.build.yml run build bash -c "../ngfw_pkgtools/build.sh setup-only && make ${PRODUCT}/iso/${VENDOR}-image ${PRODUCT}/iso/${VENDOR}-push"
       env:
