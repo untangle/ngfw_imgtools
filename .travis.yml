@@ -56,7 +56,7 @@ jobs:
 
     - name: WAF Untangle amd64
       script:
-        - docker-compose -f docker-compose.build.yml run pkgtools-waf
+        - docker-compose -f docker-compose.build.yml run pkgtools
         - docker-compose -f docker-compose.build.yml run build bash -c "../ngfw_pkgtools/build.sh setup-only && make ${PRODUCT}/iso/${VENDOR}-image ${PRODUCT}/iso/${VENDOR}-push"
       env:
         - PRODUCT: waf
