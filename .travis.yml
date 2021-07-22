@@ -1,5 +1,3 @@
-sudo: required
-
 if: branch =~ /^(master|release-\d\d.\d)$/ AND type IN (push, cron, api) AND tag IS blank
 
 git:
@@ -20,18 +18,6 @@ env:
       IMG_MODIFIER_COMMIT: origin/${TRAVIS_BRANCH}
       UPLOAD: scp
       PRIVILEGED: true
-  jobs:
-    - PRODUCT: ngfw
-      ARCHITECTURE: amd64
-      VENDOR: untangle
-    - PRODUCT: ngfw
-      ARCHITECTURE: amd64
-      VENDOR: vendor2
-      IMG_MODIFIER_VENDOR: vendor2
-    - PRODUCT: waf
-      ARCHITECTURE: amd64
-      VENDOR: untangle
-      VERSION: 0.0.1
 
 before_install:
 - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
@@ -39,23 +25,44 @@ before_install:
 - openssl aes-256-cbc -K $encrypted_404963842fb3_key -iv $encrypted_404963842fb3_iv -in .travis/buildbot.rsa.enc -out ${SSH_KEY} -d
 - chmod 600 ${SSH_KEY}
 
-script:
-  - docker-compose -f docker-compose.build.yml run pkgtools
-  # build d-i and udebs for ngfw
-  - |
-    [ ${PRODUCT} = waf ] || docker-compose -f docker-compose.build.yml run build
-  - rm -fr d-i/build/localudebs/*
-  # apply img_modifier, and build modified packages without cleaning or
-  # uploading
-  - |
-    if [ ${PRODUCT} != waf ] ; then
-      docker-compose -f docker-compose.build.yml run img_modifier_checkout
-      docker-compose -f docker-compose.build.yml run img_modifier_apply
-      FORCE=1 NO_CLEAN=1 UPLOAD= docker-compose -f docker-compose.build.yml run build
-    fi
-  # build and upload image
-  - docker-compose -f docker-compose.build.yml run build bash -c "../ngfw_pkgtools/build.sh setup-only && make ${PRODUCT}/iso/${VENDOR}-image ${PRODUCT}/iso/${VENDOR}-push"
-  - SERIAL=ttyS0,115200n8 docker-compose -f docker-compose.build.yml run build bash -c "../ngfw_pkgtools/build.sh setup-only && make ${PRODUCT}/iso/${VENDOR}-image ${PRODUCT}/iso/${VENDOR}-push"
+jobs:
+  include:
+    - name: NGFW Untangle amd64
+      script:
+        - docker-compose -f docker-compose.build.yml run pkgtools
+        - docker-compose -f docker-compose.build.yml run build
+        - rm -fr d-i/build/localudebs/*
+        - docker-compose -f docker-compose.build.yml run build bash -c "../ngfw_pkgtools/build.sh setup-only && make ${PRODUCT}/iso/${VENDOR}-image ${PRODUCT}/iso/${VENDOR}-push"
+        - SERIAL=ttyS0,115200n8 docker-compose -f docker-compose.build.yml run build bash -c "../ngfw_pkgtools/build.sh setup-only && make ${PRODUCT}/iso/${VENDOR}-image ${PRODUCT}/iso/${VENDOR}-push"
+      env:
+        - PRODUCT: ngfw
+        - ARCHITECTURE: amd64
+        - VENDOR: untangle
+
+    - name: NGFW Vendor2 amd64
+      script:
+        - docker-compose -f docker-compose.build.yml run pkgtools
+        - docker-compose -f docker-compose.build.yml run build
+        - rm -fr d-i/build/localudebs/*
+        - docker-compose -f docker-compose.build.yml run img_modifier_checkout
+        - docker-compose -f docker-compose.build.yml run img_modifier_apply
+        - FORCE=1 NO_CLEAN=1 UPLOAD= docker-compose -f docker-compose.build.yml run build
+        - docker-compose -f docker-compose.build.yml run build bash -c "../ngfw_pkgtools/build.sh setup-only && make ${PRODUCT}/iso/${VENDOR}-image ${PRODUCT}/iso/${VENDOR}-push"
+        - SERIAL=ttyS0,115200n8 docker-compose -f docker-compose.build.yml run build bash -c "../ngfw_pkgtools/build.sh setup-only && make ${PRODUCT}/iso/${VENDOR}-image ${PRODUCT}/iso/${VENDOR}-push"
+      env:
+        - PRODUCT: ngfw
+        - ARCHITECTURE: amd64
+        - VENDOR: vendor2
+
+    - name: WAF Untangle amd64
+      script:
+        - docker-compose -f docker-compose.build.yml run pkgtools
+        - docker-compose -f docker-compose.build.yml run build bash -c "../ngfw_pkgtools/build.sh setup-only && make ${PRODUCT}/iso/${VENDOR}-image ${PRODUCT}/iso/${VENDOR}-push"
+      env:
+        - PRODUCT: waf
+        - ARCHITECTURE: amd64
+        - VENDOR: untangle
+        - PKGTOOLS_COMMIT: origin/waf-${TRAVIS_BRANCH}
 
 notifications:
   email: false
