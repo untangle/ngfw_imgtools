@@ -51,6 +51,7 @@ jobs:
         - PRODUCT: ngfw
         - ARCHITECTURE: amd64
         - VENDOR: vendor2
+        - IMG_MODIFIER_VENDOR: vendor2
 
     - name: WAF Untangle amd64
       script:
