@@ -21,3 +21,4 @@ d-i/doc/devel/internals/ch05.html
 repoint-stable-stamp
 profiles/waf.preseed
 profiles/ngfw.conf
+profiles/waf.conf

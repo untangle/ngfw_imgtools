@@ -17,3 +17,5 @@ export COPYLINKS=0
 export MKISOFS_OPTS="-r -A 000000"
 
 export DISKTYPE=CUSTOM
+
+all_extras="+IMGTOOLS_DIR+/profiles/hands-free.sh +IMGTOOLS_DIR+/profiles/late_command.sh +IMGTOOLS_DIR+/profiles/preseed.cfg"
