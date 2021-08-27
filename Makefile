@@ -145,7 +145,7 @@ ngfw/iso/%-image: repoint-stable iso/dependencies ngfw/iso/conf
 		--locale en_US.UTF-8 \
 		--keyring /usr/share/keyrings/untangle-archive-keyring.gpg \
 		--force-root \
-		--auto-profiles default,ngfw,$(flavor) \
+		--auto-profiles default,ngfw,$(flavor)$(REGION_PROFILE) \
 		--profiles hands-free,ngfw,$(flavor)$(REGION_PROFILE),expert \
 		--debian-mirror http://package-server/public/$(REPOSITORY)/ \
 		--security-mirror http://package-server/public/$(REPOSITORY)/ \
