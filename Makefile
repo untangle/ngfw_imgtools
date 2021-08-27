@@ -25,8 +25,14 @@ SERIAL_NAME=
 ifneq ($(SERIAL),)
 SERIAL_ENV_CMD=export export serial_console_opts=$(SERIAL);
 SERIAL_BSC_PARAMETER=--serial-console
-SERIAL_NAME=serial-
-else
+SERIAL_NAME=-serial
+endif
+
+REGION_NAME=
+REGION_PROFILE=
+ifneq ($(REGION),)
+REGION_NAME=-$(REGION)
+REGION_PROFILE=,region-$(REGION)
 endif
 
 ## shell variables
@@ -41,7 +47,7 @@ else
 endif
 KERNEL_VERSION := 4.19.0-11
 KERNEL := linux-image-$(KERNEL_VERSION)-untangle-$(KERNEL_ARCH)
-ISO_IMAGE := ngfw-+FLAVOR+-+SERIAL+$(VERSION)_$(REPOSITORY)_$(ARCHITECTURE)_$(DISTRIBUTION)_$(shell date --iso-8601=seconds)_$(shell hostname -s).iso
+ISO_IMAGE := ngfw-+FLAVOR++REGION_NAME++SERIAL+-$(VERSION)_$(REPOSITORY)_$(ARCHITECTURE)_$(DISTRIBUTION)_$(shell date --iso-8601=seconds)_$(shell hostname -s).iso
 WAF_ISO_IMAGE := waf-+FLAVOR+-$(VERSION)_$(REPOSITORY)_$(ARCHITECTURE)_$(DISTRIBUTION)_$(shell date --iso-8601=seconds)_$(shell hostname -s).iso
 IMAGES_DIR := /data/untangle-images-$(REPOSITORY)
 WAF_IMAGES_DIR := /data/waf-images-$(REPOSITORY)
@@ -140,7 +146,7 @@ ngfw/iso/%-image: repoint-stable iso/dependencies ngfw/iso/conf
 		--keyring /usr/share/keyrings/untangle-archive-keyring.gpg \
 		--force-root \
 		--auto-profiles default,ngfw,$(flavor) \
-		--profiles hands-free,ngfw,$(flavor),expert \
+		--profiles hands-free,ngfw,$(flavor)$(REGION_PROFILE),expert \
 		--debian-mirror http://package-server/public/$(REPOSITORY)/ \
 		--security-mirror http://package-server/public/$(REPOSITORY)/ \
 		--dist $(REPOSITORY) \
@@ -150,8 +156,8 @@ ngfw/iso/%-image: repoint-stable iso/dependencies ngfw/iso/conf
 		--do-mirror \
 		--verbose \
 		--logfile $(IMGTOOLS_DIR)/simplecdd.log  ;
-	mv images/$(flavor)-$(DEBVERSION)*-$(ARCHITECTURE)-*1.iso $(subst +SERIAL+,$(SERIAL_NAME),$(subst +FLAVOR+,$(flavor),$(ISO_IMAGE)))
-	cp -f $(subst +SERIAL+,$(SERIAL_NAME),$(subst +FLAVOR+,$(flavor),$(ISO_IMAGE))) ngfw.iso
+	mv images/$(flavor)-$(DEBVERSION)*-$(ARCHITECTURE)-*1.iso $(subst +SERIAL+,$(SERIAL_NAME),$(subst +FLAVOR+,$(flavor),$(subst +REGION_NAME+,$(REGION_NAME),$(ISO_IMAGE))))
+	cp -f $(subst +SERIAL+,$(SERIAL_NAME),$(subst +FLAVOR+,$(flavor),$(subst +REGION_NAME+,$(REGION_NAME),$(ISO_IMAGE)))) ngfw$(REGION_NAME).iso
 
 ngfw/iso/%-push: # pushes the most recent image
 	$(eval iso_image := $(shell ls --sort=time *$(VERSION)*$(REPOSITORY)*$(ARCHITECTURE)*$(DISTRIBUTION)*.iso | head -1))
