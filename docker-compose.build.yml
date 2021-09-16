@@ -83,6 +83,7 @@ services:
         VERSION: ${VERSION}
         TRAVIS_BRANCH: ${TRAVIS_BRANCH:-master}
         TRAVIS_PULL_REQUEST_BRANCH:
+        TRAVIS_REPO_SLUG:
         SERIAL: ${SERIAL}
         REGION: ${REGION}
       privileged: ${PRIVILEGED:-false}
