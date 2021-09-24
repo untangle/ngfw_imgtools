@@ -50,17 +50,6 @@ jobs:
         - VENDOR: untangle
         - REGION: eu
 
-    - name: WAF Untangle amd64
-      script:
-        - docker-compose -f docker-compose.build.yml run pkgtools
-        - docker-compose -f docker-compose.build.yml run build bash -c "../ngfw_pkgtools/build.sh setup-only && make ${PRODUCT}/iso/${VENDOR}-image ${PRODUCT}/iso/${VENDOR}-push"
-      env:
-        - PRODUCT: waf
-        - ARCHITECTURE: amd64
-        - VENDOR: untangle
-        - PKGTOOLS_REPOSITORY: pkgtools-waf
-        - PKGTOOLS_COMMIT: origin/waf-${TRAVIS_BRANCH}
-
     - name: NGFW Vendor2 amd64
       script:
         - docker-compose -f docker-compose.build.yml run pkgtools
@@ -75,6 +64,17 @@ jobs:
         - ARCHITECTURE: amd64
         - VENDOR: vendor2
         - IMG_MODIFIER_VENDOR: vendor2
+
+    - name: WAF Untangle amd64
+      script:
+        - docker-compose -f docker-compose.build.yml run pkgtools
+        - docker-compose -f docker-compose.build.yml run build bash -c "../ngfw_pkgtools/build.sh setup-only && make ${PRODUCT}/iso/${VENDOR}-image ${PRODUCT}/iso/${VENDOR}-push"
+      env:
+        - PRODUCT: waf
+        - ARCHITECTURE: amd64
+        - VENDOR: untangle
+        - PKGTOOLS_REPOSITORY: pkgtools-waf
+        - PKGTOOLS_COMMIT: origin/waf-${TRAVIS_BRANCH}
 
 notifications:
   email: false
