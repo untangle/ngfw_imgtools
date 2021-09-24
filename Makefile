@@ -183,8 +183,8 @@ waf/iso/%-image: repoint-stable iso/dependencies waf/iso/conf
 		--keyboard us \
 		--locale en_US.UTF-8 \
 		--force-root \
-		--debian-mirror http://deb.debian.org/debian/ \
-		--security-mirror http://security.debian.org/debian-security/ \
+		--debian-mirror http://ftp.us.debian.org/debian/ \
+		--security-mirror http://ftp.us.security.debian.org/debian-security/ \
 		--dist $(REPOSITORY) \
 		--debug \
 		--verbose \
