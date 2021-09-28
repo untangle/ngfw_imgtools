@@ -27,43 +27,43 @@ before_install:
 
 jobs:
   include:
-    # - name: NGFW Untangle amd64
-    #   script:
-    #     - docker-compose -f docker-compose.build.yml run pkgtools
-    #     - NO_CLEAN=1 docker-compose -f docker-compose.build.yml run build
-    #     - docker-compose -f docker-compose.build.yml run build bash -c "../ngfw_pkgtools/build.sh setup-only && make ${PRODUCT}/iso/${VENDOR}-image ${PRODUCT}/iso/${VENDOR}-push"
-    #     - SERIAL=ttyS0,115200n8 docker-compose -f docker-compose.build.yml run build bash -c "../ngfw_pkgtools/build.sh setup-only && make ${PRODUCT}/iso/${VENDOR}-image ${PRODUCT}/iso/${VENDOR}-push"
-    #   env:
-    #     - PRODUCT: ngfw
-    #     - ARCHITECTURE: amd64
-    #     - VENDOR: untangle
+    - name: NGFW Untangle amd64
+      script:
+        - docker-compose -f docker-compose.build.yml run pkgtools
+        - NO_CLEAN=1 docker-compose -f docker-compose.build.yml run build
+        - docker-compose -f docker-compose.build.yml run build bash -c "../ngfw_pkgtools/build.sh setup-only && make ${PRODUCT}/iso/${VENDOR}-image ${PRODUCT}/iso/${VENDOR}-push"
+        - SERIAL=ttyS0,115200n8 docker-compose -f docker-compose.build.yml run build bash -c "../ngfw_pkgtools/build.sh setup-only && make ${PRODUCT}/iso/${VENDOR}-image ${PRODUCT}/iso/${VENDOR}-push"
+      env:
+        - PRODUCT: ngfw
+        - ARCHITECTURE: amd64
+        - VENDOR: untangle
 
-    # - name: NGFW Untangle amd64 (EU)
-    #   script:
-    #     - docker-compose -f docker-compose.build.yml run pkgtools
-    #     - NO_CLEAN=1 docker-compose -f docker-compose.build.yml run build
-    #     - docker-compose -f docker-compose.build.yml run build bash -c "../ngfw_pkgtools/build.sh setup-only && make ${PRODUCT}/iso/${VENDOR}-image ${PRODUCT}/iso/${VENDOR}-push"
-    #     - SERIAL=ttyS0,115200n8 docker-compose -f docker-compose.build.yml run build bash -c "../ngfw_pkgtools/build.sh setup-only && make ${PRODUCT}/iso/${VENDOR}-image ${PRODUCT}/iso/${VENDOR}-push"
-    #   env:
-    #     - PRODUCT: ngfw
-    #     - ARCHITECTURE: amd64
-    #     - VENDOR: untangle
-    #     - REGION: eu
+    - name: NGFW Untangle amd64 (EU)
+      script:
+        - docker-compose -f docker-compose.build.yml run pkgtools
+        - NO_CLEAN=1 docker-compose -f docker-compose.build.yml run build
+        - docker-compose -f docker-compose.build.yml run build bash -c "../ngfw_pkgtools/build.sh setup-only && make ${PRODUCT}/iso/${VENDOR}-image ${PRODUCT}/iso/${VENDOR}-push"
+        - SERIAL=ttyS0,115200n8 docker-compose -f docker-compose.build.yml run build bash -c "../ngfw_pkgtools/build.sh setup-only && make ${PRODUCT}/iso/${VENDOR}-image ${PRODUCT}/iso/${VENDOR}-push"
+      env:
+        - PRODUCT: ngfw
+        - ARCHITECTURE: amd64
+        - VENDOR: untangle
+        - REGION: eu
 
-    # - name: NGFW Vendor2 amd64
-    #   script:
-    #     - docker-compose -f docker-compose.build.yml run pkgtools
-    #     - rm -fr d-i/build/localudebs/*
-    #     - docker-compose -f docker-compose.build.yml run img_modifier_checkout
-    #     - docker-compose -f docker-compose.build.yml run img_modifier_apply
-    #     - FORCE=1 NO_CLEAN=1 UPLOAD= docker-compose -f docker-compose.build.yml run build
-    #     - docker-compose -f docker-compose.build.yml run build bash -c "../ngfw_pkgtools/build.sh setup-only && make ${PRODUCT}/iso/${VENDOR}-image ${PRODUCT}/iso/${VENDOR}-push"
-    #     - SERIAL=ttyS0,115200n8 docker-compose -f docker-compose.build.yml run build bash -c "../ngfw_pkgtools/build.sh setup-only && make ${PRODUCT}/iso/${VENDOR}-image ${PRODUCT}/iso/${VENDOR}-push"
-    #   env:
-    #     - PRODUCT: ngfw
-    #     - ARCHITECTURE: amd64
-    #     - VENDOR: vendor2
-    #     - IMG_MODIFIER_VENDOR: vendor2
+    - name: NGFW Vendor2 amd64
+      script:
+        - docker-compose -f docker-compose.build.yml run pkgtools
+        - rm -fr d-i/build/localudebs/*
+        - docker-compose -f docker-compose.build.yml run img_modifier_checkout
+        - docker-compose -f docker-compose.build.yml run img_modifier_apply
+        - FORCE=1 NO_CLEAN=1 UPLOAD= docker-compose -f docker-compose.build.yml run build
+        - docker-compose -f docker-compose.build.yml run build bash -c "../ngfw_pkgtools/build.sh setup-only && make ${PRODUCT}/iso/${VENDOR}-image ${PRODUCT}/iso/${VENDOR}-push"
+        - SERIAL=ttyS0,115200n8 docker-compose -f docker-compose.build.yml run build bash -c "../ngfw_pkgtools/build.sh setup-only && make ${PRODUCT}/iso/${VENDOR}-image ${PRODUCT}/iso/${VENDOR}-push"
+      env:
+        - PRODUCT: ngfw
+        - ARCHITECTURE: amd64
+        - VENDOR: vendor2
+        - IMG_MODIFIER_VENDOR: vendor2
 
     - name: WAF Untangle amd64
       script:
