@@ -173,7 +173,11 @@ waf/iso/conf:
 	perl -pe 's|\+IMGTOOLS_DIR\+|'$(IMGTOOLS_DIR)'|g' $(WAF_CONF_FILE_TEMPLATE) >| $(WAF_CONF_FILE)
 	perl -pe 's|\+VERSION\+|'$(VERSION)'|g ; s|\+PUBVERSION\+|'$(PUBVERSION)'|g ; s|\+ARCH\+|'$(ARCHITECTURE)'|g ; s|\+REPOSITORY\+|'$(REPOSITORY)'|g' profiles/waf.preseed.template > profiles/waf.preseed
 
-waf/iso/%-image: repoint-stable iso/dependencies waf/iso/conf
+waf/iso/%-image: iso/dependencies waf/iso/conf
+	# built in 3 simple-cdd passes:
+	#   1. add upstream installer and upstream packages from debian mirror
+	#   2. add WAF packages from internal mirror
+	#   3. build image without mirroring anything else
 	$(eval flavor := $*)
 	export CODENAME=$(REPOSITORY) DEBVERSION=$(DEBVERSION) ; \
 	export CDNAME=waf-$(flavor) DISKINFO=waf-$(flavor) ; \
@@ -186,10 +190,10 @@ waf/iso/%-image: repoint-stable iso/dependencies waf/iso/conf
 		--debian-mirror http://ftp.us.debian.org/debian/ \
 		--security-mirror http://security.debian.org/debian-security/ \
 		--dist $(REPOSITORY) \
-		--debug \
 		--verbose \
 		--mirror-only \
-		--logfile $(IMGTOOLS_DIR)/simplecdd-mirror.log ; \
+		--logfile $(IMGTOOLS_DIR)/simplecdd-mirror-debian.log ; \
+	cp $(IMGTOOLS_DIR)/tmp/mirror/conf/distributions $(IMGTOOLS_DIR)/tmp/mirror/conf/distributions.debian ; \
 	build-simple-cdd \
 		--keyboard us \
 		--locale en_US.UTF-8 \
@@ -198,10 +202,25 @@ waf/iso/%-image: repoint-stable iso/dependencies waf/iso/conf
 		--auto-profiles waf,auto-partition \
 		--keyring /usr/share/keyrings/does-not-exist.gpg \
 		--debian-mirror http://package-server/public/$(REPOSITORY)/ \
-		--security-mirror http://package-server/public/$(REPOSITORY)/ \
+		--security-mirror "" \
+		--mirror-tools reprepro \
+		--dist $(DISTRIBUTION) \
+		--verbose \
+		--mirror-only \
+		--logfile $(IMGTOOLS_DIR)/simplecdd-mirror-waf.log ; \
+	cat $(IMGTOOLS_DIR)/tmp/mirror/conf/distributions.debian >> $(IMGTOOLS_DIR)/tmp/mirror/conf/distributions ; \
+	reprepro -Vb $(IMGTOOLS_DIR)/tmp/mirror copymatched $(REPOSITORY) $(DISTRIBUTION) '*' ; \
+	build-simple-cdd \
+		--keyboard us \
+		--locale en_US.UTF-8 \
+		--force-root \
+		--profiles waf,auto-partition \
+		--auto-profiles waf,auto-partition \
+		--keyring /usr/share/keyrings/does-not-exist.gpg \
 		--mirror-tools reprepro \
 		--dist $(REPOSITORY) \
 		--verbose \
+		--no-do-mirror \
 		--logfile $(IMGTOOLS_DIR)/simplecdd-image.log
 	mv images/waf-$(flavor)-$(DEBVERSION)*-$(ARCHITECTURE)-*1.iso $(subst +FLAVOR+,$(flavor),$(WAF_ISO_IMAGE))
 	cp -f $(subst +FLAVOR+,$(flavor),$(WAF_ISO_IMAGE)) waf.iso
