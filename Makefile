@@ -122,7 +122,7 @@ iso/dependencies:
 	apt install -y simple-cdd dose-distcheck mtools dosfstools
 
 iso/%-clean:
-	rm -fr $(IMGTOOLS_DIR)/tmp repoint-stable-stamp profiles/default.preseed profiles/default.conf
+	rm -fr $(IMGTOOLS_DIR)/tmp repoint-stable-stamp profiles/default.conf
 
 ngfw/iso/conf:
 	perl -pe 's|\+IMGTOOLS_DIR\+|'$(IMGTOOLS_DIR)'|g' $(CONF_FILE_TEMPLATE) >| $(CONF_FILE)
