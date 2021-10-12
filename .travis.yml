@@ -74,7 +74,7 @@ jobs:
         - ARCHITECTURE: amd64
         - VENDOR: untangle
         - PKGTOOLS_REPOSITORY: pkgtools-waf
-        - PKGTOOLS_COMMIT: origin/waf-${TRAVIS_BRANCH}
+        - PKGTOOLS_COMMIT: origin/waf-${TRAVIS_BRANCH/waf-}
 
 notifications:
   email: false
