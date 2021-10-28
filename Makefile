@@ -132,14 +132,12 @@ ngfw/iso/conf:
 	cat $(COMMON_PRESEED) $(NETBOOT_PRESEED_EXTRA) $(NGFW_PRESEED) | perl -pe 's|\+VERSION\+|'$(VERSION)'|g ; s|\+ARCH\+|'$(ARCHITECTURE)'|g ; s|\+REPOSITORY\+|'$(REPOSITORY)'|g ; s|\+KERNEL\+|'$(KERNEL)'|g ; s/^(d-i preseed\/early_command string anna-install.*)/#$1/' >| $(NETBOOT_PRESEED_EXPERT)
 	cat $(COMMON_PRESEED) $(DEFAULT_PRESEED_EXTRA) | perl -pe 's|\+VERSION\+|'$(VERSION)'|g ; s|\+ARCH\+|'$(ARCHITECTURE)'|g ; s|\+REPOSITORY\+|'$(REPOSITORY)'|g ; s|\+KERNEL\+|'$(KERNEL)'|g' >| $(DEFAULT_PRESEED_EXPERT)
 
-ngfw/iso/%-image: repoint-stable iso/dependencies ngfw/iso/conf
+ngfw/iso/%-image: iso/dependencies ngfw/iso/conf
 	$(eval flavor := $*)
 	perl -pe 's|\+IMGTOOLS_DIR\+|'$(IMGTOOLS_DIR)'|g' $(CONF_FILE_TEMPLATE) >| $(CONF_FILE); \
 	export CODENAME=$(REPOSITORY) DEBVERSION=$(DEBVERSION) ; \
 	export CDNAME=$(flavor) DISKINFO=$(flavor) CUSTOMSIZE=$(CUSTOMSIZE) ; \
-	$(SERIAL_ENV_CMD) \
 	build-simple-cdd \
-	    $(SERIAL_BSC_PARAMETER) \
 	    --local-packages local-packages \
 		--keyboard us \
 		--locale en_US.UTF-8 \
@@ -148,14 +146,36 @@ ngfw/iso/%-image: repoint-stable iso/dependencies ngfw/iso/conf
 		--auto-profiles default,ngfw,$(flavor)$(REGION_PROFILE) \
 		--profiles hands-free,ngfw,$(flavor)$(REGION_PROFILE),expert \
 		--debian-mirror http://package-server/public/$(REPOSITORY)/ \
-		--security-mirror http://package-server/public/$(REPOSITORY)/ \
-		--dist $(REPOSITORY) \
+		--debian-mirror http://package-server/public/$(REPOSITORY)/ \
+		--security-mirror "" \
+		--updates-mirror "" \
+		--dist $(DISTRIBUTION) \
 		--require-optional-packages \
 		--mirror-tools reprepro \
 		--extra-udeb-dist $(DISTRIBUTION) \
 		--do-mirror \
+                --mirror-only \
 		--verbose \
-		--logfile $(IMGTOOLS_DIR)/simplecdd.log  ;
+		--logfile $(IMGTOOLS_DIR)/simplecdd-mirror.log  ; \
+	perl -pe s/$(DISTRIBUTION)/$(REPOSITORY)/ $(IMGTOOLS_DIR)/tmp/mirror/conf/distributions > $(IMGTOOLS_DIR)/tmp/mirror/conf/distributions.ngfw ; \
+	cat $(IMGTOOLS_DIR)/tmp/mirror/conf/distributions.ngfw >> $(IMGTOOLS_DIR)/tmp/mirror/conf/distributions ; \
+	reprepro -Vb $(IMGTOOLS_DIR)/tmp/mirror copymatched $(REPOSITORY) $(DISTRIBUTION) '*' ; \
+	$(SERIAL_ENV_CMD) \
+	build-simple-cdd \
+		$(SERIAL_BSC_PARAMETER) \
+		--keyboard us \
+		--locale en_US.UTF-8 \
+		--force-root \
+		--auto-profiles default,ngfw,$(flavor)$(REGION_PROFILE) \
+		--profiles hands-free,ngfw,$(flavor)$(REGION_PROFILE),expert \
+		--debian-mirror http://package-server/public/$(REPOSITORY)/ \
+		--security-mirror "" \
+		--updates-mirror "" \
+		--mirror-tools reprepro \
+		--dist $(REPOSITORY) \
+		--verbose \
+		--no-do-mirror \
+		--logfile $(IMGTOOLS_DIR)/simplecdd-image.log ; \
 	mv images/$(flavor)-$(DEBVERSION)*-$(ARCHITECTURE)-*1.iso $(subst +SERIAL+,$(SERIAL_NAME),$(subst +FLAVOR+,$(flavor),$(subst +REGION_NAME+,$(REGION_NAME),$(ISO_IMAGE))))
 	cp -f $(subst +SERIAL+,$(SERIAL_NAME),$(subst +FLAVOR+,$(flavor),$(subst +REGION_NAME+,$(REGION_NAME),$(ISO_IMAGE)))) ngfw$(REGION_NAME).iso
 
