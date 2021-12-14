@@ -101,6 +101,20 @@ format{ } \
 .
 
 d-i partman/early_command string \
+mounts=$(mount | grep cdrom) \
+count=0; \
+candidate=""; \
+for device in $(parted_devices | cut -f1); do \
+  count=$(($count + 1)); \
+  echo $mounts | grep -q $device; \
+  if [ $? -eq 0 ] ; then \
+    continue; \
+  fi ; \
+  candidate=$device; \
+done ; \
+if [ $count -eq 2 ] ; then \
+   debconf-set partman-auto/disk string $candidate; \
+fi ; \
 if [ -d "/sys/firmware/efi/" ] ; then \
 	debconf-set partman-auto/choose_recipe select untangle-efi ; \
 else \
