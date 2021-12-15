@@ -19,15 +19,6 @@ ifeq ($(PUBVERSION),)
 PUBVERSION := $(shell cat $(PKGTOOLS_DIR)/resources/PUBVERSION)
 endif
 
-SERIAL_ENV=
-SERIAL_PARAMETER=
-SERIAL_NAME=
-ifneq ($(SERIAL),)
-SERIAL_ENV_CMD=export export serial_console_opts=$(SERIAL);
-SERIAL_BSC_PARAMETER=--serial-console
-SERIAL_NAME=-serial
-endif
-
 REGION_NAME=
 REGION_PROFILE=
 ifneq ($(REGION),)
@@ -86,6 +77,23 @@ DEBIAN_PKGS_PATCH := $(IMGTOOLS_DIR)/patches/installer-pkgs.patch
 DEBIAN_PATCHES := $(DEBIAN_INSTALLER_PATCH) $(DEBIAN_CD_PATCH) $(DEBIAN_PKGS_PATCH)
 DEBIAN_PATCH_STAMP := patch-stamp
 
+SERIAL_ENV=
+SERIAL_PARAMETER=
+SERIAL_NAME=
+ifneq ($(SERIAL),)
+# Modify isoconfig menu to remove graphics mode.
+# Modify conf template to use normal VGA
+SERIAL_ENV_PRE_CMD=export export serial_console_opts=$(SERIAL) ; \
+cp -f ./cd-root/isolinux/menu.cfg . ; \
+sed -i -e '/include gtk.cfg/d' ./cd-root/isolinux/menu.cfg ; \
+cp -f $(CONF_FILE) ./conf ; \
+echo 'vga_normal="true"' >> $(CONF_FILE) ;
+# Restore isoconfig menu, conf template.
+SERIAL_ENV_POST_CMD=cp -f ./menu.cfg ./cd-root/isolinux/menu.cfg ; \
+cp -f ./conf $(CONF_FILE) ;
+SERIAL_BSC_PARAMETER=--serial-console
+SERIAL_NAME=-serial
+endif
 
 ## main section
 all: # do nothing by default
@@ -149,7 +157,7 @@ ngfw/iso/%-image: iso/dependencies ngfw/iso/conf
 	perl -pe s/$(DISTRIBUTION)/$(REPOSITORY)/ $(IMGTOOLS_DIR)/tmp/mirror/conf/distributions > $(IMGTOOLS_DIR)/tmp/mirror/conf/distributions.ngfw ; \
 	cat $(IMGTOOLS_DIR)/tmp/mirror/conf/distributions.ngfw >> $(IMGTOOLS_DIR)/tmp/mirror/conf/distributions ; \
 	reprepro -Vb $(IMGTOOLS_DIR)/tmp/mirror copymatched $(REPOSITORY) $(DISTRIBUTION) '*' ; \
-	$(SERIAL_ENV_CMD) \
+	$(SERIAL_ENV_PRE_CMD) \
 	build-simple-cdd \
 		$(SERIAL_BSC_PARAMETER) \
 		--keyboard us \
@@ -165,6 +173,7 @@ ngfw/iso/%-image: iso/dependencies ngfw/iso/conf
 		--verbose \
 		--no-do-mirror \
 		--logfile $(IMGTOOLS_DIR)/simplecdd-image.log ; \
+	$(SERIAL_ENV_POST_CMD) \
 	mv images/$(flavor)-$(DEBVERSION)*-$(ARCHITECTURE)-*1.iso $(subst +SERIAL+,$(SERIAL_NAME),$(subst +FLAVOR+,$(flavor),$(subst +REGION_NAME+,$(REGION_NAME),$(ISO_IMAGE))))
 	cp -f $(subst +SERIAL+,$(SERIAL_NAME),$(subst +FLAVOR+,$(flavor),$(subst +REGION_NAME+,$(REGION_NAME),$(ISO_IMAGE)))) ngfw$(REGION_NAME).iso
 
