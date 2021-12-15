@@ -110,10 +110,10 @@ for device in $(parted_devices | cut -f1); do \
   if [ $? -eq 0 ] ; then \
     continue; \
   fi ; \
-  candidate=$device; \
+  candidate=$device ; \
 done ; \
 if [ $count -eq 2 ] ; then \
-   debconf-set partman-auto/disk string $candidate; \
+   debconf-set partman-auto/disk $candidate ; \
 fi ; \
 if [ -d "/sys/firmware/efi/" ] ; then \
 	debconf-set partman-auto/choose_recipe select untangle-efi ; \
