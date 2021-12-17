@@ -32,7 +32,7 @@ jobs:
       script:
         - docker-compose -f docker-compose.build.yml run pkgtools
         - NO_CLEAN=1 docker-compose -f docker-compose.build.yml run build
-        - travis_wait 60 docker-compose -f docker-compose.build.yml run build bash -c "../ngfw_pkgtools/build.sh setup-only && make ${PRODUCT}/iso/${VENDOR}-image ${PRODUCT}/iso/${VENDOR}-push"
+        - travis_wait 120 docker-compose -f docker-compose.build.yml run build bash -c "../ngfw_pkgtools/build.sh setup-only && make ${PRODUCT}/iso/${VENDOR}-image ${PRODUCT}/iso/${VENDOR}-push"
       env:
         - PRODUCT: ngfw
         - ARCHITECTURE: amd64
@@ -43,7 +43,7 @@ jobs:
       script:
         - docker-compose -f docker-compose.build.yml run pkgtools
         - NO_CLEAN=1 docker-compose -f docker-compose.build.yml run build
-        - travis_wait 60 docker-compose -f docker-compose.build.yml run build bash -c "../ngfw_pkgtools/build.sh setup-only && make ${PRODUCT}/iso/${VENDOR}-image ${PRODUCT}/iso/${VENDOR}-push"
+        - travis_wait 120 docker-compose -f docker-compose.build.yml run build bash -c "../ngfw_pkgtools/build.sh setup-only && make ${PRODUCT}/iso/${VENDOR}-image ${PRODUCT}/iso/${VENDOR}-push"
       env:
         - PRODUCT: ngfw
         - ARCHITECTURE: amd64
@@ -55,7 +55,7 @@ jobs:
       script:
         - docker-compose -f docker-compose.build.yml run pkgtools
         - NO_CLEAN=1 docker-compose -f docker-compose.build.yml run build
-        - travis_wait 60 docker-compose -f docker-compose.build.yml run build bash -c "../ngfw_pkgtools/build.sh setup-only && make ${PRODUCT}/iso/${VENDOR}-image ${PRODUCT}/iso/${VENDOR}-push"
+        - travis_wait 120 docker-compose -f docker-compose.build.yml run build bash -c "../ngfw_pkgtools/build.sh setup-only && make ${PRODUCT}/iso/${VENDOR}-image ${PRODUCT}/iso/${VENDOR}-push"
       env:
         - PRODUCT: ngfw
         - ARCHITECTURE: amd64
@@ -67,7 +67,7 @@ jobs:
       script:
         - docker-compose -f docker-compose.build.yml run pkgtools
         - NO_CLEAN=1 docker-compose -f docker-compose.build.yml run build
-        - travis_wait 60 docker-compose -f docker-compose.build.yml run build bash -c "../ngfw_pkgtools/build.sh setup-only && make ${PRODUCT}/iso/${VENDOR}-image ${PRODUCT}/iso/${VENDOR}-push"
+        - travis_wait 120 docker-compose -f docker-compose.build.yml run build bash -c "../ngfw_pkgtools/build.sh setup-only && make ${PRODUCT}/iso/${VENDOR}-image ${PRODUCT}/iso/${VENDOR}-push"
       env:
         - PRODUCT: ngfw
         - ARCHITECTURE: amd64
@@ -83,7 +83,7 @@ jobs:
         - docker-compose -f docker-compose.build.yml run img_modifier_checkout
         - docker-compose -f docker-compose.build.yml run img_modifier_apply
         - FORCE=1 NO_CLEAN=1 UPLOAD= docker-compose -f docker-compose.build.yml run build
-        - travis_wait 60 docker-compose -f docker-compose.build.yml run build bash -c "../ngfw_pkgtools/build.sh setup-only && make ${PRODUCT}/iso/${VENDOR}-image ${PRODUCT}/iso/${VENDOR}-push"
+        - travis_wait 120 docker-compose -f docker-compose.build.yml run build bash -c "../ngfw_pkgtools/build.sh setup-only && make ${PRODUCT}/iso/${VENDOR}-image ${PRODUCT}/iso/${VENDOR}-push"
       env:
         - PRODUCT: ngfw
         - ARCHITECTURE: amd64
@@ -98,7 +98,7 @@ jobs:
         - docker-compose -f docker-compose.build.yml run img_modifier_checkout
         - docker-compose -f docker-compose.build.yml run img_modifier_apply
         - FORCE=1 NO_CLEAN=1 UPLOAD= docker-compose -f docker-compose.build.yml run build
-        - travis_wait 60 docker-compose -f docker-compose.build.yml run build bash -c "../ngfw_pkgtools/build.sh setup-only && make ${PRODUCT}/iso/${VENDOR}-image ${PRODUCT}/iso/${VENDOR}-push"
+        - travis_wait 120 docker-compose -f docker-compose.build.yml run build bash -c "../ngfw_pkgtools/build.sh setup-only && make ${PRODUCT}/iso/${VENDOR}-image ${PRODUCT}/iso/${VENDOR}-push"
       env:
         - PRODUCT: ngfw
         - ARCHITECTURE: amd64
@@ -110,7 +110,7 @@ jobs:
       if: NOT branch =~ /^ngfw-release-\d+.\d$/
       script:
         - docker-compose -f docker-compose.build.yml run pkgtools
-        - travis_wait 60 docker-compose -f docker-compose.build.yml run build bash -c "../ngfw_pkgtools/build.sh setup-only && make ${PRODUCT}/iso/${VENDOR}-image ${PRODUCT}/iso/${VENDOR}-push"
+        - travis_wait 120 docker-compose -f docker-compose.build.yml run build bash -c "../ngfw_pkgtools/build.sh setup-only && make ${PRODUCT}/iso/${VENDOR}-image ${PRODUCT}/iso/${VENDOR}-push"
       env:
         - PRODUCT: waf
         - ARCHITECTURE: amd64
