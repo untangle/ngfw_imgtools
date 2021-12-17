@@ -1,5 +1,3 @@
-if: branch =~ /^(master|((ngfw|waf)-)?release-\d+.\d)$/ AND type IN (push, cron, api) AND tag IS blank
-
 git:
   depth: false
 
