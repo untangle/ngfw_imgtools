@@ -47,10 +47,8 @@ services:
       entrypoint: >
         bash -c "
         declare -x IMG_MODIFIER_DIR=/opt/untangle/img_modifier/untangle-oem-$${IMG_MODIFIER_VENDOR}/ngfw_imgtools &&
-        if [ -d "$${IMG_MODIFIER_DIR}" ] ; then
-          echo $${IMG_MODIFIER_DIR} &&
-          cd /opt/untangle/build
-          rsync -aHvP $${IMG_MODIFIER_DIR}/ .
+        if [ -d $${IMG_MODIFIER_DIR} ] ; then
+          echo $${IMG_MODIFIER_DIR} && rsync -aHvP --no-owner --no-group $${IMG_MODIFIER_DIR}/* /opt/untangle/build/
         fi"
 
     build_clean:
