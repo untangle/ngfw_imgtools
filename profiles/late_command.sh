@@ -46,6 +46,7 @@ chroot /target rm -f /etc/udev/rules.d/70-persistent-net.rules
 chroot /target /bin/bash -c "[ ! -f /usr/share/untangle/bin/oem-apply.sh ] || /usr/share/untangle/bin/oem-apply.sh"
 
 if [ "$TERM_TYPE" = "serial" ]  ; then
+    apt-install untangle-serial-config
     # Installed via serial port; ensure can boot via console.
     console_argument=$(cat /proc/cmdline | sed -r 's/[[:alnum:]]+=/\n&/g' | grep console= | cut -d' ' -f1)
     if [ "$console_argument" != "" ] ; then
