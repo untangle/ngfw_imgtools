@@ -28,7 +28,7 @@ before_install:
 jobs:
   include:
     - name: NGFW Untangle amd64
-      if: NOT branch =~ /^waf-release-\d+.\d$/
+      if: NOT (env(REPOSITORY) = buster AND branch = master) AND NOT branch =~ /^waf-release-\d+.\d$/
       script:
         - docker-compose -f docker-compose.build.yml run pkgtools
         - NO_CLEAN=1 docker-compose -f docker-compose.build.yml run build
@@ -39,7 +39,7 @@ jobs:
         - VENDOR: untangle
 
     - name: NGFW Untangle amd64 (serial)
-      if: NOT branch =~ /^waf-release-\d+.\d$/
+      if: NOT (env(REPOSITORY) = buster AND branch = master) AND NOT branch =~ /^waf-release-\d+.\d$/
       script:
         - docker-compose -f docker-compose.build.yml run pkgtools
         - NO_CLEAN=1 docker-compose -f docker-compose.build.yml run build
@@ -51,7 +51,7 @@ jobs:
         - SERIAL: ttyS0,115200
 
     - name: NGFW Untangle amd64 (EU)
-      if: NOT branch =~ /^waf-release-\d+.\d$/
+      if: NOT (env(REPOSITORY) = buster AND branch = master) AND NOT branch =~ /^waf-release-\d+.\d$/
       script:
         - docker-compose -f docker-compose.build.yml run pkgtools
         - NO_CLEAN=1 docker-compose -f docker-compose.build.yml run build
@@ -63,7 +63,7 @@ jobs:
         - REGION: eu
 
     - name: NGFW Untangle amd64 (EU, serial)
-      if: NOT branch =~ /^waf-release-\d+.\d$/
+      if: NOT (env(REPOSITORY) = buster AND branch = master) AND NOT branch =~ /^waf-release-\d+.\d$/
       script:
         - docker-compose -f docker-compose.build.yml run pkgtools
         - NO_CLEAN=1 docker-compose -f docker-compose.build.yml run build
@@ -76,7 +76,7 @@ jobs:
         - SERIAL: ttyS0,115200
 
     - name: NGFW Vendor2 amd64
-      if: NOT branch =~ /^waf-release-\d+.\d$/
+      if: NOT (env(REPOSITORY) = buster AND branch = master) AND NOT branch =~ /^waf-release-\d+.\d$/
       script:
         - docker-compose -f docker-compose.build.yml run pkgtools
         - rm -fr d-i/build/localudebs/*
@@ -91,7 +91,7 @@ jobs:
         - IMG_MODIFIER_VENDOR: vendor2
 
     - name: NGFW Vendor2 amd64 (serial)
-      if: NOT branch =~ /^waf-release-\d+.\d$/
+      if: NOT (env(REPOSITORY) = buster AND branch = master) AND NOT branch =~ /^waf-release-\d+.\d$/
       script:
         - docker-compose -f docker-compose.build.yml run pkgtools
         - rm -fr d-i/build/localudebs/*
