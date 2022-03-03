@@ -71,10 +71,7 @@ WAF_PRESEED_FILE_TEMPLATE := $(WAF_PRESEED_FILE).template
 UNTANGLE_PKGS := $(PROFILES_DIR)/untangle.packages
 UNTANGLE_PKGS_TEMPLATE := $(UNTANGLE_PKGS).template
 CUSTOMSIZE := $(shell echo $$(( 820 * 1024 * 1024 / 2048 )) ) # from MB to 2kB blocks
-DEBIAN_INSTALLER_PATCH := $(IMGTOOLS_DIR)/patches/d-i.patch
-DEBIAN_CD_PATCH := $(IMGTOOLS_DIR)/patches/debian-cd.patch
-DEBIAN_PKGS_PATCH := $(IMGTOOLS_DIR)/patches/installer-pkgs.patch
-DEBIAN_PATCHES := $(DEBIAN_INSTALLER_PATCH) $(DEBIAN_CD_PATCH) $(DEBIAN_PKGS_PATCH)
+DEBIAN_PATCHES := $(wildcard $(IMGTOOLS_DIR)/patches/*.patch)
 DEBIAN_PATCH_STAMP := patch-stamp
 
 SERIAL_ENV=

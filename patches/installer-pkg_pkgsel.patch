@@ -1,0 +1,21 @@
+diff --git installer-pkgs-modified/pkgsel/debian/postinst installer-pkgs-modified/pkgsel/debian/postinst
+index 54a53bb..9403f55 100755
+--- installer-pkgs-modified/pkgsel/debian/postinst
++++ installer-pkgs-modified/pkgsel/debian/postinst
+@@ -201,4 +201,6 @@ chroot /target apt-get clean
+ db_progress STEP 30
+ db_progress STOP
+ 
++touch /target/etc/default/google-chrome
++
+ load_install_cd
+diff --git installer-pkgs-modified/pkgsel/debian/source/format installer-pkgs-modified/pkgsel/debian/source/format
+index 89ae9db..163aaf8 100644
+--- installer-pkgs-modified/pkgsel/debian/source/format
++++ installer-pkgs-modified/pkgsel/debian/source/format
+@@ -1 +1 @@
+-3.0 (native)
++3.0 (quilt)
+diff --git installer-pkgs-modified/pkgsel/UNTANGLE-KEEP-UPSTREAM-VERSION installer-pkgs-modified/pkgsel/UNTANGLE-KEEP-UPSTREAM-VERSION
+new file mode 100644
+index 0000000..e69de29

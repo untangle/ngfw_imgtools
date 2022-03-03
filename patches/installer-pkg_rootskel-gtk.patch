@@ -1,0 +1,42 @@
+diff --git installer-pkgs-modified/rootskel-gtk/debian/source/format installer-pkgs-modified/rootskel-gtk/debian/source/format
+index 89ae9db..163aaf8 100644
+--- installer-pkgs-modified/rootskel-gtk/debian/source/format
++++ installer-pkgs-modified/rootskel-gtk/debian/source/format
+@@ -1 +1 @@
+-3.0 (native)
++3.0 (quilt)
+diff --git installer-pkgs-modified/rootskel-gtk/src/etc/gtk-2.0/gtkrc installer-pkgs-modified/rootskel-gtk/src/etc/gtk-2.0/gtkrc
+index f8e5d96..e2cd4fd 100644
+--- installer-pkgs-modified/rootskel-gtk/src/etc/gtk-2.0/gtkrc
++++ installer-pkgs-modified/rootskel-gtk/src/etc/gtk-2.0/gtkrc
+@@ -1,2 +1,2 @@
+-gtk-theme-name = "Clearlooks"
++gtk-theme-name = "ClearlooksGreen"
+ gtk-font-name="DejaVu Sans 9"
+diff --git installer-pkgs-modified/rootskel-gtk/src/usr/share/graphics/Makefile installer-pkgs-modified/rootskel-gtk/src/usr/share/graphics/Makefile
+index 6e8afe7..546a80d 100644
+--- installer-pkgs-modified/rootskel-gtk/src/usr/share/graphics/Makefile
++++ installer-pkgs-modified/rootskel-gtk/src/usr/share/graphics/Makefile
+@@ -3,6 +3,7 @@ dir = usr/share/graphics
+ files = \
+ 	logo_debian.png \
+ 	logo_debian_dark.png \
++	logo_untangle.png \
+ 	note_icon.png \
+ 	warning_icon.png
+ 
+diff --git installer-pkgs-modified/rootskel-gtk/src/usr/share/themes/Makefile installer-pkgs-modified/rootskel-gtk/src/usr/share/themes/Makefile
+index cfa637c..e5da053 100644
+--- installer-pkgs-modified/rootskel-gtk/src/usr/share/themes/Makefile
++++ installer-pkgs-modified/rootskel-gtk/src/usr/share/themes/Makefile
+@@ -2,6 +2,7 @@ dir = usr/share/themes
+ 
+ files = \
+ 	Clearlooks/gtk-2.0/gtkrc \
++	ClearlooksGreen/gtk-2.0/gtkrc \
+ 	dark/gtk-2.0/gtkrc
+ 
+ #  I should put Makefiles in all intermediate directories, let's get lazy
+diff --git installer-pkgs-modified/rootskel-gtk/UNTANGLE-KEEP-UPSTREAM-VERSION installer-pkgs-modified/rootskel-gtk/UNTANGLE-KEEP-UPSTREAM-VERSION
+new file mode 100644
+index 0000000..e69de29
