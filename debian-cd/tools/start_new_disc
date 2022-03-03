@@ -22,7 +22,7 @@ CDDIR=$BDIR/CD${DISKNUM}
 DATE=`cat $BDIR/DATE`
 DI_DATA_DIR=$BASEDIR/data/$DI_CODENAME
 
-CAPCODENAME=`perl -e "print ucfirst("$CODENAME")"`
+CAPCODENAME=`perl -e "print ucfirst('$CODENAME')"`
 
 NUM_ARCHES=`echo $ARCHES | wc -w`
 case "$ARCHES" in
@@ -69,6 +69,8 @@ if [ $NUM_ARCHES = 1 ] ; then
 		export DISKINFO="$DISKINFO_DISTRO ${DEBIAN_KERNEL} $DEBVERSION \"$CAPCODENAME\" - $OFFICIAL $ARCHES $DISKTYPE${FIRMWARE_TEXT} $BUILD_DATE"
 	    fi
             case "$ARCHES" in
+                ppc64el)
+                    export VOLID="$VOLID_BASE p64el $DISKNUMSTRING" ;;
                 powerpc)
                     export VOLID="$VOLID_BASE ppc $DISKNUMSTRING" ;;
                 mips64el)
@@ -363,7 +365,7 @@ if [ -e "$MIRROR/dists/$CODENAME/Release" ] ; then
     sed -e "s/^Architectures: .*$/Architectures: $ARCHES/" \
         $MIRROR/dists/$CODENAME/Release | \
         sed -e "s|^Components: .*$|Components: $SECTIONS|" | \
-        perl -ne 'if (/^(MD5Sum|SHA1|SHA256):/i) { $f=1; next } 
+        perl -ne 'if (/^(MD5Sum|SHA1|SHA256|SHA512):/i) { $f=1; next }
     if ($f) { 
         unless (/^ /) { print; $f=0 }
     } else { print }' > dists/$CODENAME/Release
@@ -390,7 +392,7 @@ if [ "$BACKPORTS"x != ""x ]; then
 	sed -e "s/^Architectures: .*$/Architectures: $ARCHES/" \
             $MIRROR/dists/$CODENAME-backports/Release | \
             sed -e "s|^Components: .*$|Components: $SECTIONS|" | \
-            perl -ne 'if (/^(MD5Sum|SHA1|SHA256):/i) { $f=1; next } 
+            perl -ne 'if (/^(MD5Sum|SHA1|SHA256|SHA512):/i) { $f=1; next }
     if ($f) { 
         unless (/^ /) { print; $f=0 }
     } else { print }' > dists/$CODENAME-backports/Release
@@ -450,6 +452,12 @@ do
         if [ "$DEBVERSION" != "testing" ] ; then
             sed -i "s/^Archive:.*$/Archive: stable/" dists/$CODENAME/main/debian-installer/binary-$ARCH/Release
         fi
+    fi
+
+    if [ -n "$LOCAL"  -a -e "${LOCALDEBS:-$MIRROR}/dists/$DI_CODENAME/local/debian-installer/binary-$ARCH/Release" ] ; then
+        mkdir -p dists/$CODENAME/local/debian-installer/binary-$ARCH
+        cp "${LOCALDEBS:-$MIRROR}/dists/$DI_CODENAME/local/debian-installer/binary-$ARCH/Release" \
+            dists/$CODENAME/local/debian-installer/binary-$ARCH/
     fi
 done
 

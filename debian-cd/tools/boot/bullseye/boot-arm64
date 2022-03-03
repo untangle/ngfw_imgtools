@@ -73,6 +73,10 @@ mkdir -p $CDDIR/$INSTALLDIR
 cp -lf cdrom/vmlinuz $CDDIR/$INSTALLDIR/
 cp -lf cdrom/initrd.gz $CDDIR/$INSTALLDIR/
 
+# Try to add graphical installer build too
+extra_image gtk/vmlinuz   "../vmlinuz" || true
+extra_image gtk/initrd.gz "../initrd.gz" || true
+
 # Boot setup including config and help files comes from d-i.
 mkdir -pv $PWD/boot$N
 cat cdrom/debian-cd_info.tar.gz | (cd boot$N/; tar zx)
@@ -122,10 +126,10 @@ if [ -d boot$N/grub ] ; then
 
     # Finally, belt and braces - fix up the %install% entries in grub
     # in case they're still there
-    sed -i "s,\%install\%,$INSTALLDIR,g" $CDDIR/boot/grub/grub.cfg
+    sed -i "s|\%install\%|$INSTALLDIR|g" $CDDIR/boot/grub/grub.cfg
 
     # Substitute custom KERNEL_PARAMS into grub.cfg
-    sed -i "s,/vmlinuz ,/vmlinuz $KERNEL_PARAMS ,g" $CDDIR/boot/grub/grub.cfg
+    sed -i "s|/vmlinuz |/vmlinuz $KERNEL_PARAMS |g" $CDDIR/boot/grub/grub.cfg
 
 else
     echo "  No EFI boot code for $ARCH on CD$N"

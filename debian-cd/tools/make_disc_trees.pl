@@ -54,6 +54,11 @@ if ($backports_list =~ /^$/) {
     $backports = 0;;
 }
 
+my $disktype = read_env('DISKTYPE', "");
+if ($disktype =~ /^$/) {
+    die "make_disc_trees.pl: DISKTYPE not set, aborting\n";
+}
+
 # MAXCDS is the hard limit on the MAXIMUM number of images to
 # make. MAXJIGDOS and MAXISOS can only make this number smaller; we
 # will use the higher of those 2 numbers as the last image to go to,
@@ -123,7 +128,6 @@ my $blocksize = 2048;
 my ($maxdiskblocks, $diskdesc);
 my $cddir;
 
-my $disktype = $ENV{'DISKTYPE'};
 my $size_swap_check;
 my $hfs_extra = 0;
 my $hfs_mult = 1;
@@ -168,6 +172,7 @@ if ($archlist =~ /m68k/ || $archlist =~ /powerpc/) {
 
 print "Starting to lay out packages into images:\n";
 
+# Read in the list of packages that we're expecting to include
 if (-e "$bdir/firmware-packages") {
     open(FWLIST, "$bdir/firmware-packages") or die "Unable to read firmware-packages file!\n";
     while (defined (my $pkg = <FWLIST>)) {
@@ -203,9 +208,8 @@ while (defined (my $pkg = <INLIST>)) {
             $mkisofs_opts = "";
         }
         if ($disknum <= $maxjigdos) {
-            $mkisofs_opts = "$mkisofs_opts -jigdo-jigdo /dev/null";
-            $mkisofs_opts = "$mkisofs_opts -jigdo-template /dev/null";
-            $mkisofs_opts = "$mkisofs_opts -md5-list /dev/null";
+	    # Set things to /dev/null - we're only doing a
+	    # sizing run here
             $mkisofs_opts = "$mkisofs_opts -o /dev/null";
         }
         if ( -e "$bdir/$disknum.mkisofs_dirs" ) {
@@ -599,11 +603,15 @@ sub add_missing_Packages {
 	$filename = $File::Find::name;
 
 	if ((-d "$_") && ($filename =~ m/\/main\/binary-[^\/]*$/)) {
-		if ((-f "$_/Packages") && (! -d "../local/$_/")) {
-			mkdir "../local/$_/" || die "Error creating directory local/$_: $!\n";
-			open(LPFILE, ">../local/$_/Packages") or die "Error creating local/$_/Packages: $!\n";
-			close LPFILE;
-			print "  Created empty Packages file for local/$_\n";
+		if (-f "$_/Packages") {
+			if (! -d "../local/$_/") {
+				mkdir "../local/$_/" || die "Error creating directory local/$_: $!\n";
+			}
+			if ( ! -f "../local/$_/Packages" ) {
+				open(LPFILE, ">../local/$_/Packages") or die "Error creating local/$_/Packages: $!\n";
+				close LPFILE;
+				print "  Created empty Packages file for local/$_\n";
+			}
 		}
 	}
 }
@@ -655,6 +663,7 @@ sub recompress {
 		! ($filename =~ m/\/.*\/i18n\/(Translation.*gz)$/o)) {
 		system("rm -f $_.gz");
 		system("gzip -9c < $_ >$_.gz");
+		system("rm -f $_");
 	}
 }	
 
@@ -766,6 +775,8 @@ sub get_disc_size {
         $maxdiskblocks = $ENV{'CUSTOMSIZE'} - $reserved || 
             die "Need to specify a custom size for the CUSTOM disktype\n";
         $diskdesc = "User-supplied size";
+    } else {
+	die "make_disc_trees.pl: Unknown disk type \"$chosen_disk\" specified; ABORT\n";
     }
 
     $ENV{'MAXDISKBLOCKS'} = $maxdiskblocks;
@@ -899,7 +910,7 @@ sub finish_disc {
 	print "  Finishing off md5sum.txt\n";
 	# Just md5 the bits we won't have seen already
 	open(MD5LIST, ">>md5sum.txt") or die "Failed to open md5sum.txt file: $!\n";
-	find (\&md5_files_for_md5sum, ("./.disk", "./dists"));
+	find (\&md5_files_for_md5sum, ("./.disk", "./dists", "./firmware/dep11"));
 	close(MD5LIST);
 
 	# And sort; it should make things faster for people checking
@@ -1053,8 +1064,8 @@ sub add_trans_desc_entry {
 
     m/^Package: (\S+)/m and $p = $1;
     m/^Section: (\S+)/m and $section = $1;
-
     m/^Filename: (\S+)/mi and $file = $1;
+
     $idir = Packages_dir($dir, $file, $section, $in_backports) . "/i18n";
 
     if (! -d $idir) {
@@ -1082,6 +1093,7 @@ sub add_trans_desc_entry {
                 # so, we'll need to uncompress again on entry here.
 
                 if (-f "$trans_file.gz") {
+                    system("rm -f $trans_file");
                     system("gunzip $trans_file.gz");
                 }
 
@@ -1149,6 +1161,62 @@ sub add_md5_entry {
     $new_blocks = size_in_blocks($st->size);
     $blocks_added = $new_blocks - $old_blocks;
     msg_ap(0, "    now $size bytes, added $blocks_added blocks\n");
+
+    return $blocks_added;
+}
+
+# Add sym-links and pattern files for firmware packages
+sub add_firmware_stuff {
+    my $dir = shift;
+    my $arch = shift;
+    my $in_backports = shift;
+    local $_ = shift;
+    my ($p, $file, $section, $dist, $dep11_dir);
+    my $blocks_added = 0;
+    my @args = ("$basedir/tools/generate_firmware_patterns",
+		"--output-dir", "$dir/firmware/dep11");
+
+    m/^Package: (\S+)/m and $p = $1;
+    m/^Section: (\S+)/m and $section = $1;
+    m/^Filename: (\S+)/mi and $file = $1;
+
+    if ($file =~ /\/main\//) {
+        $dist = "main";
+    } elsif ($file =~ /\/contrib\//) {
+        $dist = "contrib";
+    } elsif ($file =~ /\/non-free\//) {
+        $dist = "non-free";
+    } else {
+        $dist = "local";
+    }
+
+    $dep11_dir = "$mirror/dists/$codename/$dist/dep11";
+    if ($in_backports) {
+	$dep11_dir = "$mirror/dists/$codename-backports/$dist/dep11";
+    }
+
+    msg_ap(0, "Symlink fw package $p into /firmware\n");
+    symlink("../$file", "$dir/firmware/" . basename($file));
+    msg_ap(0, "Symlink ../$file $dir/firmware/.\n");
+    if (! -d "$dir/firmware") {
+	mkdir "$dir/firmware" or die "mkdir $dir/firmware failed $!\n";
+	mkdir "$dir/firmware/dep11" or die "mkdir $dir/firmware/dep11 failed $!\n";
+	$blocks_added += 2;
+    }
+
+    # Cope with maybe having the patterns file already
+    # (e.g. multi-arch), in which case we'll replace it here
+    if (-f "$dir/firmware/dep11/$p.patterns") {
+	$blocks_added -= get_file_blocks("$dir/firmware/dep11/$p.patterns");
+    }
+
+    msg_ap(0, "(Maybe) generate fw pattern file $dir/firmware/dep11/$p.patterns\n");
+    push(@args, "--package", "$p");
+    push(@args, "$dep11_dir/Components-$arch.yml.gz");
+    system(@args) == 0 or die "generate_firmware_patterns failed: $?";
+    if (-f "$dir/firmware/dep11/$p.patterns") {
+	$blocks_added += get_file_blocks("$dir/firmware/dep11/$p.patterns");
+    }
 
     return $blocks_added;
 }
@@ -1253,6 +1321,7 @@ sub remove_trans_desc_entry {
             # Keeping files in .gz format is expensive - see comment
             # in add_trans_desc_entry() above.
             if (-f "$trans_file.gz") {
+                system("rm -f $trans_file");
                 system("gunzip $trans_file.gz");
             }
             $st = stat("$trans_file") || die "unable to stat $trans_file\n";
@@ -1351,6 +1420,29 @@ sub remove_md5_entry {
     return $blocks_removed;
 }
 
+sub remove_firmware_stuff {
+    my $dir = shift;
+    my $arch = shift;
+    my $in_backports = shift;
+    my ($p, $file);
+    local $_ = shift;
+    my $blocks_removed = 0;
+
+    m/^Package: (\S+)/mi and $p = $1;
+    m/^Filename: (\S+)/mi and $file = $1;
+
+    msg_ap(0, "Remove symlink for fw package $p in /firmware\n");
+	unlink("$dir/firmware/" . basename($file));
+
+    if (-f "$dir/firmware/dep11/$p.patterns") {
+	$blocks_removed += get_file_blocks("$dir/firmware/dep11/$p.patterns");
+	msg_ap(0, "Remove $dir/firmware/dep11/$p.patterns\n");
+	unlink("$dir/firmware/dep11/$p.patterns");
+    }
+
+    return $blocks_removed;
+}
+
 sub get_file_blocks {
     my $realfile = shift;
     my $st;
@@ -1419,6 +1511,10 @@ sub add_packages {
             if (!($arch eq "source")) {
                 $total_blocks -= remove_trans_desc_entry($dir, $arch, $in_backports, $package_info);
             }
+	    
+	    if ($firmware_package{$pkgname}) {
+		$total_blocks -= remove_firmware_stuff($dir, $arch, $in_backports, $package_info);
+	    }
         
             foreach my $file (@files) {
                 my $missing = 0;
@@ -1467,12 +1563,7 @@ sub add_packages {
                     $total_blocks += good_link ($realfile, "$dir/$file");
                     msg_ap(0, "  Linked $dir/$file\n");
                     if ($firmware_package{$pkgname}) {
-                        msg_ap(0, "Symlink fw package $pkgname into /firmware\n");
-                        if (! -d "$dir/firmware") {
-                            mkdir "$dir/firmware" or die "symlink failed $!\n";
-                        }
-                        symlink("../$file", "$dir/firmware/" . basename($file));
-                        msg_ap(0, "Symlink ../$file $dir/firmware/.\n");
+			$total_blocks += add_firmware_stuff($dir, $arch, $in_backports, $package_info);
                     }
                 } else {
                     msg_ap(0, "  $dir/$file already linked in\n");

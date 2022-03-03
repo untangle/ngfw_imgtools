@@ -130,7 +130,7 @@ if [ "$N" = "1" ]; then
         if [ -e "$MIRROR/tools" ] && \
            [ ! -e $CDDIR/tools ] && \
            [ "$OMIT_DOC_TOOLS" != "1" ] ; then
-                echo "  Adding tools to CD1"
+                echo "    Adding tools to CD1"
                 $BASEDIR/tools/add_files $CDDIR $MIRROR tools
                 # Remove the win32-loader/ subdirectory from tools, as d-i already installs setup.exe
                 rm -Rf $CDDIR/tools/win32-loader
@@ -156,7 +156,7 @@ extra_image () {
         for doppelganger in $doppelgangers ; do
                 if [ -f "$CDDIR/$INSTALLDIR/$dir/$doppelganger" ] &&
                         cmp -s $CDDIR/$INSTALLDIR/"$image" $CDDIR/$INSTALLDIR/"$dir"/"$doppelganger" ; then
-                        echo "  $image identical to $doppelganger. Linking"
+                        echo "    $image identical to $doppelganger. Linking"
                         ln -nf $CDDIR/$INSTALLDIR/"$dir"/"$doppelganger" $CDDIR/$INSTALLDIR/"$image"
                         break
                 fi
@@ -204,8 +204,10 @@ cat cdrom/debian-cd_info.tar.gz | (cd boot$N/isolinux/; tar zx)
 
 # Not everything in the tarball is isolinux stuff
 if [ -e boot$N/isolinux/win32-loader.ini ] ; then
+    echo "  Moving extra loader files into place:"
     for file in boot$N/isolinux/g2ldr* boot$N/isolinux/setup.exe boot$N/isolinux/win32-loader.ini; do
         if [ -e $file ] ; then
+	    printf "    "
             mv -v $file CD$N/
         fi
     done
@@ -452,8 +454,8 @@ if [ -d boot$N/isolinux/grub ] && [ $BOOT_EFI -ne 0 ] ; then
     echo "  Adding EFI boot code for $ARCH on CD$N"
 
     # Move GRUB files to the right place.
-    mkdir -p $CDDIR/efi/boot
-    mcopy -n -i boot$N/isolinux/grub/efi.img '::efi/boot/boot*.efi' $CDDIR/efi/boot
+    mkdir -p $CDDIR/EFI/boot
+    mcopy -n -s -i boot$N/isolinux/grub/efi.img '::efi/*' $CDDIR/EFI
     mkdir -p $CDDIR/boot/grub
     mv boot$N/isolinux/grub/* $CDDIR/boot/grub/
     rmdir boot$N/isolinux/grub
@@ -469,50 +471,25 @@ if [ -d boot$N/isolinux/grub ] && [ $BOOT_EFI -ne 0 ] ; then
     $BASEDIR/tools/boot/$DI_CODENAME/parse_isolinux \
         boot$N/isolinux $CDDIR $BASEDIR/data/$DI_CODENAME/grub-theme.in "$DISKINFO_DISTRO" "$DEBIAN_KERNEL" "$DEBVERSION" \
         >> $CDDIR/boot/grub/grub.cfg
+    cp -v $BASEDIR/data/$DI_CODENAME/hl*png $CDDIR/boot/grub/theme
     NUM_ENTRIES=$(grep menuentry $CDDIR/boot/grub/grub.cfg | wc -l)
     echo "    CD$N/boot/grub/grub.cfg has $NUM_ENTRIES boot entries defined"
 
     # Stuff the EFI boot files into a FAT filesystem, making it as
-    # small as possible.
+    # small as possible. We end up re-packing like this in case we're
+    # making a multi-arch image
 
-    sector_bytes=512 # -S
-    cluster_sectors=4 # -s
-    cluster_bytes=$((sector_bytes * cluster_sectors))
+    # First, work out how many blocks we need
+    blocks=$(calculate_efi_image_size $CDDIR)
 
-    clusters=2 # 1 cluster for each sub-directory
-    for file in $CDDIR/efi/boot/boot*.efi; do
-        [ -f "$file" ] || continue
-        clusters=$(($clusters + (($(stat -c %s "$file") + $cluster_bytes - 1) / $cluster_bytes)))
-    done
-    reserved_sectors=1 # boot-sector -R
-    reserved_bytes=$(($reserved_sectors * $sector_bytes))
-    fat_copies=2 # -f
-    if [ "$clusters" -le $(((1 << 12) - 2)) ]; then
-        fat_entry_bytes=3/2 # -F
-    elif [ "$clusters" -le $(((1 << 16) - 2)) ]; then
-        fat_entry_bytes=2 # -F
-    else
-        fat_entry_bytes=4 # -F
-    fi
-    fat_bytes=$((($clusters * $fat_entry_bytes + $sector_bytes - 1) / $sector_bytes * $sector_bytes))
-    root_entries=512 # -r
-    root_entry_bytes=32
-    root_bytes=$(($root_entries * root_entry_bytes))
-    size=$(($reserved_bytes + $fat_copies * $fat_bytes + $root_bytes + $clusters * $cluster_bytes))
-
-    track_sectors=32
-    track_bytes=$((sector_bytes * $track_sectors))
-    tracks=$((($size + $track_bytes - 1) / $track_bytes))
-    block_bytes=1024
-    blocks=$(($tracks * $track_bytes / $block_bytes))
-
+    # Now make a new image to contain the files
     rm -f $CDDIR/boot/grub/efi.img
     mkfs.msdos -v -C "$CDDIR/boot/grub/efi.img" $blocks >/dev/null
 
+    # And copy them into place
     mmd -i "$CDDIR/boot/grub/efi.img" ::efi
-    mmd -i "$CDDIR/boot/grub/efi.img" ::efi/boot
-    mcopy -o -i "$CDDIR/boot/grub/efi.img" $CDDIR/efi/boot/boot*.efi \
-        "::efi/boot"
+    mcopy -o -s -i "$CDDIR/boot/grub/efi.img" $CDDIR/EFI/* \
+        "::efi"
 
     if [ $BOOT_EFI = 2 ] ; then
 	# We're being added alongside (after) a BIOS boot record. Tell
@@ -525,7 +502,7 @@ if [ -d boot$N/isolinux/grub ] && [ $BOOT_EFI -ne 0 ] ; then
     # Ugh - different code here depending on the version of xorriso we've got
     if [ $XORRISO_VER -le 10202 ] ; then
         # 1.2.2 shipping in Wheezy
-        echo "Using older EFI command line for xorriso $XORRISO_VER"
+        echo "    Using older EFI command line for xorriso $XORRISO_VER"
 
         add_mkisofs_opt $CDDIR/../$N.mkisofs_opts "--efi-boot boot/grub/efi.img"
         # Add the efi image as a FAT partition too, so our CD image will
@@ -534,7 +511,7 @@ if [ -d boot$N/isolinux/grub ] && [ $BOOT_EFI -ne 0 ] ; then
         add_mkisofs_opt $CDDIR/../$N.mkisofs_opts "-append_partition 2 0x01 $CDDIR/boot/grub/efi.img"
 
     elif [ $XORRISO_VER -gt 10202 ] ; then
-        echo "Using newer EFI support in xorriso $XORRISO_VER"
+        echo "    Using newer EFI support in xorriso $XORRISO_VER"
         add_mkisofs_opt $CDDIR/../$N.mkisofs_opts "-e boot/grub/efi.img -no-emul-boot"
         add_mkisofs_opt $CDDIR/../$N.mkisofs_opts "-isohybrid-gpt-basdat -isohybrid-apm-hfsplus"
     fi	

@@ -63,7 +63,7 @@ export BASEDIR=`pwd`
 # export CDNAME=debian
 
 # Building $codename cd set ...
-export CODENAME=buster
+export CODENAME=bullseye
 
 # By default use Debian installer packages from $CODENAME
 if [ -z "$DI_CODENAME" ]; then
@@ -87,7 +87,7 @@ fi
 #export DI_WWW_HOME=default
 
 # Version number, "2.2 r0", "2.2 r1" etc.
-export DEBVERSION="10.0.0"
+export DEBVERSION="11.0.0"
 
 # Official or non-official set.
 # NOTE: THE "OFFICIAL" DESIGNATION IS ONLY ALLOWED FOR IMAGES AVAILABLE
@@ -181,6 +181,12 @@ export CONTRIB=1
 # partition than your source files.
 # export COPYLINK=1
 
+# Choose the checksum algorithm used in jigdo and template
+# files. Older jigdo tools can only support md5; but we want to move
+# to sha256 as a better checksum. Depends on xorriso 1.5.3+ to support
+# sha256
+export JIGDO_CHECKSUM="md5"
+
 # Options
 # export MKISOFS=mkisofs
 # export MKISOFS_OPTS="-r"		#For normal users
@@ -191,14 +197,19 @@ export CONTRIB=1
 # that will burn correctly onto a CD and also can be written raw to a
 # USB stick. xorriso 0.6.5 and later has working support for this.
 #export i386_MKISOFS="xorriso"
-#export i386_MKISOFS_OPTS="-as mkisofs -r -checksum_algorithm_iso md5,sha1"
+#export i386_MKISOFS_OPTS="-as mkisofs -r -checksum_algorithm_iso sha256,sha512"
 #export amd64_MKISOFS="xorriso"
-#export amd64_MKISOFS_OPTS="-as mkisofs -r -checksum_algorithm_iso md5,sha1"
+#export amd64_MKISOFS_OPTS="-as mkisofs -r -checksum_algorithm_iso sha256,sha512"
 
 # Keyring (defaults):
-#ARCHIVE_KEYRING_PACKAGE=debian-archive-keyring
+#export ARCHIVE_KEYRING_PACKAGE=debian-archive-keyring
 # The path to the keyring file relative to $TDIR/archive-keyring/
-#ARCHIVE_KEYRING_FILE=usr/share/keyrings/debian-archive-keyring.gpg
+#export ARCHIVE_KEYRING_FILE=usr/share/keyrings/debian-archive-keyring.gpg
+
+# Extra keys that you might want apt to trust. List their fingerprints
+# here and debian-cd will grab them from the user's keyring as needed
+# (The example here is the buster release key)
+#export ARCHIVE_EXTRA_KEYS="80D15823B7FD1561F9F7BCDDDC30D7C23CBBABEE"
 
 # By default we use debootstrap --no-check-gpg to find out the minimal set
 # of packages because there's no reason to not trust the local mirror. But
@@ -261,12 +272,12 @@ export VARIANTS=
 # package on the CD.  The default is 'true'.
 # export NOSUGGESTS=1
 
-# Set to 1 to generate MD5/SHA1/SHA256/SHA512 sums for generated images
+# Set to 1 to generate checksum files for generated images
 export IMAGESUMS=1
 
 # And define the set of checksum algorithms you want here. Default is
-# all of: md5 sha1 sha512 sha256
-# export CHECKSUMS="md5 sha1 sha512 sha256"
+# sha512 sha256
+# export CHECKSUMS="sha512 sha256"
 
 # We may have to extract files from packages to put them onto the CD
 # (e.g. bootloader files). If you make those packages (and their
@@ -427,6 +438,11 @@ if [ -d "/etc/ssl/ca-debian" ]; then
 	export WGET_OPTS="--ca-directory /etc/ssl/ca-debian/"
 fi
 export WGET="wget $WGET_OPTS"
+
+# Run the make_image step in parallel? Specify the number of calls to
+# use in parallel here if desired. Don't go too high - this *will*
+# thrash your IO!
+#export PARALLEL_MAKE_IMAGE=4
 
 # Set this to force the Release file(s) to say "stable". Used in first
 # Etch builds to allow us to build before the archive updated

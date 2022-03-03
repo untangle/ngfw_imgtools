@@ -45,7 +45,7 @@ diff --git debian-cd/tools/boot/buster/boot-x86 debian-cd/tools/boot/buster/boot
 index 15c5961a..b3ecd530 100644
 --- debian-cd/tools/boot/buster/boot-x86
 +++ debian-cd/tools/boot/buster/boot-x86
-@@ -451,6 +451,11 @@ if [ -n "$KERNEL_PARAMS" ]; then
+@@ -447,6 +447,11 @@ if [ -n "$KERNEL_PARAMS" ]; then
      done
  fi
  
