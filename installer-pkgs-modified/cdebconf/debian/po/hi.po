@@ -32,8 +32,8 @@ msgstr ""
 "Project-Id-Version: debian-installer_packages_po_sublevel1_hi\n"
 "Report-Msgid-Bugs-To: cdebconf@packages.debian.org\n"
 "POT-Creation-Date: 2016-06-05 14:47+0000\n"
-"PO-Revision-Date: 2018-09-24 21:29+0000\n"
-"Last-Translator: Himanshu Awasthi <johim9493@gmail.com>\n"
+"PO-Revision-Date: 2020-05-27 08:41+0000\n"
+"Last-Translator: Sanket Pardhi <sanket002@gmail.com>\n"
 "Language-Team: \n"
 "Language: hi\n"
 "MIME-Version: 1.0\n"
@@ -293,7 +293,7 @@ msgstr "कोई रिक्त प्रविष्टि चुनें"
 #: ../cdebconf-text-udeb.templates:7001
 #, no-c-format
 msgid "Other choices are available with '%c' and '%c'"
-msgstr ""
+msgstr "'%c' और '%c' के साथ अन्य विकल्प उपलब्ध हैं"
 
 #. Type: text
 #. Description
@@ -301,7 +301,7 @@ msgstr ""
 #: ../cdebconf-text-udeb.templates:8001
 #, no-c-format
 msgid "Previous choices are available with '%c'"
-msgstr ""
+msgstr "पिछले विकल्प '%c' के साथ उपलब्ध हैं"
 
 #. Type: text
 #. Description
@@ -309,7 +309,7 @@ msgstr ""
 #: ../cdebconf-text-udeb.templates:9001
 #, no-c-format
 msgid "Next choices are available with '%c'"
-msgstr ""
+msgstr "अगले विकल्प '%c' के साथ उपलब्ध हैं"
 
 #. Type: text
 #. Description
@@ -347,7 +347,7 @@ msgstr "[जारी रखने हेतु एन्टर दबाएँ]
 #. :sl4:
 #: ../cdebconf.templates:1001
 msgid "Interface to use:"
-msgstr "किस माध्यम का उपयोग किया जाए"
+msgstr "उपयोग करने के लिए इंटरफ़ेस:"
 
 #. Type: select
 #. Description

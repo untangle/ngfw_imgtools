@@ -8,7 +8,7 @@
 # This translation is released under the same licence as the debian-installer.
 #
 # Siim Põder <siim@p6drad-teel.net>, 2007.
-# Kristjan Räts <kristjanrats@gmail.com>, 2017.
+# Kristjan Räts <kristjanrats@gmail.com>, 2017, 2018, 2020.
 #
 # Thanks to following Ubuntu Translators for review and fixes:
 #     Laur Mõtus
@@ -32,7 +32,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: cdebconf@packages.debian.org\n"
 "POT-Creation-Date: 2016-06-05 14:47+0000\n"
-"PO-Revision-Date: 2017-11-19 13:25+0000\n"
+"PO-Revision-Date: 2020-07-29 08:41+0000\n"
 "Last-Translator: Kristjan Räts <kristjanrats@gmail.com>\n"
 "Language-Team: Estonian <>\n"
 "Language: et\n"
@@ -104,10 +104,10 @@ msgid ""
 msgstr ""
 "Võid valida madalaima prioriteedi, millega küsimusi veel näidata:\n"
 " - 'kriitiline' tähendab, et vastamata jätmine tõenäoliselt rikuks\n"
-"    paigalduse.\n"
-" - 'kõrge' tähendab, et küsimusel pole mõistlikke vaikeväärtusi.\n"
+"    paigalduse,\n"
+" - 'kõrge' tähendab, et küsimusel pole mõistlikke vaikeväärtusi,\n"
 " - 'keskmine' tähendab, et küsimusele on olemas mõistlikud\n"
-"    vaikeväärtused.\n"
+"    vaikeväärtused,\n"
 " - 'madal' märgib triviaalseid küsimusi, mille vaikeväärtused\n"
 "    sobivad valdavale enamikule juhtudest."
 

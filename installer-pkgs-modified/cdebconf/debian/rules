@@ -128,10 +128,10 @@ binary-indep: install-indep
 binary-arch: install-arch
 	dh_testdir
 	dh_testroot
-	dh_installchangelogs -s
-	dh_installdocs -s
-	dh_installdebconf -s
-	dh_installdirs -s
+	dh_installchangelogs -a
+	dh_installdocs -a
+	dh_installdebconf -a
+	dh_installdirs -a
 ifneq ($(filter pkg.cdebconf.nogtk,$(DEB_BUILD_PROFILES)),)
 	# If the pkg.cdebconf.nogtk build profile is enabled and therefore
 	# DEB_FRONTENDS doesn't include gtk, the main build system doesn't
@@ -142,18 +142,16 @@ ifneq ($(filter pkg.cdebconf.nogtk,$(DEB_BUILD_PROFILES)),)
 	# profile is enabled.
 	dh_install -plibdebconfclient0-dev src/modules/frontend/gtk/cdebconf_gtk.h usr/include/cdebconf/
 endif
-	dh_lintian -s
-	dh_strip -s
-	dh_compress -s
-	dh_fixperms -s
-	dh_makeshlibs -s --add-udeb=libdebconfclient0-udeb
-	dh_installdeb -s
-	dh_shlibdeps -s
-	dh_gencontrol -s
-	dh_md5sums -s
-	dh_builddeb -s
-	# Hack for Untangle builds to copy our files directly into localdeb directory for d-i.
-	cp ../*.udeb ../../d-i/build/localudebs
+	dh_lintian -a
+	dh_strip -a
+	dh_compress -a
+	dh_fixperms -a
+	dh_makeshlibs -a --add-udeb=libdebconfclient0-udeb
+	dh_installdeb -a
+	dh_shlibdeps -a
+	dh_gencontrol -a
+	dh_md5sums -a
+	dh_builddeb -a
 
 binary: binary-indep binary-arch
 .PHONY: build clean binary-indep binary-arch binary install

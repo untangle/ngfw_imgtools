@@ -400,6 +400,11 @@ static void cdebconf_gtk_set_title(struct frontend * fe, const char * title)
     gdk_threads_enter();
     cdebconf_gtk_update_frontend_title(fe);
     gdk_threads_leave();
+#else
+    /* Workaround for #882804, GTK 2 only */
+    gdk_threads_enter();
+    cdebconf_gtk_update_frontend_info(fe);
+    gdk_threads_leave();
 #endif
 }
 
@@ -450,6 +455,36 @@ static bool cdebconf_gtk_can_align(struct frontend * fe,
 {
     return DCF_CAPB_ALIGN == (fe->capability & DCF_CAPB_ALIGN);
 }
+
+#ifdef DI_UDEB
+/* Workaround for #882804, GTK 2 only
+ *
+ * If we have a info message (e.g. rescue mode was selected in the
+ * bootloader or preseeded), check that we've got a banner widget and
+ * that we didn't send an expose_event already. Send a one-shot signal
+ * to fix the display on the start-up screen if all those conditions
+ * are met.
+ *
+ * @param ce cdebconf frontend
+ */
+void cdebconf_gtk_update_frontend_info(struct frontend * fe)
+{
+    struct frontend_data * fe_data = fe->data;
+
+    if (fe->info != NULL &&
+	fe_data->banner_widget &&
+	fe_data->banner_workaround_needed)
+    {
+        /* Return value cannot be omitted (callback returns a gboolean) */
+        gboolean rval = FALSE;
+        g_signal_emit_by_name (G_OBJECT(fe_data->banner_widget),
+			       "expose_event",
+			       (gpointer) fe,
+			       (gpointer) &rval);
+        fe_data->banner_workaround_needed = FALSE;
+    }
+}
+#endif
 
 /** Describe our frontend implementation to cdebconf.
  */

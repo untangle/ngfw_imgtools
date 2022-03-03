@@ -142,6 +142,40 @@ static void log_glib_to_syslog(const gchar * log_domain,
     g_free(string);
 }
 
+/** Implementation of GLogFunc for the GTK+ frontend.
+ *
+ * This will log messages going through the glib log system to the standard
+ * syslog.
+ *
+ * @param log_domain the log domain of the message
+ * @param log_level the log level of the message
+ * @param message the message to process
+ * @param user_data user data, set in g_log_set_handler()
+ */
+static GLogWriterOutput log_glib_structured_to_syslog(GLogLevelFlags log_level,
+                                                      const GLogField *fields,
+                                                      gsize n_fields,
+                                                      gpointer user_data)
+{
+    const char *domain = NULL;
+    const char *message = "(no message)";
+    gsize i;
+
+    for (i = 0; i < n_fields; i++) {
+          const GLogField *field = &fields[i];
+
+          if (g_strcmp0(field->key, "MESSAGE") == 0) {
+              message = field->value;
+          }
+          else if (g_strcmp0(field->key, "GLIB_DOMAIN") == 0) {
+              domain = field->value;
+          }
+    }
+
+    log_glib_to_syslog(domain, log_level, message, NULL);
+    return G_LOG_WRITER_HANDLED;
+}
+
 /** Make the given window fullscreen.
  *
  * @param window main window
@@ -287,7 +321,7 @@ gboolean cdebconf_gtk_di_setup(struct frontend * fe)
     fe_data->di_data = di_data;
 
     (void) g_set_printerr_handler(print_to_syslog);
-    (void) g_log_set_default_handler(log_glib_to_syslog,  NULL);
+    g_log_set_writer_func(log_glib_structured_to_syslog, NULL, NULL);
 
     make_fullscreen(fe_data->window);
     set_shortcuts(fe);

@@ -3,8 +3,8 @@
 #
 # DO NOT MODIFY THIS FILE DIRECTLY: SUCH CHANGES WILL BE LOST
 #
-# translation of nl.po to Dutch
-# Dutch messages for debian-installer.
+# translation of debian-installer/sublevel1 to Dutch
+# Dutch messages for debian-installer/sublevel1.
 # Copyright (C) 2003 Software in the Public Interest, Inc.
 # This file is distributed under the same license as debian-installer.
 # Frans Pop <aragorn@tiscali.nl>, 2005.
@@ -21,14 +21,14 @@
 # Freek de Kruijf <f.de.kruijf@hetnet.nl>, 2006, 2007, 2008, 2009, 2010, 2011.
 # Taco Witte <tcwitte@cs.uu.nl>, 2004.
 # Reinout van Schouwen <reinouts@gnome.org>, 2007.
-# Frans Spiesschaert <Frans.Spiesschaert@yucom.be>, 2014, 2015, 2016.
+# Frans Spiesschaert <Frans.Spiesschaert@yucom.be>, 2014-2020.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: debian-installer/sublevel1\n"
 "Report-Msgid-Bugs-To: cdebconf@packages.debian.org\n"
 "POT-Creation-Date: 2016-06-05 14:47+0000\n"
-"PO-Revision-Date: 2016-02-01 22:00+0100\n"
+"PO-Revision-Date: 2020-03-30 22:36+0200\n"
 "Last-Translator: Frans Spiesschaert <Frans.Spiesschaert@yucom.be>\n"
 "Language-Team: Debian Dutch l10n Team <debian-l10n-dutch@lists.debian.org>\n"
 "Language: nl\n"
@@ -99,12 +99,12 @@ msgid ""
 " - 'low' is for trivial items that have defaults that will work in\n"
 "   the vast majority of cases."
 msgstr ""
-"U dient de laagste prioriteit waarvan u nog vragen wilt getoond worden:\n"
-" - kritiek: vragen die waarschijnlijk een niet-werkend\n"
-"   systeem tot gevolg hebben wanneer ze onbeantwoord blijven\n"
-" - hoog: vragen zonder redelijke standaardwaarden\n"
-" - medium: vragen met redelijke standaardwaarden\n"
-" - laag: triviale vragen met standaardwaarden die meestal werken"
+"U kunt de laagste prioriteit vragen selecteren welke u nog wenst te zien:\n"
+" - 'kritiek' is voor items welke het systeem wellicht\n"
+"    onklaar zullen maken zonder interventie van de gebruiker.\n"
+" - 'hoog' is voor items zonder redelijke standaardwaarden.\n"
+" - 'medium' is voor normale items met redelijke standaardwaarden.\n"
+" - 'laag' is voor triviale items met standaardwaarden die meestal werken."
 
 #. Type: select
 #. Description

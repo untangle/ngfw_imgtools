@@ -123,6 +123,19 @@ static GdkColor * get_background_color(struct frontend * fe)
 /** vertical padding around descriptions */
 #define DESCRIPTION_VPADDING 3
 
+/** Make sure text views for the description are at least 300px wide.
+ *
+ * This works around Pango >= 1.44 sometimes behaving unexpectedly
+ * when asked to fit text into too small a space, leading to GTK 2 going
+ * into an infinite loop of redoing the layout (see #988787).
+ */
+static void description_size_request_cb(GtkWidget * view,
+                                        GtkRequisition * requisition,
+                                        gpointer user_data)
+{
+    requisition->width = MAX(requisition->width, 300);
+}
+
 /** Add a description to a given container.
  *
  * @param fe cdebconf frontend
@@ -139,9 +152,9 @@ static void add_description(struct frontend * fe, struct question * question,
     char * description;
 
     description = q_get_description(fe, question);
-    /* XXX: check NULL! */
     view = gtk_text_view_new();
-    /* XXX: check NULL! */
+    g_signal_connect_after(view, "size-request",
+                           G_CALLBACK(description_size_request_cb), NULL);
     buffer = gtk_text_view_get_buffer(GTK_TEXT_VIEW(view));
     gtk_text_buffer_set_text(buffer, description, -1 /* until '\0' */);
     g_free(description);
@@ -186,6 +199,8 @@ static void add_extended_description(struct frontend * fe,
     ext_description = q_get_extended_description(fe, question);
     if ('\0' != ext_description[0]) {
         view = gtk_text_view_new();
+        g_signal_connect_after(view, "size-request",
+                               G_CALLBACK(description_size_request_cb), NULL);
         buffer = gtk_text_view_get_buffer(GTK_TEXT_VIEW(view));
         gtk_text_buffer_set_text(buffer, ext_description, -1);
         gtk_text_view_set_editable(GTK_TEXT_VIEW(view), FALSE);

@@ -92,6 +92,7 @@ static gboolean handle_exposed_banner(GtkWidget * widget,
                                       struct frontend * fe)
 {
     struct frontend_data * fe_data = fe->data;
+    GdkScreen * screen;
     GdkWindow * window;
     PangoFontDescription * font;
     PangoLayout * layout;
@@ -134,12 +135,13 @@ static gboolean handle_exposed_banner(GtkWidget * widget,
         font = pango_font_description_from_string("Sans 12");
         pango_layout_set_font_description(layout, font);
         pango_layout_get_pixel_size(layout, &text_width, &text_height);
+        screen = gtk_window_get_screen(GTK_WINDOW(fe_data->window));
         window = gtk_widget_get_window(widget);
-        /* Left-align, vertically-center */
+        /* Right-align, vertically-center */
         cairo_t *cr = gdk_cairo_create(window);
         cairo_move_to(cr,
-                        DEFAULT_PADDING * 2,
-                        (fe_data->logo_height - text_height) / 2);
+                      gdk_screen_get_width(screen) - text_width - DEFAULT_PADDING * 2,
+                      (fe_data->logo_height - text_height) / 2);
         pango_cairo_show_layout(cr, layout);
         cairo_destroy(cr);
 
@@ -234,6 +236,10 @@ static void create_banner(struct frontend * fe, GtkWidget * container)
     gtk_box_pack_start(GTK_BOX(container), banner,
                        FALSE /* don't expand */, FALSE /* don't fill */,
                        0 /* padding */);
+
+    /* Workaround for #882804, GTK 2 only */
+    fe_data->banner_widget = banner;
+    fe_data->banner_workaround_needed = TRUE;
 }
 
 /** Create the label where the current operation will be displayed.

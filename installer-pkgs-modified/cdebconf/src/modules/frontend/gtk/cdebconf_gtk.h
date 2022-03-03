@@ -283,6 +283,15 @@ void cdebconf_gtk_set_button_secondary(struct frontend * fe,
  */
 GtkWidget * cdebconf_gtk_create_continue_button(struct frontend * fe);
 
+#ifdef DI_UDEB
+/* Workaround for #882804, GTK 2 only
+ *
+ * @param ce cdebconf frontend
+ */
+void cdebconf_gtk_update_frontend_info(struct frontend * fe);
+#endif
+
+
 #endif /* !_CDEBCONF_GTK_H_ */
 
 /* vim: et sw=4 si

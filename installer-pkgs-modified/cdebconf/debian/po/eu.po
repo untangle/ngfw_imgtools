@@ -20,20 +20,21 @@
 # Marcos Goienetxe <marcos_g@infonegocio.com>, 2002.
 # Piarres Beobide <pi@beobide.net>, 2008.
 # Xabier Bilbao <xabidu@gmail.com>, 2008.
+# Iñaki Larrañaga Murgoitio <dooteo@zundan.com>, 2020.
+#
 msgid ""
 msgstr ""
-"Project-Id-Version: eu\n"
+"Project-Id-Version: di-sublevel1_eu\n"
 "Report-Msgid-Bugs-To: cdebconf@packages.debian.org\n"
 "POT-Creation-Date: 2016-06-05 14:47+0000\n"
-"PO-Revision-Date: 2012-10-19 19:41+0200\n"
+"PO-Revision-Date: 2020-11-03 18:23+0100\n"
 "Last-Translator: Iñaki Larrañaga Murgoitio <dooteo@zundan.com>\n"
-"Language-Team: debian-l10n-eu@lists.debian.org\n"
+"Language-Team: Basque <librezale@librezale.eus>\n"
 "Language: eu\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"Content-Transfer-Encoding=UTF-8Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #. Type: select
 #. Choices
@@ -99,12 +100,12 @@ msgid ""
 msgstr ""
 "Ikusi nahi duzun galderaren gutxieneko lehentasuna hauta dezakezu:\n"
 " - 'kritikoa' erabiltzaileak parte hartu ezean ziurrenik sistema\n"
-"                 hondatuko duten elementuetarako da.\n"
+"   hondatuko duten elementuetarako da.\n"
 " - 'altua' zentzuzko ezarpen lehenetsirik ez duten elementuetarako da.\n"
-" - 'tartekoa' zentzuzko ezarpen lehenetsiak dituzten elementu"
-"\\                  normaletarako da.\n"
+" - 'tartekoa' zentzuzko ezarpen lehenetsiak dituzten elementu\n"
+"   normaletarako da.\n"
 " - 'baxua' kasu gehienetan funtzionatzen duten ezarpen lehenetsiak\n"
-"                 dituzten elementu arruntetarako da."
+"   dituzten elementu arruntetarako da."
 
 #. Type: select
 #. Description
@@ -179,7 +180,7 @@ msgstr "Utzi"
 #. :sl1:
 #: ../cdebconf-newt-udeb.templates:6001
 msgid "<Tab> moves; <Space> selects; <Enter> activates buttons"
-msgstr "<Tab> mugitzeko; <Hutsunea> hautatzeko; <Sartu> botoiak aktibatzeko"
+msgstr "<Tab> mugitzeko; <Zuriunea> hautatzeko; <Sartu> botoiak aktibatzeko"
 
 #. Type: text
 #. Description
@@ -189,16 +190,15 @@ msgstr "<Tab> mugitzeko; <Hutsunea> hautatzeko; <Sartu> botoiak aktibatzeko"
 #: ../cdebconf-newt-udeb.templates:7001
 msgid "<F1> for help; <Tab> moves; <Space> selects; <Enter> activates buttons"
 msgstr ""
-"<F1> Laguntzarako<Tab> mugitzeko; <Hutsunea> hautatzeko; <Sartu> aktibatzeko"
+"<F1> Laguntza; <Tab> mugitzeko; <Zuriunea> hautatzeko; <Sartu> aktibatzeko"
 
 #. Type: text
 #. Description
 #. Appears as a checkbox in the newt and GTK interfaces.
 #. :sl1:
 #: ../cdebconf-newt-udeb.templates:8001 ../cdebconf-gtk-udeb.templates:9001
-#, fuzzy
 msgid "Show Password in Clear"
-msgstr "Pasahitzaren sarreraren errorea"
+msgstr "Erakutsi pasahitza"
 
 #. Type: text
 #. Description
@@ -238,7 +238,7 @@ msgstr "Pantaila-argazkia"
 #: ../cdebconf-gtk-udeb.templates:8001
 #, no-c-format
 msgid "Screenshot saved as %s"
-msgstr "Pantaila-argazkia %s bezala gordeta"
+msgstr "Pantaila-argazkia %s gisa gordeta"
 
 #. Type: text
 #. Description
@@ -290,7 +290,7 @@ msgstr "Hautatu sarrera huts bat"
 #: ../cdebconf-text-udeb.templates:7001
 #, no-c-format
 msgid "Other choices are available with '%c' and '%c'"
-msgstr ""
+msgstr "Beste aukerak '%c' eta '%c'-rekin erabilgarri daude"
 
 #. Type: text
 #. Description
@@ -298,7 +298,7 @@ msgstr ""
 #: ../cdebconf-text-udeb.templates:8001
 #, no-c-format
 msgid "Previous choices are available with '%c'"
-msgstr ""
+msgstr "Aurreko aukerak '%c'-rekin erabilgarri daude"
 
 #. Type: text
 #. Description
@@ -306,7 +306,7 @@ msgstr ""
 #: ../cdebconf-text-udeb.templates:9001
 #, no-c-format
 msgid "Next choices are available with '%c'"
-msgstr ""
+msgstr "Hurrengo aukerak '%c'-rekin erabilgarri daude"
 
 #. Type: text
 #. Description
@@ -337,7 +337,7 @@ msgstr "Gonbita: '%c' laguntzarako, lehenetsia=%s> "
 #. :sl4:
 #: ../cdebconf-text-udeb.templates:15001
 msgid "[Press enter to continue]"
-msgstr "(Jarraitzeko, sakatu Sartu)"
+msgstr "[Jarraitzeko, sakatu Sartu]"
 
 #. Type: select
 #. Description
@@ -362,14 +362,14 @@ msgstr ""
 #. :sl4:
 #: ../cdebconf.templates:2001
 msgid "None"
-msgstr "Batez"
+msgstr "Bat ere ez"
 
 #. Type: string
 #. Description
 #. :sl4:
 #: ../cdebconf.templates:2001
 msgid "'None' will never ask you any question."
-msgstr "'Batez' hautatuaz inoiz ez dizu galderarik egingo."
+msgstr "'Bat ere ez'-ek ez dizu galderarik inoiz egingo."
 
 #. Type: string
 #. Description
@@ -383,7 +383,7 @@ msgstr "Testua"
 #. :sl4:
 #: ../cdebconf.templates:3001
 msgid "'Text' is a traditional plain text interface."
-msgstr "'Testua' testu laueko interfaze tradizionala da."
+msgstr "'Testua' testu arrunteko interfaze tradizionala da."
 
 #. Type: string
 #. Description
@@ -413,4 +413,4 @@ msgstr "GTK"
 msgid ""
 "'GTK' is a graphical interface that may be used in any graphical environment."
 msgstr ""
-"'GTK' edozein ingurune grafikoan erabili daitekeen interfaze grafikoa da."
+"'GTK' interfaze grafikoa bat da edozein ingurune grafikotan erabiltzeko."

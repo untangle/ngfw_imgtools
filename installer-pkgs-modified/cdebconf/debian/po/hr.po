@@ -23,50 +23,50 @@ msgstr ""
 "Project-Id-Version: Debian-installer 1st-stage master file HR\n"
 "Report-Msgid-Bugs-To: cdebconf@packages.debian.org\n"
 "POT-Creation-Date: 2016-06-05 14:47+0000\n"
-"PO-Revision-Date: 2017-04-01 23:55+0200\n"
-"Last-Translator: Valentin Vidic <Valentin.Vidic@CARNet.hr>\n"
+"PO-Revision-Date: 2019-07-04 17:02+0000\n"
+"Last-Translator: gogogogi <trebelnik2@gmail.com>\n"
 "Language-Team: Croatian <lokalizacija@linux.hr>\n"
 "Language: hr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
-"%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+"Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
+"%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
 
 #. Type: select
 #. Choices
 #. :sl2:
 #: ../cdebconf-udeb.templates:2001
 msgid "critical"
-msgstr "kritične"
+msgstr "kritična"
 
 #. Type: select
 #. Choices
 #. :sl2:
 #: ../cdebconf-udeb.templates:2001
 msgid "high"
-msgstr "visoke"
+msgstr "visoka"
 
 #. Type: select
 #. Choices
 #. :sl2:
 #: ../cdebconf-udeb.templates:2001
 msgid "medium"
-msgstr "srednje"
+msgstr "srednja"
 
 #. Type: select
 #. Choices
 #. :sl2:
 #: ../cdebconf-udeb.templates:2001
 msgid "low"
-msgstr "niske"
+msgstr "niska"
 
 #. Type: select
 #. Description
 #. :sl2:
 #: ../cdebconf-udeb.templates:2002
 msgid "Ignore questions with a priority less than:"
-msgstr "Preskoči pitanja razine važnosti niže od:"
+msgstr "Zanemari pitanja čija je razina značaja manja od:"
 
 #. Type: select
 #. Description
@@ -77,9 +77,10 @@ msgid ""
 "might ask you. Only questions with a certain priority or higher are actually "
 "shown to you; all less important questions are skipped."
 msgstr ""
-"Paketi koji rabe debconf za podešavanje dijele pitanja koja vam upućuju "
-"prema razini važnosti. Samo pitanja važnosti koju vi odredite, ili više, će "
-"vam biti postavljena. Sva pitanja niže važnosti će se preskočiti."
+"Paketi koji za podešavanje koriste debconf, pitanja koja vam upućuju dijele "
+"prema razini značaja. Pitanja onog značaja kojeg odredite, ili još većeg "
+"značaja, bit će vam postavljena, dok će sva manje značajna pitanja biti "
+"preskočena."
 
 #. Type: select
 #. Description
@@ -94,7 +95,7 @@ msgid ""
 " - 'low' is for trivial items that have defaults that will work in\n"
 "   the vast majority of cases."
 msgstr ""
-"Izaberite najnižu razinu važnosti pitanja koja želite vidjeti:\n"
+"Odaberite najnižu razinu značaja pitanja koja želite vidjeti:\n"
 " - 'kritična' je za probleme koji će vjerojatno srušiti sustav\n"
 "    bez utjecaja korisnika.\n"
 " - 'visoka' je za probleme koji nemaju zadane vrijednosti.\n"
@@ -110,7 +111,7 @@ msgid ""
 "For example, this question is of medium priority, and if your priority were "
 "already 'high' or 'critical', you wouldn't see this question."
 msgstr ""
-"Primjerice, ovo pitanje je srednje važnosti i da ste već odredili željenu "
+"Primjerice, ovo pitanje je srednjeg značaja i da ste već odredili željenu "
 "razinu kao 'visoku' ili 'kritičnu', ne biste ga vidjeli."
 
 #. Type: text
@@ -118,7 +119,7 @@ msgstr ""
 #. :sl2:
 #: ../cdebconf-priority.templates:1001
 msgid "Change debconf priority"
-msgstr "Promijeni debconf razinu važnosti"
+msgstr "Promijeni debconf razinu značaja"
 
 #. Type: text
 #. Description
@@ -166,7 +167,7 @@ msgstr "Ne"
 #. :sl1:
 #: ../cdebconf-newt-udeb.templates:5001
 msgid "Cancel"
-msgstr "Otkaži"
+msgstr "Odustani"
 
 #. Type: text
 #. Description
@@ -175,7 +176,7 @@ msgstr "Otkaži"
 #. :sl1:
 #: ../cdebconf-newt-udeb.templates:6001
 msgid "<Tab> moves; <Space> selects; <Enter> activates buttons"
-msgstr "<Tab> za pomicanje, <Space> bira, <Enter> aktivira dugmad"
+msgstr "<Tab> pomicanje; <Space> odabir; <Enter> aktivira tipke"
 
 #. Type: text
 #. Description
@@ -184,8 +185,7 @@ msgstr "<Tab> za pomicanje, <Space> bira, <Enter> aktivira dugmad"
 #. :sl1:
 #: ../cdebconf-newt-udeb.templates:7001
 msgid "<F1> for help; <Tab> moves; <Space> selects; <Enter> activates buttons"
-msgstr ""
-"<F1> za pomoć, <Tab> za pomicanje, <Space> bira, <Enter> aktivira dugmad"
+msgstr "<F1> pomoć; <Tab> pomicanje; <Space> odabir; <Enter> aktivira tipke"
 
 # Moram vidjeti ovo u kontekstu - TK
 #. Type: text
@@ -224,7 +224,7 @@ msgstr "LTR"
 #. :sl1:
 #: ../cdebconf-gtk-udeb.templates:7001
 msgid "Screenshot"
-msgstr "Snimka ekrana"
+msgstr "Slika zaslona"
 
 #. Type: text
 #. Description
@@ -234,7 +234,7 @@ msgstr "Snimka ekrana"
 #: ../cdebconf-gtk-udeb.templates:8001
 #, no-c-format
 msgid "Screenshot saved as %s"
-msgstr "Snimka ekrana spremljena kao %s"
+msgstr "Slika zaslona je spremljena kao %s"
 
 #. Type: text
 #. Description
@@ -249,7 +249,7 @@ msgstr "!! GREŠKA: %s"
 #. :sl4:
 #: ../cdebconf-text-udeb.templates:2001
 msgid "KEYSTROKES:"
-msgstr "TIPRITISCI:"
+msgstr "PRITISCI TIPKA:"
 
 #. Type: text
 #. Description
@@ -271,14 +271,14 @@ msgstr "Prikaži ovu poruku pomoći"
 #. :sl4:
 #: ../cdebconf-text-udeb.templates:5001
 msgid "Go back to previous question"
-msgstr "Natrag na prethodno pitanje"
+msgstr "Natrag na prijašnje pitanje"
 
 #. Type: text
 #. Description
 #. :sl4:
 #: ../cdebconf-text-udeb.templates:6001
 msgid "Select an empty entry"
-msgstr "Izaberi prazan unos"
+msgstr "Odaberi prazan unos"
 
 #. Type: text
 #. Description
@@ -286,7 +286,7 @@ msgstr "Izaberi prazan unos"
 #: ../cdebconf-text-udeb.templates:7001
 #, no-c-format
 msgid "Other choices are available with '%c' and '%c'"
-msgstr "Ostale opcije su dostupne pomoću '%c' i '%c'"
+msgstr "Ostali odabiri su dostupni sa '%c' i '%c'"
 
 #. Type: text
 #. Description
@@ -294,7 +294,7 @@ msgstr "Ostale opcije su dostupne pomoću '%c' i '%c'"
 #: ../cdebconf-text-udeb.templates:8001
 #, no-c-format
 msgid "Previous choices are available with '%c'"
-msgstr "Prethodne opcije su dostupne pomoću '%c'"
+msgstr "Prijašnji odabiri su dostupni sa '%c'"
 
 #. Type: text
 #. Description
@@ -302,7 +302,7 @@ msgstr "Prethodne opcije su dostupne pomoću '%c'"
 #: ../cdebconf-text-udeb.templates:9001
 #, no-c-format
 msgid "Next choices are available with '%c'"
-msgstr "Dodatne opcije su dostupne pomoću '%c'"
+msgstr "Sljedeći odabiri su dostupni sa '%c'"
 
 #. Type: text
 #. Description
@@ -310,7 +310,7 @@ msgstr "Dodatne opcije su dostupne pomoću '%c'"
 #: ../cdebconf-text-udeb.templates:12001
 #, no-c-format
 msgid "Prompt: '%c' for help, default=%d> "
-msgstr "Prompt: '%c' za pomoć, zadano=%d> "
+msgstr "Upitaj: '%c' za pomoć, zadano=%d> "
 
 #. Type: text
 #. Description
@@ -318,7 +318,7 @@ msgstr "Prompt: '%c' za pomoć, zadano=%d> "
 #: ../cdebconf-text-udeb.templates:13001
 #, no-c-format
 msgid "Prompt: '%c' for help> "
-msgstr "Prompt: '%c' za pomoć> "
+msgstr "Upitaj: '%c' za pomoć> "
 
 #. Type: text
 #. Description
@@ -326,21 +326,21 @@ msgstr "Prompt: '%c' za pomoć> "
 #: ../cdebconf-text-udeb.templates:14001
 #, no-c-format
 msgid "Prompt: '%c' for help, default=%s> "
-msgstr "Prompt: '%c' za pomoć, zadano=%s> "
+msgstr "Upitaj: '%c' za pomoć, zadano=%s> "
 
 #. Type: text
 #. Description
 #. :sl4:
 #: ../cdebconf-text-udeb.templates:15001
 msgid "[Press enter to continue]"
-msgstr "[Pritisnite 'enter' za nastavak]"
+msgstr "[Pritisnite Enter za nastavak]"
 
 #. Type: select
 #. Description
 #. :sl4:
 #: ../cdebconf.templates:1001
 msgid "Interface to use:"
-msgstr "Koristiti sučelje:"
+msgstr "Sučelje za korištenje:"
 
 #. Type: select
 #. Description
@@ -350,22 +350,22 @@ msgid ""
 "Packages that use debconf for configuration share a common look and feel. "
 "You can select the type of user interface they use."
 msgstr ""
-"Paketi koji koriste debconf za postavke dijele zajednički izgled i način "
-"rada. Možete izabrati vrstu korisničkog sučelja koji oni koriste."
+"Paketi koje koristi debconf za podešavanje dijele zajednički izgled i dojam. "
+"Možete odabrati vrstu sučelja koju oni koriste."
 
 #. Type: string
 #. Description
 #. :sl4:
 #: ../cdebconf.templates:2001
 msgid "None"
-msgstr "Nijedan"
+msgstr "Nikada"
 
 #. Type: string
 #. Description
 #. :sl4:
 #: ../cdebconf.templates:2001
 msgid "'None' will never ask you any question."
-msgstr "'Nijedan' vas neće pitati nijedno pitanje."
+msgstr "'Nikada' neće postaviti bilo kakav upit."
 
 #. Type: string
 #. Description
@@ -379,7 +379,7 @@ msgstr "Tekst"
 #. :sl4:
 #: ../cdebconf.templates:3001
 msgid "'Text' is a traditional plain text interface."
-msgstr "'Tekst' je tradicionalno tekstualno sučelje."
+msgstr "'Tekst' je uobičajeno tekstno sučelje."
 
 #. Type: string
 #. Description
@@ -393,7 +393,7 @@ msgstr "Newt"
 #. :sl4:
 #: ../cdebconf.templates:4001
 msgid "'Newt' is a full-screen, character based interface."
-msgstr "'Newt' je sučelje temeljeno na znakovima, u cijelom ekranu."
+msgstr "'Newt' je cjelozaslonsko, znakovima temeljeno sučelje."
 
 #. Type: string
 #. Description
@@ -409,5 +409,5 @@ msgstr "GTK"
 msgid ""
 "'GTK' is a graphical interface that may be used in any graphical environment."
 msgstr ""
-"'GTK' je grafičko sučelje koje se može koristiti u svakom grafičkom "
-"okruženju."
+"'GTK' je grafičko sučelje koje se može koristiti u svim grafičkim "
+"okruženjima."

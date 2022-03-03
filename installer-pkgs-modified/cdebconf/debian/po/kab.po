@@ -3,75 +3,58 @@
 #
 # DO NOT MODIFY THIS FILE DIRECTLY: SUCH CHANGES WILL BE LOST
 #
-# Japanese messages for debian-installer.
-# Copyright (C) 2003 Software in the Public Interest, Inc.
-# This file is distributed under the same license as debian-installer.
+# Kabyle translation for debian-installer
+# Copyright (c) 2008 Rosetta Contributors and Canonical Ltd 2008
+# This file is distributed under the same license as the debian-installer package.
+# Slimane Selyan Amiri <selyan.kab@gmail.com>, 2020.
 #
-#
-# Translations from iso-codes:
-#   Alastair McKinstry <mckinstry@computer.org>, 2001, 2002.
-#   Free Software Foundation, Inc., 2000, 2001, 2004, 2005, 2006
-#   IIDA Yosiaki <iida@gnu.org>, 2004, 2005, 2006.
-#   Kenshi Muto <kmuto@debian.org>, 2006-2018
-#   Takayuki KUSANO <AE5T-KSN@asahi-net.or.jp>, 2001.
-#   Takuro Ashie <ashie@homa.ne.jp>, 2001.
-#   Tobias Quathamer <toddy@debian.org>, 2007.
-#     Translations taken from ICU SVN on 2007-09-09
-#   Translations from KDE: 
-#   - Taiki Komoda <kom@kde.gr.jp>
-#   Yasuaki Taniguchi <yasuakit@gmail.com>, 2010, 2011.
-#   Yukihiro Nakai <nakai@gnome.gr.jp>, 2000.
-#
-#   Kentaro Hayashi <kenhys@gmail.com>, 2021.
-#   YOSHINO Yoshihito <yy.y.ja.jp@gmail.com>, 2021.
 msgid ""
 msgstr ""
-"Project-Id-Version: debian-installer\n"
+"Project-Id-Version: debian-installer sublevel1\n"
 "Report-Msgid-Bugs-To: cdebconf@packages.debian.org\n"
 "POT-Creation-Date: 2016-06-05 14:47+0000\n"
-"PO-Revision-Date: 2021-05-06 03:32+0000\n"
-"Last-Translator: Nozomu KURASAWA <nabetaro@caldron.jp>\n"
-"Language-Team: Debian L10n Japanese <debian-japanese@lists.debian.org>\n"
-"Language: ja\n"
+"PO-Revision-Date: 2020-10-24 15:08+0100\n"
+"Last-Translator: Slimane Selyan Amiri <selyan.kab@gmail.com>\n"
+"Language-Team: Kabyle <kab@li.org>\n"
+"Language: kab\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=1; plural=0;\n"
 
 #. Type: select
 #. Choices
 #. :sl2:
 #: ../cdebconf-udeb.templates:2001
 msgid "critical"
-msgstr "重要"
+msgstr "uzɣin"
 
 #. Type: select
 #. Choices
 #. :sl2:
 #: ../cdebconf-udeb.templates:2001
 msgid "high"
-msgstr "高"
+msgstr "afellay"
 
 #. Type: select
 #. Choices
 #. :sl2:
 #: ../cdebconf-udeb.templates:2001
 msgid "medium"
-msgstr "中"
+msgstr "alemmas"
 
 #. Type: select
 #. Choices
 #. :sl2:
 #: ../cdebconf-udeb.templates:2001
 msgid "low"
-msgstr "低"
+msgstr "meẓẓi"
 
 #. Type: select
 #. Description
 #. :sl2:
 #: ../cdebconf-udeb.templates:2002
 msgid "Ignore questions with a priority less than:"
-msgstr "次のものより低い優先度の質問を無視:"
+msgstr "Eǧǧ di rrif isteqsiyen yesɛan azal qqel n:"
 
 #. Type: select
 #. Description
@@ -82,9 +65,10 @@ msgid ""
 "might ask you. Only questions with a certain priority or higher are actually "
 "shown to you; all less important questions are skipped."
 msgstr ""
-"設定に debconf を使うパッケージは、あなたに尋ねるべき質問に優先度を付けていま"
-"す。当該の優先度またはより高い優先度の質問のみが実際にあなたに提示されます。"
-"重要度の低い質問は飛ばされます。"
+"Ikemmusen yesseqdacen debconf i usefsu ttaken nnuba qebbel i tuttriwin "
+"zemren ad wen-d-fken. Ḥala tuttriwin yesɛan kra n wazal neɣ azal ameqqran "
+"ara awe-d-ibanen akka tura; tuttriwin akk yesɛan qqel n wazal ad uɣalent di "
+"rrif."
 
 #. Type: select
 #. Description
@@ -99,13 +83,14 @@ msgid ""
 " - 'low' is for trivial items that have defaults that will work in\n"
 "   the vast majority of cases."
 msgstr ""
-"提示したい質問の最低の優先度を選択できます:\n"
-" - '重要' は、ユーザの介在なしには、おそらくシステムが\n"
-"    立ち行かない項目です。\n"
-" - '高' は、妥当なデフォルト値のない項目です。\n"
-" - '中' は、妥当なデフォルト値を持つ通常の項目です。\n"
-" - '低' は、大多数の場面では稼働するデフォルト値を持つ\n"
-"    些細な項目です。"
+"Tzemreḍ ad tferneḍ tazwart akk taddayt n usteqsi i tebɣiḍ ad t-twaliḍ:\n"
+" - 'uzɣin' yeɛna iferdisen i izemren ad rẓan anagraw war ma isekcem\n"
+"   iman-is useqdac.\n"
+" - 'afellay' i yiferdisen ur nesɛi ara azalen imezwer i yettwaqbalen.\n"
+" - 'alemmas' i yiferdisen imugna i yesɛan azalen imezwer i yettwaqbalen.\n"
+" - 'adday' i yiferdisen ur nemɛin ara i yesɛan azalen imezwer ara yeddun "
+"deg\n"
+"   wamur ameqqran n tegnatin."
 
 #. Type: select
 #. Description
@@ -115,15 +100,15 @@ msgid ""
 "For example, this question is of medium priority, and if your priority were "
 "already 'high' or 'critical', you wouldn't see this question."
 msgstr ""
-"たとえば、この質問は '中' の優先度ですが、もし優先度がすでに '高' あるいは "
-"'重要' になっていたとすると、この質問は目にしないことになります。"
+"Amedya, Tuttra-agi tesεa tazwart talemast, ma yella tazwart-ik tella yakan "
+"'ugar' neγ d 'tabayakt',ur ttmuqul ara tuttra-agi."
 
 #. Type: text
 #. Description
 #. :sl2:
 #: ../cdebconf-priority.templates:1001
 msgid "Change debconf priority"
-msgstr "debconf 優先度の変更"
+msgstr "Beddel tazwart n debconf"
 
 #. Type: text
 #. Description
@@ -131,7 +116,7 @@ msgstr "debconf 優先度の変更"
 #. :sl1:
 #: ../cdebconf-newt-udeb.templates:1001 ../cdebconf-gtk-udeb.templates:1001
 msgid "Continue"
-msgstr "続ける"
+msgstr "Kemmel"
 
 #. Type: text
 #. Description
@@ -139,7 +124,7 @@ msgstr "続ける"
 #. :sl1:
 #: ../cdebconf-newt-udeb.templates:2001 ../cdebconf-gtk-udeb.templates:2001
 msgid "Go Back"
-msgstr "戻る"
+msgstr "Uɣal ɣer deffir"
 
 #. Type: text
 #. Description
@@ -151,7 +136,7 @@ msgstr "戻る"
 #: ../cdebconf-newt-udeb.templates:3001 ../cdebconf-gtk-udeb.templates:3001
 #: ../cdebconf-slang-udeb.templates:1001 ../cdebconf-text-udeb.templates:10001
 msgid "Yes"
-msgstr "はい"
+msgstr "Ih"
 
 #. Type: text
 #. Description
@@ -163,7 +148,7 @@ msgstr "はい"
 #: ../cdebconf-newt-udeb.templates:4001 ../cdebconf-gtk-udeb.templates:4001
 #: ../cdebconf-slang-udeb.templates:2001 ../cdebconf-text-udeb.templates:11001
 msgid "No"
-msgstr "いいえ"
+msgstr "Ala"
 
 #. Type: text
 #. Description
@@ -171,7 +156,7 @@ msgstr "いいえ"
 #. :sl1:
 #: ../cdebconf-newt-udeb.templates:5001
 msgid "Cancel"
-msgstr "キャンセル"
+msgstr "Sefsex"
 
 #. Type: text
 #. Description
@@ -180,7 +165,7 @@ msgstr "キャンセル"
 #. :sl1:
 #: ../cdebconf-newt-udeb.templates:6001
 msgid "<Tab> moves; <Space> selects; <Enter> activates buttons"
-msgstr "<Tab> 移動; <スペース> 選択; <Enter> ボタンを実行"
+msgstr "<Tab> tilḥin; <Space> afran; <Enter> armad tiqeffalin"
 
 #. Type: text
 #. Description
@@ -189,7 +174,7 @@ msgstr "<Tab> 移動; <スペース> 選択; <Enter> ボタンを実行"
 #. :sl1:
 #: ../cdebconf-newt-udeb.templates:7001
 msgid "<F1> for help; <Tab> moves; <Space> selects; <Enter> activates buttons"
-msgstr "<F1> ヘルプ; <Tab> 移動; <スペース> 選択; <Enter> ボタンを実行"
+msgstr "<F1> i tallelt; <Tab> tilḥin; <Space> afran; <Enter> armad tiqeffalin"
 
 #. Type: text
 #. Description
@@ -197,7 +182,7 @@ msgstr "<F1> ヘルプ; <Tab> 移動; <スペース> 選択; <Enter> ボタン�
 #. :sl1:
 #: ../cdebconf-newt-udeb.templates:8001 ../cdebconf-gtk-udeb.templates:9001
 msgid "Show Password in Clear"
-msgstr "パスワードを表示"
+msgstr "Sken awal n uɛeddi ufriẓ"
 
 #. Type: text
 #. Description
@@ -205,7 +190,7 @@ msgstr "パスワードを表示"
 #. :sl1:
 #: ../cdebconf-gtk-udeb.templates:5001
 msgid "Help"
-msgstr "ヘルプ"
+msgstr "Tallelt"
 
 #. Type: text
 #. Description
@@ -227,7 +212,7 @@ msgstr "LTR"
 #. :sl1:
 #: ../cdebconf-gtk-udeb.templates:7001
 msgid "Screenshot"
-msgstr "スクリーンショット"
+msgstr "Tuṭṭfa n ugdil"
 
 #. Type: text
 #. Description
@@ -237,7 +222,7 @@ msgstr "スクリーンショット"
 #: ../cdebconf-gtk-udeb.templates:8001
 #, no-c-format
 msgid "Screenshot saved as %s"
-msgstr "%s という名前でスクリーンショットを保存"
+msgstr "Tuṭṭfa n ugdil tettwasekles am %s"
 
 #. Type: text
 #. Description
@@ -245,14 +230,14 @@ msgstr "%s という名前でスクリーンショットを保存"
 #: ../cdebconf-text-udeb.templates:1001
 #, no-c-format
 msgid "!! ERROR: %s"
-msgstr "!! エラー: %s"
+msgstr "!! TUCCḌA: %S"
 
 #. Type: text
 #. Description
 #. :sl4:
 #: ../cdebconf-text-udeb.templates:2001
 msgid "KEYSTROKES:"
-msgstr "キーストローク:"
+msgstr "KEYSTROKES:"
 
 #. Type: text
 #. Description
@@ -267,21 +252,21 @@ msgstr "'%c'"
 #. :sl4:
 #: ../cdebconf-text-udeb.templates:4001
 msgid "Display this help message"
-msgstr "このヘルプメッセージの表示"
+msgstr "Sken-d izen-agi n tallelt"
 
 #. Type: text
 #. Description
 #. :sl4:
 #: ../cdebconf-text-udeb.templates:5001
 msgid "Go back to previous question"
-msgstr "前の質問に戻る"
+msgstr "Uɣal ɣer usteqsi yezrin"
 
 #. Type: text
 #. Description
 #. :sl4:
 #: ../cdebconf-text-udeb.templates:6001
 msgid "Select an empty entry"
-msgstr "空のエントリを選択"
+msgstr "Fren anekcum ilem"
 
 #. Type: text
 #. Description
@@ -289,7 +274,7 @@ msgstr "空のエントリを選択"
 #: ../cdebconf-text-udeb.templates:7001
 #, no-c-format
 msgid "Other choices are available with '%c' and '%c'"
-msgstr "ほかの選択肢は '%c' と '%c' が選択可能です"
+msgstr "Llan ifranen-nniḍen akked '%c' d '%c'"
 
 #. Type: text
 #. Description
@@ -297,7 +282,7 @@ msgstr "ほかの選択肢は '%c' と '%c' が選択可能です"
 #: ../cdebconf-text-udeb.templates:8001
 #, no-c-format
 msgid "Previous choices are available with '%c'"
-msgstr "前の選択肢は '%c' が選択可能です"
+msgstr "Ifranen yezrin llan s '%c'"
 
 #. Type: text
 #. Description
@@ -305,7 +290,7 @@ msgstr "前の選択肢は '%c' が選択可能です"
 #: ../cdebconf-text-udeb.templates:9001
 #, no-c-format
 msgid "Next choices are available with '%c'"
-msgstr "次の選択肢は '%c' が選択可能です"
+msgstr "Ifranen i d-iteddun llan s '%c'"
 
 #. Type: text
 #. Description
@@ -313,7 +298,7 @@ msgstr "次の選択肢は '%c' が選択可能です"
 #: ../cdebconf-text-udeb.templates:12001
 #, no-c-format
 msgid "Prompt: '%c' for help, default=%d> "
-msgstr "プロンプト: ヘルプ '%c', デフォルト=%d> "
+msgstr "Ɛeṛḍ-d: '%c' i tallelt, amezwer=%d> . "
 
 #. Type: text
 #. Description
@@ -321,7 +306,7 @@ msgstr "プロンプト: ヘルプ '%c', デフォルト=%d> "
 #: ../cdebconf-text-udeb.templates:13001
 #, no-c-format
 msgid "Prompt: '%c' for help> "
-msgstr "プロンプト: ヘルプ '%c'> "
+msgstr "Yezreb: '%c' i tallelt>. "
 
 #. Type: text
 #. Description
@@ -329,21 +314,21 @@ msgstr "プロンプト: ヘルプ '%c'> "
 #: ../cdebconf-text-udeb.templates:14001
 #, no-c-format
 msgid "Prompt: '%c' for help, default=%s> "
-msgstr "プロンプト: ヘルプ '%c', デフォルト=%s> "
+msgstr "Ɛeṛḍ-d: '%c' i tallelt, amezwer=%d> . "
 
 #. Type: text
 #. Description
 #. :sl4:
 #: ../cdebconf-text-udeb.templates:15001
 msgid "[Press enter to continue]"
-msgstr "[続けるには Enter を押してください]"
+msgstr "[Senned ɣef Kcem akken ad tkemmleḍ]"
 
 #. Type: select
 #. Description
 #. :sl4:
 #: ../cdebconf.templates:1001
 msgid "Interface to use:"
-msgstr "利用するインターフェイス:"
+msgstr "Agrudem i useqdec:"
 
 #. Type: select
 #. Description
@@ -353,36 +338,36 @@ msgid ""
 "Packages that use debconf for configuration share a common look and feel. "
 "You can select the type of user interface they use."
 msgstr ""
-"設定に debconf を用いるパッケージは、共通のルック＆フィールを用います。どの種"
-"類のユーザインターフェイスを用いるかを選んでください。"
+"Ikemmusen i iseqdacen debconf i twila kifkif-iten deg talɣa d wudem. Tzemreḍ "
+"ad tferneḍ anaw n ugrudem n useqdac i sseqdacen."
 
 #. Type: string
 #. Description
 #. :sl4:
 #: ../cdebconf.templates:2001
 msgid "None"
-msgstr "なし"
+msgstr "Ulac"
 
 #. Type: string
 #. Description
 #. :sl4:
 #: ../cdebconf.templates:2001
 msgid "'None' will never ask you any question."
-msgstr "'なし' は以降何も質問しなくなります。"
+msgstr "'Ulac' urǧin ad ak·am-d-imudd asteqsi."
 
 #. Type: string
 #. Description
 #. :sl4:
 #: ../cdebconf.templates:3001
 msgid "Text"
-msgstr "テキスト"
+msgstr "Aḍris"
 
 #. Type: string
 #. Description
 #. :sl4:
 #: ../cdebconf.templates:3001
 msgid "'Text' is a traditional plain text interface."
-msgstr "'テキスト' は従来のプレインテキストインターフェイスです。"
+msgstr "'Aḍris' d agrudem n uḍris aččuran amensay."
 
 #. Type: string
 #. Description
@@ -396,7 +381,7 @@ msgstr "Newt"
 #. :sl4:
 #: ../cdebconf.templates:4001
 msgid "'Newt' is a full-screen, character based interface."
-msgstr "'Newt' はフルスクリーンの文字ベースインターフェイスです。"
+msgstr "'Newt' d agrudem n ugdil aččuran yebnan ɣef yisekkilen."
 
 #. Type: string
 #. Description
@@ -411,4 +396,5 @@ msgstr "GTK"
 #: ../cdebconf.templates:5001
 msgid ""
 "'GTK' is a graphical interface that may be used in any graphical environment."
-msgstr "'GTK' はグラフィカル環境で利用できるグラフィカルインターフェイスです。"
+msgstr ""
+"'GTK' d agrudem udlif i izemren ad yettuseqdec deg yal tawennaḍt tudlidt."

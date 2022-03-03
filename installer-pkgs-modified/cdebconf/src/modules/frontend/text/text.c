@@ -74,6 +74,9 @@ typedef int (text_handler)(struct frontend *obj, unsigned printed, struct questi
 #define ISEMPTY(buf) (buf[0] == 0)
 #endif
 
+#define PROGRESS_NONE -10
+static int last_progress = PROGRESS_NONE;
+
 /*
  * Function: getwidth
  * Input: none
@@ -1078,6 +1081,10 @@ static int text_go(struct frontend *obj)
 	int ret = DC_OK;
 	unsigned printed;
 
+	/* Make sure that after asking the questions we show that we are back to
+	 * progressing. */
+	last_progress = PROGRESS_NONE;
+
 	while (q != NULL) {
 		for (i = 0; i < DIM(question_handlers); i++) {
 			text_handler *handler;
@@ -1166,18 +1173,17 @@ static void text_progress_start(struct frontend *obj, int min, int max, struct q
 
 static int text_progress_set(struct frontend *obj, int val)
 {
-	static int last = 0;
 	int new;
 
 	obj->progress_cur = val;
 	new = ((double)(obj->progress_cur - obj->progress_min) / 
 		(double)(obj->progress_max - obj->progress_min) * 100.0);
-	if (new < last)
-		last = 0;
+	if (new < last_progress)
+		last_progress = PROGRESS_NONE;
 	/*  Prevent verbose output  */
-	if (new / 10 == last / 10)
+	if (new / 10 == last_progress / 10)
 		return DC_OK;
-	last = new;
+	last_progress = new;
 	printf("... %d%%", new);
 	fflush(stdout);
 

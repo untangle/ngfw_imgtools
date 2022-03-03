@@ -2,13 +2,13 @@ Source: cdebconf
 Section: utils
 Priority: optional
 Build-Depends:
- debhelper (>= 9),
+ debhelper-compat (= 12),
  po-debconf (>= 0.5.0),
  libslang2-dev,
  libnewt-dev,
  libtextwrap-dev (>= 0.1-5),
  libdebian-installer4-dev (>= 0.41) | libdebian-installer-dev,
- libglib2.0-dev (>= 2.31),
+ libglib2.0-dev (>= 2.50),
  libgtk2.0-dev (>= 2.24) <!pkg.cdebconf.nogtk>,
  libcairo2-dev (>= 1.8.10-3) <!pkg.cdebconf.nogtk>,
  libselinux1-dev (>= 2.3) [linux-any] | libselinux-dev [linux-any],
@@ -17,7 +17,6 @@ Build-Depends:
 Maintainer: Debian Install System Team <debian-boot@lists.debian.org>
 Uploaders:
  Colin Watson <cjwatson@debian.org>,
- Christian Perrier <bubulle@debian.org>,
  Cyril Brulebois <kibi@debian.org>
 Standards-Version: 3.9.7
 Vcs-Browser: https://salsa.debian.org/installer-team/cdebconf
@@ -91,14 +90,14 @@ Description: Debian Configuration Management System (C-implementation)
  installed. This is a reimplementation of the original debconf version
  in C.
  .
- cdebconf-udeb is a minimal cdebconf package used by the 
+ cdebconf-udeb is a minimal cdebconf package used by the
  debian-installer
 
 Package: cdebconf-priority
 Architecture: all
 Section: debian-installer
 Priority: standard
-Depends: cdebconf-udeb
+Depends: cdebconf-udeb, ${misc:Depends}
 Package-Type: udeb
 XB-Installer-Menu-Item: 93000
 Description: Change debconf priority

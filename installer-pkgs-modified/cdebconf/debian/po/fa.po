@@ -7,6 +7,8 @@
 # Copyright (C) 2003 Software in the Public Interest, Inc.
 # This file is distributed under the same license as debian-installer.
 # Nima Sahraneshin <unix.nima@gmail.com>, 2018.
+# Seyed Hany Hosseini <hany1894@gmail.com>, 2020.
+# <soheilkhanalipur@tutanota.com>, 2020.
 #
 # Translations from iso-codes:
 #   Alastair McKinstry - further translations from ICU-3.0
@@ -21,11 +23,11 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: fa\n"
+"Project-Id-Version: fa sublevel1\n"
 "Report-Msgid-Bugs-To: cdebconf@packages.debian.org\n"
 "POT-Creation-Date: 2016-06-05 14:47+0000\n"
-"PO-Revision-Date: 2019-01-01 17:49+0000\n"
-"Last-Translator: nima sahraneshin <unix.nima@gmail.com>\n"
+"PO-Revision-Date: 2020-10-24 17:09+0000\n"
+"Last-Translator: سهیل خانعلی‌پور <soheilkhanalipur@tutanota.com>\n"
 "Language-Team: Debian-l10n-persian <debian-l10n-persian@lists.debian.org>\n"
 "Language: fa\n"
 "MIME-Version: 1.0\n"
@@ -158,7 +160,7 @@ msgstr "بله"
 #: ../cdebconf-newt-udeb.templates:4001 ../cdebconf-gtk-udeb.templates:4001
 #: ../cdebconf-slang-udeb.templates:2001 ../cdebconf-text-udeb.templates:11001
 msgid "No"
-msgstr "نه‌خیر"
+msgstr "نه"
 
 #. Type: text
 #. Description
@@ -224,7 +226,7 @@ msgstr "RTL"
 #. :sl1:
 #: ../cdebconf-gtk-udeb.templates:7001
 msgid "Screenshot"
-msgstr "تصویر"
+msgstr "نماگرفت"
 
 #. Type: text
 #. Description
@@ -400,7 +402,7 @@ msgstr "Newt یک رابط تمام صفحه و مبتنی بر کاراکتر �
 #. :sl4:
 #: ../cdebconf.templates:5001
 msgid "GTK"
-msgstr "رابط گرافیکی GTK"
+msgstr "جی‌تی‌کی"
 
 #. Type: string
 #. Description

@@ -7,7 +7,7 @@
 # Copyright (C) 2003,2004,2005,2008 Software in the Public Interest, Inc.
 # This file is distributed under the same license as debian-installer.
 #
-# Changwoo Ryu <cwryu@debian.org>, 2010-2012, 2014-2015, 2017.
+# Changwoo Ryu <cwryu@debian.org>, 2010-2012, 2014-2015, 2017-2018, 2020.
 #
 # Translations from iso-codes:
 # Copyright (C)
@@ -28,7 +28,7 @@ msgstr ""
 "Project-Id-Version: debian-installer\n"
 "Report-Msgid-Bugs-To: cdebconf@packages.debian.org\n"
 "POT-Creation-Date: 2016-06-05 14:47+0000\n"
-"PO-Revision-Date: 2017-02-11 12:13+0900\n"
+"PO-Revision-Date: 2020-04-21 05:24+0900\n"
 "Last-Translator: Changwoo Ryu <cwryu@debian.org>\n"
 "Language-Team:  Korean <debian-l10n-korean@lists.debian.org>\n"
 "Language: ko\n"
@@ -81,8 +81,8 @@ msgid ""
 "shown to you; all less important questions are skipped."
 msgstr ""
 "debconf를 사용하는 패키지에서는 물어보는 질문에 우선 순위를 매깁니다. 지정한 "
-"우선 순위 혹은 그보다 높은 우선 순위의 질문들만 나타납니다. 더 낮은 질문들은 "
-"건너 뜁니다."
+"우선 순위 혹은 그보다 높은 우선 순위의 질문만 나타납니다. 더 낮은 질문은 건"
+"너 뜁니다."
 
 #. Type: select
 #. Description

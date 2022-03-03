@@ -3,75 +3,62 @@
 #
 # DO NOT MODIFY THIS FILE DIRECTLY: SUCH CHANGES WILL BE LOST
 #
-# Japanese messages for debian-installer.
-# Copyright (C) 2003 Software in the Public Interest, Inc.
-# This file is distributed under the same license as debian-installer.
+# Occitan (post 1500) translation for debian-installer
+# Copyright (c) (c) 2006 Canonical Ltd, and Rosetta Contributors 2006
+# This file is distributed under the same license as the debian-installer package.
+# Yannig MARCHEGAY <yannick.marchegay@lokanova.com>, 2006.
+# Cédric VALMARY <cvalmary@yahoo.fr>, 2016.
+# Quentin PAGÈS <quentinantonin@free.fr>, 2020.
 #
 #
-# Translations from iso-codes:
-#   Alastair McKinstry <mckinstry@computer.org>, 2001, 2002.
-#   Free Software Foundation, Inc., 2000, 2001, 2004, 2005, 2006
-#   IIDA Yosiaki <iida@gnu.org>, 2004, 2005, 2006.
-#   Kenshi Muto <kmuto@debian.org>, 2006-2018
-#   Takayuki KUSANO <AE5T-KSN@asahi-net.or.jp>, 2001.
-#   Takuro Ashie <ashie@homa.ne.jp>, 2001.
-#   Tobias Quathamer <toddy@debian.org>, 2007.
-#     Translations taken from ICU SVN on 2007-09-09
-#   Translations from KDE: 
-#   - Taiki Komoda <kom@kde.gr.jp>
-#   Yasuaki Taniguchi <yasuakit@gmail.com>, 2010, 2011.
-#   Yukihiro Nakai <nakai@gnome.gr.jp>, 2000.
-#
-#   Kentaro Hayashi <kenhys@gmail.com>, 2021.
-#   YOSHINO Yoshihito <yy.y.ja.jp@gmail.com>, 2021.
 msgid ""
 msgstr ""
-"Project-Id-Version: debian-installer\n"
+"Project-Id-Version: debian-installer sublevel1\n"
 "Report-Msgid-Bugs-To: cdebconf@packages.debian.org\n"
 "POT-Creation-Date: 2016-06-05 14:47+0000\n"
-"PO-Revision-Date: 2021-05-06 03:32+0000\n"
-"Last-Translator: Nozomu KURASAWA <nabetaro@caldron.jp>\n"
-"Language-Team: Debian L10n Japanese <debian-japanese@lists.debian.org>\n"
-"Language: ja\n"
+"PO-Revision-Date: 2020-10-29 17:30+0000\n"
+"Last-Translator: Quentin PAGÈS <quentinantonin@free.fr>\n"
+"Language-Team: Occitan (post 1500) <ubuntu-l10n-oci@lists.ubuntu.com>\n"
+"Language: oc\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=1; plural=0;\n"
+"Plural-Forms: nplurals=2; plural=n > 1;\n"
 
 #. Type: select
 #. Choices
 #. :sl2:
 #: ../cdebconf-udeb.templates:2001
 msgid "critical"
-msgstr "重要"
+msgstr "critica"
 
 #. Type: select
 #. Choices
 #. :sl2:
 #: ../cdebconf-udeb.templates:2001
 msgid "high"
-msgstr "高"
+msgstr "elevada"
 
 #. Type: select
 #. Choices
 #. :sl2:
 #: ../cdebconf-udeb.templates:2001
 msgid "medium"
-msgstr "中"
+msgstr "intermediària"
 
 #. Type: select
 #. Choices
 #. :sl2:
 #: ../cdebconf-udeb.templates:2001
 msgid "low"
-msgstr "低"
+msgstr "febla"
 
 #. Type: select
 #. Description
 #. :sl2:
 #: ../cdebconf-udeb.templates:2002
 msgid "Ignore questions with a priority less than:"
-msgstr "次のものより低い優先度の質問を無視:"
+msgstr "Ignorar las questions de prioritat inferiora a :"
 
 #. Type: select
 #. Description
@@ -82,9 +69,10 @@ msgid ""
 "might ask you. Only questions with a certain priority or higher are actually "
 "shown to you; all less important questions are skipped."
 msgstr ""
-"設定に debconf を使うパッケージは、あなたに尋ねるべき質問に優先度を付けていま"
-"す。当該の優先度またはより高い優先度の質問のみが実際にあなたに提示されます。"
-"重要度の低い質問は飛ばされます。"
+"Los paquets qu'utilizan debconf per lor configuracion ierarquizan las "
+"questions de pausar per òrdre de prioritat. Sonque las questions qu'an una "
+"prioritat superiora o egala a la causida seràn afichadas ; las autras seràn "
+"ignoradas."
 
 #. Type: select
 #. Description
@@ -99,13 +87,13 @@ msgid ""
 " - 'low' is for trivial items that have defaults that will work in\n"
 "   the vast majority of cases."
 msgstr ""
-"提示したい質問の最低の優先度を選択できます:\n"
-" - '重要' は、ユーザの介在なしには、おそらくシステムが\n"
-"    立ち行かない項目です。\n"
-" - '高' は、妥当なデフォルト値のない項目です。\n"
-" - '中' は、妥当なデフォルト値を持つ通常の項目です。\n"
-" - '低' は、大多数の場面では稼働するデフォルト値を持つ\n"
-"    些細な項目です。"
+"Podètz definir la prioritat minimala de las questions pausadas :\n"
+" - « critica » pels reglatges que poirián copar lo\n"
+"   sistèma sens una valor adaptada ;\n"
+" - « elevada » quand existís pas de valor per defaut adaptada ;\n"
+" - « intermediària » quand existís una valor per defaut adaptada ;\n"
+" - « bassa » per las questions trivialas que las responsas per\n"
+"   defaut satisfaràn la màger part dels cases."
 
 #. Type: select
 #. Description
@@ -115,15 +103,15 @@ msgid ""
 "For example, this question is of medium priority, and if your priority were "
 "already 'high' or 'critical', you wouldn't see this question."
 msgstr ""
-"たとえば、この質問は '中' の優先度ですが、もし優先度がすでに '高' あるいは "
-"'重要' になっていたとすると、この質問は目にしないことになります。"
+"Per exemple, la presenta question a una prioritat « intermediària » ; amb "
+"una prioritat « elevada » o « critica », l'auriatz pas vista."
 
 #. Type: text
 #. Description
 #. :sl2:
 #: ../cdebconf-priority.templates:1001
 msgid "Change debconf priority"
-msgstr "debconf 優先度の変更"
+msgstr "Cambiar la prioritat de las questions de configuracion"
 
 #. Type: text
 #. Description
@@ -131,7 +119,7 @@ msgstr "debconf 優先度の変更"
 #. :sl1:
 #: ../cdebconf-newt-udeb.templates:1001 ../cdebconf-gtk-udeb.templates:1001
 msgid "Continue"
-msgstr "続ける"
+msgstr "Contunhar"
 
 #. Type: text
 #. Description
@@ -139,7 +127,7 @@ msgstr "続ける"
 #. :sl1:
 #: ../cdebconf-newt-udeb.templates:2001 ../cdebconf-gtk-udeb.templates:2001
 msgid "Go Back"
-msgstr "戻る"
+msgstr "Tornar en arrièr"
 
 #. Type: text
 #. Description
@@ -151,7 +139,7 @@ msgstr "戻る"
 #: ../cdebconf-newt-udeb.templates:3001 ../cdebconf-gtk-udeb.templates:3001
 #: ../cdebconf-slang-udeb.templates:1001 ../cdebconf-text-udeb.templates:10001
 msgid "Yes"
-msgstr "はい"
+msgstr "Òc"
 
 #. Type: text
 #. Description
@@ -163,7 +151,7 @@ msgstr "はい"
 #: ../cdebconf-newt-udeb.templates:4001 ../cdebconf-gtk-udeb.templates:4001
 #: ../cdebconf-slang-udeb.templates:2001 ../cdebconf-text-udeb.templates:11001
 msgid "No"
-msgstr "いいえ"
+msgstr "Non"
 
 #. Type: text
 #. Description
@@ -171,7 +159,7 @@ msgstr "いいえ"
 #. :sl1:
 #: ../cdebconf-newt-udeb.templates:5001
 msgid "Cancel"
-msgstr "キャンセル"
+msgstr "Anullar"
 
 #. Type: text
 #. Description
@@ -180,7 +168,8 @@ msgstr "キャンセル"
 #. :sl1:
 #: ../cdebconf-newt-udeb.templates:6001
 msgid "<Tab> moves; <Space> selects; <Enter> activates buttons"
-msgstr "<Tab> 移動; <スペース> 選択; <Enter> ボタンを実行"
+msgstr ""
+"<Tab> desplaçament; <Espaci> seleccion; <Entrada> activacion dels botons"
 
 #. Type: text
 #. Description
@@ -189,7 +178,9 @@ msgstr "<Tab> 移動; <スペース> 選択; <Enter> ボタンを実行"
 #. :sl1:
 #: ../cdebconf-newt-udeb.templates:7001
 msgid "<F1> for help; <Tab> moves; <Space> selects; <Enter> activates buttons"
-msgstr "<F1> ヘルプ; <Tab> 移動; <スペース> 選択; <Enter> ボタンを実行"
+msgstr ""
+"<F1> ajuda; <Tab> desplaçament; <Espaci> seleccion; <Entrada> activacion "
+"botons"
 
 #. Type: text
 #. Description
@@ -197,7 +188,7 @@ msgstr "<F1> ヘルプ; <Tab> 移動; <スペース> 選択; <Enter> ボタン�
 #. :sl1:
 #: ../cdebconf-newt-udeb.templates:8001 ../cdebconf-gtk-udeb.templates:9001
 msgid "Show Password in Clear"
-msgstr "パスワードを表示"
+msgstr "Mostrar lo senhal en clar"
 
 #. Type: text
 #. Description
@@ -205,7 +196,7 @@ msgstr "パスワードを表示"
 #. :sl1:
 #: ../cdebconf-gtk-udeb.templates:5001
 msgid "Help"
-msgstr "ヘルプ"
+msgstr "Ajuda"
 
 #. Type: text
 #. Description
@@ -227,7 +218,7 @@ msgstr "LTR"
 #. :sl1:
 #: ../cdebconf-gtk-udeb.templates:7001
 msgid "Screenshot"
-msgstr "スクリーンショット"
+msgstr "Captura d'ecran"
 
 #. Type: text
 #. Description
@@ -237,7 +228,7 @@ msgstr "スクリーンショット"
 #: ../cdebconf-gtk-udeb.templates:8001
 #, no-c-format
 msgid "Screenshot saved as %s"
-msgstr "%s という名前でスクリーンショットを保存"
+msgstr "Captura d'ecran enregistrada jos %s"
 
 #. Type: text
 #. Description
@@ -245,14 +236,14 @@ msgstr "%s という名前でスクリーンショットを保存"
 #: ../cdebconf-text-udeb.templates:1001
 #, no-c-format
 msgid "!! ERROR: %s"
-msgstr "!! エラー: %s"
+msgstr "!! ERROR : %s"
 
 #. Type: text
 #. Description
 #. :sl4:
 #: ../cdebconf-text-udeb.templates:2001
 msgid "KEYSTROKES:"
-msgstr "キーストローク:"
+msgstr "SEQUÉNCIAS DE BOTONS DE CLAVIÈR :"
 
 #. Type: text
 #. Description
@@ -267,21 +258,21 @@ msgstr "'%c'"
 #. :sl4:
 #: ../cdebconf-text-udeb.templates:4001
 msgid "Display this help message"
-msgstr "このヘルプメッセージの表示"
+msgstr "Afichar aqueste messatge d'ajuda"
 
 #. Type: text
 #. Description
 #. :sl4:
 #: ../cdebconf-text-udeb.templates:5001
 msgid "Go back to previous question"
-msgstr "前の質問に戻る"
+msgstr "Tornar a la question precedenta"
 
 #. Type: text
 #. Description
 #. :sl4:
 #: ../cdebconf-text-udeb.templates:6001
 msgid "Select an empty entry"
-msgstr "空のエントリを選択"
+msgstr "Seleccionar una entrada voida"
 
 #. Type: text
 #. Description
@@ -289,7 +280,7 @@ msgstr "空のエントリを選択"
 #: ../cdebconf-text-udeb.templates:7001
 #, no-c-format
 msgid "Other choices are available with '%c' and '%c'"
-msgstr "ほかの選択肢は '%c' と '%c' が選択可能です"
+msgstr "Mai de possibilitats son disponiblas amb « %c » and « %c »"
 
 #. Type: text
 #. Description
@@ -297,7 +288,7 @@ msgstr "ほかの選択肢は '%c' と '%c' が選択可能です"
 #: ../cdebconf-text-udeb.templates:8001
 #, no-c-format
 msgid "Previous choices are available with '%c'"
-msgstr "前の選択肢は '%c' が選択可能です"
+msgstr "Las possibilitats precedentas son disponiblas amb « %c »"
 
 #. Type: text
 #. Description
@@ -305,7 +296,7 @@ msgstr "前の選択肢は '%c' が選択可能です"
 #: ../cdebconf-text-udeb.templates:9001
 #, no-c-format
 msgid "Next choices are available with '%c'"
-msgstr "次の選択肢は '%c' が選択可能です"
+msgstr "Las possibilitats seguentas son disponiblas amb « %s »"
 
 #. Type: text
 #. Description
@@ -313,7 +304,7 @@ msgstr "次の選択肢は '%c' が選択可能です"
 #: ../cdebconf-text-udeb.templates:12001
 #, no-c-format
 msgid "Prompt: '%c' for help, default=%d> "
-msgstr "プロンプト: ヘルプ '%c', デフォルト=%d> "
+msgstr "Convit : « %c » per l'ajuda, defaut=%d> "
 
 #. Type: text
 #. Description
@@ -321,7 +312,7 @@ msgstr "プロンプト: ヘルプ '%c', デフォルト=%d> "
 #: ../cdebconf-text-udeb.templates:13001
 #, no-c-format
 msgid "Prompt: '%c' for help> "
-msgstr "プロンプト: ヘルプ '%c'> "
+msgstr "Convit : « %c » per l'ajuda> "
 
 #. Type: text
 #. Description
@@ -329,21 +320,21 @@ msgstr "プロンプト: ヘルプ '%c'> "
 #: ../cdebconf-text-udeb.templates:14001
 #, no-c-format
 msgid "Prompt: '%c' for help, default=%s> "
-msgstr "プロンプト: ヘルプ '%c', デフォルト=%s> "
+msgstr "Convit : « %c » per l'ajuda, defaut=%s> "
 
 #. Type: text
 #. Description
 #. :sl4:
 #: ../cdebconf-text-udeb.templates:15001
 msgid "[Press enter to continue]"
-msgstr "[続けるには Enter を押してください]"
+msgstr "[Quichatz sur Entrada per contunhar]"
 
 #. Type: select
 #. Description
 #. :sl4:
 #: ../cdebconf.templates:1001
 msgid "Interface to use:"
-msgstr "利用するインターフェイス:"
+msgstr "Interfàcia d’utilizar :"
 
 #. Type: select
 #. Description
@@ -353,36 +344,36 @@ msgid ""
 "Packages that use debconf for configuration share a common look and feel. "
 "You can select the type of user interface they use."
 msgstr ""
-"設定に debconf を用いるパッケージは、共通のルック＆フィールを用います。どの種"
-"類のユーザインターフェイスを用いるかを選んでください。"
+"Los paquets qu’utilizan debconf per la configuracion partejan la meteissa "
+"aparéncia. Podètz causir lo tipe d’interfàcia utilizaire qu’utilizan."
 
 #. Type: string
 #. Description
 #. :sl4:
 #: ../cdebconf.templates:2001
 msgid "None"
-msgstr "なし"
+msgstr "Cap"
 
 #. Type: string
 #. Description
 #. :sl4:
 #: ../cdebconf.templates:2001
 msgid "'None' will never ask you any question."
-msgstr "'なし' は以降何も質問しなくなります。"
+msgstr "« Cap » vos demandarà pas jamai res."
 
 #. Type: string
 #. Description
 #. :sl4:
 #: ../cdebconf.templates:3001
 msgid "Text"
-msgstr "テキスト"
+msgstr "Tèxt"
 
 #. Type: string
 #. Description
 #. :sl4:
 #: ../cdebconf.templates:3001
 msgid "'Text' is a traditional plain text interface."
-msgstr "'テキスト' は従来のプレインテキストインターフェイスです。"
+msgstr "« Tèxt » es una interfàcia tradicionala de tèxt brut."
 
 #. Type: string
 #. Description
@@ -396,7 +387,7 @@ msgstr "Newt"
 #. :sl4:
 #: ../cdebconf.templates:4001
 msgid "'Newt' is a full-screen, character based interface."
-msgstr "'Newt' はフルスクリーンの文字ベースインターフェイスです。"
+msgstr "« Newt » es una interfàcia en ecran complet de caractèrs."
 
 #. Type: string
 #. Description
@@ -411,4 +402,6 @@ msgstr "GTK"
 #: ../cdebconf.templates:5001
 msgid ""
 "'GTK' is a graphical interface that may be used in any graphical environment."
-msgstr "'GTK' はグラフィカル環境で利用できるグラフィカルインターフェイスです。"
+msgstr ""
+"« GTK » es una interfàcia grafica que pòt servir coma quin environament "
+"grafic que siá."

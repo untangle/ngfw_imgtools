@@ -69,6 +69,13 @@ struct frontend_data
     bool logo_adjusted;
     GtkWidget * logo_widget;
 
+    /** Workaround for #882804, GTK 2 only
+     *
+     * @see cdebconf_gtk_update_frontend_info()
+     */
+    GtkWidget * banner_widget;
+    bool banner_workaround_needed;
+
     /** Internal data of the handler of progress commands.
      *
      * @see progress.c

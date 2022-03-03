@@ -7,6 +7,8 @@
 # Tamil messages for debian-installer.
 # Copyright (C) 2003 Software in the Public Interest, Inc.
 # This file is distributed under the same license as debian-installer.
+# Jeyanthinath MuthuRam <jeyanthinath10@gmail.com>, 2020.
+# Vasudevan Tirumurti <agnihot3@gmail.com>, 2021.
 #
 #
 # Translations from iso-codes:
@@ -22,8 +24,8 @@ msgstr ""
 "Project-Id-Version: ta\n"
 "Report-Msgid-Bugs-To: cdebconf@packages.debian.org\n"
 "POT-Creation-Date: 2016-06-05 14:47+0000\n"
-"PO-Revision-Date: 2015-05-09 16:28+0630\n"
-"Last-Translator: Dr.T.Vasudevan <drtvasudevan@gmail.com>\n"
+"PO-Revision-Date: 2021-02-09 18:59+0000\n"
+"Last-Translator: Vasudevan Tirumurti <agnihot3@gmail.com>\n"
 "Language-Team: Tamil <<gnome-tamil-translation@googlegroups.com>>\n"
 "Language: ta\n"
 "MIME-Version: 1.0\n"
@@ -64,7 +66,7 @@ msgstr "குறைவு"
 #. :sl2:
 #: ../cdebconf-udeb.templates:2002
 msgid "Ignore questions with a priority less than:"
-msgstr "இதைவிட முன்னுரிமை குறைந்த கேள்விகளைத் தவிர்."
+msgstr "இதைவிட முன்னுரிமை குறைந்த கேள்விகளைத் தவிர்:"
 
 #. Type: select
 #. Description
@@ -117,7 +119,7 @@ msgstr ""
 #. :sl2:
 #: ../cdebconf-priority.templates:1001
 msgid "Change debconf priority"
-msgstr "டெப் கான்ப்ஃ முன்னுரிமையை மாற்று "
+msgstr "டெப் கான்ப்ஃ முன்னுரிமையை மாற்று"
 
 #. Type: text
 #. Description
@@ -174,7 +176,7 @@ msgstr "கைவிடுக"
 #. :sl1:
 #: ../cdebconf-newt-udeb.templates:6001
 msgid "<Tab> moves; <Space> selects; <Enter> activates buttons"
-msgstr "<Tab> நகர;<Space>தேர்வு செய்ய;<Enter> பொத்தானை செயலாக்க;"
+msgstr "<Tab> நகர; <Space>தேர்வு செய்ய; <Enter> பொத்தான்களை செயலாக்க"
 
 #. Type: text
 #. Description
@@ -183,16 +185,16 @@ msgstr "<Tab> நகர;<Space>தேர்வு செய்ய;<Enter> பொ
 #. :sl1:
 #: ../cdebconf-newt-udeb.templates:7001
 msgid "<F1> for help; <Tab> moves; <Space> selects; <Enter> activates buttons"
-msgstr "<F1> உதவிக்கு <Tab> நகர;<Space>தேர்வு செய்ய;<Enter> பொத்தானை செயலாக்க;"
+msgstr ""
+"<F1> உதவிக்கு; <Tab> நகர்த்த; <Space> தேர்வு செய்ய; <Enter> பொத்தான்களை செயலாக்க"
 
 #. Type: text
 #. Description
 #. Appears as a checkbox in the newt and GTK interfaces.
 #. :sl1:
 #: ../cdebconf-newt-udeb.templates:8001 ../cdebconf-gtk-udeb.templates:9001
-#, fuzzy
 msgid "Show Password in Clear"
-msgstr "கடவுச்சொல் உள்ளீட்டு பிழை"
+msgstr "கடவுச்சொல்லை காட்டுக"
 
 #. Type: text
 #. Description
@@ -284,7 +286,7 @@ msgstr "ஒரு காலி நுழைவை தேர்ந்தெடு
 #: ../cdebconf-text-udeb.templates:7001
 #, no-c-format
 msgid "Other choices are available with '%c' and '%c'"
-msgstr ""
+msgstr "'%c' மற்றூம் '%c' இல் வேறு தேர்வுகள் உள்ளன"
 
 #. Type: text
 #. Description
@@ -292,7 +294,7 @@ msgstr ""
 #: ../cdebconf-text-udeb.templates:8001
 #, no-c-format
 msgid "Previous choices are available with '%c'"
-msgstr ""
+msgstr "முந்தைய தேர்வுகள் '%c' இல் உள்ளன"
 
 #. Type: text
 #. Description
@@ -300,7 +302,7 @@ msgstr ""
 #: ../cdebconf-text-udeb.templates:9001
 #, no-c-format
 msgid "Next choices are available with '%c'"
-msgstr ""
+msgstr "அடுத்த தேர்வுகள் '%c' இல் உள்ளன"
 
 #. Type: text
 #. Description
@@ -316,7 +318,7 @@ msgstr "தூண்டி: உதவிக்கு '%c' முன்னிர�
 #: ../cdebconf-text-udeb.templates:13001
 #, no-c-format
 msgid "Prompt: '%c' for help> "
-msgstr "தூண்டி: உதவிக்கு '%c'"
+msgstr "தூண்டி: உதவிக்கு '%c'> "
 
 #. Type: text
 #. Description
@@ -324,7 +326,7 @@ msgstr "தூண்டி: உதவிக்கு '%c'"
 #: ../cdebconf-text-udeb.templates:14001
 #, no-c-format
 msgid "Prompt: '%c' for help, default=%s> "
-msgstr "தூண்டி: உதவிக்கு '%c', முன்னிருப்பு=%s>"
+msgstr "தூண்டி: உதவிக்கு '%c', முன்னிருப்பு=%s> "
 
 #. Type: text
 #. Description
@@ -338,7 +340,7 @@ msgstr "[தொடர என்டர் விசையை அழுத்த�
 #. :sl4:
 #: ../cdebconf.templates:1001
 msgid "Interface to use:"
-msgstr "பயனர் பயன்படுத்த இடைமுகம்"
+msgstr "பயன்படுத்த இடைமுகம்:"
 
 #. Type: select
 #. Description
@@ -377,7 +379,7 @@ msgstr "உரை"
 #. :sl4:
 #: ../cdebconf.templates:3001
 msgid "'Text' is a traditional plain text interface."
-msgstr "'உரை' என்பது பாரம்பரிய எளிய உரை இடைமுகம்"
+msgstr "'உரை' என்பது பாரம்பரிய எளிய உரை இடைமுகம்."
 
 #. Type: string
 #. Description

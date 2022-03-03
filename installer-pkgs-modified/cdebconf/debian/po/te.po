@@ -21,8 +21,8 @@ msgstr ""
 "Project-Id-Version: te\n"
 "Report-Msgid-Bugs-To: cdebconf@packages.debian.org\n"
 "POT-Creation-Date: 2016-06-05 14:47+0000\n"
-"PO-Revision-Date: 2018-07-23 06:44+0000\n"
-"Last-Translator: Praveen Illa <mail2ipn@gmail.com>\n"
+"PO-Revision-Date: 2019-08-28 18:10+0000\n"
+"Last-Translator: leela <53352@protonmail.com>\n"
 "Language-Team: d-i <kde-i18n-doc@kde.org>\n"
 "Language: te\n"
 "MIME-Version: 1.0\n"
@@ -262,8 +262,9 @@ msgstr "ఈ సహాయం చూపించు"
 #. Description
 #. :sl4:
 #: ../cdebconf-text-udeb.templates:5001
+#, fuzzy
 msgid "Go back to previous question"
-msgstr "ముందరి ప్రశ్న?"
+msgstr "ముందరి ప్రశ్న"
 
 #. Type: text
 #. Description
