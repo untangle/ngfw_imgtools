@@ -1,5 +1,5 @@
-installer-pkgs-modified/cdebconf	buster
-installer-pkgs-modified/pkgsel		buster
-installer-pkgs-modified/rootskel-gtk	buster
-installer-pkgs-modified/base-installer	buster
-d-i					buster
+installer-pkgs-modified/cdebconf	bullseye
+installer-pkgs-modified/pkgsel		bullseye
+installer-pkgs-modified/rootskel-gtk	bullseye
+installer-pkgs-modified/base-installer	bullseye
+d-i					bullseye
