@@ -2,7 +2,7 @@ diff --git installer-pkgs-modified/pkgsel/debian/postinst installer-pkgs-modifie
 index 54a53bb..9403f55 100755
 --- installer-pkgs-modified/pkgsel/debian/postinst
 +++ installer-pkgs-modified/pkgsel/debian/postinst
-@@ -201,4 +201,6 @@ chroot /target apt-get clean
+@@ -204,4 +204,6 @@ chroot /target apt-get clean
  db_progress STEP 30
  db_progress STOP
  

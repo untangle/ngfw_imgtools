@@ -1,3 +1,88 @@
+pkgsel (0.73) unstable; urgency=medium
+
+  * Team upload
+
+  [ Updated translations ]
+  * Finnish (fi.po) by Kimmo Kujansuu
+
+ -- Holger Wansing <hwansing@mailbox.org>  Fri, 23 Jul 2021 19:27:54 +0200
+
+pkgsel (0.72) unstable; urgency=medium
+
+  * Team upload
+
+  [ Updated translations ]
+  * Arabic (ar.po) by Fahim Sabah
+
+ -- Holger Wansing <hwansing@mailbox.org>  Mon, 31 May 2021 00:12:05 +0200
+
+pkgsel (0.71) unstable; urgency=medium
+
+  * Team upload
+
+  [ Updated translations ]
+  * Hindi (hi.po) by KushagraKarira
+  * Kabyle (kab.po) by Selyan Sliman Amiri
+  * Romanian (ro.po) by Sergiu
+  * Tamil (ta.po) by Vasudevan Tirumurti
+  * Thai (th.po) by Theppitak Karoonboonyanan
+  * Traditional Chinese (zh_TW.po) by louies0623
+
+ -- Holger Wansing <hwansing@mailbox.org>  Wed, 17 Feb 2021 01:49:00 +0100
+
+pkgsel (0.70) unstable; urgency=medium
+
+  * Team upload
+
+  [ Updated translations ]
+  * Basque (eu.po) by Iñaki Larrañaga Murgoitio
+  * Persian (fa.po) by سهیل خانعلی‌پور
+  * Korean (ko.po) by Changwoo Ryu
+
+  [ New translations ]
+  * Kabyle (kab.po) by Slimane Selyan Amiri
+  * Occitan (oc.po) by Quentin PAGÈS
+
+ -- Holger Wansing <hwansing@mailbox.org>  Wed, 04 Nov 2020 19:47:51 +0100
+
+pkgsel (0.69) unstable; urgency=medium
+
+  * Team upload
+
+  [ Raphaël Hertzog ]
+  * Ensure tasksel is installed since its priority has been dropped to
+    optional in version 3.57 and it might no longer be installed by
+    debootstrap.
+  * Add preseedable pkgsel/run_tasksel debconf template.
+    By setting it to false, one can avoid the tasksel prompt and its
+    installation in the target system but still benefit from the other
+    features of pkgsel (system upgrade, additional packages from
+    pkgsel/include, etc.)
+
+ -- Holger Wansing <hwansing@mailbox.org>  Wed, 29 Jan 2020 18:48:57 +0100
+
+pkgsel (0.68) unstable; urgency=medium
+
+  * Team upload
+
+  [ Updated translations ]
+  * Norwegian Bokmal (nb.po) by Deleted User
+  * Portuguese (pt.po) by Miguel Figueiredo
+  * Tajik (tg.po) by Victor Ibragimov
+
+ -- Holger Wansing <hwansing@mailbox.org>  Sun, 17 Nov 2019 23:58:04 +0100
+
+pkgsel (0.67) unstable; urgency=medium
+
+  * Team upload
+
+  [ Updated translations ]
+  * Greek (el.po) by galaxico
+  * Hindi (hi.po) by KushagraKarira
+  * Croatian (hr.po) by gogogogi
+
+ -- Holger Wansing <hwansing@mailbox.org>  Sun, 28 Jul 2019 10:06:22 +0200
+
 pkgsel (0.66) unstable; urgency=medium
 
   * Team upload

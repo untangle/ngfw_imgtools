@@ -12,6 +12,9 @@
 # najib LAARIBI <supnano@gmail.com>, 2018.
 # ButterflyOfFire <ButterflyOfFire@protonmail.com>, 2018.
 # Osama <osama.ibrahim.89@gmail.com>, 2019.
+# zer0-x <ProFessorHassan3@gmail.com>, 2021.
+# Fahim Sabah <katheer.kaleel@gmail.com>, 2021.
+#
 #
 # Translations from iso-codes:
 #     Translations taken from ICU SVN on 2007-09-09
@@ -27,9 +30,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ar\n"
 "Report-Msgid-Bugs-To: pkgsel@packages.debian.org\n"
-"POT-Creation-Date: 2018-06-27 14:00+0200\n"
-"PO-Revision-Date: 2019-05-05 22:48+0000\n"
-"Last-Translator: Osama <osama.ibrahim.89@gmail.com>\n"
+"POT-Creation-Date: 2019-12-11 20:02+0000\n"
+"PO-Revision-Date: 2021-04-01 14:26+0000\n"
+"Last-Translator: Fahim Sabah <katheer.kaleel@gmail.com>\n"
 "Language-Team: \n"
 "Language: ar\n"
 "MIME-Version: 1.0\n"
@@ -45,6 +48,7 @@ msgstr ""
 #. pkgsel is the module that installs packages by running tasksel to
 #. select "tasks". Please use "install *software*" and not
 #. "install *packages*" which is less adapted for non technical users
+#. :sl1:
 #: ../pkgsel.templates:1001
 msgid "Select and install software"
 msgstr "اختيار الحزم و تثبيتها"
@@ -53,6 +57,7 @@ msgstr "اختيار الحزم و تثبيتها"
 #. Description
 #. This appears in a progress bar when running pkgsel
 #. The text is used when pkgsel is launched, before it installs packages
+#. :sl1:
 #: ../pkgsel.templates:2001
 msgid "Setting up..."
 msgstr "الإعداد..."
@@ -61,7 +66,8 @@ msgstr "الإعداد..."
 #. Description
 #. This appears in a progress bar when running pkgsel
 #. The text is used when upgrading already installed packages.
-#: ../pkgsel.templates:4001
+#. :sl1:
+#: ../pkgsel.templates:5001
 msgid "Upgrading software..."
 msgstr "ترقية البرامج..."
 
@@ -70,7 +76,8 @@ msgstr "ترقية البرامج..."
 #. This appears in a progress bar when running pkgsel
 #. The text is used when running tasksel to allow selecting packages
 #. Tasksel will then display its own screens
-#: ../pkgsel.templates:5001
+#. :sl1:
+#: ../pkgsel.templates:6001
 msgid "Running tasksel..."
 msgstr "تشغيل tasksel..."
 
@@ -79,37 +86,43 @@ msgstr "تشغيل tasksel..."
 #. This appears in a progress bar when running pkgsel
 #. The text is used at the end of the installation phase while
 #. cleaning up pkgsel's stuff
-#: ../pkgsel.templates:6001
+#. :sl1:
+#: ../pkgsel.templates:7001
 msgid "Cleaning up..."
 msgstr "التنظيف..."
 
 #. Type: text
 #. Description
-#: ../pkgsel.templates:8001
+#. :sl2:
+#: ../pkgsel.templates:9001
 msgid "Running ${SCRIPT}..."
 msgstr "تشغيل ${SCRIPT}..."
 
 #. Type: select
 #. Choices
-#: ../pkgsel.templates:9001
+#. :sl2:
+#: ../pkgsel.templates:10001
 msgid "No automatic updates"
 msgstr "لا توجد تحديثات تلقائية"
 
 #. Type: select
 #. Choices
-#: ../pkgsel.templates:9001
+#. :sl2:
+#: ../pkgsel.templates:10001
 msgid "Install security updates automatically"
 msgstr "تثبيت تحديثات الأمان تلقائياً"
 
 #. Type: select
 #. Description
-#: ../pkgsel.templates:9002
+#. :sl2:
+#: ../pkgsel.templates:10002
 msgid "Updates management on this system:"
 msgstr "إدارة التحديثات على هذا النظام:"
 
 #. Type: select
 #. Description
-#: ../pkgsel.templates:9002
+#. :sl2:
+#: ../pkgsel.templates:10002
 msgid ""
 "Applying updates on a frequent basis is an important part of keeping the "
 "system secure."
@@ -117,18 +130,20 @@ msgstr "تطبيق التحديثات على بشكل دوري أمر مهم ل�
 
 #. Type: select
 #. Description
-#: ../pkgsel.templates:9002
+#. :sl2:
+#: ../pkgsel.templates:10002
 msgid ""
 "By default, security updates are not automatically installed, as security "
 "advisories should be reviewed before manual installation of the updates "
 "using standard package management tools."
 msgstr ""
 "لا تثُبت التحديثات الأمنية تلقائيا؛ لإن التحذيرات الأمنية يجب مراجعتها قبل "
-"التطبيق  اليدوي للتاحديثات باستخدام أدوات إدارة الحزم القياسية."
+"التطبيق اليدوي للتاحديثات باستخدام أدوات إدارة الحزم القياسية."
 
 #. Type: select
 #. Description
-#: ../pkgsel.templates:9002
+#. :sl2:
+#: ../pkgsel.templates:10002
 msgid ""
 "Alternatively the unattended-upgrades package can be installed, which will "
 "install security updates automatically. Note however that automatic "

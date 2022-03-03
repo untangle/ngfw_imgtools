@@ -155,9 +155,12 @@ else
 	tasksel_end=950
 fi
 
-log "starting tasksel"
-db_progress INFO pkgsel/progress/tasksel
-DEBIAN_TASKS_ONLY=1 in-target sh -c "tasksel --new-install --debconf-apt-progress='--from $tasksel_start --to $tasksel_end --logstderr'" || aptfailed
+if db_get pkgsel/run_tasksel && [ "$RET" = true ]; then
+    log "starting tasksel"
+    db_progress INFO pkgsel/progress/tasksel
+    apt-install tasksel  # ensure tasksel is installed
+    DEBIAN_TASKS_ONLY=1 in-target sh -c "tasksel --new-install --debconf-apt-progress='--from $tasksel_start --to $tasksel_end --logstderr'" || aptfailed
+fi
 
 if db_get pkgsel/include/install-recommends; then
 	log "The template pkgsel/include/install-recommends is no longer used; please use base-installer/install-recommends instead"

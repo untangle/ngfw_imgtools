@@ -9,14 +9,14 @@
 #
 # Debian Installer translators, please read the D-I i18n documentation
 # in doc/i18n/i18n.txt
-# Victor Ibragimov <victor.ibragimov@gmail.com>, 2013, 2014, 2015, 2016, 2017, 2018
+# Victor Ibragimov <victor.ibragimov@gmail.com>, 2013, 2014, 2018, 2019
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: debian-installer\n"
 "Report-Msgid-Bugs-To: pkgsel@packages.debian.org\n"
-"POT-Creation-Date: 2018-06-27 14:00+0200\n"
-"PO-Revision-Date: 2018-03-05 11:00+0500\n"
+"POT-Creation-Date: 2019-12-11 20:02+0000\n"
+"PO-Revision-Date: 2019-08-02 22:04+0500\n"
 "Last-Translator: Victor Ibragimov <victor.ibragimov@gmail.com>\n"
 "Language-Team: Tajik <victor.ibragimov@gmail.com>\n"
 "Language: tg\n"
@@ -32,6 +32,7 @@ msgstr ""
 #. pkgsel is the module that installs packages by running tasksel to
 #. select "tasks". Please use "install *software*" and not
 #. "install *packages*" which is less adapted for non technical users
+#. :sl1:
 #: ../pkgsel.templates:1001
 msgid "Select and install software"
 msgstr "Интихоб ва насби нармафзор"
@@ -40,6 +41,7 @@ msgstr "Интихоб ва насби нармафзор"
 #. Description
 #. This appears in a progress bar when running pkgsel
 #. The text is used when pkgsel is launched, before it installs packages
+#. :sl1:
 #: ../pkgsel.templates:2001
 msgid "Setting up..."
 msgstr "Танзим шуда истодааст..."
@@ -48,7 +50,8 @@ msgstr "Танзим шуда истодааст..."
 #. Description
 #. This appears in a progress bar when running pkgsel
 #. The text is used when upgrading already installed packages.
-#: ../pkgsel.templates:4001
+#. :sl1:
+#: ../pkgsel.templates:5001
 msgid "Upgrading software..."
 msgstr "Нармафзор такмил шуда истодааст..."
 
@@ -57,7 +60,8 @@ msgstr "Нармафзор такмил шуда истодааст..."
 #. This appears in a progress bar when running pkgsel
 #. The text is used when running tasksel to allow selecting packages
 #. Tasksel will then display its own screens
-#: ../pkgsel.templates:5001
+#. :sl1:
+#: ../pkgsel.templates:6001
 msgid "Running tasksel..."
 msgstr "Барномаи «tasksel» иҷро шуда истодааст..."
 
@@ -66,37 +70,43 @@ msgstr "Барномаи «tasksel» иҷро шуда истодааст..."
 #. This appears in a progress bar when running pkgsel
 #. The text is used at the end of the installation phase while
 #. cleaning up pkgsel's stuff
-#: ../pkgsel.templates:6001
+#. :sl1:
+#: ../pkgsel.templates:7001
 msgid "Cleaning up..."
 msgstr "Пок шуда истодааст..."
 
 #. Type: text
 #. Description
-#: ../pkgsel.templates:8001
+#. :sl2:
+#: ../pkgsel.templates:9001
 msgid "Running ${SCRIPT}..."
 msgstr "Иҷрокунии ${SCRIPT}..."
 
 #. Type: select
 #. Choices
-#: ../pkgsel.templates:9001
+#. :sl2:
+#: ../pkgsel.templates:10001
 msgid "No automatic updates"
 msgstr "Бе навсозиҳои худкор"
 
 #. Type: select
 #. Choices
-#: ../pkgsel.templates:9001
+#. :sl2:
+#: ../pkgsel.templates:10001
 msgid "Install security updates automatically"
 msgstr "Насб кардани навсозиҳои амниятӣ ба таври худкор"
 
 #. Type: select
 #. Description
-#: ../pkgsel.templates:9002
+#. :sl2:
+#: ../pkgsel.templates:10002
 msgid "Updates management on this system:"
 msgstr "Идоракунии навсозиҳо дар ин низом:"
 
 #. Type: select
 #. Description
-#: ../pkgsel.templates:9002
+#. :sl2:
+#: ../pkgsel.templates:10002
 msgid ""
 "Applying updates on a frequent basis is an important part of keeping the "
 "system secure."
@@ -105,21 +115,21 @@ msgstr ""
 
 #. Type: select
 #. Description
-#: ../pkgsel.templates:9002
-#, fuzzy
+#. :sl2:
+#: ../pkgsel.templates:10002
 msgid ""
 "By default, security updates are not automatically installed, as security "
 "advisories should be reviewed before manual installation of the updates "
 "using standard package management tools."
 msgstr ""
-"Навсозиҳои амниятӣ тавассути бастаҳои такмили бевосита ба сурати пешфарз "
-"насб карда мешаванд. Ба ивази ин имкон, шумо метавонед ин низомро бекор "
-"намоед ва навсозиҳоро тавассути абзори идоракунии бастаҳо ба таври дастӣ "
-"татбиқ намоед."
+"Навсозиҳои амниятӣ ба сурати пешфарз худкорона насб карда намешаванд, зеро "
+"ки тавсияҳои амниятӣ бояд пеш аз насбкунии дастии навсозиҳо тавассути абзори "
+"стандартии идоракунии бастаҳо аз назар гузаронида шаванд."
 
 #. Type: select
 #. Description
-#: ../pkgsel.templates:9002
+#. :sl2:
+#: ../pkgsel.templates:10002
 msgid ""
 "Alternatively the unattended-upgrades package can be installed, which will "
 "install security updates automatically. Note however that automatic "
@@ -128,3 +138,9 @@ msgid ""
 "fully backward-compatible, or where the security advisory requires the "
 "administrator to perform some other manual operation."
 msgstr ""
+"Ба таври иловагӣ қуттиҳои такмилдиҳии нокорам метавонанд насб карда шаванд "
+"ва ҳамин тавр навсозиҳои амниятӣ ба таври худкор насб карда мешаванд. Ба "
+"назар гиред, ки насбкунии навсозиҳо ба таври худкор метавонад хидматҳои ин "
+"компютерро ногаҳон бекор кунад, агар навсозиҳо комилан ба низом мувофиқат "
+"накунанд ё агар тавсияи амниятӣ аз маъмури низом талаб накунад, ки он баъзеи "
+"амалҳоро ба таври дастӣ ба кор дарорад."

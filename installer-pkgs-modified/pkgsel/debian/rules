@@ -1,8 +1,3 @@
 #! /usr/bin/make -f
 %:
 	dh $@
-
-override_dh_builddeb:
-	dh_builddeb
-	# Hack for Untangle builds to copy our files directly into localdeb directory for d-i.
-	cp ../*.udeb ../../d-i/build/localudebs

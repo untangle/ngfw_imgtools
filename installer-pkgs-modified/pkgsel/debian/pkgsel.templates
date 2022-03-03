@@ -5,12 +5,14 @@ Type: text
 #  pkgsel is the module that installs packages by running tasksel to
 #  select "tasks". Please use "install *software*" and not
 #  "install *packages*" which is less adapted for non technical users
+# :sl1:
 _Description: Select and install software
 
 Template: pkgsel/progress/init
 Type: text
 # This appears in a progress bar when running pkgsel
 # The text is used when pkgsel is launched, before it installs packages
+# :sl1:
 _Description: Setting up...
 
 Template: pkgsel/upgrade
@@ -20,10 +22,17 @@ Choices: none, safe-upgrade, full-upgrade
 Description: for internal use; can be preseeded
  type of upgrade to perform
 
+Template: pkgsel/run_tasksel
+Type: boolean
+Default: true
+Description: for internal use; can be preseeded
+ whether tasksel should be run or not
+
 Template: pkgsel/progress/upgrade
 Type: text
 # This appears in a progress bar when running pkgsel
 # The text is used when upgrading already installed packages.
+# :sl1:
 _Description: Upgrading software...
 
 Template: pkgsel/progress/tasksel
@@ -31,6 +40,7 @@ Type: text
 # This appears in a progress bar when running pkgsel
 # The text is used when running tasksel to allow selecting packages
 # Tasksel will then display its own screens
+# :sl1:
 _Description: Running tasksel...
 
 Template: pkgsel/progress/cleanup
@@ -38,6 +48,7 @@ Type: text
 # This appears in a progress bar when running pkgsel
 # The text is used at the end of the installation phase while
 # cleaning up pkgsel's stuff
+# :sl1:
 _Description: Cleaning up...
 
 Template: pkgsel/include
@@ -47,13 +58,16 @@ Description: for internal use; can be preseeded
 
 Template: pkgsel/progress/fallback
 Type: text
+# :sl2:
 _Description: Running ${SCRIPT}...
 
 Template: pkgsel/update-policy
 Type: select
 Default: none
 Choices-C: none, unattended-upgrades
+# :sl2:
 __Choices: No automatic updates, Install security updates automatically
+# :sl2:
 _Description: Updates management on this system:
  Applying updates on a frequent basis is an important part of keeping the
  system secure.

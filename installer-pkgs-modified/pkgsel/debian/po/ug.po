@@ -18,7 +18,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: debian-installer\n"
 "Report-Msgid-Bugs-To: pkgsel@packages.debian.org\n"
-"POT-Creation-Date: 2018-06-27 14:00+0200\n"
+"POT-Creation-Date: 2019-12-11 20:02+0000\n"
 "PO-Revision-Date: 2011-03-24 09:40+0600\n"
 "Last-Translator: Sahran <sahran.ug@gmail.com>\n"
 "Language-Team: Uyghur Computer Science Association <UKIJ@yahoogroups.com>\n"
@@ -34,6 +34,7 @@ msgstr ""
 #. pkgsel is the module that installs packages by running tasksel to
 #. select "tasks". Please use "install *software*" and not
 #. "install *packages*" which is less adapted for non technical users
+#. :sl1:
 #: ../pkgsel.templates:1001
 msgid "Select and install software"
 msgstr "يۇمشاق دېتال تاللاپ ئورنىتىدۇ"
@@ -42,6 +43,7 @@ msgstr "يۇمشاق دېتال تاللاپ ئورنىتىدۇ"
 #. Description
 #. This appears in a progress bar when running pkgsel
 #. The text is used when pkgsel is launched, before it installs packages
+#. :sl1:
 #: ../pkgsel.templates:2001
 msgid "Setting up..."
 msgstr "تەڭشەك…"
@@ -50,7 +52,8 @@ msgstr "تەڭشەك…"
 #. Description
 #. This appears in a progress bar when running pkgsel
 #. The text is used when upgrading already installed packages.
-#: ../pkgsel.templates:4001
+#. :sl1:
+#: ../pkgsel.templates:5001
 msgid "Upgrading software..."
 msgstr "يۇمشاق دېتالنىڭ نەشرنى ئۆرلىتىۋاتىدۇ…"
 
@@ -59,7 +62,8 @@ msgstr "يۇمشاق دېتالنىڭ نەشرنى ئۆرلىتىۋاتىدۇ…
 #. This appears in a progress bar when running pkgsel
 #. The text is used when running tasksel to allow selecting packages
 #. Tasksel will then display its own screens
-#: ../pkgsel.templates:5001
+#. :sl1:
+#: ../pkgsel.templates:6001
 msgid "Running tasksel..."
 msgstr "tasksel ئىجرا قىلىۋاتىدۇ…"
 
@@ -68,37 +72,43 @@ msgstr "tasksel ئىجرا قىلىۋاتىدۇ…"
 #. This appears in a progress bar when running pkgsel
 #. The text is used at the end of the installation phase while
 #. cleaning up pkgsel's stuff
-#: ../pkgsel.templates:6001
+#. :sl1:
+#: ../pkgsel.templates:7001
 msgid "Cleaning up..."
 msgstr "تازىلاۋاتىدۇ…"
 
 #. Type: text
 #. Description
-#: ../pkgsel.templates:8001
+#. :sl2:
+#: ../pkgsel.templates:9001
 msgid "Running ${SCRIPT}..."
 msgstr "${SCRIPT} ئىجرا قىلىۋاتىدۇ…"
 
 #. Type: select
 #. Choices
-#: ../pkgsel.templates:9001
+#. :sl2:
+#: ../pkgsel.templates:10001
 msgid "No automatic updates"
 msgstr ""
 
 #. Type: select
 #. Choices
-#: ../pkgsel.templates:9001
+#. :sl2:
+#: ../pkgsel.templates:10001
 msgid "Install security updates automatically"
 msgstr ""
 
 #. Type: select
 #. Description
-#: ../pkgsel.templates:9002
+#. :sl2:
+#: ../pkgsel.templates:10002
 msgid "Updates management on this system:"
 msgstr ""
 
 #. Type: select
 #. Description
-#: ../pkgsel.templates:9002
+#. :sl2:
+#: ../pkgsel.templates:10002
 msgid ""
 "Applying updates on a frequent basis is an important part of keeping the "
 "system secure."
@@ -106,7 +116,8 @@ msgstr ""
 
 #. Type: select
 #. Description
-#: ../pkgsel.templates:9002
+#. :sl2:
+#: ../pkgsel.templates:10002
 msgid ""
 "By default, security updates are not automatically installed, as security "
 "advisories should be reviewed before manual installation of the updates "
@@ -115,7 +126,8 @@ msgstr ""
 
 #. Type: select
 #. Description
-#: ../pkgsel.templates:9002
+#. :sl2:
+#: ../pkgsel.templates:10002
 msgid ""
 "Alternatively the unattended-upgrades package can be installed, which will "
 "install security updates automatically. Note however that automatic "

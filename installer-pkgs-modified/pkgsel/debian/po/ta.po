@@ -7,22 +7,31 @@
 # Tamil messages for debian-installer.
 # Copyright (C) 2003 Software in the Public Interest, Inc.
 # This file is distributed under the same license as debian-installer.
+# Jeyanthinath MuthuRam <jeyanthinath10@gmail.com>, 2020.
+# Vasudevan Tirumurti <agnihot3@gmail.com>, 2021.
 #
+#
+# Translations from iso-codes:
 # drtvasudevan <agnihot3@gmail.com>, 2006.
 # Damodharan Rajalingam <rdamodharan@gmail.com>, 2006.
-# Dr.T.Vasudevan <agnihot3@gmail.com>, 2007, 2008.
+# Dr.T.Vasudevan <drtvasudevan@gmail.com>, 2007, 2008, 2010.
+# Dr,T,Vasudevan <agnihot3@gmail.com>, 2010.
+#   Dr.T.Vasudevan <drtvasudevan@gmail.com>, 2007, 2008, 2011, 2012, 2015.
+#   Dwayne Bailey <dwayne@translate.org.za>, 2009.
+# I. Felix <ifelix25@gmail.com>, 2009, 2012.
 msgid ""
 msgstr ""
 "Project-Id-Version: ta\n"
 "Report-Msgid-Bugs-To: pkgsel@packages.debian.org\n"
-"POT-Creation-Date: 2018-06-27 14:00+0200\n"
-"PO-Revision-Date: 2008-09-04 16:51+0530\n"
-"Last-Translator: Dr.T.Vasudevan <agnihot3@gmail.com>\n"
-"Language-Team: Tamil <Ubuntu-l10n-tam@lists.ubuntu.com>\n"
+"POT-Creation-Date: 2019-12-11 20:02+0000\n"
+"PO-Revision-Date: 2021-02-09 18:59+0000\n"
+"Last-Translator: Vasudevan Tirumurti <agnihot3@gmail.com>\n"
+"Language-Team: Tamil <<gnome-tamil-translation@googlegroups.com>>\n"
 "Language: ta\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
 
 #. Type: text
 #. Description
@@ -31,6 +40,7 @@ msgstr ""
 #. pkgsel is the module that installs packages by running tasksel to
 #. select "tasks". Please use "install *software*" and not
 #. "install *packages*" which is less adapted for non technical users
+#. :sl1:
 #: ../pkgsel.templates:1001
 msgid "Select and install software"
 msgstr "மென்பொருளை தேர்வு செய்து நிறுவு"
@@ -39,6 +49,7 @@ msgstr "மென்பொருளை தேர்வு செய்து ந
 #. Description
 #. This appears in a progress bar when running pkgsel
 #. The text is used when pkgsel is launched, before it installs packages
+#. :sl1:
 #: ../pkgsel.templates:2001
 msgid "Setting up..."
 msgstr "அமைக்கிறது...."
@@ -47,7 +58,8 @@ msgstr "அமைக்கிறது...."
 #. Description
 #. This appears in a progress bar when running pkgsel
 #. The text is used when upgrading already installed packages.
-#: ../pkgsel.templates:4001
+#. :sl1:
+#: ../pkgsel.templates:5001
 msgid "Upgrading software..."
 msgstr "மென்பொருளை மேம்படுத்துகிறது..."
 
@@ -56,7 +68,8 @@ msgstr "மென்பொருளை மேம்படுத்துகி�
 #. This appears in a progress bar when running pkgsel
 #. The text is used when running tasksel to allow selecting packages
 #. Tasksel will then display its own screens
-#: ../pkgsel.templates:5001
+#. :sl1:
+#: ../pkgsel.templates:6001
 msgid "Running tasksel..."
 msgstr "(tasksel) வேலை தேர்வு செயற்படுகிறது....."
 
@@ -65,54 +78,65 @@ msgstr "(tasksel) வேலை தேர்வு செயற்படுகி
 #. This appears in a progress bar when running pkgsel
 #. The text is used at the end of the installation phase while
 #. cleaning up pkgsel's stuff
-#: ../pkgsel.templates:6001
+#. :sl1:
+#: ../pkgsel.templates:7001
 msgid "Cleaning up..."
 msgstr "துடைக்கிறது...."
 
 #. Type: text
 #. Description
-#: ../pkgsel.templates:8001
+#. :sl2:
+#: ../pkgsel.templates:9001
 msgid "Running ${SCRIPT}..."
 msgstr "${SCRIPT} இயக்கப்படுகிறது..."
 
 #. Type: select
 #. Choices
-#: ../pkgsel.templates:9001
+#. :sl2:
+#: ../pkgsel.templates:10001
 msgid "No automatic updates"
-msgstr ""
+msgstr "தானியங்கி இற்றைப்படுத்தல்கள் ஏதும் இல்லை"
 
 #. Type: select
 #. Choices
-#: ../pkgsel.templates:9001
+#. :sl2:
+#: ../pkgsel.templates:10001
 msgid "Install security updates automatically"
-msgstr ""
+msgstr "பாதுகாப்பு இற்றைப்படுத்தல்களை தானியங்கியாக நிறுவு"
 
 #. Type: select
 #. Description
-#: ../pkgsel.templates:9002
+#. :sl2:
+#: ../pkgsel.templates:10002
 msgid "Updates management on this system:"
-msgstr ""
+msgstr "இந்த கணினியில் இற்றைப்படுத்தல் மேலாண்மை:"
 
 #. Type: select
 #. Description
-#: ../pkgsel.templates:9002
+#. :sl2:
+#: ../pkgsel.templates:10002
 msgid ""
 "Applying updates on a frequent basis is an important part of keeping the "
 "system secure."
-msgstr ""
+msgstr "கணினியை பாதுகாப்புடன் வைத்திருக்க அடிக்கடி இற்றைப்படுத்துவது முக்கியம்."
 
 #. Type: select
 #. Description
-#: ../pkgsel.templates:9002
+#. :sl2:
+#: ../pkgsel.templates:10002
 msgid ""
 "By default, security updates are not automatically installed, as security "
 "advisories should be reviewed before manual installation of the updates "
 "using standard package management tools."
 msgstr ""
+"முன்னிருப்பாக பாதுகாப்பு இற்றைப்படுத்தல்கள் தானியங்கியாக நடக்கா. ஏனெனில் பாதுகாப்பு "
+"குறித்த அறிவுறுத்தல்களை மீண்டும் படித்த பிறகே அவை செந்தர மேலாண்மை கருவிகளால் கைமுறையாக "
+"செய்யப்பட வேண்டும்."
 
 #. Type: select
 #. Description
-#: ../pkgsel.templates:9002
+#. :sl2:
+#: ../pkgsel.templates:10002
 msgid ""
 "Alternatively the unattended-upgrades package can be installed, which will "
 "install security updates automatically. Note however that automatic "
@@ -121,3 +145,8 @@ msgid ""
 "fully backward-compatible, or where the security advisory requires the "
 "administrator to perform some other manual operation."
 msgstr ""
+"மாறாக கட்டுப்படில்லா இற்றைப்படுத்தல்கள் செய்யப்பட முடியும். அவை பாதுகாப்பு "
+"இற்றைப்படுத்தல்களை தானியங்கியாக செய்து விடும். ஆனால் அவை சில சமயம் கணினியின் எதிர்பாராத "
+"செயலிழப்பில் முடியக்கூடும். இது பின் நோக்கிய தகைமை இல்லாது போகும் பொதிகளாலோ அல்லது "
+"நிர்வாகி குறிப்புகளை படித்து முன்னேயே கைமுறையாக செய்ய வேண்டிய செயல்கள் இருப்பதாலோ "
+"நிகழும்."

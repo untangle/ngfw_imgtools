@@ -27,13 +27,17 @@
 # Kumar Appaiah <kumar.appaiah@gmail.com>, 2008, 2011, 2012.
 # Sruthi Chandran <srud@openmailbox.org>, 2018.
 # Himanshu Awasthi <johim9493@gmail.com>, 2018.
+# KushagraKarira <kushagrakarira@gmail.com>, 2020, 2021.
+# षिखर् <dnitesigm@gmail.com>, 2020.
+# Indrani Roy <indrani@scriptek.co.in>, 2021.
+#
 msgid ""
 msgstr ""
 "Project-Id-Version: debian-installer_packages_po_sublevel1_hi\n"
 "Report-Msgid-Bugs-To: pkgsel@packages.debian.org\n"
-"POT-Creation-Date: 2018-06-27 14:00+0200\n"
-"PO-Revision-Date: 2018-09-24 21:29+0000\n"
-"Last-Translator: Himanshu Awasthi <johim9493@gmail.com>\n"
+"POT-Creation-Date: 2019-12-11 20:02+0000\n"
+"PO-Revision-Date: 2021-01-20 18:26+0000\n"
+"Last-Translator: KushagraKarira <kushagrakarira@gmail.com>\n"
 "Language-Team: \n"
 "Language: hi\n"
 "MIME-Version: 1.0\n"
@@ -48,6 +52,7 @@ msgstr ""
 #. pkgsel is the module that installs packages by running tasksel to
 #. select "tasks". Please use "install *software*" and not
 #. "install *packages*" which is less adapted for non technical users
+#. :sl1:
 #: ../pkgsel.templates:1001
 msgid "Select and install software"
 msgstr "सॉफ्टवेयर चुनें व संस्थापित करें"
@@ -56,6 +61,7 @@ msgstr "सॉफ्टवेयर चुनें व संस्थापि
 #. Description
 #. This appears in a progress bar when running pkgsel
 #. The text is used when pkgsel is launched, before it installs packages
+#. :sl1:
 #: ../pkgsel.templates:2001
 msgid "Setting up..."
 msgstr "सेटअप किया जा रहा है..."
@@ -64,7 +70,8 @@ msgstr "सेटअप किया जा रहा है..."
 #. Description
 #. This appears in a progress bar when running pkgsel
 #. The text is used when upgrading already installed packages.
-#: ../pkgsel.templates:4001
+#. :sl1:
+#: ../pkgsel.templates:5001
 msgid "Upgrading software..."
 msgstr "सॉफ्टवेयर अपग्रेड किया जा रहा है..."
 
@@ -73,7 +80,8 @@ msgstr "सॉफ्टवेयर अपग्रेड किया जा �
 #. This appears in a progress bar when running pkgsel
 #. The text is used when running tasksel to allow selecting packages
 #. Tasksel will then display its own screens
-#: ../pkgsel.templates:5001
+#. :sl1:
+#: ../pkgsel.templates:6001
 msgid "Running tasksel..."
 msgstr "टास्कसेल चला रहे हैं..."
 
@@ -82,37 +90,43 @@ msgstr "टास्कसेल चला रहे हैं..."
 #. This appears in a progress bar when running pkgsel
 #. The text is used at the end of the installation phase while
 #. cleaning up pkgsel's stuff
-#: ../pkgsel.templates:6001
+#. :sl1:
+#: ../pkgsel.templates:7001
 msgid "Cleaning up..."
 msgstr "साफ कर रहे हैं..."
 
 #. Type: text
 #. Description
-#: ../pkgsel.templates:8001
+#. :sl2:
+#: ../pkgsel.templates:9001
 msgid "Running ${SCRIPT}..."
 msgstr "${SCRIPT} प्रक्रिया में है..."
 
 #. Type: select
 #. Choices
-#: ../pkgsel.templates:9001
+#. :sl2:
+#: ../pkgsel.templates:10001
 msgid "No automatic updates"
 msgstr "अपने आप नवीनीकरण ना करॆं"
 
 #. Type: select
 #. Choices
-#: ../pkgsel.templates:9001
+#. :sl2:
+#: ../pkgsel.templates:10001
 msgid "Install security updates automatically"
 msgstr "अपने आप सुरक्षा नवीनीकरण करॆं"
 
 #. Type: select
 #. Description
-#: ../pkgsel.templates:9002
+#. :sl2:
+#: ../pkgsel.templates:10002
 msgid "Updates management on this system:"
-msgstr "इस कंप्यूटर कॆ नवीनीकरण व्यवस्था  :"
+msgstr "इस प्रणाली पर अद्यतन प्रबंधन:"
 
 #. Type: select
 #. Description
-#: ../pkgsel.templates:9002
+#. :sl2:
+#: ../pkgsel.templates:10002
 msgid ""
 "Applying updates on a frequent basis is an important part of keeping the "
 "system secure."
@@ -120,7 +134,8 @@ msgstr "नियमित नवीनीकरण कंप्यूटर स
 
 #. Type: select
 #. Description
-#: ../pkgsel.templates:9002
+#. :sl2:
+#: ../pkgsel.templates:10002
 msgid ""
 "By default, security updates are not automatically installed, as security "
 "advisories should be reviewed before manual installation of the updates "
@@ -132,7 +147,8 @@ msgstr ""
 
 #. Type: select
 #. Description
-#: ../pkgsel.templates:9002
+#. :sl2:
+#: ../pkgsel.templates:10002
 msgid ""
 "Alternatively the unattended-upgrades package can be installed, which will "
 "install security updates automatically. Note however that automatic "
@@ -141,3 +157,8 @@ msgid ""
 "fully backward-compatible, or where the security advisory requires the "
 "administrator to perform some other manual operation."
 msgstr ""
+"वैकल्पिक रूप से अनअटेंडेड अपग्रेड पैकेज स्थापित किया जा सकता है, जो स्वचालित रूप से सुरक्षा "
+"अद्यतन स्थापित करेगा। हालांकि ध्यान दें कि अद्यतन की स्वचालित स्थापना कभी-कभी इस मशीन "
+"द्वारा प्रदान की जाने वाली सेवाओं के अनपेक्षित डाउनटाइम का कारण बन सकती है, जहां अद्यतन "
+"पूरी तरह से पिछड़े-संगत नहीं है, या जहां सुरक्षा सलाहकार को व्यवस्थापक को कुछ अन्य मैनुअल "
+"ऑपरेशन करने की आवश्यकता होती है।"

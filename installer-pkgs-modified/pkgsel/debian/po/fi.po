@@ -15,6 +15,7 @@
 # Timo Jyrinki <timo.jyrinki@iki.fi>, 2012.
 # Juhani Numminen <juhaninumminen0@gmail.com>, 2018, 2019.
 # Arto Keiski <arto.keiski@iki.fi>, 2018.
+# Kimmo Kujansuu <mrkujansuu@gmail.com>, 2021.
 #
 # Translations from iso-codes:
 # Copyright (C) 2007 Tobias Toedter <t.toedter@gmx.net>.
@@ -26,9 +27,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: debian-installer\n"
 "Report-Msgid-Bugs-To: pkgsel@packages.debian.org\n"
-"POT-Creation-Date: 2018-06-27 14:00+0200\n"
-"PO-Revision-Date: 2019-02-01 20:18+0000\n"
-"Last-Translator: Juhani Numminen <juhaninumminen0@gmail.com>\n"
+"POT-Creation-Date: 2019-12-11 20:02+0000\n"
+"PO-Revision-Date: 2021-07-12 20:33+0000\n"
+"Last-Translator: Kimmo Kujansuu <mrkujansuu@gmail.com>\n"
 "Language-Team: Finnish <debian-l10n-finnish@lists.debian.org>\n"
 "Language: fi\n"
 "MIME-Version: 1.0\n"
@@ -43,6 +44,7 @@ msgstr ""
 #. pkgsel is the module that installs packages by running tasksel to
 #. select "tasks". Please use "install *software*" and not
 #. "install *packages*" which is less adapted for non technical users
+#. :sl1:
 #: ../pkgsel.templates:1001
 msgid "Select and install software"
 msgstr "Valitse ja asenna ohjelmia"
@@ -51,6 +53,7 @@ msgstr "Valitse ja asenna ohjelmia"
 #. Description
 #. This appears in a progress bar when running pkgsel
 #. The text is used when pkgsel is launched, before it installs packages
+#. :sl1:
 #: ../pkgsel.templates:2001
 msgid "Setting up..."
 msgstr "Tehdään asetukset..."
@@ -59,7 +62,8 @@ msgstr "Tehdään asetukset..."
 #. Description
 #. This appears in a progress bar when running pkgsel
 #. The text is used when upgrading already installed packages.
-#: ../pkgsel.templates:4001
+#. :sl1:
+#: ../pkgsel.templates:5001
 msgid "Upgrading software..."
 msgstr "Päivitetään ohjelmia..."
 
@@ -68,7 +72,8 @@ msgstr "Päivitetään ohjelmia..."
 #. This appears in a progress bar when running pkgsel
 #. The text is used when running tasksel to allow selecting packages
 #. Tasksel will then display its own screens
-#: ../pkgsel.templates:5001
+#. :sl1:
+#: ../pkgsel.templates:6001
 msgid "Running tasksel..."
 msgstr "Suoritetaan tasksel..."
 
@@ -77,37 +82,43 @@ msgstr "Suoritetaan tasksel..."
 #. This appears in a progress bar when running pkgsel
 #. The text is used at the end of the installation phase while
 #. cleaning up pkgsel's stuff
-#: ../pkgsel.templates:6001
+#. :sl1:
+#: ../pkgsel.templates:7001
 msgid "Cleaning up..."
 msgstr "Siivotaan..."
 
 #. Type: text
 #. Description
-#: ../pkgsel.templates:8001
+#. :sl2:
+#: ../pkgsel.templates:9001
 msgid "Running ${SCRIPT}..."
 msgstr "Suoritetaan ${SCRIPT}..."
 
 #. Type: select
 #. Choices
-#: ../pkgsel.templates:9001
+#. :sl2:
+#: ../pkgsel.templates:10001
 msgid "No automatic updates"
 msgstr "Ei automaattisia päivityksiä"
 
 #. Type: select
 #. Choices
-#: ../pkgsel.templates:9001
+#. :sl2:
+#: ../pkgsel.templates:10001
 msgid "Install security updates automatically"
 msgstr "Asenna tietoturvapäivitykset automaattisesti"
 
 #. Type: select
 #. Description
-#: ../pkgsel.templates:9002
+#. :sl2:
+#: ../pkgsel.templates:10002
 msgid "Updates management on this system:"
 msgstr "Päivitysten asennustapa tässä järjestelmässä:"
 
 #. Type: select
 #. Description
-#: ../pkgsel.templates:9002
+#. :sl2:
+#: ../pkgsel.templates:10002
 msgid ""
 "Applying updates on a frequent basis is an important part of keeping the "
 "system secure."
@@ -117,7 +128,8 @@ msgstr ""
 
 #. Type: select
 #. Description
-#: ../pkgsel.templates:9002
+#. :sl2:
+#: ../pkgsel.templates:10002
 msgid ""
 "By default, security updates are not automatically installed, as security "
 "advisories should be reviewed before manual installation of the updates "
@@ -128,7 +140,8 @@ msgstr ""
 
 #. Type: select
 #. Description
-#: ../pkgsel.templates:9002
+#. :sl2:
+#: ../pkgsel.templates:10002
 msgid ""
 "Alternatively the unattended-upgrades package can be installed, which will "
 "install security updates automatically. Note however that automatic "
@@ -137,8 +150,8 @@ msgid ""
 "fully backward-compatible, or where the security advisory requires the "
 "administrator to perform some other manual operation."
 msgstr ""
-"Vaihtoehtoisesti voidaan asentaa paketti unattended-upgrades, joka asentaa "
-"tietoturvapäivitykset automaattisesti. Huomaa kuitenkin, että automaattiset "
-"päivitykset voivat joskus aiheuttaa odottamattomia häiriöitä tietokoneen "
-"käytössä niissä harvinaisissa tapauksissa, joissa päivitys ei ole täysin "
-"yhteensopiva tai edellyttää käyttäjän toimia."
+"Vaihtoehtoisesti voidaan asentaa paketti unattented-upgrades, joka asentaa "
+"tietoturvapäivitykset automaattisesti. Huomaa kuitenkin, että päivitysten "
+"automaattinen asentaminen voi toisinaan aiheuttaa odottomattomia häiriöitä "
+"tietokoneen toiminnassa, niissä harvinaisissa tapauksissa kun päivitys ei "
+"ole täysin yhteensopiva, tai päivitys vaatii käyttäjän toimia."
