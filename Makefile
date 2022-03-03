@@ -73,6 +73,8 @@ UNTANGLE_PKGS_TEMPLATE := $(UNTANGLE_PKGS).template
 CUSTOMSIZE := $(shell echo $$(( 820 * 1024 * 1024 / 2048 )) ) # from MB to 2kB blocks
 DEBIAN_PATCHES := $(wildcard $(IMGTOOLS_DIR)/patches/*.patch)
 DEBIAN_PATCH_STAMP := patch-stamp
+UNTANGLE_LOGO_SRC := $(IMGTOOLS_DIR)/patches/logo_untangle.png
+UNTANGLE_LOGO_DST := installer-pkgs-modified/rootskel-gtk/src/usr/share/graphics/logo_untangle.png
 
 SERIAL_ENV=
 SERIAL_PARAMETER=
@@ -101,6 +103,7 @@ $(DEBIAN_PATCH_STAMP):
 	for p in $(DEBIAN_PATCHES) ; do \
 	  patch -p0 < $$p ; \
 	done
+	cp $(UNTANGLE_LOGO_SRC) $(UNTANGLE_LOGO_DST)
 	touch $@
 
 d-i/unpatch:
@@ -110,6 +113,7 @@ d-i/unpatch:
 	  done ; \
 	  rm -f $(DEBIAN_PATCH_STAMP) ; \
 	fi
+	rm -f $(UNTANGLE_LOGO_DST)
 
 ## iso section
 iso/dependencies:
