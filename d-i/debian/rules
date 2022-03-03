@@ -12,8 +12,8 @@ USE_UDEBS_FROM=unstable
 TRANSSTATUS=
 BOOTMENU_BEEP=n
 else
-USE_UDEBS_FROM=buster
-USE_PROPOSED_UPDATES=0
+USE_UDEBS_FROM=bullseye
+USE_PROPOSED_UPDATES=1
 TRANSSTATUS=translation-status
 BOOTMENU_BEEP=y
 endif
@@ -23,6 +23,7 @@ RELEASE_ARCHES=amd64 arm64 armel armhf i386 mips mips64el mipsel ppc64el s390x
 ifeq (,$(filter $(ARCH), $(RELEASE_ARCHES)))
 USE_UNRELEASED=1
 USE_UDEBS_FROM=unstable
+USE_PROPOSED_UPDATES=0
 endif
 
 ARCHIVEDIR=debian/tmp/installer-$(ARCH)
@@ -70,12 +71,12 @@ install: build
 	cp -a build/dest/* $(IMAGEDIR)
 	ln -s $(DATE) $(ARCHIVEDIR)/current
 
-binary-arch: install  
+binary-arch: install
 	dh_testdir
 	dh_testroot
 	dh_installchangelogs
 	dh_installdocs doc/* -X Makefile -X build.sh -X .xsl \
-		-X internals.xml -X partman-doc.sgml -X .gitignore
+		-X internals.xml -X partman-doc.dbk -X .gitignore
 	dh_compress
 	dh_fixperms
 
@@ -89,5 +90,5 @@ binary-arch: install
 
 binary-indep:
 
-binary: binary-indep binary-arch 
-.PHONY: build build-images clean binary-indep binary-arch binary install 
+binary: binary-indep binary-arch
+.PHONY: build build-images clean binary-indep binary-arch binary install

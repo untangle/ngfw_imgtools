@@ -36,7 +36,7 @@ get_mirrors() {
 		[ -s $file ] || continue
 		grep '^deb[[:space:]]' $file | \
 		   grep -v '^deb[[:space:]]\+cdrom:' | \
-		   sed 's,^deb \[[^]]*\] ,deb ,' | \
+		   sed 's,^deb[[:space:]]\+\[[^]]*\][[:space:]]\+,deb ,' | \
 		   grep -v 'security.debian.org' | \
 		   grep '[[:space:]]main' | \
 		   awk '{print $1 " " $2}' | \
@@ -97,6 +97,3 @@ for mirror in $MIRRORS; do
 	fi
 
 done | perl -ne 'print unless $seen{$_}; $seen{$_}=1'
-
-echo "deb [trusted=yes] copy:$(pwd) localudebs/" > sources.list.udeb.local
-echo "deb [trusted=yes] http://package-server/public/$REPOSITORY $DISTRIBUTION main/debian-installer" >> sources.list.udeb.local

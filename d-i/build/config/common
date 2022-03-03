@@ -11,7 +11,7 @@
 
 # Default kernel ABI version to use. Append a kernel flavour to
 # produce KERNELVERSION.
-LINUX_KERNEL_ABI ?= 4.19.0-11
+LINUX_KERNEL_ABI ?= 5.10.0-10
 
 # Always "di" these days
 KERNEL_FLAVOUR ?= di
@@ -29,10 +29,6 @@ EXTRAS ?=
 # It will be loaded by the initrd-preseed udeb.
 PRESEED = 
 
-# The library reducer to use. Set to mklibs (to build with library reduction)
-# or mklibs-copy (to build without library reduction).
-MKLIBS = mklibs-copy
-
 # Normally the sources.list for building d-i will be derived from your
 # "normal" sources.list. However, you can specify a mirror here to override
 # this. You can use copy:/ to use a local mirror
@@ -44,18 +40,18 @@ MKLIBS = mklibs-copy
 DPKG_UNPACK_OPTIONS = --force-overwrite
 
 # The codename of the Debian release that should be installed by default.
-DEBIAN_RELEASE = buster
+DEBIAN_RELEASE = bullseye
 
 # The version (number and codename) of the Debian release targeted by the
 # installation images. (Only the codename is used while the version number
 # has not yet been determined.)
-DEBIAN_VERSION = 10 (buster)
-DEBIAN_VERSION ?= buster
+DEBIAN_VERSION = 11 (bullseye)
+DEBIAN_VERSION ?= bullseye
 
 # Define here from what release (codename!) components (udebs) should be taken
 # to build debian-installer. By default this is set to 'unstable' for building
 # daily images. For official builds this is overruled in debian/rules.
-USE_UDEBS_FROM ?= buster
+USE_UDEBS_FROM ?= bullseye
 
 # Archive components from which to fetch debian-installer modules.
 UDEB_COMPONENTS ?= main/debian-installer
