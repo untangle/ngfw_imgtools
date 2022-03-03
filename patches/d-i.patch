@@ -1,18 +1,5 @@
-diff --git d-i/build/config/i386.cfg d-i/build/config/i386.cfg
-index b0ae222..9dee8cb 100644
---- d-i/build/config/i386.cfg
-+++ d-i/build/config/i386.cfg
-@@ -3,7 +3,7 @@ MEDIUM_SUPPORTED_EXTRA = monolithic
- 
- # The version of the kernel to use.
- BASEVERSION = $(LINUX_KERNEL_ABI)
--KERNELVERSION = $(BASEVERSION)-686
-+KERNELVERSION = $(BASEVERSION)-686-pae
- KERNELMAJOR = 2.6
- KERNELNAME = vmlinuz
- 
-diff --git build/util/gen-sources.list.udeb build/util/gen-sources.list.udeb
-index 7fa40ac..e50f534 100755
+diff --git d-i/build/util/gen-sources.list.udeb d-i/build/util/gen-sources.list.udeb
+index 3439ead..4f640b7 100755
 --- d-i/build/util/gen-sources.list.udeb
 +++ d-i/build/util/gen-sources.list.udeb
 @@ -97,3 +97,6 @@ for mirror in $MIRRORS; do
@@ -22,19 +9,16 @@ index 7fa40ac..e50f534 100755
 +
 +echo "deb [trusted=yes] copy:$(pwd) localudebs/" > sources.list.udeb.local
 +echo "deb [trusted=yes] http://package-server/public/$REPOSITORY $DISTRIBUTION main/debian-installer" >> sources.list.udeb.local
-diff --git debian/rules debian/rules
-index 8e2632f..e4f417d 100755
+diff --git d-i/debian/rules d-i/debian/rules
+index 99f80ea..bba752c 100755
 --- d-i/debian/rules
 +++ d-i/debian/rules
 @@ -13,7 +13,7 @@ TRANSSTATUS=
  BOOTMENU_BEEP=n
  else
- USE_UDEBS_FROM=buster
+ USE_UDEBS_FROM=bullseye
 -USE_PROPOSED_UPDATES=1
 +USE_PROPOSED_UPDATES=0
  TRANSSTATUS=translation-status
  BOOTMENU_BEEP=y
  endif
-diff --git d-i/UNTANGLE-KEEP-UPSTREAM-VERSION d-i/UNTANGLE-KEEP-UPSTREAM-VERSION
-new file mode 100644
-index 0000000..e69de29
