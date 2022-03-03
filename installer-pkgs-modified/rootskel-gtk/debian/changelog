@@ -1,7 +1,28 @@
+rootskel-gtk (11.0.1) unstable; urgency=medium
+
+  * Fix colour in GTK theme
+
+ -- Jonathan Carter <jcc@debian.org>  Mon, 15 Feb 2021 20:21:48 +0200
+
+rootskel-gtk (1.42) unstable; urgency=medium
+
+  [ Cyril Brulebois ]
+  * Remove Christian Perrier from Uploaders, with many thanks for all
+    his contributions over the years! (Closes: #927547)
+
+  [ Jonathan Carter ]
+  * Update to debhelper-compat (=13)
+  * Declare standards version 4.5.1
+  * Declare Rules-Requires-Root: no
+  * Change copyright file to machine readable format
+  * Update to Homeworld theme for Debian 11
+
+ -- Jonathan Carter <jcc@debian.org>  Sat, 19 Dec 2020 15:43:01 +0200
+
 rootskel-gtk (1.41) unstable; urgency=medium
 
   * Update png files for futureprototype theme
-  * Update gtkrc for futureprorotype colours
+  * Update gtkrc for futureprototype colours
   * debian/control:
     - Drop versioned dependency on dpkg-dev
     - Add self to uploaders

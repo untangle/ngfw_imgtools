@@ -34,16 +34,16 @@ style "clearlooks-default"
 	bg[NORMAL]		= "#ede9e3"
 	bg[PRELIGHT]		= "#f9f7f3" # very light beige
 #	bg[SELECTED]            = "#d60052" # Debian red
-	bg[SELECTED]		= "#3e485c" # futureprototype lighter colour
+	bg[SELECTED]		= "#01958b" # homeworld lighter colour
 	bg[INSENSITIVE]		= "#efebe5" # beige
 	bg[ACTIVE]		= "#dcd4c9" #"#d7d3ca" # dark beige
 
 	base[NORMAL]		= "#ffffff" # white
 	base[PRELIGHT]		= "#5f8ec4" # dark beige
 #	base[ACTIVE]            = "#b20044" # Debian darker red
-	base[ACTIVE]		= "#1f2b43" # futureprototype darker colour
+	base[ACTIVE]		= "#01384c" # homeworld darker colour
 #	base[SELECTED]          = "#d60052" # Debian red
-	base[SELECTED]		= "#3e485c" # futureprototype lighter colour
+	base[SELECTED]		= "#01958b"  # homeworld lighter colour
 	base[INSENSITIVE]	= "#e8e5de" # beige
 
 	text[NORMAL]		= "#000000" # black

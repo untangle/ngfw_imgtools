@@ -1,7 +1,7 @@
 # High-Contrast, Large Print, Inverse Video Theme v0.1
 # This is the whole basic theme, just this one gtkrc file.
 # It uses components of the standard theme engine
-# Written by Bill Haneman, based on Standard theme by T. Liebeck, 
+# Written by Bill Haneman, based on Standard theme by T. Liebeck,
 # which was in turn based on lots of different gtkrc files but
 # primarily the one for the metal theme.
 # email: bill.haneman@sun.com
@@ -41,7 +41,7 @@ style "default"
 
   fg[NORMAL]		= "#ffffff"
   text[NORMAL]		= "#ffffff"
-  bg[NORMAL]		= "#000033" 
+  bg[NORMAL]		= "#000033"
   base[NORMAL]		= "#000033"
 
   fg[INSENSITIVE]	= "#999999"
