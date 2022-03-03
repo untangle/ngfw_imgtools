@@ -39,13 +39,3 @@ override_dh_install-arch:
 override_dh_installdebconf-arch:
 	dh_installdebconf
 	(echo ; cat debian/templates.gen) >> debian/bootstrap-base/DEBIAN/templates
-
-override_dh_builddeb-arch:
-	dh_builddeb
-	# Hack for Untangle builds to copy our files directly into localdeb directory for d-i.
-	cp ../*.udeb ../../d-i/build/localudebs
-
-override_dh_builddeb:
-	dh_builddeb
-	# Hack for Untangle builds to copy our files directly into localdeb directory for d-i.
-	cp ../*.udeb ../../d-i/build/localudebs
