@@ -98,7 +98,7 @@ endif
 all: # do nothing by default
 
 ## d-i section
-d-i/patch: $(DEBIAN_PATCH_STAMP)
+patch: $(DEBIAN_PATCH_STAMP)
 $(DEBIAN_PATCH_STAMP):
 	for p in $(DEBIAN_PATCHES) ; do \
 	  patch -p0 < $$p ; \
@@ -106,7 +106,7 @@ $(DEBIAN_PATCH_STAMP):
 	cp $(UNTANGLE_LOGO_SRC) $(UNTANGLE_LOGO_DST)
 	touch $@
 
-d-i/unpatch:
+unpatch:
 	if [ -f $(DEBIAN_PATCH_STAMP) ] ; then \
 	  for p in $(DEBIAN_PATCHES) ; do \
 	    patch -p0 -R < $$p ; \
