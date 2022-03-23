@@ -40,7 +40,7 @@ KERNEL_VERSION := 4.19.0-11
 KERNEL := linux-image-$(KERNEL_VERSION)-untangle-$(KERNEL_ARCH)
 ISO_IMAGE := ngfw-+FLAVOR++REGION_NAME++SERIAL+-$(VERSION)_$(REPOSITORY)_$(ARCHITECTURE)_$(DISTRIBUTION)_$(shell date --iso-8601=seconds)_$(shell hostname -s).iso
 WAF_ISO_IMAGE := waf-+FLAVOR+-$(VERSION)_$(REPOSITORY)_$(ARCHITECTURE)_$(DISTRIBUTION)_$(shell date --iso-8601=seconds)_$(shell hostname -s).iso
-IMAGES_DIR := /data/untangle-images-$(REPOSITORY)
+IMAGES_DIR := /data/ngfw-images-$(REPOSITORY)
 WAF_IMAGES_DIR := /data/waf-images-$(REPOSITORY)
 MOUNT_SCRIPT := /data/image-manager/mounts.py
 NETBOOT_HOST := package-server
