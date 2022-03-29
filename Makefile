@@ -169,8 +169,9 @@ ngfw/iso/%-image: iso/dependencies ngfw/iso/conf
 		--debian-mirror http://package-server/public/$(REPOSITORY)/ \
 		--security-mirror "" \
 		--updates-mirror "" \
-		--mirror-tools reprepro \
 		--dist $(REPOSITORY) \
+		--require-optional-packages \
+		--mirror-tools reprepro \
 		--verbose \
 		--no-do-mirror \
 		--logfile $(IMGTOOLS_DIR)/simplecdd-image.log ; \
