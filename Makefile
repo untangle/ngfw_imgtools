@@ -176,7 +176,6 @@ ngfw/iso/%-image: iso/dependencies ngfw/iso/conf
 		--logfile $(IMGTOOLS_DIR)/simplecdd-image.log ; \
 	$(SERIAL_ENV_POST_CMD) \
 	mv images/$(flavor)-$(DEBVERSION)*-$(ARCHITECTURE)-*1.iso $(subst +SERIAL+,$(SERIAL_NAME),$(subst +FLAVOR+,$(flavor),$(subst +REGION_NAME+,$(REGION_NAME),$(ISO_IMAGE))))
-	cp -f $(subst +SERIAL+,$(SERIAL_NAME),$(subst +FLAVOR+,$(flavor),$(subst +REGION_NAME+,$(REGION_NAME),$(ISO_IMAGE)))) ngfw$(REGION_NAME).iso
 
 ngfw/iso/%-push: # pushes the most recent image
 	$(eval iso_image := $(shell ls --sort=time *$(VERSION)*$(REPOSITORY)*$(ARCHITECTURE)*$(DISTRIBUTION)*.iso | head -1))
