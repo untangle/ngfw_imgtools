@@ -24,6 +24,7 @@ ddclient ddclient/daemon_interval string
 ddclient ddclient/fetchhosts string
 ddclient ddclient/hostslist string
 ddclient ddclient/interface string
+ddclient ddclient/method string
 ddclient ddclient/modifiedconfig string
 ddclient ddclient/names string
 ddclient ddclient/protocol string
