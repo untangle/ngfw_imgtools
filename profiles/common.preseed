@@ -36,6 +36,9 @@ ddclient ddclient/username string
 ddclient ddclient/password string
 ddclient ddclient/password-repeat string
 
+# hyperscan
+libhyperscan5 libhyperscan/cpu-ssse3 boolean true
+
 # slapd
 slapd slapd/internal/adminpw string
 slapd slapd/password1 string
