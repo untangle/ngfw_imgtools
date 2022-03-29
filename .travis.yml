@@ -82,10 +82,9 @@ jobs:
       if: NOT (env(REPOSITORY) = buster AND branch = master) AND NOT branch =~ /^waf-release-\d+.\d$/
       script:
         - docker-compose -f docker-compose.build.yml run pkgtools
-        - rm -fr d-i/build/localudebs/*
         - docker-compose -f docker-compose.build.yml run img_modifier_checkout
         - docker-compose -f docker-compose.build.yml run img_modifier_apply
-        - FORCE=1 NO_CLEAN=1 UPLOAD= docker-compose -f docker-compose.build.yml run build
+        - FORCE=1 NO_CLEAN=1 UPLOAD=localudebs docker-compose -f docker-compose.build.yml run build
         - travis_wait 120 docker-compose -f docker-compose.build.yml run build bash -c "../ngfw_pkgtools/build.sh setup-only && make ${PRODUCT}/iso/${VENDOR}-image ${PRODUCT}/iso/${VENDOR}-push"
       env:
         - PRODUCT: ngfw
@@ -98,10 +97,9 @@ jobs:
       if: NOT (env(REPOSITORY) = buster AND branch = master) AND NOT branch =~ /^waf-release-\d+.\d$/
       script:
         - docker-compose -f docker-compose.build.yml run pkgtools
-        - rm -fr d-i/build/localudebs/*
         - docker-compose -f docker-compose.build.yml run img_modifier_checkout
         - docker-compose -f docker-compose.build.yml run img_modifier_apply
-        - FORCE=1 NO_CLEAN=1 UPLOAD= docker-compose -f docker-compose.build.yml run build
+        - FORCE=1 NO_CLEAN=1 UPLOAD=localudebs docker-compose -f docker-compose.build.yml run build
         - travis_wait 120 docker-compose -f docker-compose.build.yml run build bash -c "../ngfw_pkgtools/build.sh setup-only && make ${PRODUCT}/iso/${VENDOR}-image ${PRODUCT}/iso/${VENDOR}-push"
       env:
         - PRODUCT: ngfw
