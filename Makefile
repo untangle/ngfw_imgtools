@@ -40,7 +40,7 @@ KERNEL_VERSION := 4.19.0-11
 KERNEL := linux-image-$(KERNEL_VERSION)-untangle-$(KERNEL_ARCH)
 ISO_IMAGE := ngfw-+FLAVOR++REGION_NAME++SERIAL+-$(VERSION)_$(REPOSITORY)_$(ARCHITECTURE)_$(DISTRIBUTION)_$(shell date --iso-8601=seconds)_$(shell hostname -s).iso
 WAF_ISO_IMAGE := waf-+FLAVOR+-$(VERSION)_$(REPOSITORY)_$(ARCHITECTURE)_$(DISTRIBUTION)_$(shell date --iso-8601=seconds)_$(shell hostname -s).iso
-IMAGES_DIR := /data/ngfw-images-$(REPOSITORY)
+NGFW_IMAGES_DIR := /data/ngfw-images-$(REPOSITORY)
 WAF_IMAGES_DIR := /data/waf-images-$(REPOSITORY)
 MOUNT_SCRIPT := /data/image-manager/mounts.py
 NETBOOT_HOST := package-server
@@ -181,12 +181,8 @@ ngfw/iso/%-image: iso/dependencies ngfw/iso/conf
 ngfw/iso/%-push: # pushes the most recent image
 	$(eval iso_image := $(shell ls --sort=time *$(VERSION)*$(REPOSITORY)*$(ARCHITECTURE)*$(DISTRIBUTION)*.iso | head -1))
 	$(eval timestamp := $(shell echo $(iso_image) | perl -pe 's/.*(\d{4}(-\d{2}){2}T(\d{2}:?){3}).*/$$1/'))
-	ssh $(NETBOOT_USER)@$(NETBOOT_HOST) "sudo python $(MOUNT_SCRIPT) new $(VERSION) $(timestamp) $(ARCHITECTURE) $(REPOSITORY)"
-	scp ./$(iso_image) $(NETBOOT_PRESEED_FINAL) $(NETBOOT_PRESEED_EXPERT) $(NETBOOT_USER)@$(NETBOOT_HOST):$(IMAGES_DIR)/$(VERSION)
-	scp $(NETBOOT_INITRD_TXT) $(NETBOOT_USER)@$(NETBOOT_HOST):$(IMAGES_DIR)/$(VERSION)/initrd-$(ARCHITECTURE)-txt.gz
-	scp $(NETBOOT_INITRD_GTK) $(NETBOOT_USER)@$(NETBOOT_HOST):$(IMAGES_DIR)/$(VERSION)/initrd-$(ARCHITECTURE)-gtk.gz
-	scp $(NETBOOT_KERNEL) $(NETBOOT_USER)@$(NETBOOT_HOST):$(IMAGES_DIR)/$(VERSION)/linux-$(ARCHITECTURE)
-	ssh $(NETBOOT_USER)@$(NETBOOT_HOST) "sudo python $(MOUNT_SCRIPT) link $(VERSION) $(timestamp) $(ARCHITECTURE) $(REPOSITORY)"
+	ssh $(NETBOOT_USER)@$(NETBOOT_HOST) mkdir -p $(NGFW_IMAGES_DIR)/$(VERSION)
+	scp ./$(iso_image) $(NETBOOT_PRESEED_FINAL) $(NETBOOT_PRESEED_EXPERT) $(NETBOOT_USER)@$(NETBOOT_HOST):$(NGFW_IMAGES_DIR)/$(VERSION)
 
 waf/iso/conf:
 	perl -pe 's|\+IMGTOOLS_DIR\+|'$(IMGTOOLS_DIR)'|g' $(WAF_CONF_FILE_TEMPLATE) >| $(WAF_CONF_FILE)
