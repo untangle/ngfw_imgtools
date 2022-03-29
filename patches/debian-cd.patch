@@ -1,7 +1,7 @@
-diff --git debian-cd/data/buster/grub-theme.in debian-cd/data/buster/grub-theme.in
+diff --git debian-cd/data/bullseye/grub-theme.in debian-cd/data/bullseye/grub-theme.in
 index 3cb9db6f..43b54b47 100644
---- debian-cd/data/buster/grub-theme.in
-+++ debian-cd/data/buster/grub-theme.in
+--- debian-cd/data/bullseye/grub-theme.in
++++ debian-cd/data/bullseye/grub-theme.in
 @@ -15,7 +15,7 @@ terminal-font: "Sans Regular 12"
  #ifdef MENU0
    + hbox {
@@ -41,11 +41,11 @@ index 3cb9db6f..43b54b47 100644
 +    + label {text = "GRUB Command line" font = "Sans 10" color = "#000000" align = "left"}
    }  
  }
-diff --git debian-cd/tools/boot/buster/boot-x86 debian-cd/tools/boot/buster/boot-x86
+diff --git debian-cd/tools/boot/bullseye/boot-x86 debian-cd/tools/boot/bullseye/boot-x86
 index 15c5961a..b3ecd530 100644
---- debian-cd/tools/boot/buster/boot-x86
-+++ debian-cd/tools/boot/buster/boot-x86
-@@ -447,6 +447,11 @@ if [ -n "$KERNEL_PARAMS" ]; then
+--- debian-cd/tools/boot/bullseye/boot-x86
++++ debian-cd/tools/boot/bullseye/boot-x86
+@@ -421,6 +421,11 @@ if [ -n "$KERNEL_PARAMS" ]; then
      done
  fi
  
@@ -57,9 +57,9 @@ index 15c5961a..b3ecd530 100644
  set_default_desktop
  rm -rf cdrom
  
-diff --git debian-cd/tools/boot/buster/parse_isolinux debian-cd/tools/boot/buster/parse_isolinux
+diff --git debian-cd/tools/boot/bullseye/parse_isolinux debian-cd/tools/boot/bullseye/parse_isolinux
 --- parse_isolinux.orig	2021-05-26 13:38:10.217824041 -0400
-+++ debian-cd/tools/boot/buster/parse_isolinux	2021-05-26 15:01:58.122706293 -0400
++++ debian-cd/tools/boot/bullseye/parse_isolinux	2021-05-26 15:01:58.122706293 -0400
 @@ -17,6 +17,9 @@
  my $tl_distro= shift or die "Need a top-level distro name (e.g. Debian)\n";
  my $tl_kernel= shift or die "Need a top-level kernel (e.g. GNU/Linux)\n";

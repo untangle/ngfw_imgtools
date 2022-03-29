@@ -17,9 +17,6 @@ my $grub_theme = shift or die "Need input file location for base grub theme!\n";
 my $tl_distro= shift or die "Need a top-level distro name (e.g. Debian)\n";
 my $tl_kernel= shift or die "Need a top-level kernel (e.g. GNU/Linux)\n";
 my $tl_version= shift or die "Need a top-level version (e.g. 7.0)\n";
-
-my $tl_title = "$tl_distro $tl_kernel $tl_version";
-my $tl_timeout = 0;
 my $theme_dir = "$outdir/boot/grub/theme";
 my @cpp_and_opts = ('cpp',
 		    '-traditional',
@@ -80,11 +77,6 @@ sub parse_file {
 	    $in_ifcpu = 1;
 	} elsif ($line =~ /default archdetect/) {
 	    $in_ifcpu = 0;
-	} elsif ($line =~ /timeout (.*)$/) {
-		$tl_timeout = $1;
-		if ( $tl_timeout > 10 ){
-			$tl_timeout = int($tl_timeout / 10);
-		}
 	} else {
 	    push(@lines, $line);
 	}
@@ -132,7 +124,7 @@ sub create_theme_file {
     my $filename = shift;
     my @args;
     push(@args, @cpp_and_opts);
-    push(@args, "-DTITLE=\"$tl_title\"");
+    push(@args, "-DTITLE=\"$tl_distro $tl_kernel $tl_version\"");
     for (my $i = 0; $i < $menudepth; $i++) {
 	push(@args, "-DMENU$i=\"" . $menu_title[$i] . "\"");
     }
@@ -163,18 +155,18 @@ parse_file("isolinux.cfg");
 
 $menu{"number"} = "1";
 $menu{"label"} = "top";
-$menu{"title"} = "$tl_title UEFI Installer menu";
+$menu{"title"} = "$tl_distro $tl_kernel UEFI Installer menu";
 $menu_title[$menudepth] = $menu{"title"};
 
 my %kernel;
 my $in_kernel = 0;
 my $in_dark = 0;
 my $new_menu = 0;
-my $tl_title_colon_index = -1;
 
 $menudepth++;
 debug();
 print_indent "set theme=/boot/grub/theme/" . $menu{"number"} . "\n";
+create_theme_file($menu{"number"});
 
 foreach my $line(@lines) {
     if ($line =~ /^\s*menu begin\ (\S+)/) {
@@ -221,16 +213,6 @@ foreach my $line(@lines) {
 	    $in_kernel = 0;
 	}
 	$menu{"title"} = $1;
-
-	$tl_title = $1;
-	$tl_title_colon_index = index($tl_title, ':');
-	if ( $tl_title_colon_index > -1 ){
-		$tl_title = substr($tl_title, 0, $tl_title_colon_index);
-		$tl_title =~ s/^\s+|\s+$//g;
-		$menu{"title"} = "$tl_title UEFI Installer menu";
-		$menu_title[$menudepth - 1] = $menu{"title"};
-	}
-
 	if ($new_menu) {
 	    my $hotkey = "";
 	    if ($menu{"label"} =~ m,\^(\S),) {
@@ -287,8 +269,3 @@ if ($in_kernel) {
     print_kernel(\%kernel);
     undef %kernel;
 }
-if($tl_timeout > 0){
-	print "set timeout=$tl_timeout\n";
-	# print "set timeout $tl_timeout\n";
-}
-create_theme_file($menu{"number"});
