@@ -70,7 +70,6 @@ WAF_PRESEED_FILE := $(PROFILES_DIR)/waf.preseed
 WAF_PRESEED_FILE_TEMPLATE := $(WAF_PRESEED_FILE).template
 UNTANGLE_PKGS := $(PROFILES_DIR)/untangle.packages
 UNTANGLE_PKGS_TEMPLATE := $(UNTANGLE_PKGS).template
-CUSTOMSIZE := $(shell echo $$(( 820 * 1024 * 1024 / 2048 )) ) # from MB to 2kB blocks
 DEBIAN_PATCHES := $(wildcard $(IMGTOOLS_DIR)/patches/*.patch)
 DEBIAN_PATCH_STAMP := patch-stamp
 UNTANGLE_LOGO_SRC := $(IMGTOOLS_DIR)/patches/logo_untangle.png
@@ -134,7 +133,7 @@ ngfw/iso/%-image: iso/dependencies ngfw/iso/conf
 	$(eval flavor := $*)
 	perl -pe 's|\+IMGTOOLS_DIR\+|'$(IMGTOOLS_DIR)'|g' $(CONF_FILE_TEMPLATE) >| $(CONF_FILE); \
 	export CODENAME=$(REPOSITORY) DEBVERSION=$(DEBVERSION) ; \
-	export CDNAME=$(flavor) DISKINFO=$(flavor) CUSTOMSIZE=$(CUSTOMSIZE) ; \
+	export CDNAME=$(flavor) DISKINFO=$(flavor) ; \
 	build-simple-cdd \
 	    --local-packages local-packages \
 		--keyboard us \
@@ -158,6 +157,8 @@ ngfw/iso/%-image: iso/dependencies ngfw/iso/conf
 	perl -pe s/$(DISTRIBUTION)/$(REPOSITORY)/ $(IMGTOOLS_DIR)/tmp/mirror/conf/distributions > $(IMGTOOLS_DIR)/tmp/mirror/conf/distributions.ngfw ; \
 	cat $(IMGTOOLS_DIR)/tmp/mirror/conf/distributions.ngfw >> $(IMGTOOLS_DIR)/tmp/mirror/conf/distributions ; \
 	reprepro -Vb $(IMGTOOLS_DIR)/tmp/mirror copymatched $(REPOSITORY) $(DISTRIBUTION) '*' ; \
+	export CUSTOMSIZE=`du -s --block-size=2048 $(IMGTOOLS_DIR)/tmp/mirror | awk '{print $$1}')` ; \
+	echo $(CUSTOMSIZE) ; \
 	$(SERIAL_ENV_PRE_CMD) \
 	build-simple-cdd \
 		$(SERIAL_BSC_PARAMETER) \
