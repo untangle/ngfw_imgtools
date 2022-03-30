@@ -17,6 +17,7 @@ env:
       IMG_MODIFIER_COMMIT: origin/${TRAVIS_BRANCH}
       UPLOAD: scp
       PRIVILEGED: true
+      REPOSITORY: bullseye
 
 before_install:
 - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
@@ -34,7 +35,6 @@ jobs:
         - travis_wait 120 docker-compose -f docker-compose.build.yml run build bash -c "../ngfw_pkgtools/build.sh setup-only && make ${PRODUCT}/iso/${VENDOR}-image ${PRODUCT}/iso/${VENDOR}-push"
       env:
         - PRODUCT: ngfw
-        - REPOSITORY: bullseye
         - ARCHITECTURE: amd64
         - VENDOR: untangle
 
@@ -46,7 +46,6 @@ jobs:
         - travis_wait 120 docker-compose -f docker-compose.build.yml run build bash -c "../ngfw_pkgtools/build.sh setup-only && make ${PRODUCT}/iso/${VENDOR}-image ${PRODUCT}/iso/${VENDOR}-push"
       env:
         - PRODUCT: ngfw
-        - REPOSITORY: bullseye
         - ARCHITECTURE: amd64
         - VENDOR: untangle
         - SERIAL: ttyS0,115200
@@ -59,7 +58,6 @@ jobs:
         - travis_wait 120 docker-compose -f docker-compose.build.yml run build bash -c "../ngfw_pkgtools/build.sh setup-only && make ${PRODUCT}/iso/${VENDOR}-image ${PRODUCT}/iso/${VENDOR}-push"
       env:
         - PRODUCT: ngfw
-        - REPOSITORY: bullseye
         - ARCHITECTURE: amd64
         - VENDOR: untangle
         - REGION: eu
@@ -72,7 +70,6 @@ jobs:
         - travis_wait 120 docker-compose -f docker-compose.build.yml run build bash -c "../ngfw_pkgtools/build.sh setup-only && make ${PRODUCT}/iso/${VENDOR}-image ${PRODUCT}/iso/${VENDOR}-push"
       env:
         - PRODUCT: ngfw
-        - REPOSITORY: bullseye
         - ARCHITECTURE: amd64
         - VENDOR: untangle
         - REGION: eu
@@ -88,7 +85,6 @@ jobs:
         - travis_wait 120 docker-compose -f docker-compose.build.yml run build bash -c "../ngfw_pkgtools/build.sh setup-only && make ${PRODUCT}/iso/${VENDOR}-image ${PRODUCT}/iso/${VENDOR}-push"
       env:
         - PRODUCT: ngfw
-        - REPOSITORY: bullseye
         - ARCHITECTURE: amd64
         - VENDOR: vendor2
         - IMG_MODIFIER_VENDOR: vendor2
@@ -103,7 +99,6 @@ jobs:
         - travis_wait 120 docker-compose -f docker-compose.build.yml run build bash -c "../ngfw_pkgtools/build.sh setup-only && make ${PRODUCT}/iso/${VENDOR}-image ${PRODUCT}/iso/${VENDOR}-push"
       env:
         - PRODUCT: ngfw
-        - REPOSITORY: bullseye
         - ARCHITECTURE: amd64
         - VENDOR: vendor2
         - IMG_MODIFIER_VENDOR: vendor2
