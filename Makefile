@@ -4,7 +4,7 @@ PKGTOOLS_DIR := $(IMGTOOLS_DIR)/../ngfw_pkgtools
 
 ## overridables
 ifeq ($(REPOSITORY),)
-REPOSITORY := buster
+REPOSITORY := bullseye
 endif
 ifeq ($(DISTRIBUTION),)
 DISTRIBUTION := $(shell cat $(PKGTOOLS_DIR)/resources/DISTRIBUTION)
