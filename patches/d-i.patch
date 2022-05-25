@@ -31,7 +31,7 @@ index 99f80ea..bba752c 100644
  # Default kernel ABI version to use. Append a kernel flavour to
  # produce KERNELVERSION.
 -LINUX_KERNEL_ABI ?= 5.10.0-10
-+LINUX_KERNEL_ABI ?= 5.10.0-12
++LINUX_KERNEL_ABI ?= 5.10.0-14
  
  # Always "di" these days
  KERNEL_FLAVOUR ?= di

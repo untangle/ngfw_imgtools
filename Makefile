@@ -36,7 +36,7 @@ ifeq ($(ARCHITECTURE),i386)
 else
   KERNEL_ARCH := $(ARCHITECTURE)
 endif
-KERNEL_VERSION := 5.10.0-12
+KERNEL_VERSION := 5.10.0-14
 KERNEL := linux-image-$(KERNEL_VERSION)-untangle-$(KERNEL_ARCH)
 ISO_IMAGE := ngfw-+FLAVOR++REGION_NAME++SERIAL+-$(VERSION)_$(REPOSITORY)_$(ARCHITECTURE)_$(DISTRIBUTION)_$(shell date --iso-8601=seconds)_$(shell hostname -s).iso
 WAF_ISO_IMAGE := waf-+FLAVOR+-$(VERSION)_$(REPOSITORY)_$(ARCHITECTURE)_$(DISTRIBUTION)_$(shell date --iso-8601=seconds)_$(shell hostname -s).iso
