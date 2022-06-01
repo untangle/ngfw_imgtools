@@ -12,7 +12,15 @@ env:
     - secure: "GAew5U/YEjjE0pErO0fULKPwSRpBMcDTUU9UTnGnnfr0IMz8AsXnaN6p3ONcKtDFyLQWohhvHBME/JFSQif7CD471wK8szsaWqB7miiqQOTmqEFdoGtoHimXY/Ye9Lm7CaIjpr7VzsbAQ4eV5JupUumALflwS58n4rLo3jRL4dZfWltRYw6ouX1DO3h9CdV6OBhl0uvJvIqvRV81/+4gwQ4ElW3PiXSvKlLTrHArExjUqMqmEw9r6br3BE9vLCbEOQYDihGsknS6oDCr9kYS7INEZ9PhoFDpvoMwEEp3eKt2GKfW3oCewdUmVkgh0+TYpcA6p/4oy/XFuBXYrV7bjN9URonv7jn7OzB4tCRJ0V+IzwcmxvuSdfvaAXF69eqFFfFYln+sZS/Qv9Qs86O9TBbzyCn1mVrmIkxjcyf04ua6yf7f2gQ4tlMFbvbcLaZMqfkCoLgBOFPsd0VCDMwLkdjK4a29aNqitMSkFadrw1Y7Zfv3n0YRFJ/SdpJepzKep3X5HL8/g5+2b1C2rLALJmejuJBENo25XHTKAfC0p7hZ02Ic7nW+g16ZEgMkhBx+tPN/CpNedrmkELWN5y8isJQgiQ4BrIM3gdE9qh9KPfm5U1BFBU93p3l1fekwFjwhbPjOqhs06mvTYZoyfo8cORuNy+fMrFlSSFIp03jmoqY="
     - DOCKER_USERNAME: untangleengineering
       SSH_KEY: /tmp/travis-buildbot.rsa
+<<<<<<< HEAD
       PACKAGE_SERVER_IP: 50.211.244.129
+||||||| parent of 6f46b6a (Update external IP for package-server)
+      PACKAGE_SERVER_IP: 50.211.244.129
+      REPOSITORY: buster
+=======
+      PACKAGE_SERVER_IP: 52.2.228.218
+      REPOSITORY: buster
+>>>>>>> 6f46b6a (Update external IP for package-server)
       PKGTOOLS_COMMIT: origin/${TRAVIS_BRANCH}
       IMG_MODIFIER_COMMIT: origin/${TRAVIS_BRANCH}
       UPLOAD: scp
