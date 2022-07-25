@@ -10,7 +10,7 @@ If you need to modify some of upstream's behavior in `debian-cd/`,
 editing the patches under `patches/`, and testing they apply correctly
 with `make unpatch` and `make patch`.
 
-Note: `patches/logo_untangle.png` is not really a patch, but is used as
+Note: `patches/logo_arista.png` is not really a patch, but is used as
 a drop-in replacement for the Debian logo during `make patch`, hence its
 questionable location.
 

@@ -1,7 +1,7 @@
-Untangle NG Firewall
+Arista NG Firewall
 ====================
-Untangle Home Page: http://www.untangle.com/
-Documentation:      http://wiki.untangle.com/
+NG Firewall Homepage: https://www.untangle.com/untangle-ng-firewall/
+Documentation:      https://wiki.untangle.com/
 
 For most installations with a keyboard and monitor, just reboot and boot from this media to begin installation.
 

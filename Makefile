@@ -72,8 +72,8 @@ UNTANGLE_PKGS := $(PROFILES_DIR)/untangle.packages
 UNTANGLE_PKGS_TEMPLATE := $(UNTANGLE_PKGS).template
 DEBIAN_PATCHES := $(wildcard $(IMGTOOLS_DIR)/patches/*.patch)
 DEBIAN_PATCH_STAMP := patch-stamp
-UNTANGLE_LOGO_SRC := $(IMGTOOLS_DIR)/patches/logo_untangle.png
-UNTANGLE_LOGO_DST := installer-pkgs-modified/rootskel-gtk/src/usr/share/graphics/logo_untangle.png
+ARISTA_LOGO_SRC := $(IMGTOOLS_DIR)/patches/logo_arista.png
+ARISTA_LOGO_DST := installer-pkgs-modified/rootskel-gtk/src/usr/share/graphics/logo_arista.png
 
 SERIAL_ENV=
 SERIAL_PARAMETER=
@@ -102,7 +102,7 @@ $(DEBIAN_PATCH_STAMP):
 	for p in $(DEBIAN_PATCHES) ; do \
 	  patch -p0 < $$p ; \
 	done
-	cp $(UNTANGLE_LOGO_SRC) $(UNTANGLE_LOGO_DST)
+	cp $(ARISTA_LOGO_SRC) $(ARISTA_LOGO_DST)
 	touch $@
 
 unpatch:
