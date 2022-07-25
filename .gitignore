@@ -6,6 +6,7 @@ profiles/expert.preseed
 simplecdd*.log
 profiles/netboot.expert.preseed.amd64
 profiles/netboot.preseed.amd64
+images
 *.iso
 *.img
 profiles/untangle.packages
