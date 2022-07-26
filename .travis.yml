@@ -75,35 +75,6 @@ jobs:
         - REGION: eu
         - SERIAL: ttyS0,115200
 
-    - name: NGFW Vendor2 amd64
-      if: NOT branch =~ /^waf-release-\d+.\d$/
-      script:
-        - docker-compose -f docker-compose.build.yml run pkgtools
-        - docker-compose -f docker-compose.build.yml run img_modifier_checkout
-        - docker-compose -f docker-compose.build.yml run img_modifier_apply
-        - FORCE=1 NO_CLEAN=1 UPLOAD=localudebs docker-compose -f docker-compose.build.yml run build
-        - docker-compose -f docker-compose.build.yml run build bash -c "../ngfw_pkgtools/build.sh setup-only && make ${PRODUCT}/iso/${VENDOR}-image ${PRODUCT}/iso/${VENDOR}-push"
-      env:
-        - PRODUCT: ngfw
-        - ARCHITECTURE: amd64
-        - VENDOR: vendor2
-        - IMG_MODIFIER_VENDOR: vendor2
-
-    - name: NGFW Vendor2 amd64 (serial)
-      if: NOT branch =~ /^waf-release-\d+.\d$/
-      script:
-        - docker-compose -f docker-compose.build.yml run pkgtools
-        - docker-compose -f docker-compose.build.yml run img_modifier_checkout
-        - docker-compose -f docker-compose.build.yml run img_modifier_apply
-        - FORCE=1 NO_CLEAN=1 UPLOAD=localudebs docker-compose -f docker-compose.build.yml run build
-        - docker-compose -f docker-compose.build.yml run build bash -c "../ngfw_pkgtools/build.sh setup-only && make ${PRODUCT}/iso/${VENDOR}-image ${PRODUCT}/iso/${VENDOR}-push"
-      env:
-        - PRODUCT: ngfw
-        - ARCHITECTURE: amd64
-        - VENDOR: vendor2
-        - IMG_MODIFIER_VENDOR: vendor2
-        - SERIAL: ttyS0,115200
-
     - name: WAF Untangle amd64
       if: NOT branch =~ /^ngfw-release-\d+.\d$/
       script:
