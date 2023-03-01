@@ -162,6 +162,7 @@ ngfw/iso/%-image: iso/dependencies ngfw/iso/conf
 	$(SERIAL_ENV_PRE_CMD) \
 	build-simple-cdd \
 		$(SERIAL_BSC_PARAMETER) \
+	    --local-packages local-packages \
 		--keyboard us \
 		--locale en_US.UTF-8 \
 		--force-root \
