@@ -75,19 +75,6 @@ jobs:
         - REGION: eu
         - SERIAL: ttyS0,115200
 
-    - name: WAF Untangle amd64
-      if: NOT branch =~ /^ngfw-release-\d+.\d$/
-      script:
-        - docker-compose -f docker-compose.build.yml run pkgtools
-        - docker-compose -f docker-compose.build.yml run build bash -c "../ngfw_pkgtools/build.sh setup-only && make ${PRODUCT}/iso/${VENDOR}-image ${PRODUCT}/iso/${VENDOR}-push"
-      env:
-        - PRODUCT: waf
-        - REPOSITORY: buster
-        - ARCHITECTURE: amd64
-        - VENDOR: untangle
-        - PKGTOOLS_REPOSITORY: pkgtools-waf
-        - PKGTOOLS_COMMIT: origin/waf-${TRAVIS_BRANCH/waf-}
-
 notifications:
   email: false
   slack:
