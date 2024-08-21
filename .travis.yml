@@ -50,31 +50,6 @@ jobs:
         - VENDOR: untangle
         - SERIAL: ttyS0,115200
 
-    - name: NGFW Untangle amd64 (EU)
-      if: NOT branch =~ /^waf-release-\d+.\d$/
-      script:
-        - docker-compose -f docker-compose.build.yml run pkgtools
-        - NO_CLEAN=1 docker-compose -f docker-compose.build.yml run build
-        - docker-compose -f docker-compose.build.yml run build bash -c "../ngfw_pkgtools/build.sh setup-only && make ${PRODUCT}/iso/${VENDOR}-image ${PRODUCT}/iso/${VENDOR}-push"
-      env:
-        - PRODUCT: ngfw
-        - ARCHITECTURE: amd64
-        - VENDOR: untangle
-        - REGION: eu
-
-    - name: NGFW Untangle amd64 (EU, serial)
-      if: NOT branch =~ /^waf-release-\d+.\d$/
-      script:
-        - docker-compose -f docker-compose.build.yml run pkgtools
-        - NO_CLEAN=1 docker-compose -f docker-compose.build.yml run build
-        - docker-compose -f docker-compose.build.yml run build bash -c "../ngfw_pkgtools/build.sh setup-only && make ${PRODUCT}/iso/${VENDOR}-image ${PRODUCT}/iso/${VENDOR}-push"
-      env:
-        - PRODUCT: ngfw
-        - ARCHITECTURE: amd64
-        - VENDOR: untangle
-        - REGION: eu
-        - SERIAL: ttyS0,115200
-
 notifications:
   email: false
   slack:
