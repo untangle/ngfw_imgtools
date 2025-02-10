@@ -135,3 +135,8 @@ if [ -d "/sys/firmware/efi/" ] ; then \
 else \
 	debconf-set partman-auto/choose_recipe select untangle2 ; \
 fi ;
+
+d-i preseed/late_command string \
+    mkdir -p /target/var/log/installer && \
+    cp /var/log/installer/* /target/var/log/installer/ && \
+    echo "Preseed installation completed" >> /target/var/log/installer/preseed.log
