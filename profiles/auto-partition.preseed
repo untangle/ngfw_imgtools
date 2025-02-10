@@ -115,6 +115,13 @@ done ; \
 if [ $count -eq 2 ] ; then \
    debconf-set partman-auto/disk $candidate ; \
 fi ; \
+# Extract device base name
+device_base=$(basename $candidate) ; \
+# Check if the selected disk already has partitions
+existing_partitions=$(lsblk -lnpo NAME | grep -E "^/dev/${device_base}p?[0-9]+$") ; \
+if [ -n "$existing_partitions" ]; then \
+  debconf-set partman-auto/init_automatically_partition select Guided - use entire disk ; \
+fi ; \
 if [ -d "/sys/firmware/efi/" ] ; then \
 	debconf-set partman-auto/choose_recipe select untangle-efi ; \
 else \
