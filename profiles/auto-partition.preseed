@@ -126,10 +126,13 @@ device_base=$(basename $candidate) ; \
 # Check if the selected disk already has partitions
 existing_partitions=$(lsblk -lnpo NAME | grep -E "^/dev/${device_base}p?[0-9]+$") ; \
 echo "existing_partitions: $existing_partitions" >> /var/log/installer/preseed.log ; \
-if [ -n "$existing_partitions" ]; then \
-  debconf-set partman-auto/init_automatically_partition select Guided - use entire disk ; \
-  debconf-set partman-auto/disk string /dev/${device_base} ;
-fi ; \
+debconf-set partman-auto/init_automatically_partition select Guided - use entire disk ; \
+debconf-set partman-auto/disk string /dev/mmcblk0 ; \
+
+#if [ -n "$existing_partitions" ]; then \
+#  debconf-set partman-auto/init_automatically_partition select Guided - use entire disk ; \
+#  debconf-set partman-auto/disk string /dev/${device_base} ;
+#fi ; \
 if [ -d "/sys/firmware/efi/" ] ; then \
 	debconf-set partman-auto/choose_recipe select untangle-efi ; \
 else \
