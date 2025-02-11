@@ -101,13 +101,9 @@ format{ } \
 .
 
 d-i partman/early_command string \
-mkdir -p /var/log/installer ;
-echo "Preseed installation started" > /var/log/installer/preseed.log ; 
-lsblk > /var/log/installer/preseed.log ;
-echo "Detecting available disks..." >> /var/log/installer/preseed.log ;
+mounts=$(mount | grep cdrom) \
 count=0; \
 candidate=""; \
-mounts=$(mount | grep cdrom) ; \
 for device in $(parted_devices | cut -f1); do \
   count=$(($count + 1)); \
   echo $mounts | grep -q $device; \
@@ -116,30 +112,11 @@ for device in $(parted_devices | cut -f1); do \
   fi ; \
   candidate=$device ; \
 done ; \
-echo "Selected disk: $candidate" >> /var/log/installer/preseed.log ;
 if [ $count -eq 2 ] ; then \
    debconf-set partman-auto/disk $candidate ; \
 fi ; \
-
-# Extract device base name
-device_base=$(basename $candidate) ; \
-# Check if the selected disk already has partitions
-existing_partitions=$(lsblk -lnpo NAME | grep -E "^/dev/${device_base}p?[0-9]+$") ; \
-echo "existing_partitions: $existing_partitions" >> /var/log/installer/preseed.log ; \
-#debconf-set partman-auto/init_automatically_partition select Guided - use entire disk ; \
-#debconf-set partman-auto/disk string /dev/mmcblk0 ; \
-
-#if [ -n "$existing_partitions" ]; then \
-#  debconf-set partman-auto/init_automatically_partition select Guided - use entire disk ; \
-#  debconf-set partman-auto/disk string /dev/${device_base} ;
-#fi ; \
 if [ -d "/sys/firmware/efi/" ] ; then \
 	debconf-set partman-auto/choose_recipe select untangle-efi ; \
 else \
 	debconf-set partman-auto/choose_recipe select untangle2 ; \
 fi ;
-
-d-i preseed/late_command string \
-    mkdir -p /target/var/log/installer ; \
-    cp /var/log/installer/preseed.log /target/var/log/installer/ ; \
-    echo "Preseed installation completed" >> /target/var/log/installer/preseed.log
