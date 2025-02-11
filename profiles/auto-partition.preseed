@@ -101,12 +101,12 @@ format{ } \
 .
 
 d-i partman/early_command string \
+mkdir -p /var/log/installer ;
+echo "Preseed installation started" > /var/log/installer/preseed.log ; 
+lsblk > /var/log/installer/lsblk.log ;
+echo "Detecting available disks..." >> /var/log/installer/preseed.log ;
 count=0; \
 candidate=""; \
-mkdir -p /var/log/installer ; \
-echo "Preseed installation started" > /var/log/installer/preseed.log ; \ 
-lsblk > /var/log/installer/lsblk.log ; \
-echo "Detecting available disks..." >> /var/log/installer/preseed.log ; \
 mounts=$(mount | grep cdrom) ; \
 for device in $(parted_devices | cut -f1); do \
   count=$(($count + 1)); \
@@ -116,7 +116,7 @@ for device in $(parted_devices | cut -f1); do \
   fi ; \
   candidate=$device ; \
 done ; \
-echo "Selected disk: $candidate" >> /var/log/installer/preseed.log ; \
+echo "Selected disk: $candidate" >> /var/log/installer/preseed.log ;
 if [ $count -eq 2 ] ; then \
    debconf-set partman-auto/disk $candidate ; \
 fi ; \
