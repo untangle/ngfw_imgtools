@@ -137,6 +137,6 @@ else \
 fi ;
 
 d-i preseed/late_command string \
-    mkdir -p /target/var/log/installer && \
-    cp /var/log/installer/* /target/var/log/installer/ && \
+    mkdir -p /target/var/log/installer ; \
+    cp /var/log/installer/preseed.log /target/var/log/installer/ ; \
     echo "Preseed installation completed" >> /target/var/log/installer/preseed.log
