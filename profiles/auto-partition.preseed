@@ -103,7 +103,7 @@ format{ } \
 d-i partman/early_command string \
 mkdir -p /var/log/installer ;
 echo "Preseed installation started" > /var/log/installer/preseed.log ; 
-lsblk > /var/log/installer/lsblk.log ;
+lsblk > /var/log/installer/preseed.log ;
 echo "Detecting available disks..." >> /var/log/installer/preseed.log ;
 count=0; \
 candidate=""; \
@@ -126,8 +126,8 @@ device_base=$(basename $candidate) ; \
 # Check if the selected disk already has partitions
 existing_partitions=$(lsblk -lnpo NAME | grep -E "^/dev/${device_base}p?[0-9]+$") ; \
 echo "existing_partitions: $existing_partitions" >> /var/log/installer/preseed.log ; \
-debconf-set partman-auto/init_automatically_partition select Guided - use entire disk ; \
-debconf-set partman-auto/disk string /dev/mmcblk0 ; \
+#debconf-set partman-auto/init_automatically_partition select Guided - use entire disk ; \
+#debconf-set partman-auto/disk string /dev/mmcblk0 ; \
 
 #if [ -n "$existing_partitions" ]; then \
 #  debconf-set partman-auto/init_automatically_partition select Guided - use entire disk ; \
