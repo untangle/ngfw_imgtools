@@ -101,13 +101,13 @@ format{ } \
 .
 
 d-i partman/early_command string \
-mkdir -p /var/log/installer \
-echo "Preseed installation started" > /var/log/installer/preseed.log \ 
-lsblk > /var/log/installer/lsblk.log \
-echo "Detecting available disks..." >> /var/log/installer/preseed.log \
-mounts=$(mount | grep cdrom) \
 count=0; \
 candidate=""; \
+mkdir -p /var/log/installer ; \
+echo "Preseed installation started" > /var/log/installer/preseed.log ; \ 
+lsblk > /var/log/installer/lsblk.log ; \
+echo "Detecting available disks..." >> /var/log/installer/preseed.log ; \
+mounts=$(mount | grep cdrom) \
 for device in $(parted_devices | cut -f1); do \
   count=$(($count + 1)); \
   echo $mounts | grep -q $device; \
