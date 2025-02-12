@@ -1,4 +1,5 @@
 # This makes partman automatically partition without confirmation.
+d-i partman-auto/disk string /dev/mmcblk0
 d-i partman-md/confirm boolean true
 d-i partman-partitioning/confirm_write_new_label boolean true
 d-i partman/choose_partition select finish
