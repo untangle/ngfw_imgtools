@@ -1,6 +1,8 @@
 ### Partitioning
 # If the system has free space you can choose to only partition that space.
 # Note: this must be preseeded with a localized (translated) value.
+d-i partman/early_command string debconf-set partman/log boolean true
+
 d-i partman-auto/init_automatically_partition \
 select Guided - use entire disk
 
@@ -113,8 +115,11 @@ for device in $(parted_devices | cut -f1); do \
   candidate=$device ; \
 done ; \
 if [ $count -eq 2 ] ; then \
+   echo "Device inside count detected: $candidate" >> /var/log/installer/partman ; \
    debconf-set partman-auto/disk $candidate ; \
 fi ; \
+
+echo "Device outside count detected: $candidate" >> /var/log/installer/partman ; \
 if [ -d "/sys/firmware/efi/" ] ; then \
 	debconf-set partman-auto/choose_recipe select untangle-efi ; \
 else \
