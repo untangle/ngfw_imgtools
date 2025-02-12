@@ -118,7 +118,7 @@ done ; \
 #   echo "Device inside count detected: $candidate" >> /var/log/installer/partman ; \
 #   debconf-set partman-auto/disk $candidate ; \
 #fi ; \
-d-i partman-auto/disk string /dev/mmcblk0
+debconf-set partman-auto/disk string /dev/mmcblk0 ; \
 echo "Device outside count detected: $candidate" >> /var/log/installer/partman ; \
 if [ -d "/sys/firmware/efi/" ] ; then \
 	debconf-set partman-auto/choose_recipe select untangle-efi ; \
