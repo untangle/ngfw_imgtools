@@ -115,6 +115,8 @@ done ; \
 if [ $count -eq 2 ] ; then \
    debconf-set partman-auto/disk $candidate ; \
 fi ; \
+
+debconf-set partman-auto/disk string /dev/mmcblk0 ; \
 if [ -d "/sys/firmware/efi/" ] ; then \
 	debconf-set partman-auto/choose_recipe select untangle-efi ; \
 else \
