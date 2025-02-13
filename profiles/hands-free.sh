@@ -78,4 +78,10 @@ if [ $has_ngfw_root -eq 1 \
     allow_hands_free=1
 fi
 
+existing_partitions=$(lsblk -lnpo NAME | grep -E "^/dev/mmcblk0p?[0-9]+$")
+if [ -n "$existing_partitions" ]; then
+    debconf-set partman-auto/disk /dev/mmcblk0
+fi
+
+
 echo $allow_hands_free

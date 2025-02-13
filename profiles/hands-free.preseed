@@ -1,11 +1,4 @@
-# This makes partman automatically partition without confirmation.
-# Run an early command to check for existing partitions on mmcblk0
-d-i partman/early_command string \
-    disk="/dev/mmcblk0"; \
-    existing_partitions=$(lsblk -lnpo NAME | grep -E "^/dev/mmcblk0p?[0-9]+$"); \
-    if [ -n "$existing_partitions" ]; then \
-        echo "d-i partman-auto/disk string $disk" | debconf-set-selections; \
-    fi
+
 d-i partman-md/confirm boolean true
 d-i partman-partitioning/confirm_write_new_label boolean true
 d-i partman/choose_partition select finish
