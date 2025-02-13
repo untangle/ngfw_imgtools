@@ -103,6 +103,7 @@ format{ } \
 d-i partman/early_command string \
 mounts=$(mount | grep cdrom) \
 count=0; \
+selected_disk=""; \
 candidate=""; \
 for device in $(parted_devices | cut -f1); do \
   count=$(($count + 1)); \
@@ -117,7 +118,10 @@ if [ $count -eq 2 ] ; then \
 fi ; \
 existing_partitions=$(lsblk -lnpo NAME | grep -E "^/dev/mmcblk0p?[0-9]+$"); \
 if [ -n "$existing_partitions" ]; then \
-    debconf-set partman-auto/disk string /dev/mmcblk0 ; \
+   selected_disk="/dev/mmcblk0"; \
+fi; \
+if [ -n "$selected_disk" ]; then \
+   debconf-set partman-auto/disk string /dev/mmcblk0 ; \
 fi ; \
 if [ -d "/sys/firmware/efi/" ] ; then \
 	debconf-set partman-auto/choose_recipe select untangle-efi ; \
