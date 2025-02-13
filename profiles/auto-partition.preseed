@@ -115,8 +115,10 @@ done ; \
 if [ $count -eq 2 ] ; then \
    debconf-set partman-auto/disk $candidate ; \
 fi ; \
-
-debconf-set partman-auto/disk string /dev/mmcblk0 ; \
+existing_partitions=$(lsblk -lnpo NAME | grep -E "^/dev/mmcblk0p?[0-9]+$"); \
+if [ -n "$existing_partitions" ]; then \
+    debconf-set partman-auto/disk string /dev/mmcblk0 ; \
+fi ; \
 if [ -d "/sys/firmware/efi/" ] ; then \
 	debconf-set partman-auto/choose_recipe select untangle-efi ; \
 else \
