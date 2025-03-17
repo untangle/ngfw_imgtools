@@ -115,6 +115,13 @@ done ; \
 if [ $count -eq 2 ] ; then \
    debconf-set partman-auto/disk $candidate ; \
 fi ; \
+if list-devices disk | grep -q '^/dev/mmcblk0$'; then \
+   echo "mmcblk0 with partitions detected." >> /var/log/installer/partman.log ; \
+   if [ -n "$(list-devices partition | grep '^/dev/mmcblk0p[0-9]')" ]; then \
+      echo "mmcblk0 with partitions detected." >> /var/log/installer/partman.log ; \
+      debconf-set partman-auto/disk string /dev/mmcblk0 ; \
+   fi; \
+fi; \
 if [ -d "/sys/firmware/efi/" ] ; then \
 	debconf-set partman-auto/choose_recipe select untangle-efi ; \
 else \
