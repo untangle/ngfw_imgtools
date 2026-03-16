@@ -1,0 +1,10 @@
++KERNEL+
+untangle-archive-keyring
+untangle-linux-config
+untangle-bootsplash
+untangle-kernel-modules-bookworm-amd64
+untangle-debconf-manager
+untangle-hardware-config
+untangle-serial-config
+untangle-kiosk
+untangle-client-local
