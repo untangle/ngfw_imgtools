@@ -11,7 +11,7 @@
 
 # Default kernel ABI version to use. Append a kernel flavour to
 # produce KERNELVERSION.
-LINUX_KERNEL_ABI ?= 5.10.0-27
+LINUX_KERNEL_ABI ?= 6.1.0-43
 
 # Always "di" these days
 KERNEL_FLAVOUR ?= di
@@ -40,18 +40,18 @@ PRESEED =
 DPKG_UNPACK_OPTIONS = --force-overwrite
 
 # The codename of the Debian release that should be installed by default.
-DEBIAN_RELEASE = bullseye
+DEBIAN_RELEASE = bookworm
 
 # The version (number and codename) of the Debian release targeted by the
 # installation images. (Only the codename is used while the version number
 # has not yet been determined.)
-DEBIAN_VERSION = 11 (bullseye)
-DEBIAN_VERSION ?= bullseye
+DEBIAN_VERSION = 12 (bookworm)
+DEBIAN_VERSION ?= bookworm
 
 # Define here from what release (codename!) components (udebs) should be taken
 # to build debian-installer. By default this is set to 'unstable' for building
 # daily images. For official builds this is overruled in debian/rules.
-USE_UDEBS_FROM ?= bullseye
+USE_UDEBS_FROM ?= bookworm
 
 # Archive components from which to fetch debian-installer modules.
 UDEB_COMPONENTS ?= main/debian-installer
