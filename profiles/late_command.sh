@@ -3,9 +3,11 @@ script=$0
 preseed_config_file=$(dirname $script)/preseed.cfg
 
 # Forcibly install our linux configurator
+apt-install untangle-archive-keyring
 apt-install untangle-linux-config
 # sh -c "grep -q BOOTIF /proc/cmdline || sed -i -re 's/^root:[^:]+:/root:CHANGEME:/' /target/etc/shadow"
-chroot /target sh -c "grep -q BOOTIF /proc/cmdline || sed -i -re 's/^root:[^:]+:/root:CHANGEME:/' /etc/shadow" 
+# FIXME: CHANGEME is not a valid hash and locks the account; disabled until untangle-linux-config handles this
+#chroot /target sh -c "grep -q BOOTIF /proc/cmdline || sed -i -re 's/^root:[^:]+:/root:CHANGEME:/' /etc/shadow" 
 
 # Local client installation
 install_client_local=1

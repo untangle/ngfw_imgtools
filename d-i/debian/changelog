@@ -1,3 +1,58 @@
+debian-installer (20230607+deb12u1+17.5.0..+17.5.0..+17.5.0..+17.5.0..+17.5.0..+17.5.0..+17.5.0..+17.5.0..-1bookworm) current; urgency=medium
+
+  * auto build
+
+ -- Untangle Buildbot <buildbot@untangle.com>  
+
+debian-installer (20230607+deb12u1+17.5.0..+17.5.0..+17.5.0..+17.5.0..+17.5.0..+17.5.0..+17.5.0..-1bookworm) current; urgency=medium
+
+  * auto build
+
+ -- Untangle Buildbot <buildbot@untangle.com>  
+
+debian-installer (20230607+deb12u1+17.5.0..+17.5.0..+17.5.0..+17.5.0..+17.5.0..+17.5.0..-1bookworm) current; urgency=medium
+
+  * auto build
+
+ -- Untangle Buildbot <buildbot@untangle.com>  
+
+debian-installer (20230607+deb12u1+17.5.0..+17.5.0..+17.5.0..+17.5.0..+17.5.0..-1bookworm) current; urgency=medium
+
+  * auto build
+
+ -- Untangle Buildbot <buildbot@untangle.com>  
+
+debian-installer (20230607+deb12u1+17.5.0..+17.5.0..+17.5.0..+17.5.0..-1bookworm) current; urgency=medium
+
+  * auto build
+
+ -- Untangle Buildbot <buildbot@untangle.com>  
+
+debian-installer (20230607+deb12u1+17.5.0..+17.5.0..+17.5.0..-1bookworm) current; urgency=medium
+
+  * auto build
+
+ -- Untangle Buildbot <buildbot@untangle.com>  
+
+debian-installer (20230607+deb12u1+17.5.0..+17.5.0..-1bookworm) current; urgency=medium
+
+  * auto build
+
+ -- Untangle Buildbot <buildbot@untangle.com>  
+
+debian-installer (20230607+deb12u1+17.5.0..-1bookworm) current; urgency=medium
+
+  * auto build
+
+ -- Untangle Buildbot <buildbot@untangle.com>  
+
+debian-installer (20230607+deb12u1-1bookworm) current; urgency=medium
+
+  * Bookworm migration: Build for kernel 6.1.0-43-untangle-amd64
+  * Update USE_UDEBS_FROM to bookworm
+
+ -- Untangle Buildbot <buildbot@untangle.com>  Tue, 25 Feb 2026 00:00:00 +0000
+
 debian-installer (20210731+deb11u2) bullseye; urgency=medium
 
   * Bump Linux kernel ABI to 5.10.0-10.

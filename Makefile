@@ -4,11 +4,14 @@ PKGTOOLS_DIR := $(IMGTOOLS_DIR)/../ngfw_pkgtools
 
 ## overridables
 ifeq ($(REPOSITORY),)
-REPOSITORY := bullseye
+REPOSITORY := bookworm
 endif
 ifeq ($(DISTRIBUTION),)
 DISTRIBUTION := $(shell cat $(PKGTOOLS_DIR)/resources/DISTRIBUTION)
 endif
+
+DEBIAN_MIRROR := http://package-server/public/$(REPOSITORY)/
+MIRROR_KEYRING := /usr/share/keyrings/untangle-archive-keyring.gpg
 ifeq ($(ARCHITECTURE),)
 ARCHITECTURE := $(shell dpkg-architecture -qDEB_BUILD_ARCH)
 endif
@@ -30,13 +33,13 @@ endif
 export http_proxy=$(shell perl -pe 's/.*"(.*?)".*/$$1/' 2> /dev/null < /etc/apt/apt.conf.d/01proxy)
 
 ## make variables
-DEBVERSION := 10.0
+DEBVERSION := 12.0
 ifeq ($(ARCHITECTURE),i386)
   KERNEL_ARCH := 686-pae
 else
   KERNEL_ARCH := $(ARCHITECTURE)
 endif
-KERNEL_VERSION := 5.10.0-27
+KERNEL_VERSION := 6.1.0-43
 KERNEL := linux-image-$(KERNEL_VERSION)-untangle-$(KERNEL_ARCH)
 ISO_IMAGE := ngfw-+FLAVOR++REGION_NAME++SERIAL+-$(VERSION)_$(REPOSITORY)_$(ARCHITECTURE)_$(DISTRIBUTION)_$(shell date --iso-8601=seconds)_$(shell hostname -s).iso
 WAF_ISO_IMAGE := waf-+FLAVOR+-$(VERSION)_$(REPOSITORY)_$(ARCHITECTURE)_$(DISTRIBUTION)_$(shell date --iso-8601=seconds)_$(shell hostname -s).iso
@@ -138,12 +141,12 @@ ngfw/iso/%-image: iso/dependencies ngfw/iso/conf
 	    --local-packages local-packages \
 		--keyboard us \
 		--locale en_US.UTF-8 \
-		--keyring /usr/share/keyrings/untangle-archive-keyring.gpg \
+		--keyring $(MIRROR_KEYRING) \
 		--force-root \
 		--auto-profiles default,ngfw,$(flavor)$(REGION_PROFILE) \
 		--profiles hands-free,ngfw,$(flavor)$(REGION_PROFILE),expert \
-		--debian-mirror http://package-server/public/$(REPOSITORY)/ \
-		--debian-mirror http://package-server/public/$(REPOSITORY)/ \
+		--debian-mirror $(DEBIAN_MIRROR) \
+		--debian-mirror $(DEBIAN_MIRROR) \
 		--security-mirror "" \
 		--updates-mirror "" \
 		--dist $(DISTRIBUTION) \
@@ -154,10 +157,12 @@ ngfw/iso/%-image: iso/dependencies ngfw/iso/conf
                 --mirror-only \
 		--verbose \
 		--logfile $(IMGTOOLS_DIR)/simplecdd-mirror.log  ; \
-	perl -pe s/$(DISTRIBUTION)/$(REPOSITORY)/ $(IMGTOOLS_DIR)/tmp/mirror/conf/distributions > $(IMGTOOLS_DIR)/tmp/mirror/conf/distributions.ngfw ; \
-	cat $(IMGTOOLS_DIR)/tmp/mirror/conf/distributions.ngfw >> $(IMGTOOLS_DIR)/tmp/mirror/conf/distributions ; \
-	reprepro -Vb $(IMGTOOLS_DIR)/tmp/mirror copymatched $(REPOSITORY) $(DISTRIBUTION) '*' ; \
-	export CUSTOMSIZE=`du -s --block-size=2048 $(IMGTOOLS_DIR)/tmp/mirror | awk '{print $$1}')` ; \
+	if [ "$(DISTRIBUTION)" != "$(REPOSITORY)" ]; then \
+		perl -pe s/$(DISTRIBUTION)/$(REPOSITORY)/ $(IMGTOOLS_DIR)/tmp/mirror/conf/distributions > $(IMGTOOLS_DIR)/tmp/mirror/conf/distributions.ngfw ; \
+		cat $(IMGTOOLS_DIR)/tmp/mirror/conf/distributions.ngfw >> $(IMGTOOLS_DIR)/tmp/mirror/conf/distributions ; \
+		reprepro --ignore=undefinedtarget -Vb $(IMGTOOLS_DIR)/tmp/mirror copymatched $(REPOSITORY) $(DISTRIBUTION) '*' ; \
+	fi ; \
+	export CUSTOMSIZE=`du -s --block-size=2048 $(IMGTOOLS_DIR)/tmp/mirror | awk '{print int($$1 * 1.5)}'` ; \
 	echo $(CUSTOMSIZE) ; \
 	$(SERIAL_ENV_PRE_CMD) \
 	build-simple-cdd \
@@ -168,7 +173,7 @@ ngfw/iso/%-image: iso/dependencies ngfw/iso/conf
 		--force-root \
 		--auto-profiles default,ngfw,$(flavor)$(REGION_PROFILE) \
 		--profiles hands-free,ngfw,$(flavor)$(REGION_PROFILE),expert \
-		--debian-mirror http://package-server/public/$(REPOSITORY)/ \
+		--debian-mirror $(DEBIAN_MIRROR) \
 		--security-mirror "" \
 		--updates-mirror "" \
 		--dist $(REPOSITORY) \
@@ -226,7 +231,7 @@ waf/iso/%-image: iso/dependencies waf/iso/conf
 		--mirror-only \
 		--logfile $(IMGTOOLS_DIR)/simplecdd-mirror-waf.log ; \
 	cat $(IMGTOOLS_DIR)/tmp/mirror/conf/distributions.debian >> $(IMGTOOLS_DIR)/tmp/mirror/conf/distributions ; \
-	reprepro -Vb $(IMGTOOLS_DIR)/tmp/mirror copymatched $(REPOSITORY) $(DISTRIBUTION) '*' ; \
+	reprepro --ignore=undefinedtarget -Vb $(IMGTOOLS_DIR)/tmp/mirror copymatched $(REPOSITORY) $(DISTRIBUTION) '*' ; \
 	build-simple-cdd \
 		--keyboard us \
 		--locale en_US.UTF-8 \
