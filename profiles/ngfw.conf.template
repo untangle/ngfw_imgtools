@@ -2,7 +2,7 @@
 debian_cd_dir="+IMGTOOLS_DIR+/debian-cd"
 
 # non-free (sun-java)
-mirror_components="main non-free-firmware"
+mirror_components="main non-free non-free-firmware"
 #mirror_components_extra="main upstream premium"
 
 # custom installer (using standard Debian Bookworm d-i images)
