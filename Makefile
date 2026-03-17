@@ -173,6 +173,7 @@ ngfw/iso/%-image: iso/dependencies ngfw/iso/conf
 	    --local-packages local-packages \
 		--keyboard us \
 		--locale en_US.UTF-8 \
+		--keyring $(MIRROR_KEYRING) \
 		--force-root \
 		--auto-profiles default,ngfw,$(flavor)$(REGION_PROFILE) \
 		--profiles hands-free,ngfw,$(flavor)$(REGION_PROFILE),expert \
