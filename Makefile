@@ -158,12 +158,9 @@ ngfw/iso/%-image: iso/dependencies ngfw/iso/conf
 		--verbose \
 		--logfile $(IMGTOOLS_DIR)/simplecdd-mirror.log  ; \
 	if [ "$(DISTRIBUTION)" != "$(REPOSITORY)" ]; then \
-		gpg --batch --passphrase '' --quick-gen-key "build@localhost" rsa2048 default none 2>/dev/null || true ; \
-		perl -pe 's/$(DISTRIBUTION)/$(REPOSITORY)/; s/^SignWith:.*$$/SignWith: build@localhost/' $(IMGTOOLS_DIR)/tmp/mirror/conf/distributions > $(IMGTOOLS_DIR)/tmp/mirror/conf/distributions.ngfw ; \
+		perl -pe 's/$(DISTRIBUTION)/$(REPOSITORY)/' $(IMGTOOLS_DIR)/tmp/mirror/conf/distributions > $(IMGTOOLS_DIR)/tmp/mirror/conf/distributions.ngfw ; \
 		cat $(IMGTOOLS_DIR)/tmp/mirror/conf/distributions.ngfw >> $(IMGTOOLS_DIR)/tmp/mirror/conf/distributions ; \
-		reprepro --ignore=undefinedtarget -b $(IMGTOOLS_DIR)/tmp/mirror copymatched $(REPOSITORY) $(DISTRIBUTION) '*' ; \
-		reprepro --ignore=undefinedtarget -b $(IMGTOOLS_DIR)/tmp/mirror export $(REPOSITORY) ; \
-		gpg --export build@localhost > /etc/apt/trusted.gpg.d/build-mirror.gpg ; \
+		reprepro --ignore=undefinedtarget -Vb $(IMGTOOLS_DIR)/tmp/mirror copymatched $(REPOSITORY) $(DISTRIBUTION) '*' ; \
 	fi ; \
 	export CUSTOMSIZE=`du -s --block-size=2048 $(IMGTOOLS_DIR)/tmp/mirror | awk '{print int($$1 * 1.5)}'` ; \
 	echo $(CUSTOMSIZE) ; \

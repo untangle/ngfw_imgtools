@@ -23,9 +23,9 @@ if [ -z "$CODENAME" ] || [ -z "$ARCH" ] || [ -z "$APTTMP" ]; then
 fi
 
 if [ $ARCH = "source" ] ; then
-	ADEB="deb-src"
+	ADEB="deb-src [trusted=yes]"
 else
-	ADEB="deb"
+	ADEB="deb [trusted=yes]"
 fi
 
 if [ "$USE_BP"x = "1"x ] ; then
@@ -46,7 +46,7 @@ options=" -q -o Dir::State::status=$APTTMP/$THIS_PKGSET/status \
 
 sections=main
 if [ "${NONFREE:-0}" != "0" ] || [ "${EXTRANONFREE:-0}" != "0" ] || [ "${FORCE_FIRMWARE:-0}" != "0" ]; then
-	sections="$sections non-free-firmware"
+	sections="$sections non-free non-free-firmware"
 fi
 if [ "${CONTRIB:-0}" != "0" ]; then
 	sections="$sections contrib"
