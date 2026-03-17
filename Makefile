@@ -158,10 +158,13 @@ ngfw/iso/%-image: iso/dependencies ngfw/iso/conf
 		--verbose \
 		--logfile $(IMGTOOLS_DIR)/simplecdd-mirror.log  ; \
 	if [ "$(DISTRIBUTION)" != "$(REPOSITORY)" ]; then \
-		perl -pe s/$(DISTRIBUTION)/$(REPOSITORY)/ $(IMGTOOLS_DIR)/tmp/mirror/conf/distributions > $(IMGTOOLS_DIR)/tmp/mirror/conf/distributions.ngfw ; \
+		perl -pe 's/$(DISTRIBUTION)/$(REPOSITORY)/; s/^SignWith:.*$$//' $(IMGTOOLS_DIR)/tmp/mirror/conf/distributions > $(IMGTOOLS_DIR)/tmp/mirror/conf/distributions.ngfw ; \
 		cat $(IMGTOOLS_DIR)/tmp/mirror/conf/distributions.ngfw >> $(IMGTOOLS_DIR)/tmp/mirror/conf/distributions ; \
 		reprepro --ignore=undefinedtarget -Vb $(IMGTOOLS_DIR)/tmp/mirror copymatched $(REPOSITORY) $(DISTRIBUTION) '*' ; \
+		reprepro --ignore=undefinedtarget -Vb $(IMGTOOLS_DIR)/tmp/mirror export $(REPOSITORY) ; \
 	fi ; \
+	echo 'Acquire::AllowInsecureRepositories "true";' > /etc/apt/apt.conf.d/99allow-unauth ; \
+	echo 'APT::Get::AllowUnauthenticated "true";' >> /etc/apt/apt.conf.d/99allow-unauth ; \
 	export CUSTOMSIZE=`du -s --block-size=2048 $(IMGTOOLS_DIR)/tmp/mirror | awk '{print int($$1 * 1.5)}'` ; \
 	echo $(CUSTOMSIZE) ; \
 	$(SERIAL_ENV_PRE_CMD) \
