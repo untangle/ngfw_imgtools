@@ -100,3 +100,7 @@ done | perl -ne 'print unless $seen{$_}; $seen{$_}=1'
 
 echo "deb [trusted=yes] copy:$(pwd) localudebs/" > sources.list.udeb.local
 echo "deb [trusted=yes] http://package-server/public/$REPOSITORY $DISTRIBUTION main/debian-installer" >> sources.list.udeb.local
+# Trixie smoke test (Phase D): some udebs (e.g. libglib2.0-udeb) now depend on
+# regular .debs (e.g. libatomic1) that don't exist as -udeb variants. Expose the
+# main component so apt can resolve those cross-component deps during d-i build.
+echo "deb [trusted=yes] http://package-server/public/$REPOSITORY $DISTRIBUTION main" >> sources.list.udeb.local

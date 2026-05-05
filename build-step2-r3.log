@@ -1,0 +1,597 @@
+The SSH_KEY variable is not set. Defaulting to a blank string.
+The DISTRIBUTION variable is not set. Defaulting to a blank string.
+The ARCHITECTURE variable is not set. Defaulting to a blank string.
+The VERBOSE variable is not set. Defaulting to a blank string.
+The PACKAGE variable is not set. Defaulting to a blank string.
+The DEBUG variable is not set. Defaulting to a blank string.
+The VERSION variable is not set. Defaulting to a blank string.
+The SERIAL variable is not set. Defaulting to a blank string.
+The REGION variable is not set. Defaulting to a blank string.
+Creating ngfw_imgtools_build_run ... 
+Creating ngfw_imgtools_build_run ... done
+pkgtools version f1012c5
+Get:1 http://deb.debian.org/debian trixie InRelease [140 kB]
+Get:2 http://deb.debian.org/debian trixie-updates InRelease [47.3 kB]
+Get:3 http://deb.debian.org/debian-security trixie-security InRelease [43.4 kB]
+Get:4 http://deb.debian.org/debian trixie/main amd64 Packages [9671 kB]
+Get:5 http://package-server/public/trixie current InRelease [17.7 kB]
+Err:5 http://package-server/public/trixie current InRelease
+  Sub-process /usr/bin/sqv returned an error code (1), error message is: Missing key 735A9E18E8F62EDF413592460B9D6AE3627BF103, which is needed to verify signature.
+Get:6 http://deb.debian.org/debian trixie/main arm64 Packages [9607 kB]
+Get:7 http://deb.debian.org/debian trixie-updates/main amd64 Packages [5412 B]
+Get:8 http://deb.debian.org/debian trixie-updates/main arm64 Packages [5404 B]
+Get:9 http://deb.debian.org/debian-security trixie-security/main amd64 Packages [130 kB]
+Get:10 http://deb.debian.org/debian-security trixie-security/main arm64 Packages [130 kB]
+Reading package lists...
+W: http://package-server/public/trixie/dists/current/InRelease: The key(s) in the keyring /etc/apt/trusted.gpg.d/untangle.gpg are ignored as the file has an unsupported filetype.
+W: OpenPGP signature verification failed: http://package-server/public/trixie current InRelease: Sub-process /usr/bin/sqv returned an error code (1), error message is: Missing key 735A9E18E8F62EDF413592460B9D6AE3627BF103, which is needed to verify signature.
+E: The repository 'http://package-server/public/trixie current InRelease' is not signed.
+===  BEGIN installer-pkgs-modified/cdebconf
+... still waiting for PID 75 every 1s, next message in 30s
+===  SUCCESS installer-pkgs-modified/cdebconf 0.260+18.0.0+17.5.0..+17.5.0.20260316T171811Z.fd20a9c+localdiff20260505T065604+17.5.0.20260316T171811Z.fd20a9c+localdiff20260505T070444-1trixie
+===  BEGIN installer-pkgs-modified/pkgsel
+===  SUCCESS installer-pkgs-modified/pkgsel 0.73+18.0.0+17.5.0..+17.5.0.20260316T171811Z.fd20a9c+localdiff20260505T065702+17.5.0.20260316T171811Z.fd20a9c+localdiff20260505T070538-1trixie
+===  BEGIN installer-pkgs-modified/rootskel-gtk
+===  SUCCESS installer-pkgs-modified/rootskel-gtk 11.0.1+18.0.0+17.5.0..+17.5.0.20260316T171811Z.fd20a9c+localdiff20260505T065706+17.5.0.20260316T171811Z.fd20a9c+localdiff20260505T070543-1trixie
+===  BEGIN installer-pkgs-modified/base-installer
+===  SUCCESS installer-pkgs-modified/base-installer 1.215+18.0.0+17.5.0..+17.5.0.20260316T171811Z.fd20a9c+localdiff20260505T065716+17.5.0.20260316T171811Z.fd20a9c+localdiff20260505T070551-1trixie
+===  BEGIN d-i
+... still waiting for PID 11241 every 1s, next message in 30s
+Local changes detected:
+d-i/build/config/common d-i/debian/changelog d-i/debian/control d-i/debian/rules
+
+Setting version='20240821+18.0.0+17.5.0..+17.5.0.20260316T171811Z.fd20a9c+localdiff20260505T065725+17.5.0.20260316T171811Z.fd20a9c+localdiff20260505T070602-1trixie' distribution='current' timestamp='Mon, 16 Mar 2026 17:18:11 +0000'
+libdistro-info-perl is not installed, Debian release names are not known.
+libdistro-info-perl is not installed, Ubuntu release names are not known.
+... done
+tar: Removing leading `../' from member names
+
+WARNING: apt does not have a stable CLI interface. Use with caution in scripts.
+
+Note, using directory '.' to get the build dependencies
+Reading package lists...
+Building dependency tree...
+Reading state information...
+Installing:
+  bf-utf-source  genext2fs              libbogl-dev      syslinux-utils
+  docbook-xml    genisoimage            pxelinux         xsltproc
+  docbook-xsl    grub-common            shim-signed
+  e2fsprogs      grub-efi-amd64-signed  syslinux
+  fdisk          isolinux               syslinux-common
+
+Installing dependencies:
+  bogl-utils               libefivar1t64            libsvtav1enc2
+  dmsetup                  libext2fs2t64            libxpm4
+  grub-efi-amd64-bin       libfdisk1                libxslt1.1
+  grub-efi-amd64-unsigned  libfuse3-4               libyuv0
+  grub2-common             libgav1-1                logsave
+  libabsl20240722          libgd3                   mokutil
+  libaom3                  libheif-plugin-dav1d     sgml-base
+  libavif16                libheif-plugin-libde265  sgml-data
+  libbogl0                 libheif1                 shim-helpers-amd64-signed
+  libde265-0               libimagequant0           shim-signed-common
+  libdevmapper1.02.1       librav1e0.7              shim-unsigned
+  libefiboot1t64           libss2                   xml-core
+
+Suggested packages:
+  docbook                 gpart                     libheif-plugin-jpegenc
+  docbook-defguide        parted                    libheif-plugin-j2kdec
+  docbook-dsssl           fuse2fs                   libheif-plugin-j2kenc
+  dbtoepub                e2fsck-static             libheif-plugin-kvazaar
+  docbook-xsl-doc-html    wodim                     libheif-plugin-rav1e
+  | docbook-xsl-doc-pdf   cdrkit-doc                libheif-plugin-svtenc
+  | docbook-xsl-doc-text  multiboot-doc             tftpd-hpa
+  | docbook-xsl-doc       grub-emu                  sgml-base-doc
+  docbook-xsl-saxon       desktop-base              perlsgml
+  fop                     console-setup             w3-recs
+  libsaxon-java           fuse3                     opensp
+  libxalan2-java          libgd-tools               libcrypt-passwdmd5-perl
+  libxslthl-java          libheif-plugin-ffmpegdec
+  xalan                   libheif-plugin-jpegdec
+
+Recommended packages:
+  e2fsprogs-l10n  efibootmgr           libheif-plugin-aomenc
+  os-prober       libheif-plugin-x265
+
+Summary:
+  Upgrading: 0, Installing: 53, Removing: 0, Not Upgrading: 0
+  Download size: 22.6 MB
+  Space needed: 113 MB / 49.6 GB available
+
+Get:1 http://deb.debian.org/debian trixie/main amd64 libext2fs2t64 amd64 1.47.2-3+b10 [213 kB]
+Get:2 http://deb.debian.org/debian trixie/main amd64 libss2 amd64 1.47.2-3+b10 [29.8 kB]
+Get:3 http://deb.debian.org/debian trixie/main amd64 logsave amd64 1.47.2-3+b10 [24.9 kB]
+Get:4 http://deb.debian.org/debian trixie/main amd64 e2fsprogs amd64 1.47.2-3+b10 [590 kB]
+Get:5 http://deb.debian.org/debian trixie/main amd64 libfdisk1 amd64 2.41-5 [214 kB]
+Get:6 http://deb.debian.org/debian trixie/main amd64 fdisk amd64 2.41-5 [158 kB]
+Get:7 http://deb.debian.org/debian trixie/main amd64 bf-utf-source all 0.08+nmu2 [1024 kB]
+Get:8 http://deb.debian.org/debian trixie/main amd64 libaom3 amd64 3.12.1-1 [1871 kB]
+Get:9 http://deb.debian.org/debian trixie/main amd64 libabsl20240722 amd64 20240722.0-4 [492 kB]
+Get:10 http://deb.debian.org/debian trixie/main amd64 libgav1-1 amd64 0.19.0-3+b1 [353 kB]
+Get:11 http://deb.debian.org/debian trixie/main amd64 librav1e0.7 amd64 0.7.1-9+b2 [946 kB]
+Get:12 http://deb.debian.org/debian trixie/main amd64 libsvtav1enc2 amd64 2.3.0+dfsg-1 [2489 kB]
+Get:13 http://deb.debian.org/debian trixie/main amd64 libyuv0 amd64 0.0.1904.20250204-1 [174 kB]
+Get:14 http://deb.debian.org/debian trixie/main amd64 libavif16 amd64 1.2.1-1.2 [133 kB]
+Get:15 http://deb.debian.org/debian trixie/main amd64 libheif-plugin-dav1d amd64 1.19.8-1 [11.7 kB]
+Get:16 http://deb.debian.org/debian trixie/main amd64 libde265-0 amd64 1.0.15-1+b3 [189 kB]
+Get:17 http://deb.debian.org/debian trixie/main amd64 libheif-plugin-libde265 amd64 1.19.8-1 [15.3 kB]
+Get:18 http://deb.debian.org/debian trixie/main amd64 libheif1 amd64 1.19.8-1 [520 kB]
+Get:19 http://deb.debian.org/debian trixie/main amd64 libimagequant0 amd64 2.18.0-1+b2 [35.2 kB]
+Get:20 http://deb.debian.org/debian trixie/main amd64 libxpm4 amd64 1:3.5.17-1+b3 [56.2 kB]
+Get:21 http://deb.debian.org/debian trixie/main amd64 libgd3 amd64 2.3.3-13 [126 kB]
+Get:22 http://deb.debian.org/debian trixie/main amd64 bogl-utils amd64 0.1.18-22+b1 [33.6 kB]
+Get:23 http://deb.debian.org/debian trixie/main amd64 libdevmapper1.02.1 amd64 2:1.02.205-2 [135 kB]
+Get:24 http://deb.debian.org/debian trixie/main amd64 dmsetup amd64 2:1.02.205-2 [82.3 kB]
+Get:25 http://deb.debian.org/debian trixie/main amd64 sgml-base all 1.31+nmu1 [10.9 kB]
+Get:26 http://deb.debian.org/debian trixie/main amd64 xml-core all 0.19 [20.1 kB]
+Get:27 http://deb.debian.org/debian trixie/main amd64 sgml-data all 2.0.11+nmu1 [179 kB]
+Get:28 http://deb.debian.org/debian trixie/main amd64 docbook-xml all 4.5-13 [77.4 kB]
+Get:29 http://deb.debian.org/debian trixie/main amd64 docbook-xsl all 1.79.2+dfsg-7 [1221 kB]
+Get:30 http://deb.debian.org/debian trixie/main amd64 genext2fs amd64 1.5.0-3+b1 [30.0 kB]
+Get:31 http://deb.debian.org/debian trixie/main amd64 genisoimage amd64 9:1.1.11-4 [334 kB]
+Get:32 http://deb.debian.org/debian trixie/main amd64 libefivar1t64 amd64 38-3.1+b1 [58.5 kB]
+Get:33 http://deb.debian.org/debian trixie/main amd64 libefiboot1t64 amd64 38-3.1+b1 [43.9 kB]
+Get:34 http://deb.debian.org/debian trixie/main amd64 libfuse3-4 amd64 3.17.2-3 [98.7 kB]
+Get:35 http://deb.debian.org/debian trixie/main amd64 grub-common amd64 2.12-9+deb13u1 [2899 kB]
+Get:36 http://deb.debian.org/debian trixie/main amd64 grub-efi-amd64-unsigned amd64 2.12-9+deb13u1 [1361 kB]
+Get:37 http://deb.debian.org/debian trixie/main amd64 grub-efi-amd64-bin amd64 2.12-9+deb13u1 [1054 kB]
+Get:38 http://deb.debian.org/debian trixie/main amd64 grub-efi-amd64-signed amd64 1+2.12+9+deb13u1 [1364 kB]
+Get:39 http://deb.debian.org/debian trixie/main amd64 grub2-common amd64 2.12-9+deb13u1 [641 kB]
+Get:40 http://deb.debian.org/debian trixie/main amd64 isolinux all 3:6.04~git20190206.bf6db5b4+dfsg1-3.1 [86.5 kB]
+Get:41 http://deb.debian.org/debian trixie/main amd64 libbogl0 amd64 0.1.18-22+b1 [48.2 kB]
+Get:42 http://deb.debian.org/debian trixie/main amd64 libbogl-dev amd64 0.1.18-22+b1 [56.2 kB]
+Get:43 http://deb.debian.org/debian trixie/main amd64 libxslt1.1 amd64 1.1.35-1.2+deb13u2 [233 kB]
+Get:44 http://deb.debian.org/debian trixie/main amd64 mokutil amd64 0.7.2-1 [26.7 kB]
+Get:45 http://deb.debian.org/debian trixie/main amd64 pxelinux all 3:6.04~git20190206.bf6db5b4+dfsg1-3.1 [134 kB]
+Get:46 http://deb.debian.org/debian trixie/main amd64 shim-unsigned amd64 15.8-1 [440 kB]
+Get:47 http://deb.debian.org/debian trixie/main amd64 shim-helpers-amd64-signed amd64 1+15.8+1 [301 kB]
+Get:48 http://deb.debian.org/debian trixie/main amd64 shim-signed-common all 1.47+15.8-1 [15.2 kB]
+Get:49 http://deb.debian.org/debian trixie/main amd64 shim-signed amd64 1.47+15.8-1 [329 kB]
+Get:50 http://deb.debian.org/debian trixie/main amd64 syslinux amd64 3:6.04~git20190206.bf6db5b4+dfsg1-3.1 [181 kB]
+Get:51 http://deb.debian.org/debian trixie/main amd64 syslinux-common all 3:6.04~git20190206.bf6db5b4+dfsg1-3.1 [1212 kB]
+Get:52 http://deb.debian.org/debian trixie/main amd64 syslinux-utils amd64 3:6.04~git20190206.bf6db5b4+dfsg1-3.1 [78.2 kB]
+Get:53 http://deb.debian.org/debian trixie/main amd64 xsltproc amd64 1.1.35-1.2+deb13u2 [115 kB]
+Preconfiguring packages ...
+Fetched 22.6 MB in 5s (4896 kB/s)
+Selecting previously unselected package libext2fs2t64:amd64.
+(Reading database ... (Reading database ... 5%(Reading database ... 10%(Reading database ... 15%(Reading database ... 20%(Reading database ... 25%(Reading database ... 30%(Reading database ... 35%(Reading database ... 40%(Reading database ... 45%(Reading database ... 50%(Reading database ... 55%(Reading database ... 60%(Reading database ... 65%(Reading database ... 70%(Reading database ... 75%(Reading database ... 80%(Reading database ... 85%(Reading database ... 90%(Reading database ... 95%(Reading database ... 100%(Reading database ... 33224 files and directories currently installed.)
+Preparing to unpack .../libext2fs2t64_1.47.2-3+b10_amd64.deb ...
+Adding 'diversion of /lib/x86_64-linux-gnu/libe2p.so.2 to /lib/x86_64-linux-gnu/libe2p.so.2.usr-is-merged by libext2fs2t64'
+Adding 'diversion of /lib/x86_64-linux-gnu/libe2p.so.2.3 to /lib/x86_64-linux-gnu/libe2p.so.2.3.usr-is-merged by libext2fs2t64'
+Adding 'diversion of /lib/x86_64-linux-gnu/libext2fs.so.2 to /lib/x86_64-linux-gnu/libext2fs.so.2.usr-is-merged by libext2fs2t64'
+Adding 'diversion of /lib/x86_64-linux-gnu/libext2fs.so.2.4 to /lib/x86_64-linux-gnu/libext2fs.so.2.4.usr-is-merged by libext2fs2t64'
+Unpacking libext2fs2t64:amd64 (1.47.2-3+b10) ...
+Selecting previously unselected package libss2:amd64.
+Preparing to unpack .../libss2_1.47.2-3+b10_amd64.deb ...
+Unpacking libss2:amd64 (1.47.2-3+b10) ...
+Selecting previously unselected package logsave.
+Preparing to unpack .../logsave_1.47.2-3+b10_amd64.deb ...
+Unpacking logsave (1.47.2-3+b10) ...
+Setting up libext2fs2t64:amd64 (1.47.2-3+b10) ...
+Setting up libss2:amd64 (1.47.2-3+b10) ...
+Selecting previously unselected package e2fsprogs.
+(Reading database ... (Reading database ... 5%(Reading database ... 10%(Reading database ... 15%(Reading database ... 20%(Reading database ... 25%(Reading database ... 30%(Reading database ... 35%(Reading database ... 40%(Reading database ... 45%(Reading database ... 50%(Reading database ... 55%(Reading database ... 60%(Reading database ... 65%(Reading database ... 70%(Reading database ... 75%(Reading database ... 80%(Reading database ... 85%(Reading database ... 90%(Reading database ... 95%(Reading database ... 100%(Reading database ... 33253 files and directories currently installed.)
+Preparing to unpack .../00-e2fsprogs_1.47.2-3+b10_amd64.deb ...
+Unpacking e2fsprogs (1.47.2-3+b10) ...
+Selecting previously unselected package libfdisk1:amd64.
+Preparing to unpack .../01-libfdisk1_2.41-5_amd64.deb ...
+Unpacking libfdisk1:amd64 (2.41-5) ...
+Selecting previously unselected package fdisk.
+Preparing to unpack .../02-fdisk_2.41-5_amd64.deb ...
+Unpacking fdisk (2.41-5) ...
+Selecting previously unselected package bf-utf-source.
+Preparing to unpack .../03-bf-utf-source_0.08+nmu2_all.deb ...
+Unpacking bf-utf-source (0.08+nmu2) ...
+Selecting previously unselected package libaom3:amd64.
+Preparing to unpack .../04-libaom3_3.12.1-1_amd64.deb ...
+Unpacking libaom3:amd64 (3.12.1-1) ...
+Selecting previously unselected package libabsl20240722:amd64.
+Preparing to unpack .../05-libabsl20240722_20240722.0-4_amd64.deb ...
+Unpacking libabsl20240722:amd64 (20240722.0-4) ...
+Selecting previously unselected package libgav1-1:amd64.
+Preparing to unpack .../06-libgav1-1_0.19.0-3+b1_amd64.deb ...
+Unpacking libgav1-1:amd64 (0.19.0-3+b1) ...
+Selecting previously unselected package librav1e0.7:amd64.
+Preparing to unpack .../07-librav1e0.7_0.7.1-9+b2_amd64.deb ...
+Unpacking librav1e0.7:amd64 (0.7.1-9+b2) ...
+Selecting previously unselected package libsvtav1enc2:amd64.
+Preparing to unpack .../08-libsvtav1enc2_2.3.0+dfsg-1_amd64.deb ...
+Unpacking libsvtav1enc2:amd64 (2.3.0+dfsg-1) ...
+Selecting previously unselected package libyuv0:amd64.
+Preparing to unpack .../09-libyuv0_0.0.1904.20250204-1_amd64.deb ...
+Unpacking libyuv0:amd64 (0.0.1904.20250204-1) ...
+Selecting previously unselected package libavif16:amd64.
+Preparing to unpack .../10-libavif16_1.2.1-1.2_amd64.deb ...
+Unpacking libavif16:amd64 (1.2.1-1.2) ...
+Selecting previously unselected package libheif-plugin-dav1d:amd64.
+Preparing to unpack .../11-libheif-plugin-dav1d_1.19.8-1_amd64.deb ...
+Unpacking libheif-plugin-dav1d:amd64 (1.19.8-1) ...
+Selecting previously unselected package libde265-0:amd64.
+Preparing to unpack .../12-libde265-0_1.0.15-1+b3_amd64.deb ...
+Unpacking libde265-0:amd64 (1.0.15-1+b3) ...
+Selecting previously unselected package libheif-plugin-libde265:amd64.
+Preparing to unpack .../13-libheif-plugin-libde265_1.19.8-1_amd64.deb ...
+Unpacking libheif-plugin-libde265:amd64 (1.19.8-1) ...
+Selecting previously unselected package libheif1:amd64.
+Preparing to unpack .../14-libheif1_1.19.8-1_amd64.deb ...
+Unpacking libheif1:amd64 (1.19.8-1) ...
+Selecting previously unselected package libimagequant0:amd64.
+Preparing to unpack .../15-libimagequant0_2.18.0-1+b2_amd64.deb ...
+Unpacking libimagequant0:amd64 (2.18.0-1+b2) ...
+Selecting previously unselected package libxpm4:amd64.
+Preparing to unpack .../16-libxpm4_1%3a3.5.17-1+b3_amd64.deb ...
+Unpacking libxpm4:amd64 (1:3.5.17-1+b3) ...
+Selecting previously unselected package libgd3:amd64.
+Preparing to unpack .../17-libgd3_2.3.3-13_amd64.deb ...
+Unpacking libgd3:amd64 (2.3.3-13) ...
+Selecting previously unselected package bogl-utils.
+Preparing to unpack .../18-bogl-utils_0.1.18-22+b1_amd64.deb ...
+Unpacking bogl-utils (0.1.18-22+b1) ...
+Selecting previously unselected package libdevmapper1.02.1:amd64.
+Preparing to unpack .../19-libdevmapper1.02.1_2%3a1.02.205-2_amd64.deb ...
+Unpacking libdevmapper1.02.1:amd64 (2:1.02.205-2) ...
+Selecting previously unselected package dmsetup.
+Preparing to unpack .../20-dmsetup_2%3a1.02.205-2_amd64.deb ...
+Unpacking dmsetup (2:1.02.205-2) ...
+Selecting previously unselected package sgml-base.
+Preparing to unpack .../21-sgml-base_1.31+nmu1_all.deb ...
+Unpacking sgml-base (1.31+nmu1) ...
+Selecting previously unselected package xml-core.
+Preparing to unpack .../22-xml-core_0.19_all.deb ...
+Unpacking xml-core (0.19) ...
+Selecting previously unselected package sgml-data.
+Preparing to unpack .../23-sgml-data_2.0.11+nmu1_all.deb ...
+Unpacking sgml-data (2.0.11+nmu1) ...
+Selecting previously unselected package docbook-xml.
+Preparing to unpack .../24-docbook-xml_4.5-13_all.deb ...
+Unpacking docbook-xml (4.5-13) ...
+Selecting previously unselected package docbook-xsl.
+Preparing to unpack .../25-docbook-xsl_1.79.2+dfsg-7_all.deb ...
+Unpacking docbook-xsl (1.79.2+dfsg-7) ...
+Selecting previously unselected package genext2fs.
+Preparing to unpack .../26-genext2fs_1.5.0-3+b1_amd64.deb ...
+Unpacking genext2fs (1.5.0-3+b1) ...
+Selecting previously unselected package genisoimage.
+Preparing to unpack .../27-genisoimage_9%3a1.1.11-4_amd64.deb ...
+Unpacking genisoimage (9:1.1.11-4) ...
+Selecting previously unselected package libefivar1t64:amd64.
+Preparing to unpack .../28-libefivar1t64_38-3.1+b1_amd64.deb ...
+Unpacking libefivar1t64:amd64 (38-3.1+b1) ...
+Selecting previously unselected package libefiboot1t64:amd64.
+Preparing to unpack .../29-libefiboot1t64_38-3.1+b1_amd64.deb ...
+Unpacking libefiboot1t64:amd64 (38-3.1+b1) ...
+Selecting previously unselected package libfuse3-4:amd64.
+Preparing to unpack .../30-libfuse3-4_3.17.2-3_amd64.deb ...
+Unpacking libfuse3-4:amd64 (3.17.2-3) ...
+Selecting previously unselected package grub-common.
+Preparing to unpack .../31-grub-common_2.12-9+deb13u1_amd64.deb ...
+Unpacking grub-common (2.12-9+deb13u1) ...
+Selecting previously unselected package grub-efi-amd64-unsigned.
+Preparing to unpack .../32-grub-efi-amd64-unsigned_2.12-9+deb13u1_amd64.deb ...
+Unpacking grub-efi-amd64-unsigned (2.12-9+deb13u1) ...
+Selecting previously unselected package grub-efi-amd64-bin.
+Preparing to unpack .../33-grub-efi-amd64-bin_2.12-9+deb13u1_amd64.deb ...
+Unpacking grub-efi-amd64-bin (2.12-9+deb13u1) ...
+Selecting previously unselected package grub-efi-amd64-signed.
+Preparing to unpack .../34-grub-efi-amd64-signed_1+2.12+9+deb13u1_amd64.deb ...
+Unpacking grub-efi-amd64-signed (1+2.12+9+deb13u1) ...
+Selecting previously unselected package grub2-common.
+Preparing to unpack .../35-grub2-common_2.12-9+deb13u1_amd64.deb ...
+Unpacking grub2-common (2.12-9+deb13u1) ...
+Selecting previously unselected package isolinux.
+Preparing to unpack .../36-isolinux_3%3a6.04~git20190206.bf6db5b4+dfsg1-3.1_all.deb ...
+Unpacking isolinux (3:6.04~git20190206.bf6db5b4+dfsg1-3.1) ...
+Selecting previously unselected package libbogl0:amd64.
+Preparing to unpack .../37-libbogl0_0.1.18-22+b1_amd64.deb ...
+Unpacking libbogl0:amd64 (0.1.18-22+b1) ...
+Selecting previously unselected package libbogl-dev:amd64.
+Preparing to unpack .../38-libbogl-dev_0.1.18-22+b1_amd64.deb ...
+Unpacking libbogl-dev:amd64 (0.1.18-22+b1) ...
+Selecting previously unselected package libxslt1.1:amd64.
+Preparing to unpack .../39-libxslt1.1_1.1.35-1.2+deb13u2_amd64.deb ...
+Unpacking libxslt1.1:amd64 (1.1.35-1.2+deb13u2) ...
+Selecting previously unselected package mokutil.
+Preparing to unpack .../40-mokutil_0.7.2-1_amd64.deb ...
+Unpacking mokutil (0.7.2-1) ...
+Selecting previously unselected package pxelinux.
+Preparing to unpack .../41-pxelinux_3%3a6.04~git20190206.bf6db5b4+dfsg1-3.1_all.deb ...
+Unpacking pxelinux (3:6.04~git20190206.bf6db5b4+dfsg1-3.1) ...
+Selecting previously unselected package shim-unsigned:amd64.
+Preparing to unpack .../42-shim-unsigned_15.8-1_amd64.deb ...
+Unpacking shim-unsigned:amd64 (15.8-1) ...
+Selecting previously unselected package shim-helpers-amd64-signed.
+Preparing to unpack .../43-shim-helpers-amd64-signed_1+15.8+1_amd64.deb ...
+Unpacking shim-helpers-amd64-signed (1+15.8+1) ...
+Selecting previously unselected package shim-signed-common.
+Preparing to unpack .../44-shim-signed-common_1.47+15.8-1_all.deb ...
+Unpacking shim-signed-common (1.47+15.8-1) ...
+Selecting previously unselected package shim-signed:amd64.
+Preparing to unpack .../45-shim-signed_1.47+15.8-1_amd64.deb ...
+Unpacking shim-signed:amd64 (1.47+15.8-1) ...
+Selecting previously unselected package syslinux.
+Preparing to unpack .../46-syslinux_3%3a6.04~git20190206.bf6db5b4+dfsg1-3.1_amd64.deb ...
+Unpacking syslinux (3:6.04~git20190206.bf6db5b4+dfsg1-3.1) ...
+Selecting previously unselected package syslinux-common.
+Preparing to unpack .../47-syslinux-common_3%3a6.04~git20190206.bf6db5b4+dfsg1-3.1_all.deb ...
+Unpacking syslinux-common (3:6.04~git20190206.bf6db5b4+dfsg1-3.1) ...
+Selecting previously unselected package syslinux-utils.
+Preparing to unpack .../48-syslinux-utils_3%3a6.04~git20190206.bf6db5b4+dfsg1-3.1_amd64.deb ...
+Unpacking syslinux-utils (3:6.04~git20190206.bf6db5b4+dfsg1-3.1) ...
+Selecting previously unselected package xsltproc.
+Preparing to unpack .../49-xsltproc_1.1.35-1.2+deb13u2_amd64.deb ...
+Unpacking xsltproc (1.1.35-1.2+deb13u2) ...
+Setting up genisoimage (9:1.1.11-4) ...
+Setting up libaom3:amd64 (3.12.1-1) ...
+Setting up isolinux (3:6.04~git20190206.bf6db5b4+dfsg1-3.1) ...
+Setting up libxpm4:amd64 (1:3.5.17-1+b3) ...
+Setting up libefivar1t64:amd64 (38-3.1+b1) ...
+Setting up syslinux-common (3:6.04~git20190206.bf6db5b4+dfsg1-3.1) ...
+Setting up pxelinux (3:6.04~git20190206.bf6db5b4+dfsg1-3.1) ...
+Setting up libabsl20240722:amd64 (20240722.0-4) ...
+Setting up syslinux (3:6.04~git20190206.bf6db5b4+dfsg1-3.1) ...
+Setting up syslinux-utils (3:6.04~git20190206.bf6db5b4+dfsg1-3.1) ...
+Setting up bf-utf-source (0.08+nmu2) ...
+Setting up libsvtav1enc2:amd64 (2.3.0+dfsg-1) ...
+Setting up libbogl0:amd64 (0.1.18-22+b1) ...
+Setting up libimagequant0:amd64 (2.18.0-1+b2) ...
+Setting up libgav1-1:amd64 (0.19.0-3+b1) ...
+Setting up logsave (1.47.2-3+b10) ...
+Setting up libfdisk1:amd64 (2.41-5) ...
+Setting up genext2fs (1.5.0-3+b1) ...
+Setting up librav1e0.7:amd64 (0.7.1-9+b2) ...
+Setting up libefiboot1t64:amd64 (38-3.1+b1) ...
+Setting up libxslt1.1:amd64 (1.1.35-1.2+deb13u2) ...
+Setting up sgml-base (1.31+nmu1) ...
+Setting up libfuse3-4:amd64 (3.17.2-3) ...
+Setting up libde265-0:amd64 (1.0.15-1+b3) ...
+Setting up libyuv0:amd64 (0.0.1904.20250204-1) ...
+Setting up shim-unsigned:amd64 (15.8-1) ...
+Setting up libavif16:amd64 (1.2.1-1.2) ...
+Setting up mokutil (0.7.2-1) ...
+Setting up xsltproc (1.1.35-1.2+deb13u2) ...
+Setting up e2fsprogs (1.47.2-3+b10) ...
+Created symlink '/etc/systemd/system/timers.target.wants/e2scrub_all.timer' → '/usr/lib/systemd/system/e2scrub_all.timer'.
+Created symlink '/etc/systemd/system/multi-user.target.wants/e2scrub_reap.service' → '/usr/lib/systemd/system/e2scrub_reap.service'.
+Setting up fdisk (2.41-5) ...
+Setting up shim-signed-common (1.47+15.8-1) ...
+No DKMS packages installed: not changing Secure Boot validation state.
+Setting up shim-helpers-amd64-signed (1+15.8+1) ...
+Setting up xml-core (0.19) ...
+Setting up libheif-plugin-libde265:amd64 (1.19.8-1) ...
+Setting up libheif1:amd64 (1.19.8-1) ...
+Setting up libgd3:amd64 (2.3.3-13) ...
+Setting up dmsetup (2:1.02.205-2) ...
+Setting up libheif-plugin-dav1d:amd64 (1.19.8-1) ...
+Setting up bogl-utils (0.1.18-22+b1) ...
+Setting up libdevmapper1.02.1:amd64 (2:1.02.205-2) ...
+Setting up libbogl-dev:amd64 (0.1.18-22+b1) ...
+Setting up grub-common (2.12-9+deb13u1) ...
+Created symlink '/etc/systemd/system/multi-user.target.wants/grub-common.service' → '/usr/lib/systemd/system/grub-common.service'.
+Created symlink '/etc/systemd/system/suspend.target.wants/grub-common.service' → '/usr/lib/systemd/system/grub-common.service'.
+Created symlink '/etc/systemd/system/hibernate.target.wants/grub-common.service' → '/usr/lib/systemd/system/grub-common.service'.
+Created symlink '/etc/systemd/system/hybrid-sleep.target.wants/grub-common.service' → '/usr/lib/systemd/system/grub-common.service'.
+Created symlink '/etc/systemd/system/suspend-then-hibernate.target.wants/grub-common.service' → '/usr/lib/systemd/system/grub-common.service'.
+Setting up grub-efi-amd64-signed (1+2.12+9+deb13u1) ...
+Setting up grub-efi-amd64-unsigned (2.12-9+deb13u1) ...
+Setting up grub2-common (2.12-9+deb13u1) ...
+Setting up grub-efi-amd64-bin (2.12-9+deb13u1) ...
+Setting up shim-signed:amd64 (1.47+15.8-1) ...
+Processing triggers for libc-bin (2.41-12+deb13u2) ...
+Processing triggers for man-db (2.13.1-1) ...
+Processing triggers for sgml-base (1.31+nmu1) ...
+Setting up sgml-data (2.0.11+nmu1) ...
+Setting up docbook-xsl (1.79.2+dfsg-7) ...
+Processing triggers for sgml-base (1.31+nmu1) ...
+Setting up docbook-xml (4.5-13) ...
+Processing triggers for sgml-base (1.31+nmu1) ...
+dpkg-buildpackage: info: source package debian-installer
+dpkg-buildpackage: info: source version 20240821+18.0.0+17.5.0..+17.5.0.20260316T171811Z.fd20a9c+localdiff20260505T065725+17.5.0.20260316T171811Z.fd20a9c+localdiff20260505T070602-1trixie
+dpkg-buildpackage: info: source distribution current
+dpkg-buildpackage: info: source changed by Untangle Buildbot <buildbot@untangle.com>
+ dpkg-source -i.* --before-build .
+dpkg-buildpackage: info: host architecture amd64
+ debian/rules clean
+dh_testdir
+dh_testroot
+dh_clean
+/usr/bin/make -C build reallyclean
+make[1]: Entering directory '/opt/untangle/build/d-i/build'
+rm -f ./stamps/tree-unpack-cdrom_isolinux-stamp ./stamps/tree-cdrom_isolinux-stamp ./stamps/extra-cdrom_isolinux-stamp ./stamps/get_udebs-cdrom_isolinux-stamp
+rm -f ./tmp/cdrom_isolinux/diskusage.txt
+rm -f ./tmp/cdrom_isolinux/all.utf
+rm -f ./tmp/cdrom_isolinux/unifont.bdf ./tmp/cdrom_isolinux/tree/lib/unifont.bgf
+rm -f pkg-lists/standard-udebs pkg-lists/kernel-module-udebs
+rm -rf ./dest/cdrom/initrd.gz ./dest/cdrom/vmlinuz ./dest/cdrom/debian-cd_info.tar.gz
+rm -rf ./tmp/cdrom_isolinux
+rm -f ./stamps/tree-unpack-cdrom_gtk-stamp ./stamps/tree-cdrom_gtk-stamp ./stamps/extra-cdrom_gtk-stamp ./stamps/get_udebs-cdrom_gtk-stamp
+rm -f ./tmp/cdrom_gtk/diskusage.txt
+rm -f ./tmp/cdrom_gtk/all.utf
+rm -f ./tmp/cdrom_gtk/unifont.bdf ./tmp/cdrom_gtk/tree/lib/unifont.bgf
+rm -f pkg-lists/standard-udebs pkg-lists/kernel-module-udebs
+rm -rf ./dest/cdrom/gtk/initrd.gz ./dest/cdrom/gtk/vmlinuz ./dest/cdrom/gtk/debian-cd_info.tar.gz
+rm -rf ./tmp/cdrom_gtk
+rm -f ./stamps/tree-unpack-cdrom-xen-stamp ./stamps/tree-cdrom-xen-stamp ./stamps/extra-cdrom-xen-stamp ./stamps/get_udebs-cdrom-xen-stamp
+rm -f ./tmp/cdrom-xen/diskusage.txt
+rm -f ./tmp/cdrom-xen/all.utf
+rm -f ./tmp/cdrom-xen/unifont.bdf ./tmp/cdrom-xen/tree/lib/unifont.bgf
+rm -f pkg-lists/standard-udebs pkg-lists/kernel-module-udebs
+rm -rf ./dest/cdrom/xen/vmlinuz ./dest/cdrom/xen/initrd.gz xen_config
+rm -rf ./tmp/cdrom-xen
+rm -f ./stamps/tree-unpack-netboot-stamp ./stamps/tree-netboot-stamp ./stamps/extra-netboot-stamp ./stamps/get_udebs-netboot-stamp
+rm -f ./tmp/netboot/diskusage.txt
+rm -f ./tmp/netboot/all.utf
+rm -f ./tmp/netboot/unifont.bdf ./tmp/netboot/tree/lib/unifont.bgf
+rm -f pkg-lists/standard-udebs pkg-lists/kernel-module-udebs
+rm -rf ./dest/netboot/debian-installer ./dest/netboot/netboot.tar.gz ./dest/netboot/mini.iso
+rm -rf ./tmp/netboot
+rm -f ./stamps/tree-unpack-netboot-gtk-stamp ./stamps/tree-netboot-gtk-stamp ./stamps/extra-netboot-gtk-stamp ./stamps/get_udebs-netboot-gtk-stamp
+rm -f ./tmp/netboot-gtk/diskusage.txt
+rm -f ./tmp/netboot-gtk/all.utf
+rm -f ./tmp/netboot-gtk/unifont.bdf ./tmp/netboot-gtk/tree/lib/unifont.bgf
+rm -f pkg-lists/standard-udebs pkg-lists/kernel-module-udebs
+rm -rf ./dest/netboot/gtk/debian-installer ./dest/netboot/gtk/netboot.tar.gz ./dest/netboot/gtk/mini.iso
+rm -rf ./tmp/netboot-gtk
+rm -f ./stamps/tree-unpack-netboot-xen-stamp ./stamps/tree-netboot-xen-stamp ./stamps/extra-netboot-xen-stamp ./stamps/get_udebs-netboot-xen-stamp
+rm -f ./tmp/netboot-xen/diskusage.txt
+rm -f ./tmp/netboot-xen/all.utf
+rm -f ./tmp/netboot-xen/unifont.bdf ./tmp/netboot-xen/tree/lib/unifont.bgf
+rm -f pkg-lists/standard-udebs pkg-lists/kernel-module-udebs
+rm -rf ./dest/netboot/xen/vmlinuz ./dest/netboot/xen/initrd.gz xen_config
+rm -rf ./tmp/netboot-xen
+rm -f ./stamps/tree-unpack-hd-media-stamp ./stamps/tree-hd-media-stamp ./stamps/extra-hd-media-stamp ./stamps/get_udebs-hd-media-stamp
+rm -f ./tmp/hd-media/diskusage.txt
+rm -f ./tmp/hd-media/all.utf
+rm -f ./tmp/hd-media/unifont.bdf ./tmp/hd-media/tree/lib/unifont.bgf
+rm -f pkg-lists/standard-udebs pkg-lists/kernel-module-udebs
+rm -rf ./dest/hd-media/vmlinuz ./dest/hd-media/initrd.gz ./dest/hd-media/boot.img.gz
+rm -rf ./tmp/hd-media
+rm -f ./stamps/tree-unpack-hd-media_gtk-stamp ./stamps/tree-hd-media_gtk-stamp ./stamps/extra-hd-media_gtk-stamp ./stamps/get_udebs-hd-media_gtk-stamp
+rm -f ./tmp/hd-media_gtk/diskusage.txt
+rm -f ./tmp/hd-media_gtk/all.utf
+rm -f ./tmp/hd-media_gtk/unifont.bdf ./tmp/hd-media_gtk/tree/lib/unifont.bgf
+rm -f pkg-lists/standard-udebs pkg-lists/kernel-module-udebs
+rm -rf ./dest/hd-media/gtk/vmlinuz ./dest/hd-media/gtk/initrd.gz
+rm -rf ./tmp/hd-media_gtk
+for png in boot/artwork/11-homeworld/homeworld.png boot/artwork/11-homeworld/homeworld.png boot/artwork/11-homeworld/homeworld.png; do if [ -f ${png%%.png}.svg ]; then rm -f $png; fi; done
+rm -rf apt apt.udeb apt.deb ./dest/ ./tmp/ sourceudebs debugudebs
+rm -f sources.list sources.list.udeb localudebs/Packages.gz localudebs/Packages
+rm -rf udebs ./stamps/
+make[1]: Leaving directory '/opt/untangle/build/d-i/build'
+/usr/bin/make -C doc/devel/partman clean
+make[1]: Entering directory '/opt/untangle/build/d-i/doc/devel/partman'
+make[1]: Leaving directory '/opt/untangle/build/d-i/doc/devel/partman'
+/usr/bin/make -C doc/devel/internals clean
+make[1]: Entering directory '/opt/untangle/build/d-i/doc/devel/internals'
+make[1]: Leaving directory '/opt/untangle/build/d-i/doc/devel/internals'
+ dpkg-source -i.* -b .
+dpkg-source: warning: native package version may not have a revision
+dpkg-source: warning: source directory 'd-i' is not <sourcepackage>-<upstreamversion> 'debian-installer-20240821+18.0.0+17.5.0..+17.5.0.20260316T171811Z.fd20a9c+localdiff20260505T065725+17.5.0.20260316T171811Z.fd20a9c+localdiff20260505T070602'
+dpkg-source: info: using source format '1.0'
+dpkg-source: info: building debian-installer in debian-installer_20240821+18.0.0+17.5.0..+17.5.0.20260316T171811Z.fd20a9c+localdiff20260505T065725+17.5.0.20260316T171811Z.fd20a9c+localdiff20260505T070602-1trixie.tar.gz
+dpkg-source: info: building debian-installer in debian-installer_20240821+18.0.0+17.5.0..+17.5.0.20260316T171811Z.fd20a9c+localdiff20260505T065725+17.5.0.20260316T171811Z.fd20a9c+localdiff20260505T070602-1trixie.dsc
+ debian/rules binary
+rm -f build-stamp
+/usr/bin/make -C doc/devel/internals
+make[1]: Entering directory '/opt/untangle/build/d-i/doc/devel/internals'
+Writing ./ch01.html for chapter(intro)
+Writing ./ch02.html for chapter(running)
+Writing ./ch03.html for chapter(udebs)
+Writing ./ch04.html for chapter(build)
+Writing ./ch05.html for chapter(maintenance)
+Writing ./apa.html for appendix(ap-menu-item)
+Writing ./apb.html for appendix(ap-hooks)
+Writing ./index.html for book
+make[1]: Leaving directory '/opt/untangle/build/d-i/doc/devel/internals'
+/usr/bin/make -C doc/devel/partman
+make[1]: Entering directory '/opt/untangle/build/d-i/doc/devel/partman'
+Writing ./ch01.html for chapter(ch1)
+Writing ./ch02.html for chapter(ch2)
+Writing ./ch03.html for chapter(ch3)
+Writing ./ch04.html for chapter(ch4)
+Writing ./ch05.html for chapter(ch5)
+Writing ./ch06.html for chapter(ch6)
+Writing ./index.html for book
+make[1]: Leaving directory '/opt/untangle/build/d-i/doc/devel/partman'
+touch build-stamp
+dh_testdir
+dh_testroot
+dh_prep
+dh_installdirs
+debian/rules build-images
+make[1]: Entering directory '/opt/untangle/build/d-i'
+/usr/bin/make -C build all_build stats release \
+	USE_UDEBS_FROM=trixie BUILD_DATE=20240821+18 \
+	USE_PROPOSED_UPDATES=0 \
+	USE_UNRELEASED= \
+	TRANSSTATUS=translation-status BOOTMENU_BEEP=y
+make[2]: Entering directory '/opt/untangle/build/d-i/build'
+WARNING: mirror 'http://package-server/public/trixie' appears to be invalid; skipping
+Using sources.list.udeb.local:
+   deb [trusted=yes] copy:/opt/untangle/build/d-i/build localudebs/
+   deb [trusted=yes] http://package-server/public/trixie current main/debian-installer
+*
+* Warning: Building with localudebs.
+* This build should not be used for official purposes.
+*
+Ign:1 copy:/opt/untangle/build/d-i/build localudebs/ InRelease
+Ign:2 copy:/opt/untangle/build/d-i/build localudebs/ Release
+Err:3 copy:/opt/untangle/build/d-i/build localudebs/ Packages
+  Failed to stat - copy-stat (2: No such file or directory)
+Err:3 copy:/opt/untangle/build/d-i/build localudebs/ Packages
+  Failed to stat - copy-stat (2: No such file or directory)
+Err:3 copy:/opt/untangle/build/d-i/build localudebs/ Packages
+  Failed to stat - copy-stat (2: No such file or directory)
+Get:3 copy:/opt/untangle/build/d-i/build localudebs/ Packages [12.0 kB]
+Get:4 http://package-server/public/trixie current InRelease [17.7 kB]
+Ign:4 http://package-server/public/trixie current InRelease
+Get:5 http://package-server/public/trixie current/main/debian-installer amd64 Packages [71.5 kB]
+Fetched 101 kB in 2s (43.9 kB/s)
+Reading package lists...
+W: http://package-server/public/trixie/dists/current/InRelease: Loading /usr/share/keyrings/debian-archive-keyring.gpg from deprecated option Dir::Etc::Trusted
+W: OpenPGP signature verification failed: http://package-server/public/trixie current InRelease: Sub-process /usr/bin/sqv returned an error code (1), error message is: Missing key 735A9E18E8F62EDF413592460B9D6AE3627BF103, which is needed to verify signature.
+Reading package lists...
+Building dependency tree...
+dh_testroot
+dh_testroot: warning: dh_testroot must be called from the source root
+get-packages udeb acpi-modules-6.1.0-43-amd64-di alsa-utils-udeb anna archdetect ata-modules-6.1.0-43-amd64-di bogl-bterm-udeb brltty-udeb busybox-udeb ca-certificates-udeb cdebconf-gtk-terminal cdebconf-gtk-udeb cdebconf-newt-terminal cdebconf-newt-udeb cdebconf-priority cdebconf-text-udeb cdebconf-udeb cdrom-checker cdrom-core-modules-6.1.0-43-amd64-di cdrom-detect cdrom-retriever console-setup-linux-fonts-udeb console-setup-pc-ekmap console-setup-udeb crc-modules-6.1.0-43-amd64-di di-utils di-utils-reboot di-utils-shell di-utils-terminfo env-preseed espeak-ng-data-udeb espeakup-udeb event-modules-6.1.0-43-amd64-di fat-modules-6.1.0-43-amd64-di fb-modules-6.1.0-43-amd64-di file-preseed firewire-core-modules-6.1.0-43-amd64-di fontconfig-udeb fonts-android-udeb fonts-dejavu-mono-udeb fonts-dejavu-udeb fonts-farsiweb-udeb fonts-freefont-udeb fonts-khmeros-udeb fonts-knda-udeb fonts-lao-udeb fonts-lohit-guru-udeb fonts-mlym-udeb fonts-noto-hinted-udeb fonts-sil-abyssinica-udeb fonts-sil-padauk-udeb fonts-taml-udeb fonts-telu-udeb fonts-thai-tlwg-udeb fonts-tibetan-machine-udeb fonts-ukij-uyghur-udeb gtk2-engines-udeb haveged-udeb hw-detect i2c-modules-6.1.0-43-amd64-di initrd-preseed input-modules-6.1.0-43-amd64-di installation-locale isofs-modules-6.1.0-43-amd64-di kbd-udeb kernel-image-6.1.0-43-amd64-di kmod-udeb libacl1-udeb libasound2-udeb libatk-adaptor-udeb libatk-bridge-2.0-0-udeb libatk1.0-udeb libatspi0-udeb libblkid1-udeb libc6-udeb libcairo2-udeb libcap2-udeb libcrypt1-udeb libcrypto3-udeb libdatrie1-udeb libdbus-1-3-udeb libdebconfclient0-udeb libdebian-installer4-udeb libdrm2-udeb libevdev2-udeb libexpat1-udeb libffi8-udeb libfontenc1-udeb libfreetype6-udeb libfribidi0-udeb libgail18-udeb libgdk-pixbuf-2.0-0-udeb libglib2.0-udeb libgtk2.0-0-udeb libharfbuzz0-udeb libinput10-udeb libkmod2-udeb libmtdev1-udeb libncursesw6-udeb libnewt0.52-udeb libpango1.0-udeb libpci3-udeb libpciaccess0-udeb libpcre2-8-0-udeb libpixman-1-0-udeb libpng16-16-udeb libreadline8-udeb libselinux1-udeb libslang2-udeb libssl3-udeb libtextwrap1-udeb libthai-data-udeb libthai0-udeb libtinfo6-udeb libudev1-udeb libuuid1-udeb libvte9-udeb libx11-6-udeb libxau6-udeb libxcb1-udeb libxcursor1-udeb libxcvt0-udeb libxdmcp6-udeb libxext6-udeb libxfixes3-udeb libxfont2-udeb libxft2-udeb libxi6-udeb libxinerama1-udeb libxkbfile1-udeb libxrandr2-udeb libxrender1-udeb libxshmfence1-udeb libzstd1-udeb load-cdrom localechooser lowmemcheck main-menu media-retriever mmc-core-modules-6.1.0-43-amd64-di mmc-modules-6.1.0-43-amd64-di mountmedia mouse-modules-6.1.0-43-amd64-di nano-udeb pata-modules-6.1.0-43-amd64-di pciutils-udeb pcmcia-modules-6.1.0-43-amd64-di pcmcia-storage-modules-6.1.0-43-amd64-di pcmciautils-udeb preseed-common readline-common-udeb rescue-check rfkill-modules-6.1.0-43-amd64-di rootskel rootskel-gtk sata-modules-6.1.0-43-amd64-di save-logs scsi-core-modules-6.1.0-43-amd64-di scsi-modules-6.1.0-43-amd64-di serial-modules-6.1.0-43-amd64-di sound-modules-6.1.0-43-amd64-di speakup-modules-6.1.0-43-amd64-di udev-udeb udpkg uinput-modules-6.1.0-43-amd64-di usb-modules-6.1.0-43-amd64-di usb-serial-modules-6.1.0-43-amd64-di usb-storage-modules-6.1.0-43-amd64-di util-linux-udeb wget-udeb wireless-regdb-udeb x11-xkb-utils-udeb xkb-data-udeb xserver-xorg-core-udeb xserver-xorg-input-libinput-udeb xserver-xorg-video-fbdev-udeb zlib1g-udeb 
+*
+* Warning: Building with localudebs.
+* This build should not be used for official purposes.
+*
+Ign:1 copy:/opt/untangle/build/d-i/build localudebs/ InRelease
+Ign:2 copy:/opt/untangle/build/d-i/build localudebs/ Release
+Err:3 copy:/opt/untangle/build/d-i/build localudebs/ Packages
+  Failed to stat - copy-stat (2: No such file or directory)
+Err:3 copy:/opt/untangle/build/d-i/build localudebs/ Packages
+  Failed to stat - copy-stat (2: No such file or directory)
+Err:3 copy:/opt/untangle/build/d-i/build localudebs/ Packages
+  Failed to stat - copy-stat (2: No such file or directory)
+Get:3 copy:/opt/untangle/build/d-i/build localudebs/ Packages [12.0 kB]
+Get:4 http://package-server/public/trixie current InRelease [17.7 kB]
+Ign:4 http://package-server/public/trixie current InRelease
+Fetched 29.7 kB in 1s (23.9 kB/s)
+Reading package lists...
+W: http://package-server/public/trixie/dists/current/InRelease: Loading /usr/share/keyrings/debian-archive-keyring.gpg from deprecated option Dir::Etc::Trusted
+W: OpenPGP signature verification failed: http://package-server/public/trixie current InRelease: Sub-process /usr/bin/sqv returned an error code (1), error message is: Missing key 735A9E18E8F62EDF413592460B9D6AE3627BF103, which is needed to verify signature.
+Reading package lists...
+Building dependency tree...
+Need to download: acpi-modules-6.1.0-43-amd64-di alsa-utils-udeb anna archdetect ata-modules-6.1.0-43-amd64-di bogl-bterm-udeb brltty-udeb busybox-udeb ca-certificates-udeb cdebconf-gtk-terminal cdebconf-gtk-udeb cdebconf-newt-terminal cdebconf-newt-udeb cdebconf-priority cdebconf-text-udeb cdebconf-udeb cdrom-checker cdrom-core-modules-6.1.0-43-amd64-di cdrom-detect cdrom-retriever console-setup-linux-fonts-udeb console-setup-pc-ekmap console-setup-udeb crc-modules-6.1.0-43-amd64-di di-utils di-utils-reboot di-utils-shell di-utils-terminfo env-preseed espeak-ng-data-udeb espeakup-udeb event-modules-6.1.0-43-amd64-di fat-modules-6.1.0-43-amd64-di fb-modules-6.1.0-43-amd64-di file-preseed firewire-core-modules-6.1.0-43-amd64-di fontconfig-udeb fonts-android-udeb fonts-dejavu-mono-udeb fonts-dejavu-udeb fonts-farsiweb-udeb fonts-freefont-udeb fonts-khmeros-udeb fonts-knda-udeb fonts-lao-udeb fonts-lohit-guru-udeb fonts-mlym-udeb fonts-noto-hinted-udeb fonts-sil-abyssinica-udeb fonts-sil-padauk-udeb fonts-taml-udeb fonts-telu-udeb fonts-thai-tlwg-udeb fonts-tibetan-machine-udeb fonts-ukij-uyghur-udeb gtk2-engines-udeb haveged-udeb hw-detect i2c-modules-6.1.0-43-amd64-di initrd-preseed input-modules-6.1.0-43-amd64-di installation-locale isofs-modules-6.1.0-43-amd64-di kbd-udeb kernel-image-6.1.0-43-amd64-di kmod-udeb libacl1-udeb libasound2-udeb libatk-adaptor-udeb libatk-bridge-2.0-0-udeb libatk1.0-udeb libatspi0-udeb libblkid1-udeb libc6-udeb libcairo2-udeb libcap2-udeb libcrypt1-udeb libcrypto3-udeb libdatrie1-udeb libdbus-1-3-udeb libdebconfclient0-udeb libdebian-installer4-udeb libdrm2-udeb libevdev2-udeb libexpat1-udeb libffi8-udeb libfontenc1-udeb libfreetype6-udeb libfribidi0-udeb libgail18-udeb libgdk-pixbuf-2.0-0-udeb libglib2.0-udeb libgtk2.0-0-udeb libharfbuzz0-udeb libinput10-udeb libkmod2-udeb libmtdev1-udeb libncursesw6-udeb libnewt0.52-udeb libpango1.0-udeb libpci3-udeb libpciaccess0-udeb libpcre2-8-0-udeb libpixman-1-0-udeb libpng16-16-udeb libreadline8-udeb libselinux1-udeb libslang2-udeb libssl3-udeb libtextwrap1-udeb libthai-data-udeb libthai0-udeb libtinfo6-udeb libudev1-udeb libuuid1-udeb libvte9-udeb libx11-6-udeb libxau6-udeb libxcb1-udeb libxcursor1-udeb libxcvt0-udeb libxdmcp6-udeb libxext6-udeb libxfixes3-udeb libxfont2-udeb libxft2-udeb libxi6-udeb libxinerama1-udeb libxkbfile1-udeb libxrandr2-udeb libxrender1-udeb libxshmfence1-udeb libzstd1-udeb load-cdrom localechooser lowmemcheck main-menu media-retriever mmc-core-modules-6.1.0-43-amd64-di mmc-modules-6.1.0-43-amd64-di mountmedia mouse-modules-6.1.0-43-amd64-di nano-udeb pata-modules-6.1.0-43-amd64-di pciutils-udeb pcmcia-modules-6.1.0-43-amd64-di pcmcia-storage-modules-6.1.0-43-amd64-di pcmciautils-udeb preseed-common readline-common-udeb rescue-check rfkill-modules-6.1.0-43-amd64-di rootskel rootskel-gtk sata-modules-6.1.0-43-amd64-di save-logs scsi-core-modules-6.1.0-43-amd64-di scsi-modules-6.1.0-43-amd64-di serial-modules-6.1.0-43-amd64-di sound-modules-6.1.0-43-amd64-di speakup-modules-6.1.0-43-amd64-di udev-udeb udpkg uinput-modules-6.1.0-43-amd64-di usb-modules-6.1.0-43-amd64-di usb-serial-modules-6.1.0-43-amd64-di usb-storage-modules-6.1.0-43-amd64-di util-linux-udeb wget-udeb wireless-regdb-udeb x11-xkb-utils-udeb xkb-data-udeb xserver-xorg-core-udeb xserver-xorg-input-libinput-udeb xserver-xorg-video-fbdev-udeb zlib1g-udeb
+Reading package lists...
+Building dependency tree...
+  kmod-udeb:amd64 Depends on liblzma5-udeb:amd64 < none @un H > (>= 5.8.1) can't be satisfied!
+  libglib2.0-udeb:amd64 Depends on libatomic1:amd64 < none @un H > can't be satisfied!
+  libkmod2-udeb:amd64 Depends on liblzma5-udeb:amd64 < none @un H > (>= 5.8.1) can't be satisfied!
+Solving dependencies...
+Some packages could not be installed. This may mean that you have
+requested an impossible situation or if you are using the unstable
+distribution that some required packages have not yet been created
+or been moved out of Incoming.
+The following information may help to resolve the situation:
+
+The following packages have unmet dependencies:
+ kmod-udeb : Depends: liblzma5-udeb (>= 5.8.1) but it is not installable
+ libglib2.0-udeb : Depends: libatomic1 but it is not installable
+ libkmod2-udeb : Depends: liblzma5-udeb (>= 5.8.1) but it is not installable
+E: Unable to correct problems, you have held broken packages.
+E: The following information from --solver 3.0 may provide additional context:
+   Unable to satisfy dependencies. Reached two conflicting decisions:
+   1. kmod-udeb:amd64=34.2-2 is selected for install
+   2. kmod-udeb:amd64 Depends liblzma5-udeb (>= 5.8.1)
+      but none of the choices are installable:
+      [no choices]
+make[9]: *** [Makefile:624: stamps/get_udebs-cdrom_gtk-stamp] Error 100
+make[8]: *** [Makefile:298: _build] Error 2
+make[7]: *** [Makefile:292: build_cdrom_gtk] Error 2
+make[6]: *** [Makefile:298: _build] Error 2
+make[5]: *** [Makefile:194: flavour_build] Error 2
+make[4]: *** [Makefile:190: medium_build] Error 2
+make[3]: *** [Makefile:186: subarch_build] Error 2
+make[2]: *** [Makefile:182: all_build] Error 2
+make[2]: Leaving directory '/opt/untangle/build/d-i/build'
+make[1]: *** [debian/rules:46: build-images] Error 2
+make[1]: Leaving directory '/opt/untangle/build/d-i'
+make: *** [debian/rules:67: install] Error 2
+dpkg-buildpackage: error: debian/rules binary subprocess returned exit status 2
+FAILURE 20240821+18.0.0+17.5.0..+17.5.0.20260316T171811Z.fd20a9c+localdiff20260505T065725+17.5.0.20260316T171811Z.fd20a9c+localdiff20260505T070602-1trixie
+===  FAILURE d-i 20240821+18.0.0+17.5.0..+17.5.0.20260316T171811Z.fd20a9c+localdiff20260505T065725+17.5.0.20260316T171811Z.fd20a9c+localdiff20260505T070602-1trixie
+1

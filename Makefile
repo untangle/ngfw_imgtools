@@ -4,7 +4,7 @@ PKGTOOLS_DIR := $(IMGTOOLS_DIR)/../ngfw_pkgtools
 
 ## overridables
 ifeq ($(REPOSITORY),)
-REPOSITORY := bookworm
+REPOSITORY := trixie
 endif
 ifeq ($(DISTRIBUTION),)
 DISTRIBUTION := $(shell cat $(PKGTOOLS_DIR)/resources/DISTRIBUTION)
@@ -33,13 +33,13 @@ endif
 export http_proxy=$(shell perl -pe 's/.*"(.*?)".*/$$1/' 2> /dev/null < /etc/apt/apt.conf.d/01proxy)
 
 ## make variables
-DEBVERSION := 12.0
+DEBVERSION := 13.0
 ifeq ($(ARCHITECTURE),i386)
   KERNEL_ARCH := 686-pae
 else
   KERNEL_ARCH := $(ARCHITECTURE)
 endif
-KERNEL_VERSION := 6.1.0-43
+KERNEL_VERSION := 6.12.85+1
 KERNEL := linux-image-$(KERNEL_VERSION)-untangle-$(KERNEL_ARCH)
 ISO_IMAGE := ngfw-+FLAVOR++REGION_NAME++SERIAL+-$(VERSION)_$(REPOSITORY)_$(ARCHITECTURE)_$(DISTRIBUTION)_$(shell date --iso-8601=seconds)_$(shell hostname -s).iso
 WAF_ISO_IMAGE := waf-+FLAVOR+-$(VERSION)_$(REPOSITORY)_$(ARCHITECTURE)_$(DISTRIBUTION)_$(shell date --iso-8601=seconds)_$(shell hostname -s).iso

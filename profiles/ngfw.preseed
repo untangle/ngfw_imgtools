@@ -1,1 +1,2 @@
-d-i pkgsel/include string untangle-gateway
+# Trixie kernel-only smoke test (Phase D): NGFW packages disabled until Phase E lands.
+# d-i pkgsel/include string untangle-gateway

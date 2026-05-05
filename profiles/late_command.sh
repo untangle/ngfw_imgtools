@@ -2,9 +2,9 @@
 script=$0
 preseed_config_file=$(dirname $script)/preseed.cfg
 
-# Forcibly install our linux configurator
-apt-install untangle-archive-keyring
-apt-install untangle-linux-config
+# Trixie kernel-only smoke test (Phase D): NGFW packages disabled until Phase E lands.
+# apt-install untangle-archive-keyring
+# apt-install untangle-linux-config
 # sh -c "grep -q BOOTIF /proc/cmdline || sed -i -re 's/^root:[^:]+:/root:CHANGEME:/' /target/etc/shadow"
 # FIXME: CHANGEME is not a valid hash and locks the account; disabled until untangle-linux-config handles this
 #chroot /target sh -c "grep -q BOOTIF /proc/cmdline || sed -i -re 's/^root:[^:]+:/root:CHANGEME:/' /etc/shadow" 
@@ -36,7 +36,7 @@ else
 fi
 
 if [ $install_client_local -eq 1 ] ; then
-    apt-install untangle-client-local
+    : # Trixie kernel-only smoke test: apt-install untangle-client-local
 fi
 
 # Comment out cdrom references in sources.list.
@@ -48,7 +48,7 @@ chroot /target rm -f /etc/udev/rules.d/70-persistent-net.rules
 chroot /target /bin/bash -c "[ ! -f /usr/share/untangle/bin/oem-apply.sh ] || /usr/share/untangle/bin/oem-apply.sh"
 
 if [ "$TERM_TYPE" = "serial" ]  ; then
-    apt-install untangle-serial-config
+    : # Trixie kernel-only smoke test: apt-install untangle-serial-config
     # Installed via serial port; ensure can boot via console.
     console_argument=$(cat /proc/cmdline | sed -r 's/[[:alnum:]]+=/\n&/g' | grep console= | cut -d' ' -f1)
     if [ "$console_argument" != "" ] ; then

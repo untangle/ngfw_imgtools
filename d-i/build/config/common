@@ -11,6 +11,11 @@
 
 # Default kernel ABI version to use. Append a kernel flavour to
 # produce KERNELVERSION.
+# Trixie smoke test (Phase D): use bookworm 6.1.0-43 udebs as the INSTALLER kernel
+# (we have 54 matching .udeb files in d-i/build/localudebs/ from prior bookworm builds).
+# The TARGET kernel installed on the system is hardcoded in installer-pkgs-modified/
+# base-installer/library.sh as "6.12.85+1-untangle" so the installed system runs trixie.
+# Once the trixie kernel build emits its own di udebs, revert this line to 6.12.85+1.
 LINUX_KERNEL_ABI ?= 6.1.0-43
 
 # Always "di" these days
@@ -40,18 +45,18 @@ PRESEED =
 DPKG_UNPACK_OPTIONS = --force-overwrite
 
 # The codename of the Debian release that should be installed by default.
-DEBIAN_RELEASE = bookworm
+DEBIAN_RELEASE = trixie
 
 # The version (number and codename) of the Debian release targeted by the
 # installation images. (Only the codename is used while the version number
 # has not yet been determined.)
-DEBIAN_VERSION = 12 (bookworm)
-DEBIAN_VERSION ?= bookworm
+DEBIAN_VERSION = 13 (trixie)
+DEBIAN_VERSION ?= trixie
 
 # Define here from what release (codename!) components (udebs) should be taken
 # to build debian-installer. By default this is set to 'unstable' for building
 # daily images. For official builds this is overruled in debian/rules.
-USE_UDEBS_FROM ?= bookworm
+USE_UDEBS_FROM ?= trixie
 
 # Archive components from which to fetch debian-installer modules.
 UDEB_COMPONENTS ?= main/debian-installer
