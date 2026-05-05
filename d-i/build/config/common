@@ -11,12 +11,16 @@
 
 # Default kernel ABI version to use. Append a kernel flavour to
 # produce KERNELVERSION.
-# Trixie smoke test (Phase D): use bookworm 6.1.0-43 udebs as the INSTALLER kernel
-# (we have 54 matching .udeb files in d-i/build/localudebs/ from prior bookworm builds).
-# The TARGET kernel installed on the system is hardcoded in installer-pkgs-modified/
-# base-installer/library.sh as "6.12.85+1-untangle" so the installed system runs trixie.
-# Once the trixie kernel build emits its own di udebs, revert this line to 6.12.85+1.
+# Trixie smoke test (Phase D): override stock 6.12.73+deb13 with bookworm 6.1.0-43.
+# We have 54 matching .udeb files in d-i/build/localudebs/ from prior bookworm builds.
+# TARGET kernel installed on the system is hardcoded in installer-pkgs-modified/
+# base-installer/library.sh as "6.12.85+1-untangle". Once trixie kernel build emits
+# its own di udebs (NGFW-15749 follow-up), revert this line to 6.12.85+1.
 LINUX_KERNEL_ABI ?= 6.1.0-43
+
+# Make sure the mirror is sufficiently up-to-date, by checking minimal
+# version (list of package_version):
+CHECK_MINIMAL_VERSION ?=
 
 # Always "di" these days
 KERNEL_FLAVOUR ?= di
@@ -37,12 +41,12 @@ PRESEED =
 # Normally the sources.list for building d-i will be derived from your
 # "normal" sources.list. However, you can specify a mirror here to override
 # this. You can use copy:/ to use a local mirror
-#MIRROR = http://www.us.debian.org/debian
+#MIRROR = http://deb.debian.org/debian
 
 # Options to pass to dpkg when it is unpacking the udebs to create the
 # image. None should be needed, but --force-overwrite might need to be
 # enabled from time to time if udebs have conflicting files.
-DPKG_UNPACK_OPTIONS = --force-overwrite
+DPKG_UNPACK_OPTIONS =
 
 # The codename of the Debian release that should be installed by default.
 DEBIAN_RELEASE = trixie
@@ -97,11 +101,12 @@ WRITE_MEDIA = floppy
 # some mapping MEDIUM -> TYPE
 TYPE = $(MEDIUM)
 
-# Used to write a /etc/lsb-release file in the installer initrd.
+# Used to write a /etc/lsb-release file in the installer initrd
+# and to brand the installer menu.
 LSB_DISTRIB_ID=Debian
-LSB_DISTRIB_DESCRIPTION="Debian $(shell uname -o) installer"
+LSB_DISTRIB_DESCRIPTION=Debian $(shell uname -o) installer
 # Inlude the build date of the installer in here.
-LSB_DISTRIB_RELEASE="$(DEBIAN_VERSION) - installer build $(BUILD_DATE)"
+LSB_DISTRIB_RELEASE=$(DEBIAN_VERSION) - installer build $(BUILD_DATE)
 
 # This keyring is only used to verify udeb downloads using apt. Since the
 # build process does not run as root, apt cannot read /etc/apt/trusted.gpg.

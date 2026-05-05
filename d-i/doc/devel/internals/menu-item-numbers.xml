@@ -90,6 +90,7 @@ were before to give more flexibility.
 7300 zipl-installer (s390)
      flash-kernel-installer (arm*)
 7400 grub-installer
+7400 systemd-boot-installer
 7700 nobootloader
 7800 finish-install
 </screen></informalexample>
