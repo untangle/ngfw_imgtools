@@ -66,7 +66,7 @@ export BASEDIR=`pwd`
 # Trixie smoke test (NGFW-15749): CODENAME must match our Untangle mirror's
 # distribution codename, which is `current` (see /var/www/public/trixie/conf/distributions).
 # Was bullseye (Debian 11 era); should be the actual trixie/current we're building against.
-export CODENAME=current
+export CODENAME=bullseye
 
 # By default use Debian installer packages from $CODENAME
 if [ -z "$DI_CODENAME" ]; then
