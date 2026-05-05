@@ -40,7 +40,10 @@ else
   KERNEL_ARCH := $(ARCHITECTURE)
 endif
 KERNEL_VERSION := 6.12.85+1
-KERNEL := linux-image-$(KERNEL_VERSION)-untangle-$(KERNEL_ARCH)
+# Trixie smoke test (Phase D): our kernel build emits the -unsigned variant only
+# (no signed wrapper). Reference it by its actual package name. Once we build a
+# signed/meta variant, change back to unsigned-less name.
+KERNEL := linux-image-$(KERNEL_VERSION)-untangle-$(KERNEL_ARCH)-unsigned
 ISO_IMAGE := ngfw-+FLAVOR++REGION_NAME++SERIAL+-$(VERSION)_$(REPOSITORY)_$(ARCHITECTURE)_$(DISTRIBUTION)_$(shell date --iso-8601=seconds)_$(shell hostname -s).iso
 WAF_ISO_IMAGE := waf-+FLAVOR+-$(VERSION)_$(REPOSITORY)_$(ARCHITECTURE)_$(DISTRIBUTION)_$(shell date --iso-8601=seconds)_$(shell hostname -s).iso
 NGFW_IMAGES_DIR := /data/ngfw-images-$(REPOSITORY)
