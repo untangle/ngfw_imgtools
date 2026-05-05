@@ -231,6 +231,10 @@ ROOT
 EXTRA
   This creates a file system image with driver .udebs in it.
 
+MINIEFI
+  This creates a mini UEFI Unified Kernel Image (UKI) by depending on
+  arch_miniefi rule, where the image creation is handled.
+
 MINIISO
   This creates a mini ISO image, by creating the boot screens and
   depending on arch_miniiso rule, where the image creation is handled.
@@ -246,6 +250,7 @@ MANIFEST-KERNEL
 MANIFEST-BOOT
 MANIFEST-ROOT
 MANIFEST-EXTRA
+MANIFEST-MINIEFI
 MANIFEST-MINIISO
 MANIFEST-DEBIAN_CD_INFO
 MANIFEST-MISC
@@ -486,6 +491,10 @@ arch_root:
 
 arch_boot_screens:
   The boot screens in TEMP_BOOT_SCREENS are created here.
+
+arch_miniefi:
+  The miniature UEFI UKI image TEMP_MINIEFI is built here, from whatever
+  the particular (sub-)architecture needs for it.
 
 arch_miniiso:
   The mini ISO image TEMP_MINIISO is built here, from whatever the
