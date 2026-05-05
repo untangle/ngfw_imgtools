@@ -439,13 +439,20 @@ ifeq ($(filter $(DEB_HOST_ARCH),mips64el hppa sh4),)
 	# a versioned vmlinuz-* instead of just vmlinuz (in sid, since 6.6.8-1);
 	# ditto for vmlinux-* on some archs (e.g. ppc64el). Keep it on mips64el
 	# though (see KERNELNAME variable).
+	# Trixie smoke test (NGFW-15749): tolerate 0 versioned files when the udeb
+	# already ships an unversioned /boot/vmlinuz (bookworm 6.1.0-43 case until
+	# trixie kernel build emits its own di udebs).
 	VMLINUXZ=`find $(TREE)/boot/ -name 'vmlinu[xz]-*'`; \
-	if [ `echo "$$VMLINUXZ" | wc -w` != 1 ]; then \
-		echo "E: unexpected number of vmlinu[xz]-* in tree: $$VMLINUXZ (expected: 1)" >&2; \
+	N=`echo "$$VMLINUXZ" | wc -w`; \
+	if [ $$N -gt 1 ]; then \
+		echo "E: too many vmlinu[xz]-* in tree: $$VMLINUXZ (expected: 0 or 1)" >&2; \
 		exit 1; \
-	else \
+	elif [ $$N -eq 1 ]; then \
 		echo "I: unversioning vmlinu[xz]" >&2; \
 		mv -v $$VMLINUXZ $(TREE)/boot/`basename $$VMLINUXZ|sed 's/-.*//'`; \
+	else \
+		echo "I: no versioned vmlinu[xz]-* found; assuming unversioned vmlinuz already in place" >&2; \
+		ls -la $(TREE)/boot/ >&2 || true; \
 	fi
 endif
 endif
