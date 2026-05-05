@@ -486,20 +486,25 @@ ifneq (,$(filter $(ARCH),amd64 arm64 i386))
 	# HACK alert (#1036019): this isn't just a problem for the graphical
 	# installer, complement fb-modules with extra modules for all images
 	# including DRM modules.
+	# Trixie smoke test (NGFW-15749): tolerate missing modules — bookworm
+	# 6.1.0-43 host kernel doesn't have all of trixie's expected DRM bits.
 	if [ -e "$(DRM_DIR)/drm.ko.xz" ]; then \
 		for module in $(DRM_MODULES); do \
 			mkdir -p $(TREE)$(DRM_DIR)/$$(dirname $$module); \
-			cp $(DRM_DIR)/$$module.xz $(TREE)$(DRM_DIR)/$$module.xz; \
+			[ -f "$(DRM_DIR)/$$module.xz" ] && cp $(DRM_DIR)/$$module.xz $(TREE)$(DRM_DIR)/$$module.xz \
+				|| echo "I: skipping missing $(DRM_DIR)/$$module.xz" >&2; \
 		done; \
 	fi
 endif
 
 ifneq (,$(filter $(ARCH),amd64))
 	# Sound support for Intel might be funky and require i915 bits:
+	# Trixie smoke test (NGFW-15749): tolerate missing modules.
 	if [ -e "$(TREE)/etc/fonts" ]; then \
 		for module in $(SPEECH_MODULES); do \
 			mkdir -p $(TREE)$(DRIVERS_DIR)/$$(dirname $$module); \
-			cp $(DRIVERS_DIR)/$$module.xz $(TREE)$(DRIVERS_DIR)/$$module.xz; \
+			[ -f "$(DRIVERS_DIR)/$$module.xz" ] && cp $(DRIVERS_DIR)/$$module.xz $(TREE)$(DRIVERS_DIR)/$$module.xz \
+				|| echo "I: skipping missing $(DRIVERS_DIR)/$$module.xz" >&2; \
 		done; \
 	fi
 endif
