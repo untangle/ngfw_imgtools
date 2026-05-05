@@ -1,3 +1,4 @@
-untangle-gateway
-untangle-client-local
-untangle-linux-config
+# Trixie kernel-only smoke test (Phase D): NGFW packages disabled until Phase E lands.
+# untangle-gateway
+# untangle-client-local
+# untangle-linux-config

@@ -1,5 +1,5 @@
-installer-pkgs-modified/cdebconf	bookworm
-installer-pkgs-modified/pkgsel		bookworm
-installer-pkgs-modified/rootskel-gtk	bookworm
-installer-pkgs-modified/base-installer	bookworm
-d-i					bookworm
+installer-pkgs-modified/cdebconf	trixie
+installer-pkgs-modified/pkgsel		trixie
+installer-pkgs-modified/rootskel-gtk	trixie
+installer-pkgs-modified/base-installer	trixie
+d-i					trixie

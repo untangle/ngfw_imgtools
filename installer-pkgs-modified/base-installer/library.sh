@@ -23,7 +23,13 @@ case $KERNEL_NAME in
 	hurd)		KERNEL_NAME=gnumach ; KERNEL_MAJOR="$(uname -v | cut -d ' ' -f 2 | cut -d . -f 1)" ;;
 esac
 KERNEL_VERSION="$(uname -r | cut -d - -f 1)"
-KERNEL_ABI="$(uname -r | cut -d - -f 1,2)-untangle"
+# Trixie smoke test (Phase D): hardcode TARGET kernel ABI to trixie 6.12.85+1
+# regardless of what the installer kernel ABI is. The installer runs bookworm
+# 6.1.0-43 (because we have those udebs locally), but the installed system gets
+# trixie's 6.12.85+1-untangle kernel. Revert when the trixie kernel build emits
+# its own d-i udebs and we can run a same-ABI installer.
+KERNEL_ABI="6.12.85+1-untangle"
+# original (uname-derived): KERNEL_ABI="$(uname -r | cut -d - -f 1,2)-untangle"
 KERNEL_FLAVOUR=$(uname -r | cut -d - -f 3-)
 MACHINE="$(uname -m)"
 NUMCPUS=$(cat /var/numcpus 2>/dev/null) || true

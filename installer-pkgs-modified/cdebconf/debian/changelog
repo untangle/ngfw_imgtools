@@ -1,3 +1,9 @@
+cdebconf (0.260+18.0.0-1trixie) current; urgency=medium
+
+  * Initial port to Trixie (NGFW-15749)
+
+ -- singhrohit23 <rohitsingh@arista.com>  Mon, 05 May 2026 12:00:00 +0530
+
 cdebconf (0.260+17.5.0..+17.5.0..+17.5.0..+17.5.0..+17.5.0..+17.5.0..+17.5.0..+17.5.0..+17.5.0..+17.5.0..-1bookworm) current; urgency=medium
 
   * auto build
