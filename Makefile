@@ -138,7 +138,7 @@ ngfw/iso/conf:
 ngfw/iso/%-image: iso/dependencies ngfw/iso/conf
 	$(eval flavor := $*)
 	perl -pe 's|\+IMGTOOLS_DIR\+|'$(IMGTOOLS_DIR)'|g' $(CONF_FILE_TEMPLATE) >| $(CONF_FILE); \
-	export CODENAME=$(REPOSITORY) DEBVERSION=$(DEBVERSION) ; \
+	export CODENAME=$(DISTRIBUTION) DEBVERSION=$(DEBVERSION) ; \
 	export CDNAME=$(flavor) DISKINFO=$(flavor) ; \
 	build-simple-cdd \
 	    --local-packages local-packages \
@@ -205,7 +205,7 @@ waf/iso/%-image: iso/dependencies waf/iso/conf
 	#   2. add WAF packages from internal mirror
 	#   3. build image without mirroring anything else
 	$(eval flavor := $*)
-	export CODENAME=$(REPOSITORY) DEBVERSION=$(DEBVERSION) ; \
+	export CODENAME=$(DISTRIBUTION) DEBVERSION=$(DEBVERSION) ; \
 	export CDNAME=waf-$(flavor) DISKINFO=waf-$(flavor) ; \
 	export CUSTOMSIZE=$(shell echo $$(( 700 * 1024 * 1024 / 2048 )) ) ; \
 	export http_proxy="" ; \
