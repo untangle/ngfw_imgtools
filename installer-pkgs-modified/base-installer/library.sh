@@ -23,13 +23,16 @@ case $KERNEL_NAME in
 	hurd)		KERNEL_NAME=gnumach ; KERNEL_MAJOR="$(uname -v | cut -d ' ' -f 2 | cut -d . -f 1)" ;;
 esac
 KERNEL_VERSION="$(uname -r | cut -d - -f 1)"
-# Trixie smoke test (Phase D): hardcode TARGET kernel ABI to trixie 6.12.85+1
-# regardless of what the installer kernel ABI is. The installer runs bookworm
-# 6.1.0-43 (because we have those udebs locally), but the installed system gets
-# trixie's 6.12.85+1-untangle kernel. Revert when the trixie kernel build emits
-# its own d-i udebs and we can run a same-ABI installer.
-KERNEL_ABI="6.12.85+1-untangle"
-# original (uname-derived): KERNEL_ABI="$(uname -r | cut -d - -f 1,2)-untangle"
+# NGFW-15749: hardcode TARGET kernel ABI to trixie 6.12.85+3 (untangle3trixie
+# build, with bare-named kernel + 45 udebs from enable_signed=false config flip).
+# Cannot revert to uname-derived: trixie kernel naming `6.12.85+3-untangle-amd64`
+# breaks the bookworm-era `cut -d - -f 1,2` + append `-untangle` pattern (would
+# yield `6.12.85+3-untangle-untangle`). Bump this string each time the trixie
+# kernel ABI revs (untangle3 -> +3, untangle4 -> +4, etc.) until uname-derived
+# logic is rewritten for trixie naming.
+KERNEL_ABI="6.12.85+3-untangle"
+# original bookworm logic (broken on trixie naming):
+# KERNEL_ABI="$(uname -r | cut -d - -f 1,2)-untangle"
 KERNEL_FLAVOUR=$(uname -r | cut -d - -f 3-)
 MACHINE="$(uname -m)"
 NUMCPUS=$(cat /var/numcpus 2>/dev/null) || true

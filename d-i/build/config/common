@@ -16,7 +16,7 @@
 # TARGET kernel installed on the system is hardcoded in installer-pkgs-modified/
 # base-installer/library.sh as "6.12.85+1-untangle". Once trixie kernel build emits
 # its own di udebs (NGFW-15749 follow-up), revert this line to 6.12.85+1.
-LINUX_KERNEL_ABI ?= 6.1.0-43
+LINUX_KERNEL_ABI ?= 6.12.85+3
 
 # Make sure the mirror is sufficiently up-to-date, by checking minimal
 # version (list of package_version):

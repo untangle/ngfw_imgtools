@@ -1,3 +1,9 @@
+rootskel-gtk (11.0.1+18.0.0+17.5.0.20260505T072745Z.9b09fbc+localdiff20260506T161341-1trixie) current; urgency=medium
+
+  * auto build
+
+ -- Untangle Buildbot <buildbot@untangle.com>  Tue, 05 May 2026 07:27:45 +0000
+
 rootskel-gtk (11.0.1+18.0.0-1trixie) current; urgency=medium
 
   * Initial port to Trixie (NGFW-15749)
