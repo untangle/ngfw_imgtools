@@ -95,6 +95,9 @@ services:
         - /etc/apt/apt.conf.d/01proxy:/etc/apt/apt.conf.d/01proxy
         # Trixie: stricter Git refuses repos owned by other UIDs; mark them safe.
         - /tmp/docker-gitconfig:/root/.gitconfig:ro
+        # NGFW-15749: Trixie's apt uses sqv (Sequoia) which rejects keybox-format
+        # .gpg keyrings. Inject the ASCII-armored key so InRelease verifies.
+        - /home/rohit/Arista-Workspace/Bookworm-Assemble/ngfw_pkgs/untangle-archive-keyring/files/etc/apt/trusted.gpg.d/untangle-archive-trixie-automatic.asc:/etc/apt/trusted.gpg.d/untangle-archive-trixie-automatic.asc:ro
 
 volumes:
   pkgtools:
