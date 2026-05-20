@@ -1,12 +1,10 @@
 +KERNEL+
-# Untangle packages temporarily commented for Trixie ISO infra smoke test (Phase D).
-# Re-enable once Phase E (NGFW package builds for trixie) lands.
-# untangle-archive-keyring
-# untangle-linux-config
-# untangle-bootsplash
-# untangle-kernel-modules-trixie-amd64
-# untangle-debconf-manager
-# untangle-hardware-config
-# untangle-serial-config
-# untangle-kiosk
-# untangle-client-local
+untangle-archive-keyring
+untangle-linux-config
+untangle-bootsplash
+untangle-kernel-modules-trixie-amd64
+untangle-debconf-manager
+untangle-hardware-config
+untangle-serial-config
+untangle-kiosk
+untangle-client-local
