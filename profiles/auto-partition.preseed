@@ -118,6 +118,26 @@ elif [ -n "$mmc_dev" ]; then \
     debconf-set partman-auto/disk $mmc_dev; \
     debconf-set grub-installer/bootdev $mmc_dev; \
 fi; \
+target_disk=""; \
+if [ -n "$nvme_dev" ]; then target_disk=$nvme_dev; \
+elif [ -n "$mmc_dev" ]; then target_disk=$mmc_dev; \
+else for dev in $(list-devices disk); do \
+    if [ "$dev" != "$cdrom_dev" ]; then target_disk=$dev; break; fi; \
+done; fi; \
+if [ -n "$target_disk" ]; then \
+    for part in $(grep "^${target_disk}" /proc/mounts | awk '{print $1}'); do \
+        umount "$part" 2>/dev/null || true; \
+    done; \
+    for part in $(grep "^${target_disk}" /proc/swaps | awk '{print $1}'); do \
+        swapoff "$part" 2>/dev/null || true; \
+    done; \
+    dd if=/dev/zero of="$target_disk" bs=512 count=34 conv=notrunc 2>/dev/null || true; \
+    disk_sz=$(blockdev --getsz "$target_disk" 2>/dev/null); \
+    if [ -n "$disk_sz" ] && [ "$disk_sz" -gt 34 ]; then \
+        dd if=/dev/zero of="$target_disk" bs=512 seek=$((disk_sz - 34)) count=34 conv=notrunc 2>/dev/null || true; \
+    fi; \
+    blockdev --rereadpt "$target_disk" 2>/dev/null || true; \
+fi; \
 if [ -d "/sys/firmware/efi/" ] ; then \
 	debconf-set partman-auto/choose_recipe select untangle-efi ; \
 else \
