@@ -1,0 +1,1048 @@
+Package: acpi-modules-6.1.0-43-amd64-di
+Architecture: amd64
+Version: 6.1.159-1+untangle1bookworm
+Kernel-Version: 6.1.0-43-amd64
+Priority: optional
+Section: debian-installer
+Source: linux
+Maintainer: Debian Kernel Team <debian-kernel@lists.debian.org>
+Installed-Size: 37
+Provides: acpi-modules
+Depends: kernel-image-6.1.0-43-amd64-di
+Filename: localudebs/acpi-modules-6.1.0-43-amd64-di_6.1.159-1+untangle1bookworm_amd64.udeb
+Size: 7588
+MD5sum: dfa5a7726528a0d4b477fa019b9da3d0
+SHA1: 0f9593c78042f3c6cebb1040cd35a57446fa9fc3
+SHA256: 0735842ca5a9430a0bf184b267bccf129722a4d7f0d96d1c0a3361505af9b0d5
+SHA512: 37c43c5a28094b12f3710191fc84609b37cebd6005a60424c19bbc67484f61d3dd54ada6090175a92fa6b0b4626b6e2f3030050d748cfd713fff802b7280a4b9
+Description: ACPI support modules
+ This package contains kernel modules for ACPI.
+
+Package: ata-modules-6.1.0-43-amd64-di
+Architecture: amd64
+Version: 6.1.159-1+untangle1bookworm
+Kernel-Version: 6.1.0-43-amd64
+Priority: optional
+Section: debian-installer
+Source: linux
+Maintainer: Debian Kernel Team <debian-kernel@lists.debian.org>
+Installed-Size: 835
+Provides: ata-modules
+Depends: kernel-image-6.1.0-43-amd64-di, scsi-core-modules-6.1.0-43-amd64-di
+Filename: localudebs/ata-modules-6.1.0-43-amd64-di_6.1.159-1+untangle1bookworm_amd64.udeb
+Size: 146660
+MD5sum: 2f055c06bf3044045585a1df31bf7cfe
+SHA1: 51800d04bd6eca4b10e4396d201e5ccafbfff1e6
+SHA256: 1d884fd4a57408556b4e0340c67742239ba96d886a4c60583626341da39f688c
+SHA512: 96084f7a9f45ac954edfbae020df94726da1810a6dca22b0711a966687dfb1f0875fc97f8e46f0816b32b59cbc48cb221a912a11978cf5801a34eb4ac60df144
+Description: ATA disk modules
+ This package contains core ATA disk modules used by both PATA and SATA
+ disk drivers.
+
+Package: btrfs-modules-6.1.0-43-amd64-di
+Architecture: amd64
+Version: 6.1.159-1+untangle1bookworm
+Kernel-Version: 6.1.0-43-amd64
+Priority: optional
+Section: debian-installer
+Source: linux
+Maintainer: Debian Kernel Team <debian-kernel@lists.debian.org>
+Installed-Size: 3768
+Provides: btrfs-modules
+Depends: kernel-image-6.1.0-43-amd64-di, crc-modules-6.1.0-43-amd64-di, md-modules-6.1.0-43-amd64-di
+Filename: localudebs/btrfs-modules-6.1.0-43-amd64-di_6.1.159-1+untangle1bookworm_amd64.udeb
+Size: 682524
+MD5sum: 4f0c6c7806ebf891b6a5e139f592c126
+SHA1: a75fd52b8cc8047d6fa6bb716f1a6cfe04110696
+SHA256: e95bf049ccece2ff01eb355f2216b1c90ae546af2cd033bf1413353007d1ab5f
+SHA512: 4b9c238f3410e2ff5a539dcaaf67908c1597fae43cd3e9eb142ea135602e40f2418f8a4c148bce9523590d471dd2be0be64e2a65c28e97f037b23ae95ab214c3
+Description: BTRFS filesystem support
+ This package contains the BTRFS filesystem module for the kernel.
+
+Package: cdrom-core-modules-6.1.0-43-amd64-di
+Architecture: amd64
+Version: 6.1.159-1+untangle1bookworm
+Kernel-Version: 6.1.0-43-amd64
+Priority: standard
+Section: debian-installer
+Source: linux
+Maintainer: Debian Kernel Team <debian-kernel@lists.debian.org>
+Installed-Size: 213
+Provides: cdrom-core-modules
+Depends: kernel-image-6.1.0-43-amd64-di, scsi-core-modules-6.1.0-43-amd64-di
+Filename: localudebs/cdrom-core-modules-6.1.0-43-amd64-di_6.1.159-1+untangle1bookworm_amd64.udeb
+Size: 43408
+MD5sum: 46f12d40d77b103fd879f1e738fc2c2f
+SHA1: 6cbd1dd537a1938e0e98c68617991fa3f3d59e6a
+SHA256: 3935d6ac44ce975ef26991415d907283be20496e2e20a545066617eda3d1a92f
+SHA512: ddd1397df503beb30706c9f62bf1a5e4b96e55cefacf75112f8f05a3a93dabc172528eb74ee813920025655282ae594da75ab53a7677c07340c6cda63ce44665
+Description: CDROM support
+ This package contains core CDROM support for the kernel.
+
+Package: crc-modules-6.1.0-43-amd64-di
+Architecture: amd64
+Version: 6.1.159-1+untangle1bookworm
+Kernel-Version: 6.1.0-43-amd64
+Priority: optional
+Section: debian-installer
+Source: linux
+Maintainer: Debian Kernel Team <debian-kernel@lists.debian.org>
+Installed-Size: 81
+Provides: crc-modules
+Depends: kernel-image-6.1.0-43-amd64-di
+Filename: localudebs/crc-modules-6.1.0-43-amd64-di_6.1.159-1+untangle1bookworm_amd64.udeb
+Size: 17208
+MD5sum: 48c7b4868d0af5ca1a88d6d9f87247e5
+SHA1: a25d85523b38ef331c2c0c4e224e815dd6dec0e9
+SHA256: d43fffb9ca9cde58f7c17c16b6318b8c771667a9d5a08a42522fdabf5fcb5b4f
+SHA512: 3e1e01276a2f212f7f449246c774ad2ad33ef1ca0bdd1a3fc7b162ed5eaca424e3de6b4353eda7e5f84c9379826212d9caa31636840844c7a4a8d54e5b585342
+Description: CRC modules
+ This package contains CRC support modules.
+
+Package: crypto-dm-modules-6.1.0-43-amd64-di
+Architecture: amd64
+Version: 6.1.159-1+untangle1bookworm
+Kernel-Version: 6.1.0-43-amd64
+Priority: optional
+Section: debian-installer
+Source: linux
+Maintainer: Debian Kernel Team <debian-kernel@lists.debian.org>
+Installed-Size: 127
+Provides: crypto-dm-modules
+Depends: kernel-image-6.1.0-43-amd64-di, md-modules-6.1.0-43-amd64-di
+Filename: localudebs/crypto-dm-modules-6.1.0-43-amd64-di_6.1.159-1+untangle1bookworm_amd64.udeb
+Size: 27928
+MD5sum: 34870cd94f823df77842f834d8d6755e
+SHA1: a6297bbd714e5d9cf28b311564b477bf6e83383d
+SHA256: 3633b1420ee957dac65b0bc40411f64c147f371ee96aeb0a798ab17a109b5770
+SHA512: d103bb5975a400aa2f0f6cab524a812aac0b4022f957b957ef914026cb54bb288f04425f4d3bc650f4fd78a4fec7fb0607ab07159e4a15f801d0ca5384d93746
+Description: devicemapper crypto module
+ This package contains the devicemapper crypto (dm-crypt) module.
+
+Package: crypto-modules-6.1.0-43-amd64-di
+Architecture: amd64
+Version: 6.1.159-1+untangle1bookworm
+Kernel-Version: 6.1.0-43-amd64
+Priority: optional
+Section: debian-installer
+Source: linux
+Maintainer: Debian Kernel Team <debian-kernel@lists.debian.org>
+Installed-Size: 318
+Provides: crypto-modules
+Depends: kernel-image-6.1.0-43-amd64-di
+Filename: localudebs/crypto-modules-6.1.0-43-amd64-di_6.1.159-1+untangle1bookworm_amd64.udeb
+Size: 66644
+MD5sum: 6e536b3f9d9033d74eb2fa230869c884
+SHA1: 85bee90149ed824a1674cb76c7e55fd6b5b05d57
+SHA256: 26fdbdc18dcde538577f0a321b19bc597de5f1d59a34bcf3bcc5560620e6a2b3
+SHA512: 77cb5ead04b9de4a733f01f5eecf5fb58463ecde7803c784e9086dff243a6083640bd29619aea0117696f75c8d676f08139c5dcc77c7548804b382ba778b182f
+Description: crypto modules
+ This package contains crypto modules.
+
+Package: efi-modules-6.1.0-43-amd64-di
+Architecture: amd64
+Version: 6.1.159-1+untangle1bookworm
+Kernel-Version: 6.1.0-43-amd64
+Priority: optional
+Section: debian-installer
+Source: linux
+Maintainer: Debian Kernel Team <debian-kernel@lists.debian.org>
+Installed-Size: 54
+Provides: efi-modules
+Depends: kernel-image-6.1.0-43-amd64-di
+Filename: localudebs/efi-modules-6.1.0-43-amd64-di_6.1.159-1+untangle1bookworm_amd64.udeb
+Size: 10876
+MD5sum: 3c867df04e967070f0b189cb9179c357
+SHA1: 2314f0cc5b9fab08fe23fdeed7898fcecac71f96
+SHA256: 3dea3c896366b64239abcb684a3c4a9c24248e2b2c8ef08fb615e40c3f5184d0
+SHA512: 9c7549f11c24d04d2ff970f668e121fbdfa479820c7d73b0cac4cc8d1229ca29b36b17286f6f19fe15bb29e7e5519ed962d5919a96d0dd742b958b25b29e2364
+Description: EFI modules
+ This package contains EFI modules.
+
+Package: event-modules-6.1.0-43-amd64-di
+Architecture: amd64
+Version: 6.1.159-1+untangle1bookworm
+Kernel-Version: 6.1.0-43-amd64
+Priority: optional
+Section: debian-installer
+Source: linux
+Maintainer: Debian Kernel Team <debian-kernel@lists.debian.org>
+Installed-Size: 54
+Provides: event-modules
+Depends: kernel-image-6.1.0-43-amd64-di
+Filename: localudebs/event-modules-6.1.0-43-amd64-di_6.1.159-1+untangle1bookworm_amd64.udeb
+Size: 11628
+MD5sum: 02af4fd4a068df54c065e486539d0f38
+SHA1: 3472bd4391ab3beb809fe0cb5144d9892214f983
+SHA256: b0277120d1c66699c8f9bf9e497a21b761fb1623a3975d24a1c3e7b589e57df3
+SHA512: 499b3a9e3cca441f17f755b59beac7e91f12e7c79705efd4a5da465f8a86944afac54dbb7771df5b7ede01fe5f3303c2ab4543b52a3588318429ca8d2a1707c7
+Description: Event support
+ This package contains event drivers for the kernel.
+
+Package: ext4-modules-6.1.0-43-amd64-di
+Architecture: amd64
+Version: 6.1.159-1+untangle1bookworm
+Kernel-Version: 6.1.0-43-amd64
+Priority: standard
+Section: debian-installer
+Source: linux
+Maintainer: Debian Kernel Team <debian-kernel@lists.debian.org>
+Installed-Size: 2385
+Provides: ext2-modules, ext3-modules, ext4-modules
+Depends: kernel-image-6.1.0-43-amd64-di, crc-modules-6.1.0-43-amd64-di
+Filename: localudebs/ext4-modules-6.1.0-43-amd64-di_6.1.159-1+untangle1bookworm_amd64.udeb
+Size: 410544
+MD5sum: 7cd07f4ef3b8e31e1b783fd22a8bd73c
+SHA1: c831858dbf6124e1ed2421567759e9c0b0a8c72d
+SHA256: 7fc4d489ddda28eab506b26d42345ccb8329472ebe27bf37de376c1527952557
+SHA512: 0e7c782647f41efaa920282824d968a57c59f76d661fe59fa63fb9ffab0e0cca36bfbb27c02423c400beff473e5f18ddae3cc5db51680c457a136813376af20c
+Description: ext2/ext3/ext4 filesystem support
+ This package contains the ext4 filesystem module for the kernel, which
+ also supports ext2 and ext3.
+
+Package: f2fs-modules-6.1.0-43-amd64-di
+Architecture: amd64
+Version: 6.1.159-1+untangle1bookworm
+Kernel-Version: 6.1.0-43-amd64
+Priority: optional
+Section: debian-installer
+Source: linux
+Maintainer: Debian Kernel Team <debian-kernel@lists.debian.org>
+Installed-Size: 1667
+Provides: f2fs-modules
+Depends: kernel-image-6.1.0-43-amd64-di, crc-modules-6.1.0-43-amd64-di
+Filename: localudebs/f2fs-modules-6.1.0-43-amd64-di_6.1.159-1+untangle1bookworm_amd64.udeb
+Size: 307268
+MD5sum: 43795aa86f3486d7d3a85be684cce141
+SHA1: b24c14b0e73854f6d049ea52e6db5c00aa23a1f1
+SHA256: 78826eb4075ece291a0c86a05c992aac01b1bae2ff61e2f2e08994af891ae223
+SHA512: d638f8cf65feb865397a859e969188f7beea6bef9b173f100384396c3fa20c20d66f2be77397c0585cbca55b38de1680558871f2991345fb208bb8775c257084
+Description: f2fs filesystem support
+ This package contains the f2fs (Flash-Friendly Filesystem) module.
+
+Package: fat-modules-6.1.0-43-amd64-di
+Architecture: amd64
+Version: 6.1.159-1+untangle1bookworm
+Kernel-Version: 6.1.0-43-amd64
+Priority: standard
+Section: debian-installer
+Source: linux
+Maintainer: Debian Kernel Team <debian-kernel@lists.debian.org>
+Installed-Size: 259
+Provides: fat-modules
+Depends: kernel-image-6.1.0-43-amd64-di
+Filename: localudebs/fat-modules-6.1.0-43-amd64-di_6.1.159-1+untangle1bookworm_amd64.udeb
+Size: 54284
+MD5sum: 0b23fbea9a9a2ae64abd5133f0aa6915
+SHA1: 010a9a9514d902f2bb416c009f3c926bd832d7a4
+SHA256: 2e3a248eab0076c5b69f6a336baa200ea05de6ed9ea048412168424fafb1ea4b
+SHA512: a38299eb0806337beb71eee6481fff86f8e8ec73914ac436cd03b40d3e93877ab885e325d1e50f35a05383df394401c4a120630eda174020a7f892bc07c445b4
+Description: FAT filesystem support
+ This package contains the FAT and VFAT filesystem modules for the kernel.
+
+Package: fb-modules-6.1.0-43-amd64-di
+Architecture: amd64
+Version: 6.1.159-1+untangle1bookworm
+Kernel-Version: 6.1.0-43-amd64
+Priority: optional
+Section: debian-installer
+Source: linux
+Maintainer: Debian Kernel Team <debian-kernel@lists.debian.org>
+Installed-Size: 2018
+Provides: fb-modules
+Depends: kernel-image-6.1.0-43-amd64-di, i2c-modules-6.1.0-43-amd64-di
+Filename: localudebs/fb-modules-6.1.0-43-amd64-di_6.1.159-1+untangle1bookworm_amd64.udeb
+Size: 342352
+MD5sum: 8eb45363fd99c85d5f8d725b2dd7cfcb
+SHA1: 8c8a89b1faed312c8949a7f3b3266a95a8e81881
+SHA256: 5ba7f1c26e97418c4b2a1e11495aacf2b13cc847dba8b47f704183adf4586e6b
+SHA512: 389b19e40ad5d5a39b917612c057c43fa02899e81265d57e14ac2307c63ec2087aa54f7b4ddc35a7e5f97f5d5fb42d9c3495fd870820d0ef9947156d906b7bf0
+Description: Frame buffer support
+ This package contains Frame buffer drivers for the kernel.
+
+Package: firewire-core-modules-6.1.0-43-amd64-di
+Architecture: amd64
+Version: 6.1.159-1+untangle1bookworm
+Kernel-Version: 6.1.0-43-amd64
+Priority: standard
+Section: debian-installer
+Source: linux
+Maintainer: Debian Kernel Team <debian-kernel@lists.debian.org>
+Installed-Size: 370
+Provides: firewire-core-modules
+Depends: kernel-image-6.1.0-43-amd64-di, scsi-core-modules-6.1.0-43-amd64-di, crc-modules-6.1.0-43-amd64-di
+Filename: localudebs/firewire-core-modules-6.1.0-43-amd64-di_6.1.159-1+untangle1bookworm_amd64.udeb
+Size: 76496
+MD5sum: 92d7b28788f3aea766a8f30b7246dd45
+SHA1: 3ce90955f67161b094b40875636225ee20aa114e
+SHA256: 922041f64f14a6da088fcd61c3dcfcbaf1c4f20712768fb9860123fe951ce8ce
+SHA512: 7d9a2b66ba54c5ce302098bf9f8871d771c5782a21e0e7df180e5f6f2d04b6001ea61af764bc93c14651e8d9357064b773e1651d6e4f0a2dabc145a4de23686c
+Description: Core FireWire drivers
+ This package contains core FireWire drivers for the kernel.
+
+Package: fuse-modules-6.1.0-43-amd64-di
+Architecture: amd64
+Version: 6.1.159-1+untangle1bookworm
+Kernel-Version: 6.1.0-43-amd64
+Priority: optional
+Section: debian-installer
+Source: linux
+Maintainer: Debian Kernel Team <debian-kernel@lists.debian.org>
+Installed-Size: 411
+Provides: fuse-modules
+Depends: kernel-image-6.1.0-43-amd64-di
+Filename: localudebs/fuse-modules-6.1.0-43-amd64-di_6.1.159-1+untangle1bookworm_amd64.udeb
+Size: 84024
+MD5sum: 234c5876896ed07a39f4cb9577cd27ef
+SHA1: 4b94153b605fded747dab9b1c8df2d387e3f4a7a
+SHA256: 6fd89711eaec5c75be118f66ad6760fb762603bbeb4bc114557e9d6f8cfb72a7
+SHA512: 1464e9a086a356e25c6d5c2c27df6486f744cd8629039a20b430494a0ce11c031af9b47bff18f673af246cefa85b5d6ef673fe98f625aad4ae750d08756f6e7f
+Description: FUSE modules
+ This package contains the Filesystem in Userspace (FUSE) module.
+
+Package: i2c-modules-6.1.0-43-amd64-di
+Architecture: amd64
+Version: 6.1.159-1+untangle1bookworm
+Kernel-Version: 6.1.0-43-amd64
+Priority: optional
+Section: debian-installer
+Source: linux
+Maintainer: Debian Kernel Team <debian-kernel@lists.debian.org>
+Installed-Size: 33
+Provides: i2c-modules
+Depends: kernel-image-6.1.0-43-amd64-di
+Filename: localudebs/i2c-modules-6.1.0-43-amd64-di_6.1.159-1+untangle1bookworm_amd64.udeb
+Size: 6732
+MD5sum: 6dac663455f4d292ed0ff6bbeab0babd
+SHA1: 91284f7572b935792f8bf30cbb3dec4e44f62c4a
+SHA256: 6ceb9ae532c0091e96f199d8f3f1f7a6b9315e9eb388010bed30d6acb4fa2212
+SHA512: 7a7c5a31d3d14e2901e0df8daa7c0fce2d3220f3d85a9b5c7238105ba24483f3081526ebadee893054d40000a10d389c12ca40becaac8362940e03e20f9c96eb
+Description: i2c support modules
+ This package contains basic i2c support modules.
+
+Package: input-modules-6.1.0-43-amd64-di
+Architecture: amd64
+Version: 6.1.159-1+untangle1bookworm
+Kernel-Version: 6.1.0-43-amd64
+Priority: optional
+Section: debian-installer
+Source: linux
+Maintainer: Debian Kernel Team <debian-kernel@lists.debian.org>
+Installed-Size: 4851
+Provides: input-modules
+Depends: kernel-image-6.1.0-43-amd64-di, usb-modules-6.1.0-43-amd64-di, i2c-modules-6.1.0-43-amd64-di, rfkill-modules-6.1.0-43-amd64-di, crc-modules-6.1.0-43-amd64-di
+Filename: localudebs/input-modules-6.1.0-43-amd64-di_6.1.159-1+untangle1bookworm_amd64.udeb
+Size: 730312
+MD5sum: f84bc1ba7d781d93ace0b14358137a39
+SHA1: a19bfed7a9dc8bb955351ce17a73eb8bf1e0e19b
+SHA256: e431ca0519ad5821dce99c8c6e8bc3b26e6778d5b73dc2849c67a2d771261348
+SHA512: 1b4587c568dcbd53d53a05de66383e53c29dbe93ff40f1f22f1a6a5567e0b4f37f1943794ec7a7f05cb17e7ef75054d9b8b8d8c885d03f803d5e32e7beff65e0
+Description: Input devices support
+ This package contains input device drivers for the kernel.
+
+Package: isofs-modules-6.1.0-43-amd64-di
+Architecture: amd64
+Version: 6.1.159-1+untangle1bookworm
+Kernel-Version: 6.1.0-43-amd64
+Priority: standard
+Section: debian-installer
+Source: linux
+Maintainer: Debian Kernel Team <debian-kernel@lists.debian.org>
+Installed-Size: 96
+Provides: isofs-modules
+Depends: kernel-image-6.1.0-43-amd64-di, cdrom-core-modules-6.1.0-43-amd64-di
+Filename: localudebs/isofs-modules-6.1.0-43-amd64-di_6.1.159-1+untangle1bookworm_amd64.udeb
+Size: 24124
+MD5sum: db7359c3dcd73a164650681c79b6eff8
+SHA1: 198c574c1874ed9b72bc6233ad1cd98aae2f2359
+SHA256: e315b9d439a112b5f3c55a71500ccf6a399079d0c044078fe8793c9963df13f6
+SHA512: 0cbccfa3a52b225846131a525b22c6624e5b9c8b87a5fafc3586cf786c7ce0a266e6f6cbb86d74849bbadcbd6d18fb57e28eada6133d271c01f10ecfd4edefa8
+Description: ISOFS filesystem support
+ This package contains the ISOFS filesystem module for the kernel.
+
+Package: jfs-modules-6.1.0-43-amd64-di
+Architecture: amd64
+Version: 6.1.159-1+untangle1bookworm
+Kernel-Version: 6.1.0-43-amd64
+Priority: standard
+Section: debian-installer
+Source: linux
+Maintainer: Debian Kernel Team <debian-kernel@lists.debian.org>
+Installed-Size: 456
+Provides: jfs-modules
+Depends: kernel-image-6.1.0-43-amd64-di
+Filename: localudebs/jfs-modules-6.1.0-43-amd64-di_6.1.159-1+untangle1bookworm_amd64.udeb
+Size: 108532
+MD5sum: 33cda6ccf8e4a04f8e63c2f64742be9b
+SHA1: d3a5d9e958020fa588938b73b301554ff3fc5a16
+SHA256: 017040339352b47911a828b3b47f4302b847273314203773c612e4f5d8488b62
+SHA512: dbeb93d0ba37af3283719130b0bf2143645e7225ad5ecfe931bffc6611ab2cebed293c3547f619d78c77481accac324b0069fc45cc37ce96cc8e40b0ee68267f
+Description: JFS filesystem support
+ This package contains the JFS filesystem module for the kernel.
+
+Package: kernel-image-6.1.0-43-amd64-di
+Architecture: amd64
+Version: 6.1.159-1+untangle1bookworm
+Kernel-Version: 6.1.0-43-amd64
+Priority: standard
+Section: debian-installer
+Source: linux
+Maintainer: Debian Kernel Team <debian-kernel@lists.debian.org>
+Installed-Size: 9828
+Provides: kernel-image
+Filename: localudebs/kernel-image-6.1.0-43-amd64-di_6.1.159-1+untangle1bookworm_amd64.udeb
+Size: 8473488
+MD5sum: a6087db31a378e80ac4a50a5d53cc022
+SHA1: c1d55ee01d4b59f7a7826d67e19181c173543dd2
+SHA256: 10b5042709dcfd07e8f355bb323993fa7a2df5820cb74b6f3dc2169d34c50b5b
+SHA512: e61c18018b51c63fa2cc9b1937c9b33b36f27abbcfa05f8bdb07fd9c4d99360df2270708e8fd8573c1a066f639c918c0ccc208b0a995366fb877fd6f7326b416
+Description: Linux kernel image and core modules for the Debian installer
+ This package contains the kernel image and core modules for the Debian
+ installer boot images.  It does _not_ provide a usable kernel for your
+ full Debian system.
+
+Package: loop-modules-6.1.0-43-amd64-di
+Architecture: amd64
+Version: 6.1.159-1+untangle1bookworm
+Kernel-Version: 6.1.0-43-amd64
+Priority: standard
+Section: debian-installer
+Source: linux
+Maintainer: Debian Kernel Team <debian-kernel@lists.debian.org>
+Installed-Size: 82
+Provides: loop-modules
+Depends: kernel-image-6.1.0-43-amd64-di
+Filename: localudebs/loop-modules-6.1.0-43-amd64-di_6.1.159-1+untangle1bookworm_amd64.udeb
+Size: 18384
+MD5sum: 3cc46eee8ffb7662246de234c44e9003
+SHA1: 9ff02bc229e2ccb2658259bcf5e9de9ffa79852b
+SHA256: e9afba851a4325e2cf5a5153bc39dfb810c28ca740291d2cb9827636a686bc4c
+SHA512: aeff2941e69183e5ec3d47adf22bc21f95dc72f5b3029dd1b80ae182d080b22972d549c9e74c7ee32b929f8e282f2dec4c3e5313bd3d5a7a0f638ee97ad2794c
+Description: Loopback filesystem support
+ This package contains loopback filesystem support for the kernel.
+
+Package: md-modules-6.1.0-43-amd64-di
+Architecture: amd64
+Version: 6.1.159-1+untangle1bookworm
+Kernel-Version: 6.1.0-43-amd64
+Priority: optional
+Section: debian-installer
+Source: linux
+Maintainer: Debian Kernel Team <debian-kernel@lists.debian.org>
+Installed-Size: 3400
+Provides: md-modules
+Depends: kernel-image-6.1.0-43-amd64-di, crc-modules-6.1.0-43-amd64-di
+Filename: localudebs/md-modules-6.1.0-43-amd64-di_6.1.159-1+untangle1bookworm_amd64.udeb
+Size: 676752
+MD5sum: 20a62557cea65a3e7a136fc1da3cf61b
+SHA1: 7b4f639e3e5ecd9f97de74456aefc13c3667eeee
+SHA256: 08f2d58fb91f648a3ceab4ca3c93bada7af1cf6d5a2bff3a528d402da21d38df
+SHA512: ddb7d1535aeedf45612b9c9e2422ab376075a5aede067cddabea9e3e4f189a697d87b8ae08c06123a7865f844de93939513a99e8dfcc7d6080019d65064f886d
+Description: RAID and LVM support
+ This package contains RAID and LVM modules for the kernel.
+
+Package: mmc-core-modules-6.1.0-43-amd64-di
+Architecture: amd64
+Version: 6.1.159-1+untangle1bookworm
+Kernel-Version: 6.1.0-43-amd64
+Priority: optional
+Section: debian-installer
+Source: linux
+Maintainer: Debian Kernel Team <debian-kernel@lists.debian.org>
+Installed-Size: 447
+Provides: mmc-core-modules
+Depends: kernel-image-6.1.0-43-amd64-di
+Filename: localudebs/mmc-core-modules-6.1.0-43-amd64-di_6.1.159-1+untangle1bookworm_amd64.udeb
+Size: 79928
+MD5sum: e29ecff425777760172ee1f9934415c7
+SHA1: 346edf16505f45508d6eda4a83edddfad990223c
+SHA256: a64a5f8e9165b313bf2072f86255b8af1892bd8fcf12d2981a9ef194d88caaae
+SHA512: 175528c49de9d3bfeba092220cf3894cd0dd2f9f2fec6af964dc3aa190f1c82c2f943877f40b1f766b7e11eb4ac30b3ea63f3b46422eea67cedf62d6c6e0a722
+Description: MMC/SD/SDIO core modules
+ This package contains core modules for MMC/SD/SDIO support.
+
+Package: mmc-modules-6.1.0-43-amd64-di
+Architecture: amd64
+Version: 6.1.159-1+untangle1bookworm
+Kernel-Version: 6.1.0-43-amd64
+Priority: optional
+Section: debian-installer
+Source: linux
+Maintainer: Debian Kernel Team <debian-kernel@lists.debian.org>
+Installed-Size: 1443
+Provides: mmc-modules
+Depends: kernel-image-6.1.0-43-amd64-di, mmc-core-modules-6.1.0-43-amd64-di, usb-modules-6.1.0-43-amd64-di, crc-modules-6.1.0-43-amd64-di
+Filename: localudebs/mmc-modules-6.1.0-43-amd64-di_6.1.159-1+untangle1bookworm_amd64.udeb
+Size: 234444
+MD5sum: e69e1aae18e3035532e05360063c4a71
+SHA1: bceccc96f9b42dc49fd344fc6a35a0277ba045e5
+SHA256: 81f25d1b95d92fee8d4c82c07288a0184d78493cf3768a28709a8b1b9bad1340
+SHA512: 395a86876d0a720e5165a293c7af2d8846f38720b2b90c94dba656473e7a7e27e9fa2f4145c1c505084b9c90e5a5b35c381b59c82c708b6cb4b8792d8bcc5761
+Description: MMC/SD card modules
+ This package contains modules needed to support MMC (multimedia) and SD
+ cards.
+
+Package: mouse-modules-6.1.0-43-amd64-di
+Architecture: amd64
+Version: 6.1.159-1+untangle1bookworm
+Kernel-Version: 6.1.0-43-amd64
+Priority: optional
+Section: debian-installer
+Source: linux
+Maintainer: Debian Kernel Team <debian-kernel@lists.debian.org>
+Installed-Size: 392
+Provides: mouse-modules
+Depends: kernel-image-6.1.0-43-amd64-di, event-modules-6.1.0-43-amd64-di, input-modules-6.1.0-43-amd64-di, usb-modules-6.1.0-43-amd64-di
+Filename: localudebs/mouse-modules-6.1.0-43-amd64-di_6.1.159-1+untangle1bookworm_amd64.udeb
+Size: 72788
+MD5sum: 70c1b98695d7c0196cedaf23673b60dd
+SHA1: 38894da6436ee91c0b04701ad6950379dbd153c4
+SHA256: 76f5a5047a96fb2b0b7538e823ca600c1a0cc06bd66224a017cf5831a4b6d974
+SHA512: 0ee32f491c134e0b2d8cef28134c744d198f49364e114b56fb2a6c2d17b768b5e1bea98fe9e0da36e5c38a68096cd635464d1ab055d0288f1540aea59eadd441
+Description: Mouse support
+ This package contains mouse drivers for the kernel.
+
+Package: mtd-core-modules-6.1.0-43-amd64-di
+Architecture: amd64
+Version: 6.1.159-1+untangle1bookworm
+Kernel-Version: 6.1.0-43-amd64
+Priority: optional
+Section: debian-installer
+Source: linux
+Maintainer: Debian Kernel Team <debian-kernel@lists.debian.org>
+Installed-Size: 187
+Provides: mtd-core-modules
+Depends: kernel-image-6.1.0-43-amd64-di
+Filename: localudebs/mtd-core-modules-6.1.0-43-amd64-di_6.1.159-1+untangle1bookworm_amd64.udeb
+Size: 35996
+MD5sum: e28c4ca902dc2eb180589d82e2f3dcbc
+SHA1: 5f81be94e4b1317017321ca7fd9fe4b4e52b26d0
+SHA256: d600215a5033638d70bfc4f2a9221d818bfdab1c51f9b5d847a21dc6143e2834
+SHA512: c75a58d7902023ca43edd1414f9732c7105afc3f0544ab647932108c9017a02f6764860e459453daaa29bf308f393421d65ca229554c185ed1b18a6eb8e798f4
+Description: MTD core
+ This package contains the MTD core.
+
+Package: multipath-modules-6.1.0-43-amd64-di
+Architecture: amd64
+Version: 6.1.159-1+untangle1bookworm
+Kernel-Version: 6.1.0-43-amd64
+Priority: optional
+Section: debian-installer
+Source: linux
+Maintainer: Debian Kernel Team <debian-kernel@lists.debian.org>
+Installed-Size: 253
+Provides: multipath-modules
+Depends: kernel-image-6.1.0-43-amd64-di, md-modules-6.1.0-43-amd64-di, scsi-core-modules-6.1.0-43-amd64-di
+Filename: localudebs/multipath-modules-6.1.0-43-amd64-di_6.1.159-1+untangle1bookworm_amd64.udeb
+Size: 47892
+MD5sum: 7f61cfae117c2708cb3c33fe7b278b3a
+SHA1: 91be4fd8d99ef9828a44282e129ed2e1f63c38cc
+SHA256: 21fba76537fc4129941e1953512f3752b0add4e9b0796c19f00d2271b1b60d5f
+SHA512: e3bc3b09544e96f260261f181daa726ad96362f13c7293c936c4cce2d1da7b21e357226fa5a5b07f4acac8999c97cbef10eea3db4d3a8c06777939f45b40c41d
+Description: Multipath support
+ This package contains DM-Multipath modules for the kernel.
+
+Package: nbd-modules-6.1.0-43-amd64-di
+Architecture: amd64
+Version: 6.1.159-1+untangle1bookworm
+Kernel-Version: 6.1.0-43-amd64
+Priority: optional
+Section: debian-installer
+Source: linux
+Maintainer: Debian Kernel Team <debian-kernel@lists.debian.org>
+Installed-Size: 127
+Provides: nbd-modules
+Depends: kernel-image-6.1.0-43-amd64-di
+Filename: localudebs/nbd-modules-6.1.0-43-amd64-di_6.1.159-1+untangle1bookworm_amd64.udeb
+Size: 25628
+MD5sum: cb20e30714ab0404118b0d76f1c67849
+SHA1: f5bd917631d1ca3a1c3b7deb8620d869c379e35d
+SHA256: a31a65fb7555e7062e24c8ec4372e98bb05660c114a9cc087898a378877fb2eb
+SHA512: bf647536d05d1f998d1ea9961274c6b518cd87a05af7430c0f541be6561b1e09ba2560bc5adef8326a26721672634f339f80db61853cb67cc62a677eb540412f
+Description: Network Block Device modules
+ This package contains the modules required for support of the Network
+ Block Device
+
+Package: nic-modules-6.1.0-43-amd64-di
+Architecture: amd64
+Version: 6.1.159-1+untangle1bookworm
+Kernel-Version: 6.1.0-43-amd64
+Priority: standard
+Section: debian-installer
+Source: linux
+Maintainer: Debian Kernel Team <debian-kernel@lists.debian.org>
+Installed-Size: 34792
+Provides: nic-extra-modules, nic-modules
+Depends: kernel-image-6.1.0-43-amd64-di, nic-shared-modules-6.1.0-43-amd64-di, i2c-modules-6.1.0-43-amd64-di, crc-modules-6.1.0-43-amd64-di, mtd-core-modules-6.1.0-43-amd64-di
+Filename: localudebs/nic-modules-6.1.0-43-amd64-di_6.1.159-1+untangle1bookworm_amd64.udeb
+Size: 6334368
+MD5sum: a5e2d0f82dd0fbb1b2009fabc678f19d
+SHA1: bd2257a44214e638021b4f43ab76997e34e46095
+SHA256: f3b5f2f37e5dfaaeaa80c6dcf08ab9abba9e8bc6da45f99ce1fdfe686bddd500
+SHA512: 5e4bd8fe7aa7d0ebcc3fdeed4252f10859967716b952ee6d7359ae30e9d26820bc143e71b95330c256710665ac0efd37bb7b6bf00e32511fad88aaf4673f2b3a
+Description: NIC drivers
+ This package contains Ethernet and some paravirtualised network drivers
+ for the kernel.
+
+Package: nic-pcmcia-modules-6.1.0-43-amd64-di
+Architecture: amd64
+Version: 6.1.159-1+untangle1bookworm
+Kernel-Version: 6.1.0-43-amd64
+Priority: standard
+Section: debian-installer
+Source: linux
+Maintainer: Debian Kernel Team <debian-kernel@lists.debian.org>
+Installed-Size: 1479
+Provides: nic-pcmcia-modules
+Depends: kernel-image-6.1.0-43-amd64-di, nic-shared-modules-6.1.0-43-amd64-di, nic-wireless-modules-6.1.0-43-amd64-di, pcmcia-modules-6.1.0-43-amd64-di, mmc-core-modules-6.1.0-43-amd64-di
+Filename: localudebs/nic-pcmcia-modules-6.1.0-43-amd64-di_6.1.159-1+untangle1bookworm_amd64.udeb
+Size: 252748
+MD5sum: 7d18595253a9d126fe2e685528044d58
+SHA1: 431e392005850fde4fe57632197f3daf5eebc6ca
+SHA256: 5121b6f29ef0cb3f77a88e016566cae0ae102f6568fdf475c12fe226ceec2d8d
+SHA512: 8362adf976d1dd1664f55064ebb6b1a30dcef122a59173778b2f957af393624910fe22a5d70feb71245b6829b1267ab3003544da30668e258c0c0205a350d677
+Description: Common PCMCIA NIC drivers
+ This package contains common PCMCIA NIC drivers for the kernel.
+
+Package: nic-shared-modules-6.1.0-43-amd64-di
+Architecture: amd64
+Version: 6.1.159-1+untangle1bookworm
+Kernel-Version: 6.1.0-43-amd64
+Priority: standard
+Section: debian-installer
+Source: linux
+Maintainer: Debian Kernel Team <debian-kernel@lists.debian.org>
+Installed-Size: 1787
+Provides: nic-shared-modules
+Depends: kernel-image-6.1.0-43-amd64-di
+Filename: localudebs/nic-shared-modules-6.1.0-43-amd64-di_6.1.159-1+untangle1bookworm_amd64.udeb
+Size: 280144
+MD5sum: e1ef8ab5f11107b582f5f747445ada87
+SHA1: 50d467357dfc5fa60dc49f33cba6409bf2764af7
+SHA256: 16469099a656655fd54279611d6b5f7f9a5134f13cc587d0e0f394da0ec3a80b
+SHA512: 8ee79ec8af4d3fa2feb5e2ef58e4e4f320088bb7b0af97dd4aa2cb87ae26d86576233869a45828e790d3f0fd0f7970e8d1c6b859a849a8e9a32e8858e394fe0b
+Description: Shared NIC drivers
+ This package contains NIC drivers needed by combinations of nic-modules,
+ nic-pcmcia-modules, nic-usb-modules and nic-wireless-modules.
+
+Package: nic-usb-modules-6.1.0-43-amd64-di
+Architecture: amd64
+Version: 6.1.159-1+untangle1bookworm
+Kernel-Version: 6.1.0-43-amd64
+Priority: standard
+Section: debian-installer
+Source: linux
+Maintainer: Debian Kernel Team <debian-kernel@lists.debian.org>
+Installed-Size: 1920
+Provides: nic-usb-modules
+Depends: kernel-image-6.1.0-43-amd64-di, nic-shared-modules-6.1.0-43-amd64-di, nic-wireless-modules-6.1.0-43-amd64-di, usb-modules-6.1.0-43-amd64-di, crc-modules-6.1.0-43-amd64-di
+Filename: localudebs/nic-usb-modules-6.1.0-43-amd64-di_6.1.159-1+untangle1bookworm_amd64.udeb
+Size: 310628
+MD5sum: b05b0aac63b927b5c0ba855e7934bee8
+SHA1: f11ba4fb315529e6c1b37f9f1394a7e03c72db0b
+SHA256: e720a6ffdf5d193ab10e99f141ba62c03c6897d48d7ac2f4cbf21769830a71ff
+SHA512: 1bbcac7c5455c5537acdfec6a1831be4ec93ea9e2af2c1055d3f970d02e710bbb1f457e7e7719abc1c26bf4b5522469301d8ecf8abb56e9afa85bf1163448cec
+Description: USB NIC drivers
+ This package contains USB network adapter drivers for the kernel.
+
+Package: nic-wireless-modules-6.1.0-43-amd64-di
+Architecture: amd64
+Version: 6.1.159-1+untangle1bookworm
+Kernel-Version: 6.1.0-43-amd64
+Priority: standard
+Section: debian-installer
+Source: linux
+Maintainer: Debian Kernel Team <debian-kernel@lists.debian.org>
+Installed-Size: 42751
+Provides: nic-wireless-modules
+Depends: kernel-image-6.1.0-43-amd64-di, nic-shared-modules-6.1.0-43-amd64-di, usb-modules-6.1.0-43-amd64-di, mmc-core-modules-6.1.0-43-amd64-di, pcmcia-modules-6.1.0-43-amd64-di, crc-modules-6.1.0-43-amd64-di, rfkill-modules-6.1.0-43-amd64-di, crypto-modules-6.1.0-43-amd64-di
+Filename: localudebs/nic-wireless-modules-6.1.0-43-amd64-di_6.1.159-1+untangle1bookworm_amd64.udeb
+Size: 6849180
+MD5sum: b7009b713f6746c7feefa534641b0961
+SHA1: 06fa14bd7d39f317447fe19526bc680f990bb125
+SHA256: 35a156157251a0569910e35d47864c18786c634f4a60ff2a70f2743a1b170f9f
+SHA512: 599056f5bf5efac38ac5b26fc8c53e873bbeea3200771ff6bf6368310abaca1133f9ba73503eeba92d25d73cc39c04499ca84b336841ec8fba7eb031c2806cbc
+Description: Wireless NIC drivers
+ This package contains wireless NIC drivers for the kernel.  Includes
+ crypto modules only needed for wireless (WEP, WPA).
+
+Package: pata-modules-6.1.0-43-amd64-di
+Architecture: amd64
+Version: 6.1.159-1+untangle1bookworm
+Kernel-Version: 6.1.0-43-amd64
+Priority: standard
+Section: debian-installer
+Source: linux
+Maintainer: Debian Kernel Team <debian-kernel@lists.debian.org>
+Installed-Size: 1043
+Provides: pata-modules
+Depends: kernel-image-6.1.0-43-amd64-di, ata-modules-6.1.0-43-amd64-di
+Filename: localudebs/pata-modules-6.1.0-43-amd64-di_6.1.159-1+untangle1bookworm_amd64.udeb
+Size: 101748
+MD5sum: 1f2a9d8289d93ca7ad38058797cd44ae
+SHA1: a537cdf27d8309c2ee958212ce25fc424b2a8e16
+SHA256: 3431e06bec05d2ceb50086d47927ca51c88553d75d36486750865e42a9d21271
+SHA512: 0f484979b26083087b595f9a53c30b825fe1948b284cade99187b98b3d2c84e8ebc68c7cb5a6601f2894bc0778987c8829eaf594e0faa534a61709aaf7a5af91
+Description: PATA drivers
+ This package contains PATA drivers for the kernel.
+
+Package: pcmcia-modules-6.1.0-43-amd64-di
+Architecture: amd64
+Version: 6.1.159-1+untangle1bookworm
+Kernel-Version: 6.1.0-43-amd64
+Priority: standard
+Section: debian-installer
+Source: linux
+Maintainer: Debian Kernel Team <debian-kernel@lists.debian.org>
+Installed-Size: 457
+Provides: pcmcia-modules
+Depends: kernel-image-6.1.0-43-amd64-di
+Filename: localudebs/pcmcia-modules-6.1.0-43-amd64-di_6.1.159-1+untangle1bookworm_amd64.udeb
+Size: 80852
+MD5sum: 070a3db555cc6f6a8c95f7a8240ef6c0
+SHA1: 6bbf90cb7c83760e692d4f08b89c557eda245c57
+SHA256: 5956419a1b2e153778f03ac30c7aacbdad2acd5b9923a85c779afcafe4ffb4c7
+SHA512: 6b156549aad374939b1557ab7e55eba777c634a8f3012d12483bd275185d05c09e4f7445a5468dee7196d821a619f2e898f91d4eca6db5a0b38783b07c4feac9
+Description: Common PCMCIA drivers
+ This package contains common PCMCIA drivers for the kernel.
+
+Package: pcmcia-storage-modules-6.1.0-43-amd64-di
+Architecture: amd64
+Version: 6.1.159-1+untangle1bookworm
+Kernel-Version: 6.1.0-43-amd64
+Priority: standard
+Section: debian-installer
+Source: linux
+Maintainer: Debian Kernel Team <debian-kernel@lists.debian.org>
+Installed-Size: 85
+Provides: pcmcia-storage-modules
+Depends: kernel-image-6.1.0-43-amd64-di, cdrom-core-modules-6.1.0-43-amd64-di, pcmcia-modules-6.1.0-43-amd64-di, ata-modules-6.1.0-43-amd64-di
+Filename: localudebs/pcmcia-storage-modules-6.1.0-43-amd64-di_6.1.159-1+untangle1bookworm_amd64.udeb
+Size: 15940
+MD5sum: 8ca12d635df1a5eb133134637e20d3c8
+SHA1: 3000f6fa14516bcc3a8e1ee7cd291e09857054b2
+SHA256: 3ad58c2050ce029196d1db22c7c9c577441cfe6582ffea351e3e3d197eb64ec3
+SHA512: 1817357a0215a5c445839832db375957e0175de543f6b8f8657e47a73d44e0e06a9f4d62fcdd6afe290c7f3ad3ddcb38cb8041123f2d251fea9ff818bb9eaf5b
+Description: PCMCIA storage drivers
+ This package contains PCMCIA storage drivers for the kernel.
+
+Package: ppp-modules-6.1.0-43-amd64-di
+Architecture: amd64
+Version: 6.1.159-1+untangle1bookworm
+Kernel-Version: 6.1.0-43-amd64
+Priority: optional
+Section: debian-installer
+Source: linux
+Maintainer: Debian Kernel Team <debian-kernel@lists.debian.org>
+Installed-Size: 272
+Provides: ppp-modules
+Depends: kernel-image-6.1.0-43-amd64-di, serial-modules-6.1.0-43-amd64-di, crc-modules-6.1.0-43-amd64-di
+Filename: localudebs/ppp-modules-6.1.0-43-amd64-di_6.1.159-1+untangle1bookworm_amd64.udeb
+Size: 52840
+MD5sum: bd4bcf8ea6efde3852dcf1e1badfbd91
+SHA1: 028bf0dc299917ae59671bb25cb8837e9f51fe5a
+SHA256: 23f80b4fb27ea781e51d15bac03f3b0a0047ad623fccb8c8997ff89a2ec8b397
+SHA512: 0b36c8cccc7deeb83341eebaccf066f384adc8ce211f96fdce64188bb35f70ec2bbb44cdca7e92b5506159258728ba63dabe11fcc7fee9b772fe2391ce9af5f5
+Description: PPP drivers
+ This package contains PPP drivers for the kernel.
+
+Package: rfkill-modules-6.1.0-43-amd64-di
+Architecture: amd64
+Version: 6.1.159-1+untangle1bookworm
+Kernel-Version: 6.1.0-43-amd64
+Priority: optional
+Section: debian-installer
+Source: linux
+Maintainer: Debian Kernel Team <debian-kernel@lists.debian.org>
+Installed-Size: 82
+Provides: rfkill-modules
+Depends: kernel-image-6.1.0-43-amd64-di
+Filename: localudebs/rfkill-modules-6.1.0-43-amd64-di_6.1.159-1+untangle1bookworm_amd64.udeb
+Size: 14960
+MD5sum: f7e706ac4dbe50f5e38855aec0daa096
+SHA1: f19f6a6a8b49c398376ea1b743484c79efa415b3
+SHA256: d7edefe4385f7fa34e990f9ba3c66d7c4f82652e380c4886f4a3fdaddf21ee1c
+SHA512: f32eae5e211b476b6399a9db728e7d55885158be5588b0dbbabf3896cb2c6f9a7c56ecd8e08a9a595b4ce885ea030104321131256f3a9a3c8907982b5caf02c7
+Description: rfkill modules
+ This package contains the rfkill module.
+
+Package: sata-modules-6.1.0-43-amd64-di
+Architecture: amd64
+Version: 6.1.159-1+untangle1bookworm
+Kernel-Version: 6.1.0-43-amd64
+Priority: standard
+Section: debian-installer
+Source: linux
+Maintainer: Debian Kernel Team <debian-kernel@lists.debian.org>
+Installed-Size: 1223
+Provides: sata-modules
+Depends: kernel-image-6.1.0-43-amd64-di, scsi-core-modules-6.1.0-43-amd64-di, ata-modules-6.1.0-43-amd64-di
+Filename: localudebs/sata-modules-6.1.0-43-amd64-di_6.1.159-1+untangle1bookworm_amd64.udeb
+Size: 177544
+MD5sum: f35a9067183fb4086944358260e85996
+SHA1: f8939bf87a03b04e5ea22f3612444e808aee0c67
+SHA256: 3e342a111cdf885c28e7b2bb267c9350e26b5ae471adcc802a272e696eb7acc6
+SHA512: 847cb3ee1e090b7557eb380b2db7900ddbcc8afab43d927295a666c15af1a52306b1237c1f37a25010471be26a26c698c1f03594e4878df8bf26bdd9a3fd8dd8
+Description: SATA drivers
+ This package contains SATA drivers for the kernel.
+
+Package: scsi-core-modules-6.1.0-43-amd64-di
+Architecture: amd64
+Version: 6.1.159-1+untangle1bookworm
+Kernel-Version: 6.1.0-43-amd64
+Priority: standard
+Section: debian-installer
+Source: linux
+Maintainer: Debian Kernel Team <debian-kernel@lists.debian.org>
+Installed-Size: 1212
+Provides: scsi-core-modules
+Depends: kernel-image-6.1.0-43-amd64-di, crc-modules-6.1.0-43-amd64-di
+Filename: localudebs/scsi-core-modules-6.1.0-43-amd64-di_6.1.159-1+untangle1bookworm_amd64.udeb
+Size: 206248
+MD5sum: 92acd3fe84b66bf48d814517c89e76c9
+SHA1: 169a8d6ce8df4e319ed311c174b6894ea1fa89c6
+SHA256: dd0415020b770668237ad454e5c7abc432da90a09603f7267ab07e26b0502cc9
+SHA512: 5a7afe2700f90f7e784bbf1c73ff0924b12d54aa5569af1e79a00b5c4a46612618932f64b6d66ee6fec3f16bb42c11975882d307c7714624e01bb8377089959a
+Description: Core SCSI subsystem
+ This package contains the core SCSI subsystem for the kernel.
+
+Package: scsi-modules-6.1.0-43-amd64-di
+Architecture: amd64
+Version: 6.1.159-1+untangle1bookworm
+Kernel-Version: 6.1.0-43-amd64
+Priority: standard
+Section: debian-installer
+Source: linux
+Maintainer: Debian Kernel Team <debian-kernel@lists.debian.org>
+Installed-Size: 20569
+Provides: scsi-modules
+Depends: kernel-image-6.1.0-43-amd64-di, scsi-core-modules-6.1.0-43-amd64-di, cdrom-core-modules-6.1.0-43-amd64-di, ata-modules-6.1.0-43-amd64-di
+Filename: localudebs/scsi-modules-6.1.0-43-amd64-di_6.1.159-1+untangle1bookworm_amd64.udeb
+Size: 3731280
+MD5sum: 13f1f519f074f2081428ddd406c415b1
+SHA1: 9dd716aa56d47339d6f86cd6c2d574723527e40f
+SHA256: 43af8bc729c630b0b5b026b109c3c88019eadd78ce1a704eb9ba8c3f9def9a38
+SHA512: 0314feedb3ecfe0ba8b0befb52df9fafc103c4eebace5fc33f2d0864ca808c9247a4269609c2dca8606a761fe0b380a485bfadd5526be865bcbd82b6580091af
+Description: SCSI drivers
+ This package contains SCSI drivers for the kernel.
+
+Package: scsi-nic-modules-6.1.0-43-amd64-di
+Architecture: amd64
+Version: 6.1.159-1+untangle1bookworm
+Kernel-Version: 6.1.0-43-amd64
+Priority: optional
+Section: debian-installer
+Source: linux
+Maintainer: Debian Kernel Team <debian-kernel@lists.debian.org>
+Installed-Size: 1139
+Provides: scsi-nic-modules
+Depends: scsi-modules-6.1.0-43-amd64-di, nic-modules-6.1.0-43-amd64-di
+Filename: localudebs/scsi-nic-modules-6.1.0-43-amd64-di_6.1.159-1+untangle1bookworm_amd64.udeb
+Size: 222296
+MD5sum: 45a4d53cc0b4ad156483060281e4d262
+SHA1: 174641680580cc7b9757bffbe302d805e6c7aa58
+SHA256: e9f03401b7be2d4010f888d6b12bf162a1d126c63121174c4c82d62814b5fb47
+SHA512: 0e6b082e5cdee9218963a0c43f26c37d6b4dfc04f1bedb479ecfd49f99294b37bba25cb90c5f60fb1765608455045a3586e8e19465654b4fdaafd758ec2b1fb0
+Description: SCSI drivers for converged NICs
+ This package contains SCSI drivers that depend on net drivers.
+
+Package: serial-modules-6.1.0-43-amd64-di
+Architecture: amd64
+Version: 6.1.159-1+untangle1bookworm
+Kernel-Version: 6.1.0-43-amd64
+Priority: optional
+Section: debian-installer
+Source: linux
+Maintainer: Debian Kernel Team <debian-kernel@lists.debian.org>
+Installed-Size: 249
+Provides: serial-modules
+Depends: kernel-image-6.1.0-43-amd64-di, pcmcia-modules-6.1.0-43-amd64-di
+Filename: localudebs/serial-modules-6.1.0-43-amd64-di_6.1.159-1+untangle1bookworm_amd64.udeb
+Size: 46372
+MD5sum: 57e9e77fb7a25b73b73e9caa3af6230b
+SHA1: aaa525d72988eac4f5072fc01ed595c2b409c017
+SHA256: 9708c3067111ad1a054f3b4c0b5dac8b28997dd1bfaf6e840b7b4134e1253875
+SHA512: 29212b617e34d09e10a281df6d5e1b984113ca9205eb5a155d96ffce8ff73ea302f1f9a256b798a31beefc6c2dfa569b758b61ea50794761c331c8bfaa10391a
+Description: Serial drivers
+ This package contains serial drivers for the kernel.
+
+Package: sound-modules-6.1.0-43-amd64-di
+Architecture: amd64
+Version: 6.1.159-1+untangle1bookworm
+Kernel-Version: 6.1.0-43-amd64
+Priority: optional
+Section: debian-installer
+Source: linux
+Maintainer: Debian Kernel Team <debian-kernel@lists.debian.org>
+Installed-Size: 29357
+Provides: sound-modules
+Depends: kernel-image-6.1.0-43-amd64-di, i2c-modules-6.1.0-43-amd64-di, usb-modules-6.1.0-43-amd64-di, pcmcia-modules-6.1.0-43-amd64-di, firewire-core-modules-6.1.0-43-amd64-di, crc-modules-6.1.0-43-amd64-di
+Filename: localudebs/sound-modules-6.1.0-43-amd64-di_6.1.159-1+untangle1bookworm_amd64.udeb
+Size: 3655108
+MD5sum: 9c4af743f7d5a696836135f3fe0b5cc6
+SHA1: d7480a4b24c6110cd13aac0e13f7f6e9b35d477c
+SHA256: 2da3ce79a1ce75349a5d73bd0234ce47c767e2d4a8e31832e017d4ea726f8e50
+SHA512: 046427644ddcd4a4252b44273674fa854a9b5ecdc22815b8c414470bb3628b9cbb664f5df9d0640084a81466f72a6e04fb592484a82bb9f463b214d09178e0e1
+Description: sound support
+ This package contains sound modules.
+
+Package: speakup-modules-6.1.0-43-amd64-di
+Architecture: amd64
+Version: 6.1.159-1+untangle1bookworm
+Kernel-Version: 6.1.0-43-amd64
+Priority: optional
+Section: debian-installer
+Source: linux
+Maintainer: Debian Kernel Team <debian-kernel@lists.debian.org>
+Installed-Size: 474
+Provides: speakup-modules
+Depends: kernel-image-6.1.0-43-amd64-di
+Filename: localudebs/speakup-modules-6.1.0-43-amd64-di_6.1.159-1+untangle1bookworm_amd64.udeb
+Size: 70232
+MD5sum: c4714fa4667e61b8c2ac9e1d92c218d8
+SHA1: 9decfa83851270b4938f31223a82f59644c8e66f
+SHA256: 1df08550ec54428bfbf742538e38da3609a5d92de4194a2a0af8dbf4c8529723
+SHA512: ed63adec796f1f0ff114bcd83d55008a5920c4400ced4eda06eb1e75d71ad98bddf5ed8af8218abfdb72e4efbfdcfbbd0884afd371f70f385a5af385462af98e
+Description: speakup modules
+ This package contains speakup modules.
+
+Package: squashfs-modules-6.1.0-43-amd64-di
+Architecture: amd64
+Version: 6.1.159-1+untangle1bookworm
+Kernel-Version: 6.1.0-43-amd64
+Priority: optional
+Section: debian-installer
+Source: linux
+Maintainer: Debian Kernel Team <debian-kernel@lists.debian.org>
+Installed-Size: 162
+Provides: squashfs-modules
+Depends: kernel-image-6.1.0-43-amd64-di
+Filename: localudebs/squashfs-modules-6.1.0-43-amd64-di_6.1.159-1+untangle1bookworm_amd64.udeb
+Size: 32760
+MD5sum: 6f33272caa8c5a2c3a68ad9cd7a0518a
+SHA1: 078ed3f13d60e71d558e1855d6875b56700a02d5
+SHA256: 6121a5f249b0346cdfaa1c73a531d12bd495c6fe65427ccaa1e3346960d922cb
+SHA512: 4cccc3a73e9739772a7e18118fee7efeeff42fb5a65376c148a6ae19829fb7d15ccfeccaf89773f1a88517e7a9409c28278c2f40cb13fba46444f210337d12cb
+Description: squashfs modules
+ This package contains squashfs modules.
+
+Package: udf-modules-6.1.0-43-amd64-di
+Architecture: amd64
+Version: 6.1.159-1+untangle1bookworm
+Kernel-Version: 6.1.0-43-amd64
+Priority: optional
+Section: debian-installer
+Source: linux
+Maintainer: Debian Kernel Team <debian-kernel@lists.debian.org>
+Installed-Size: 280
+Provides: udf-modules
+Depends: kernel-image-6.1.0-43-amd64-di, crc-modules-6.1.0-43-amd64-di, cdrom-core-modules-6.1.0-43-amd64-di
+Filename: localudebs/udf-modules-6.1.0-43-amd64-di_6.1.159-1+untangle1bookworm_amd64.udeb
+Size: 62768
+MD5sum: c2f56ea5b8c083e899b302713141924c
+SHA1: ddcac13d7bceebcb12a8af2a72e0ee227f4b2fc5
+SHA256: 37de0019aec131d9a7b58bcd3a2c5c1fda535bc5f9eaa017057fc7eab3f47d7d
+SHA512: d119600c04a5c41a849f97cc4cc0dccf88e78fd1687ea79fa11a8c444038d1e5b42cdb6354b90f1b93c7d74b8cd2039e7393fef9d19f5f274487264d815a27b1
+Description: UDF modules
+ This package contains the UDF filesystem module.
+
+Package: uinput-modules-6.1.0-43-amd64-di
+Architecture: amd64
+Version: 6.1.159-1+untangle1bookworm
+Kernel-Version: 6.1.0-43-amd64
+Priority: optional
+Section: debian-installer
+Source: linux
+Maintainer: Debian Kernel Team <debian-kernel@lists.debian.org>
+Installed-Size: 45
+Provides: uinput-modules
+Depends: kernel-image-6.1.0-43-amd64-di
+Filename: localudebs/uinput-modules-6.1.0-43-amd64-di_6.1.159-1+untangle1bookworm_amd64.udeb
+Size: 9808
+MD5sum: b7b9e0243d8ee050e27eaa6ed67fbd65
+SHA1: 33fd55c293266dac39d9e81d7899e3e0cdbd9030
+SHA256: fd7219bed19dcbfc5fe805e0288aadb3135ee129db4293318d0e0cf09f0d3af3
+SHA512: f5ef9de7bd42b2180bb37e4509e312d401acfc4f5152e4eb2df9770d271fdaf8e4157fa14f7e960bcd73b1e4b2364be88f98463e5b943336a1f691169313df02
+Description: uinput support
+ This package contains the uinput module.
+
+Package: usb-modules-6.1.0-43-amd64-di
+Architecture: amd64
+Version: 6.1.159-1+untangle1bookworm
+Kernel-Version: 6.1.0-43-amd64
+Priority: optional
+Section: debian-installer
+Source: linux
+Maintainer: Debian Kernel Team <debian-kernel@lists.debian.org>
+Installed-Size: 1911
+Provides: usb-modules
+Depends: kernel-image-6.1.0-43-amd64-di
+Filename: localudebs/usb-modules-6.1.0-43-amd64-di_6.1.159-1+untangle1bookworm_amd64.udeb
+Size: 358892
+MD5sum: 9d91062c4346826b0cd0f1a25eb3165e
+SHA1: 8a09cb82b7bd9da59ef98ecd147df775101527ba
+SHA256: b22d9e310fc3e40ef70dc217752beafcd5bd5927afc97c129d4c4b200ba912c8
+SHA512: a7d98d2422fa6ed414914ed5f6ef2feb1c6fda432cfaec2dabe34d09745992f40582bb80972d7c7b737f15f9427ada8f0e8500a8d4b189224cdd24f3833c184c
+Description: USB support
+ This package contains core USB drivers for the kernel.
+
+Package: usb-serial-modules-6.1.0-43-amd64-di
+Architecture: amd64
+Version: 6.1.159-1+untangle1bookworm
+Kernel-Version: 6.1.0-43-amd64
+Priority: optional
+Section: debian-installer
+Source: linux
+Maintainer: Debian Kernel Team <debian-kernel@lists.debian.org>
+Installed-Size: 1868
+Provides: usb-serial-modules
+Depends: kernel-image-6.1.0-43-amd64-di, usb-modules-6.1.0-43-amd64-di
+Filename: localudebs/usb-serial-modules-6.1.0-43-amd64-di_6.1.159-1+untangle1bookworm_amd64.udeb
+Size: 256104
+MD5sum: 04c30cadcfbb406f524797bce614183c
+SHA1: 7958832b4a14e767bdec55a42695fb14e02d4edd
+SHA256: 311dcd943e6dd3f73e4f17d6b404875672a584f6cbe9a1d57e7b62d72ba251c1
+SHA512: 5619c2c29a3fb83f3eb6b81230d37d4897e83b427883e0e2105c968d91047353427b673c9e375e6917213db96151d5aa23149640b1120d8c5a898c80c2ca2ebd
+Description: USB serial drivers
+ This package contains USB serial drivers for the kernel.
+
+Package: usb-storage-modules-6.1.0-43-amd64-di
+Architecture: amd64
+Version: 6.1.159-1+untangle1bookworm
+Kernel-Version: 6.1.0-43-amd64
+Priority: standard
+Section: debian-installer
+Source: linux
+Maintainer: Debian Kernel Team <debian-kernel@lists.debian.org>
+Installed-Size: 732
+Provides: usb-storage-modules
+Depends: kernel-image-6.1.0-43-amd64-di, scsi-core-modules-6.1.0-43-amd64-di, usb-modules-6.1.0-43-amd64-di
+Filename: localudebs/usb-storage-modules-6.1.0-43-amd64-di_6.1.159-1+untangle1bookworm_amd64.udeb
+Size: 113292
+MD5sum: e7b12b383b872a20c92c36a138fa07b4
+SHA1: 2416e871feb9f63d16ba3fd2f6c4ba7e4be46c12
+SHA256: b879ba908f85fbc88665a0fb4626f5a1d036d6c42368941ed6471d8490db68c3
+SHA512: b6016645a81d7263088f59da9faaa89251ad51010d76a1e576f4f6cc79a733da17255d3bfe8047a0dfb9b39b85c844bb1bc2ee7194273ff3de72040f347adf77
+Description: USB storage support
+ This package contains the USB storage driver for the kernel.
+
+Package: xfs-modules-6.1.0-43-amd64-di
+Architecture: amd64
+Version: 6.1.159-1+untangle1bookworm
+Kernel-Version: 6.1.0-43-amd64
+Priority: standard
+Section: debian-installer
+Source: linux
+Maintainer: Debian Kernel Team <debian-kernel@lists.debian.org>
+Installed-Size: 4118
+Provides: xfs-modules
+Depends: kernel-image-6.1.0-43-amd64-di, crc-modules-6.1.0-43-amd64-di
+Filename: localudebs/xfs-modules-6.1.0-43-amd64-di_6.1.159-1+untangle1bookworm_amd64.udeb
+Size: 605940
+MD5sum: 3ccaa4e06153f6d95bc9aad1302fab9b
+SHA1: d436d4a807c7cd5c91a7db36c5c85fa747eade28
+SHA256: 4754901a3c16efc87e39468d644812780ebd476bb4c7eecf8f918c56b3585e13
+SHA512: 59f2298b414593fd3199acaafbfa0e8a6c0d7ddbfe864ceded5bd017142ea754c2e04a8971916531fa15412c5733038c89c96f0551dc9dd4bcef7fed005ed00e
+Description: XFS filesystem support
+ This package contains the XFS filesystem module for the kernel.
+

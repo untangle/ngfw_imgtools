@@ -51,7 +51,8 @@ base-installer base-installer/kernel/image string +KERNEL+
 ### Network configuration
 # netcfg will choose an interface that has link if possible. This makes it
 # skip displaying a list if there is more than one interface.
-d-i netcfg/choose_interface select auto
+# NGFW: network disabled during install (overridden in default.preseed with lo + disable_dhcp)
+#d-i netcfg/choose_interface select auto
 
 # To pick a particular interface instead:
 #d-i netcfg/choose_interface select lo
@@ -66,7 +67,7 @@ d-i netcfg/choose_interface select auto
 
 # If you have a slow dhcp server and the installer times out waiting for
 # it, this might be useful.
-d-i netcfg/dhcp_timeout string 60
+#d-i netcfg/dhcp_timeout string 60
 
 # Any hostname and domain names assigned from dhcp take precedence over
 # values set here. However, setting the values still prevents the questions

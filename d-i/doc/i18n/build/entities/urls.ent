@@ -77,8 +77,6 @@
 
 <!ENTITY git-tasksel-anon "git clone git@salsa.debian.org:installer-team/tasksel.git">
 <!ENTITY git-tasksel "git clone git@salsa.debian.org:installer-team/tasksel.git">
-<!ENTITY git-win32-loader-anon "git clone -q git@salsa.debian.org:installer-team/win32-loader.git">
-<!ENTITY git-win32-loader "git clone git@salsa.debian.org:installer-team/win32-loader.git">
 <!ENTITY git-iso-codes-anon "git clone git@salsa.debian.org:debian/iso-codes.git">
 <!ENTITY git-iso-codes "git clone git@salsa.debian.org:debian/iso-codes.git">
 <!ENTITY git-grub2 "git clone git@salsa.debian.org:grub-team/grub.git">

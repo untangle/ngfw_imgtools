@@ -22,6 +22,10 @@ document explains the format of the recipes and how to use them.
 1. FORMAT OF THE RECIPES
 ------------------------
 
+The recipe format is described here using a variant of Backus-Naur Form.
+See https://en.wikipedia.org/wiki/Backus%E2%80%93Naur_form if you are
+unfamiliar with this.
+
 All new lines and tabs in the recipe are converted to spaces.
 Then two or more consecutive spaces are converted to one space.
 Almost all tokens must be separated by spaces.  An important exception

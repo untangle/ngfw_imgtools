@@ -1,0 +1,51 @@
+#!/bin/sh
+
+TARGET="$1"
+
+MERGE_DIRS="bin lib lib32 lib64 libo32 libx32 sbin"
+
+die() {
+	echo "error: $*" 1>&2
+	exit 1
+}
+
+test -d "$TARGET" || die "not a directory: $TARGET"
+
+test -d "$TARGET/usr" || mkdir "$TARGET/usr"
+
+move_entry() {
+	test -h "$TARGET/usr/$1" && die "merge target 'usr/$1' is a symlink"
+
+	if ! test -e "$TARGET/usr/$1"; then
+		mv "$TARGET/$1" "$TARGET/usr/$1" ||
+			die "moving '$1' failed"
+		return 0
+	fi
+	test -d "$TARGET/usr/$1" || die "merge target '$1' is not a directory"
+	test -d "$TARGET/$1" ||
+		die "cannot merge non-directory '$1' into a directory"
+	for e in "$TARGET/$1/"* "$TARGET/$1/."*; do
+		test "${e%/.}" != "${e%/..}" && continue
+		if test -h "$e"; then
+			t=$(readlink "$e")
+			test "${t#/}" != "$t" -o "${t#../}" = "${t#*/../*}" ||
+				die "handling of symbolic links containing ../ not implemented: ${e#"$TARGET"}"
+		fi
+		test "${e%'/*'}" != "${e%'/.*'}" && ! test -e "$e" && continue
+		move_entry "${e#"$TARGET"}"
+	done
+	rmdir "$TARGET/$1" || die "failed to remove directory '$1'"
+}
+
+for d in $MERGE_DIRS; do
+	test -h "$TARGET/$d" && continue
+	if test -e "$TARGET/$d"; then
+	       	move_entry "$d"
+	fi
+	# Create the symlink even when nothing was moved taking over the
+	# functionality of base-files providing these symlinks as there is no
+	# base-files udeb.
+	if test -e "$TARGET/usr/$d" && ! test -e "$TARGET/$d"; then
+		ln -s "usr/$d" "$TARGET/$d"
+	fi
+done

@@ -36,57 +36,15 @@ d-i partman-auto/method string regular
 #d-i partman-auto/expert_recipe_file string /hd-media/recipe
 
 # If not, you can put an entire recipe into the preconfiguration file in one
-# (logical) line:
-d-i partman-auto/expert_recipe string \
-untangle :: \
-5000 10000 80000 root \
-$primary{ } \
-$bootable{ } \
-method{ format } \
-format{ } \
-use_filesystem{ } \
-filesystem{ ext4 } \
-mountpoint{ / } \
-. \
-1000 2000 300% swap \
-$primary{ } \
-method{ swap } \
-format{ } \
-. \
-10 10 1000000000 data \
-method{ format } \
-format{ } \
-use_filesystem{ } \
-filesystem{ ext4 } \
-mountpoint{ /data } \
-.
-
+# (logical) line.
+# NOTE: Only ONE expert_recipe definition can be active (last one wins in
+# preseed). The BIOS recipe (untangle2) is defined here as default. The EFI
+# recipe is set dynamically in partman/early_command when EFI is detected.
 d-i partman-auto/expert_recipe string \
 untangle2 :: \
 500 10000 1000000 ext4 \
 $primary{ } \
 $bootable{ } \
-method{ format } \
-format{ } \
-use_filesystem{ } \
-filesystem{ ext4 } \
-mountpoint{ / } \
-label{ NGFW_ROOT } \
-. \
-1000 2000 300% swap \
-method{ swap } \
-format{ } \
-.
-
-d-i partman-auto/expert_recipe string \
-untangle-efi :: \
-512 512 512 fat32 \
-$primary{ } \
-method{ efi } \
-format{ } \
-mountpoint{ /boot/efi } \
-. \
-500 10000 1000000 ext4 \
 method{ format } \
 format{ } \
 use_filesystem{ } \
@@ -139,6 +97,7 @@ if [ -n "$target_disk" ]; then \
     blockdev --rereadpt "$target_disk" 2>/dev/null || true; \
 fi; \
 if [ -d "/sys/firmware/efi/" ] ; then \
+	debconf-set partman-auto/expert_recipe 'untangle-efi :: 500 10000 1000000 ext4 $primary{ } $bootable{ } method{ format } format{ } use_filesystem{ } filesystem{ ext4 } mountpoint{ / } label{ NGFW_ROOT } . 1000 2000 300% swap method{ swap } format{ } . 512 512 512 fat32 $primary{ } method{ efi } format{ } .' ; \
 	debconf-set partman-auto/choose_recipe select untangle-efi ; \
 else \
 	debconf-set partman-auto/choose_recipe select untangle2 ; \

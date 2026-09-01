@@ -2,10 +2,24 @@
 script=$0
 preseed_config_file=$(dirname $script)/preseed.cfg
 
-# Forcibly install our linux configurator
+# NGFW-15749: trixie d-i 13's apt-install in chroot doesn't auto-bind /cdrom
+# like bookworm d-i 12 did. Without this, `apt-install` below hangs at the
+# "Please insert media labeled..." debconf dialog. Bind /cdrom from the d-i
+# environment to all three paths apt may probe — bookworm-d-i used /media/cdrom,
+# trixie-d-i 13 actually probes /media/cdrom0. /target/cdrom is also covered for
+# any older apt-cdrom code path. Validated empirically: only /media/cdrom0 was
+# the live miss on trixie. mkdir + bind both wrapped with || true so this stays
+# safe on bookworm and netboot installs where /cdrom may not exist.
+for d in /target/cdrom /target/media/cdrom /target/media/cdrom0 ; do
+    mkdir -p "$d" 2>/dev/null || true
+    mount --bind /cdrom "$d" 2>/dev/null || true
+done
+
+apt-install untangle-archive-keyring
 apt-install untangle-linux-config
 # sh -c "grep -q BOOTIF /proc/cmdline || sed -i -re 's/^root:[^:]+:/root:CHANGEME:/' /target/etc/shadow"
-chroot /target sh -c "grep -q BOOTIF /proc/cmdline || sed -i -re 's/^root:[^:]+:/root:CHANGEME:/' /etc/shadow" 
+# FIXME: CHANGEME is not a valid hash and locks the account; disabled until untangle-linux-config handles this
+#chroot /target sh -c "grep -q BOOTIF /proc/cmdline || sed -i -re 's/^root:[^:]+:/root:CHANGEME:/' /etc/shadow" 
 
 # Local client installation
 install_client_local=1

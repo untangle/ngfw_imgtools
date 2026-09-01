@@ -56,18 +56,40 @@
 # Temporary workaround for #823881:
 export MTOOLS_SKIP_CHECK=1
 
+# Temporary workaround for #1036019:
+export DRM_DIR := /usr/lib/modules/$(KERNELVERSION)/kernel/drivers/gpu/drm
+ifndef DRM_MODULES
+export DRM_MODULES :=          \
+	drm_shmem_helper.ko    \
+	drm_ttm_helper.ko      \
+	drm_vram_helper.ko     \
+	tiny/bochs.ko          \
+	tiny/cirrus.ko         \
+	ttm/ttm.ko
+endif
+
+# Sound support for Intel might be funky and require i915 bits:
+export DRIVERS_DIR := /usr/lib/modules/$(KERNELVERSION)/kernel/drivers
+ifndef SPEECH_MODULES
+export SPEECH_MODULES :=                      \
+	gpu/drm/display/drm_display_helper.ko \
+	gpu/drm/drm_buddy.ko                  \
+	gpu/drm/i915/i915.ko                  \
+	media/cec/core/cec.ko                 \
+	media/rc/rc-core.ko
+endif
+
 # Add to PATH so dpkg will always work, and so local programs will be found.
 PATH := util:$(PATH):/usr/sbin:/sbin
 EATMYDATA = $(shell which eatmydata 2>/dev/null)
-gzip = $(shell which pigz >/dev/null 2>&1 && echo "pigz -n -T" || echo "gzip -n")
 
 # We don't want this to be run each time we re-enter.
 ifndef DEB_HOST_ARCH
-DEB_HOST_ARCH = $(shell dpkg-architecture -qDEB_HOST_ARCH)
-DEB_HOST_ARCH_OS = $(shell dpkg-architecture -qDEB_HOST_ARCH_OS)
-DEB_HOST_GNU_CPU = $(shell dpkg-architecture -qDEB_HOST_GNU_CPU)
-DEB_HOST_GNU_SYSTEM = $(shell dpkg-architecture -qDEB_HOST_GNU_SYSTEM)
-DEB_HOST_MULTIARCH = $(shell dpkg-architecture -qDEB_HOST_MULTIARCH)
+DEB_HOST_ARCH := $(shell dpkg-architecture -qDEB_HOST_ARCH)
+DEB_HOST_ARCH_OS := $(shell dpkg-architecture -qDEB_HOST_ARCH_OS)
+DEB_HOST_GNU_CPU := $(shell dpkg-architecture -qDEB_HOST_GNU_CPU)
+DEB_HOST_GNU_SYSTEM := $(shell dpkg-architecture -qDEB_HOST_GNU_SYSTEM)
+DEB_HOST_MULTIARCH := $(shell dpkg-architecture -qDEB_HOST_MULTIARCH)
 export DEB_HOST_ARCH DEB_HOST_ARCH_OS DEB_HOST_GNU_CPU DEB_HOST_GNU_SYSTEM DEB_HOST_MULTIARCH
 endif
 
@@ -96,6 +118,11 @@ targetdirs = $(subst _,/,$(targetstring))
 # Overridden in config/hurd.cfg
 define genext2fs
   genext2fs -d $(TREE) -b `expr $$(du -s $(TREE) | cut -f 1) + $$(expr $$(find $(TREE) | wc -l) \* 2)` -m 0
+endef
+
+# Overridden for some depthcharge images
+define xz
+  xz -T0 --check=crc32 --block-size=1M
 endef
 
 # Configurations for the varying ARCH, SUBARCH, MEDIUM, FLAVOUR.
@@ -151,22 +178,12 @@ define normalise_permissions
   find $(1) -not -type d -and -not -type l -print0 | xargs -0r chmod $(FILE_MODE)
 endef
 
-# Limit on mfsroot size. It is determined by NKPT (in <machine/pmap.h).
-# On amd64, it can be increased by increasing this variable.  On i386,
-# this is a hard limit due to constraints of 4 GiB VM space.
-ifeq ($(DEB_HOST_ARCH),kfreebsd-i386)
-MFSROOT_LIMIT := 42m
-else ifeq ($(DEB_HOST_ARCH),kfreebsd-amd64)
-# See Bug#783773 for derivation.
-MFSROOT_LIMIT := 78m
-endif
-
-define mkfs.ufs1
-  sh -c 'makefs -t ffs -T $(SOURCE_DATE_EPOCH) -s $(MFSROOT_LIMIT) -f 3000 -o minfree=0,version=1 $$0 ${TREE}'
-endef
-
 define e2fsck
   e2fsck -fy
+endef
+
+define gzip
+  pigz -nm
 endef
 
 # Define MKFS_JFFS2 in the config file for your target.
@@ -178,7 +195,7 @@ endef
 # A generic recursion rule
 .PHONY: all_%
 all_%:
-	@install -d $(STAMPS)
+	@install -p -d $(STAMPS)
 	$(call recurse,SUBARCH,subarch,$*)
 
 .PHONY: subarch_%
@@ -288,7 +305,7 @@ _clean: tree_umount
 # we provide a generic build rule.
 .PHONY: build_%
 build_%:
-	@install -d $(STAMPS)
+	@install -p -d $(STAMPS)
 	@$(submake) _build $(shell $(submake) $(subst build_,validate_,$@))
 
 # The general build rule.
@@ -406,6 +423,40 @@ endif
 		perl -nle '$$p = $$_; $$v = <>; chomp $$v; $$a = <>; chomp $$a; <>; print "$$p $$v $$a"' | \
 		sort > $(TEMP_UDEB_LIST)
 
+	# Temporary: prefer kmod executables over busybox ones (#1060134).
+	for exec in depmod insmod lsmod modinfo modprobe rmmod; do \
+		rm -vf "$(TREE)/sbin/$$exec"; \
+	done
+
+	# This is needed even when all files are moved as it also installs the
+	# aliasing symbolic links that base-files would install if there was a
+	# base-files udeb.
+	merge-usr "$(TREE)"
+
+ifeq ($(DEB_HOST_ARCH_OS),linux)
+ifeq ($(filter $(DEB_HOST_ARCH),mips64el hppa sh4),)
+	# XXX: Compensate (at least temporarily) for kernel-image's now shipping
+	# a versioned vmlinuz-* instead of just vmlinuz (in sid, since 6.6.8-1);
+	# ditto for vmlinux-* on some archs (e.g. ppc64el). Keep it on mips64el
+	# though (see KERNELNAME variable).
+	# Trixie smoke test (NGFW-15749): tolerate 0 versioned files when the udeb
+	# already ships an unversioned /boot/vmlinuz (bookworm 6.1.0-43 case until
+	# trixie kernel build emits its own di udebs).
+	VMLINUXZ=`find $(TREE)/boot/ -name 'vmlinu[xz]-*'`; \
+	N=`echo "$$VMLINUXZ" | wc -w`; \
+	if [ $$N -gt 1 ]; then \
+		echo "E: too many vmlinu[xz]-* in tree: $$VMLINUXZ (expected: 0 or 1)" >&2; \
+		exit 1; \
+	elif [ $$N -eq 1 ]; then \
+		echo "I: unversioning vmlinu[xz]" >&2; \
+		mv -v $$VMLINUXZ $(TREE)/boot/`basename $$VMLINUXZ|sed 's/-.*//'`; \
+	else \
+		echo "I: no versioned vmlinu[xz]-* found; assuming unversioned vmlinuz already in place" >&2; \
+		ls -la $(TREE)/boot/ >&2 || true; \
+	fi
+endif
+endif
+
 	# Clean up after dpkg.
 	rm -rf $(DPKGDIR)/updates
 	rm -f $(DPKGDIR)/available $(DPKGDIR)/*-old $(DPKGDIR)/lock
@@ -430,6 +481,34 @@ endif
 
 ifeq ($(DEB_HOST_ARCH_OS),linux)
 ifdef KERNELVERSION
+
+ifneq (,$(filter $(ARCH),amd64 arm64 i386))
+	# HACK alert (#1036019): this isn't just a problem for the graphical
+	# installer, complement fb-modules with extra modules for all images
+	# including DRM modules.
+	# Trixie smoke test (NGFW-15749): tolerate missing modules — bookworm
+	# 6.1.0-43 host kernel doesn't have all of trixie's expected DRM bits.
+	if [ -e "$(DRM_DIR)/drm.ko.xz" ]; then \
+		for module in $(DRM_MODULES); do \
+			mkdir -p $(TREE)$(DRM_DIR)/$$(dirname $$module); \
+			[ -f "$(DRM_DIR)/$$module.xz" ] && cp $(DRM_DIR)/$$module.xz $(TREE)$(DRM_DIR)/$$module.xz \
+				|| echo "I: skipping missing $(DRM_DIR)/$$module.xz" >&2; \
+		done; \
+	fi
+endif
+
+ifneq (,$(filter $(ARCH),amd64))
+	# Sound support for Intel might be funky and require i915 bits:
+	# Trixie smoke test (NGFW-15749): tolerate missing modules.
+	if [ -e "$(TREE)/etc/fonts" ]; then \
+		for module in $(SPEECH_MODULES); do \
+			mkdir -p $(TREE)$(DRIVERS_DIR)/$$(dirname $$module); \
+			[ -f "$(DRIVERS_DIR)/$$module.xz" ] && cp $(DRIVERS_DIR)/$$module.xz $(TREE)$(DRIVERS_DIR)/$$module.xz \
+				|| echo "I: skipping missing $(DRIVERS_DIR)/$$module.xz" >&2; \
+		done; \
+	fi
+endif
+
 	# Set up modules.dep, ensure there is at least one standard dir (kernel
 	# in this case), so depmod will use its prune list for archs with no
 	# modules.
@@ -444,7 +523,7 @@ ifdef KERNELVERSION
 		[ -z "$$sysmap_name" ] || sysmap_opt="-F $$sysmap_name"; \
 		if [ -d $(TREE)/lib/modules/$(VERSION) ] && [ -z "$(OMIT_DEPMOD)" ]; then \
 			mkdir -p $(TREE)/lib/modules/$(VERSION)/kernel; \
-			$(shell choose-subarch-env $(VERSION)) depmod $$sysmap_opt -q -a -b $(TREE)/ $(VERSION); \
+			$(shell choose-subarch-env $(VERSION)) depmod $$sysmap_opt -a -b $(TREE)/ $(VERSION); \
 		fi; \
 		[ -z "$$sysmap_name" ] || mv $$sysmap_name $(TEMP);)
 
@@ -485,8 +564,8 @@ ifndef OMIT_LSB
 		set -e; \
 		mkdir -p $(TREE)/etc; \
 		echo 'DISTRIB_ID=$(LSB_DISTRIB_ID)' > $(TREE)/etc/lsb-release; \
-		echo 'DISTRIB_DESCRIPTION=$(LSB_DISTRIB_DESCRIPTION)' >> $(TREE)/etc/lsb-release; \
-		echo 'DISTRIB_RELEASE=$(LSB_DISTRIB_RELEASE)' >> $(TREE)/etc/lsb-release; \
+		echo 'DISTRIB_DESCRIPTION="$(LSB_DISTRIB_DESCRIPTION)"' >> $(TREE)/etc/lsb-release; \
+		echo 'DISTRIB_RELEASE="$(LSB_DISTRIB_RELEASE)"' >> $(TREE)/etc/lsb-release; \
 		echo 'X_INSTALLATION_MEDIUM=$(MEDIUM)' >> $(TREE)/etc/lsb-release; \
 	fi
 endif
@@ -529,6 +608,8 @@ endif
 	# HACK ALERT: copy libgcc_s.so.[124] from the host system as
 	# libgcc-s[124] is not packaged as a udeb
 	cp /lib/$(DEB_HOST_MULTIARCH)/libgcc_s.so.[124] $(TREE)/lib
+	# HACK ALERT: ditto for libatomic1
+	cp /usr/lib/$(DEB_HOST_MULTIARCH)/libatomic.so.1* $(TREE)/usr/lib/$(DEB_HOST_MULTIARCH)
 
 	# Reduce status file to contain only the elements we care about.
 	egrep -i '^((Status|Provides|Depends|Package|Version|Description|installer-menu-item|Description-..):|$$)' \
@@ -622,6 +703,13 @@ $(STAMPS)get_udebs-$(targetstring)-stamp: sources.list.udeb
 	dh_testroot
 	@rm -f $@
 
+	# Check mirror freshness:
+	for pv in $(CHECK_MINIMAL_VERSION); do \
+		p=$$(echo $$pv|sed 's/_.*//'); \
+		v=$$(echo $$pv|sed 's/.*_//'); \
+		CHECKMINVER=$$v get-packages udeb $$p; \
+	done
+
 	get-packages udeb $(UDEBS)
 	@touch $@
 
@@ -636,9 +724,9 @@ sources.list.udeb:
 			echo "deb $(MIRROR) unreleased $(UDEB_COMPONENTS)"; \
 		fi \
 	else \
-		gen-sources.list.udeb "$(SYSTEM_SOURCES_LIST)" $(USE_UDEBS_FROM) $(UDEB_COMPONENTS) $(USE_PROPOSED_UPDATES); \
+		gen-sources.list.udeb "$(SYSTEM_SOURCES_LIST)" $(USE_UDEBS_FROM) "$(UDEB_COMPONENTS)" $(USE_PROPOSED_UPDATES); \
 		if [ "$(USE_UNRELEASED)" = 1 ]; then \
-			gen-sources.list.udeb "$(SYSTEM_SOURCES_LIST)" unreleased $(UDEB_COMPONENTS); \
+			gen-sources.list.udeb "$(SYSTEM_SOURCES_LIST)" unreleased "$(UDEB_COMPONENTS)"; \
 		fi \
 	fi) > $@
 	@if [ -e $@.local ]; then \
@@ -667,7 +755,13 @@ $(TEMP)/unifont.bdf: $(TEMP)/all.utf
 		echo "a version of glibc with a different locale data format.)"; \
 	        exit 1; \
 	    fi
-	LOCPATH=$(LOCALE_PATH) LC_ALL=C.UTF-8 reduce-font /usr/src/unifont.bdf < $(TEMP)/all.utf > $@.tmp
+	hex2bdf \
+	    -v "`dpkg-query -W -f '$${Version}' unifont`" \
+	    -c "`dpkg-query -W -f '$${Homepage}' unifont`" \
+	    < /usr/share/unifont/unifont.hex \
+	    > $@.full
+	LOCPATH=$(LOCALE_PATH) LC_ALL=C.UTF-8 reduce-font $@.full < $(TEMP)/all.utf > $@.tmp
+	rm $@.full
 	mv $@.tmp $@
 
 $(TREE)/lib/unifont.bgf: $(TEMP)/unifont.bdf
@@ -696,13 +790,13 @@ endif
 
 	# Only build the font if we have installation-locale
 ifeq ($(DEB_HOST_ARCH_OS),linux)
-	if [ -d "$(LOCALE_PATH)/C.UTF-8" ] && [ -e /usr/src/unifont.bdf ]; then \
+	if [ -d "$(LOCALE_PATH)/C.UTF-8" ] && [ -e /usr/share/unifont/unifont.hex ]; then \
 		$(submake) $(TREE)/lib/unifont.bgf; \
 	fi
 endif
 ifeq ($(DEB_HOST_ARCH_OS),hurd)
 	# The hurd console uses a BDF font
-	if [ -d "$(LOCALE_PATH)/C.UTF-8" ] && [ -e /usr/src/unifont.bdf ]; then \
+	if [ -d "$(LOCALE_PATH)/C.UTF-8" ] && [ -e /usr/share/unifont/unifont.hex ]; then \
 		$(submake) $(TREE)/lib/unifont.bdf; \
 	fi
 endif
@@ -712,7 +806,7 @@ endif
 	$(clamp_mtimes) $(TREE)/lib
 	$(normalise_permissions) $(TREE)/lib
 
-	install -d $(TEMP)
+	install -p -d $(TEMP)
 
 	set -e; \
 	case $(INITRD_FS) in \
@@ -728,20 +822,19 @@ endif
 	jffs2) \
 		$(mkjffs2) $(TEMP_INITRD); \
 	;; \
-	ufs1) \
-		$(mkfs.ufs1) $(TEMP)/initrd; \
-		$(gzip) -v9f $(TEMP)/initrd; \
-	;; \
 	*) \
 		echo "Unsupported filesystem type"; \
 		exit 1 ;; \
 	esac
 
+$(TEMP_INITRD_XZ): $(TEMP_INITRD)
+	$(gzip) -v -d <$< | $(xz) -v >$@
+
 # Create the images for dest/. Those are the targets called from config.
 
 ifeq ($(SYMLINK_INITRD),)
 $(INITRD): $(TEMP_INITRD)
-	install -m 644 -D $< $@
+	install -p -m 644 -D $< $@
 	update-manifest $@ $(MANIFEST-INITRD) $(UDEB_LISTS)
 else
 $(INITRD): $(realpath $(dir $(INITRD))/$(SYMLINK_INITRD))
@@ -750,8 +843,12 @@ $(INITRD): $(realpath $(dir $(INITRD))/$(SYMLINK_INITRD))
 	update-manifest $@ $(MANIFEST-INITRD) $(UDEB_LISTS)
 endif
 
+$(INITRD_XZ): $(TEMP_INITRD_XZ)
+	install -p -m 644 -D $< $@
+	update-manifest $@ $(MANIFEST-INITRD) $(UDEB_LISTS)
+
 $(RAMDISK): $(TEMP_INITRD)
-	install -m 644 -D $< $@
+	install -p -m 644 -D $< $@
 	update-manifest $@ $(MANIFEST-RAMDISK) $(UDEB_LISTS)
 
 # raw kernel images
@@ -759,7 +856,7 @@ ifeq ($(SYMLINK_KERNEL),)
 $(KERNEL): TEMP_REAL_KERNEL = $(TEMP)/$(shell echo ./$@ |sed 's,$(SOME_DEST)/$(EXTRANAME),,')
 $(KERNEL):
 	@$(MAKE) $(STAMPS)tree-unpack-$(targetstring)-stamp $(TEMP_REAL_KERNEL)
-	install -m 644 -D $(TEMP_REAL_KERNEL) $@
+	install -p -m 644 -D $(TEMP_REAL_KERNEL) $@
 	update-manifest $@ $(MANIFEST-KERNEL)
 else
 $(KERNEL): $(realpath $(dir $(KERNEL))/$(SYMLINK_KERNEL))
@@ -782,7 +879,7 @@ $(DTBS): $(TEMP_KERNEL)
 
 # bootable images
 $(BOOT): $(TEMP_BOOT)
-	install -m 644 -D $(TEMP_BOOT)$(GZIPPED) $@
+	install -p -m 644 -D $(TEMP_BOOT)$(GZIPPED) $@
 	update-manifest $@ $(MANIFEST-BOOT) $(UDEB_LISTS)
 
 $(TEMP_KERNEL): $(STAMPS)tree-unpack-$(targetstring)-stamp
@@ -791,14 +888,21 @@ $(TEMP_BOOT): $(TEMP_INITRD) $(TEMP_KERNEL) $(TEMP_BOOT_SCREENS) arch_boot
 
 # non-bootable root images
 $(ROOT): $(TEMP_ROOT)
-	install -m 644 -D $(TEMP_ROOT)$(GZIPPED) $@
+	install -p -m 644 -D $(TEMP_ROOT)$(GZIPPED) $@
 	update-manifest $@ $(MANIFEST-ROOT) $(UDEB_LISTS)
 
 $(TEMP_ROOT): $(TEMP_INITRD) arch_root
 
+# miniature UEFI UKI with only one boot image
+$(MINIEFI): $(TEMP_MINIEFI)
+	install -p -m 644 -D $(TEMP_MINIEFI) $@
+	update-manifest $@ $(MANIFEST-MINIEFI) $(UDEB_LISTS)
+
+$(TEMP_MINIEFI): $(TEMP_BOOT_SCREENS) arch_miniefi
+
 # miniature ISOs with only a boot image
 $(MINIISO): $(TEMP_MINIISO)
-	install -m 644 -D $(TEMP_MINIISO) $@
+	install -p -m 644 -D $(TEMP_MINIISO) $@
 	update-manifest $@ $(MANIFEST-MINIISO) $(UDEB_LISTS)
 
 $(TEMP_MINIISO): $(TEMP_BOOT_SCREENS) arch_miniiso
@@ -831,21 +935,30 @@ $(TEMP_BOOT_SCREENS): arch_boot_screens
 $(TEMP_CD_INFO_DIR): arch_cd_info_dir
 $(TEMP_NETBOOT_DIR): arch_netboot_dir
 
+# disk/partition images for ChromeOS devices
+$(DEPTHCHARGE): $(TEMP_DEPTHCHARGE)
+	rm -rf $(SOME_DEST)/$(EXTRANAME)/depthcharge
+	mkdir -p $(SOME_DEST)/$(EXTRANAME)/depthcharge
+	cp -a $(TEMP_DEPTHCHARGE)/* $@
+	update-manifest $@ $(MANIFEST-DEPTHCHARGE) $(UDEB_LISTS)
+
+$(TEMP_DEPTHCHARGE): arch_depthcharge
+
 $(MISC): TEMP_REAL_MISC = $(shell echo ./$@ |sed 's,$(SOME_DEST)/$(EXTRANAME),,')
 $(MISC): 
-	install -m 644 $(TEMP_REAL_MISC) $(SOME_DEST)/$(EXTRANAME)
+	install -p -m 644 $(TEMP_REAL_MISC) $(SOME_DEST)/$(EXTRANAME)
 	update-manifest \
 		$(SOME_DEST)/$(EXTRANAME)$(shell basename $(TEMP_REAL_MISC)) \
 		$(MANIFEST-MISC)
 
 # Other images, e.g. driver floppies. Those are simply handled as flavours
 $(EXTRA): $(TEMP_EXTRA)
-	install -m 644 -D $(TEMP_EXTRA)$(GZIPPED) $@
+	install -p -m 644 -D $(TEMP_EXTRA)$(GZIPPED) $@
 	update-manifest $@ $(MANIFEST-EXTRA) $(UDEB_LISTS)
 
 $(TEMP_EXTRA): $(STAMPS)extra-$(targetstring)-stamp
-	install -d $(shell dirname $@)
-	install -d $(TREE)
+	install -p -d $(shell dirname $@)
+	install -p -d $(TREE)
 	set -e; case $(INITRD_FS) in \
 	ext2) \
 		genext2fs -d $(TREE) -b $(IMAGE_SIZE) -m 0 $@ ; \
@@ -908,7 +1021,7 @@ pkg-lists/kernel-module-udebs:
 # Write (floppy) images
 .PHONY: write_%
 write_%:
-	@install -d $(STAMPS)
+	@install -p -d $(STAMPS)
 	@$(submake) _write $(shell $(submake) $(subst write_,validate_,$@))
 
 .PHONY: _write
@@ -919,7 +1032,7 @@ _write: _build
 # you can check the floppy to make sure it wrote properly.
 .PHONY: checkedwrite_%
 checkedwrite_%:
-	@install -d $(STAMPS)
+	@install -p -d $(STAMPS)
 	@$(submake) _checkedwrite $(shell $(submake) $(subst checkedwrite_,validate_,$@))
 
 .PHONY: _checkedwrite
