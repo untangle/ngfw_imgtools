@@ -61,25 +61,30 @@ NETBOOT_PATH = $(NETBOOT_DI_DIR)/$(ARCH)
 
 # The files we may want to have in dest/
 INITRD = $(SOME_DEST)/$(EXTRANAME)initrd.gz
+INITRD_XZ = $(SOME_DEST)/$(EXTRANAME)initrd.xz
 KERNEL = $(foreach name,$(KERNELNAME),$(SOME_DEST)/$(EXTRANAME)$(name))
 DTBS = $(SOME_DEST)/$(EXTRANAME)README
 BOOT = $(SOME_DEST)/$(EXTRANAME)boot.img$(GZIPPED)
 ROOT = $(SOME_DEST)/$(EXTRANAME)root.img$(GZIPPED)
 EXTRA = $(SOME_DEST)/$(EXTRANAME).img$(GZIPPED)
+MINIEFI = $(SOME_DEST)/$(EXTRANAME)mini.efi
 MINIISO = $(SOME_DEST)/$(EXTRANAME)mini.iso
 DEBIAN_CD_INFO = $(SOME_DEST)/$(EXTRANAME)debian-cd_info.tar.gz
 NETBOOT_DIR = $(SOME_DEST)/$(EXTRANAME)$(NETBOOT_DI_DIR)
 NETBOOT_TAR = $(SOME_DEST)/$(EXTRANAME)netboot.tar.gz
 RAMDISK = $(SOME_DEST)/$(EXTRANAME)ramdisk.gz
+DEPTHCHARGE = $(SOME_DEST)/$(EXTRANAME)depthcharge
 MISC = $(foreach name,$(MISCNAME),$(SOME_DEST)/$(EXTRANAME)$(name))
 
 # some intersting files in tmp/ we may need
 TEMP_INITRD = $(TEMP)/initrd.gz
+TEMP_INITRD_XZ = $(TEMP)/initrd.xz
 TEMP_UDEB_LIST = $(TEMP)/udeb.list
 TEMP_KERNEL = $(foreach name,$(KERNELNAME),$(TEMP)/$(name))
 TEMP_DTBS = $(TEMP)/lib
 TEMP_BOOT = $(TEMP)/boot.img
 TEMP_ROOT = $(TEMP)/root.img
+TEMP_MINIEFI = $(TEMP)/mini.efi
 TEMP_MINIISO = $(TEMP)/mini.iso
 TEMP_EXTRA = $(TEMP)/$(EXTRANAME).img
 TEMP_BOOT_SCREENS = $(TEMP)/boot_screens
@@ -89,6 +94,7 @@ TEMP_CD_INFO_DIR = $(TEMP)/cd_info
 TEMP_CD_TREE = $(TEMP)/cd_tree
 TEMP_POWERPC_INITRD = $(TEMP)/powerpc_initrd_tree
 TEMP_GRUB_EFI = $(TEMP)/grub_efi
+TEMP_DEPTHCHARGE = $(TEMP)/depthcharge
 
 DPKGDIR = $(TREE)/var/lib/dpkg
 

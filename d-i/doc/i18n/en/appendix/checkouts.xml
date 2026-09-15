@@ -143,17 +143,6 @@ translation material.
 
 </sect4>
 
-<sect4>
-<title>Win32-loader</title>
-
-<itemizedlist>
-<listitem>
-<command>&git-win32-loader-anon;</command>
-</listitem>
-</itemizedlist>
-
-</sect4>
-
 </sect3>
 
 <sect3>

@@ -2,10 +2,10 @@
 debian_cd_dir="+IMGTOOLS_DIR+/debian-cd"
 
 # non-free (sun-java)
-mirror_components="main non-free"
+mirror_components="main non-free non-free-firmware"
 #mirror_components_extra="main upstream premium"
 
-# custom installer
+# custom installer (using standard Debian Bookworm d-i images)
 custom_installer="+IMGTOOLS_DIR+/d-i/build/dest"
 export DI_DIR="+IMGTOOLS_DIR+/d-i/build/dest"
 
@@ -29,6 +29,9 @@ export DISKTYPE=CUSTOM
 updates_mirror=""
 
 reprepro_opts="--ignore=undefinedtarget"
+
+verify_release_keys=""
+verify_release_blindtrust=1
 
 all_extras="+IMGTOOLS_DIR+/profiles/hands-free.sh +IMGTOOLS_DIR+/profiles/late_command.sh +IMGTOOLS_DIR+/profiles/preseed.cfg"
 

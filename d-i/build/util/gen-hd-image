@@ -58,8 +58,12 @@ set -e
 PATH="${PATH}:/bin:/sbin:/usr/bin:/usr/sbin"
 export PATH
 
+LABELTYPE="dos"
+LABELID="0xdeb00001"
 FSTYPE="fat32"
 PARTID="0x0c"
+PARTUUID="DEB00000-0000-0000-0000-000000000002"
+BOOTLOADER_PARTUUID="DEB00000-0000-0000-0000-000000000003"
 FATSIZE="32"
 BUILDTYPE="complete"
 SOURCEDIR="."
@@ -116,7 +120,7 @@ $(basename $0) - bootable harddisk image generator
 
 SYNOPSIS:
 
-$(basename $0) -o output_image_name [-s image_size] [-i sourcedir] [-t fstype] [-d partid] [-p partition_offset] [-b build_type] [-z|-j|-J] [-h] [[bootloader_image bootloader_offset] ...]
+$(basename $0) -o output_image_name [-s image_size] [-i sourcedir] [-t fstype] [-d partid] [-p partition_offset] [-b build_type] [-X label_type] [-z|-j|-J] [-h] [[bootloader_image bootloader_offset] ...]
 
 DESCRIPTION:
 
@@ -194,6 +198,11 @@ OPTIONS
 
        Verbose output.
 
+  -X label_type
+
+       Specify the disk label type for harddisk image. Supported values
+       are 'dos' for MBR (default) or 'gpt' for GPT.
+
   -z
 
        Compress the image with gzip.
@@ -215,10 +224,11 @@ EOF
 # -t type of filesystem (fat16/fat32/ext2)
 # -p partition offset
 # -b build type (complete/firmware/partition)
+# -X disk label type (dos/gpt)
 # -z/-j/-J gzip/bzip2/xz compression
 # -v verbose
 
-while getopts "hi:o:s:t:d:p:b:zjJv" option; do
+while getopts "hi:o:s:t:d:p:b:zjJvX:" option; do
   case ${option} in
     h)
       usage
@@ -236,16 +246,7 @@ while getopts "hi:o:s:t:d:p:b:zjJv" option; do
     t)
       FSTYPE="${OPTARG}"
       case "${FSTYPE}" in
-        fat16)
-          PARTID="0x0e"
-          FATSIZE="16"
-          ;;
-        fat32)
-          PARTID="0x0c"
-          FATSIZE="32"
-          ;;
-        ext2)
-          PARTID="0x83"
+        fat16|fat32|ext2)
           ;;
         *)
           echo "$(basename $0): Invalid filesystem type \"${FSTYPE}\". Use fat16, fat32 or ext2."
@@ -271,9 +272,9 @@ while getopts "hi:o:s:t:d:p:b:zjJv" option; do
       esac
       ;;
     z)
-      COMPRESS="gzip"
-      COMPRESS_OPTS="-n"
-      PREREQUISITES="${PREREQUISITES} gzip"
+      COMPRESS="pigz"
+      COMPRESS_OPTS="-nm"
+      PREREQUISITES="${PREREQUISITES} pigz"
       ;;
     j)
       COMPRESS="bzip2"
@@ -285,6 +286,21 @@ while getopts "hi:o:s:t:d:p:b:zjJv" option; do
       ;;
     v)
       VERBOSITY="1"
+      ;;
+    X)
+      LABELTYPE="${OPTARG}"
+      case "${LABELTYPE}" in
+        dos)
+          LABELID="0xdeb00001"
+          ;;
+        gpt)
+          LABELID="DEB00000-0000-0000-0000-000000000001"
+          ;;
+        *)
+          echo "$(basename $0): Invalid disk label type \"${LABELTYPE}\". Use dos or gpt."
+          exit 1
+          ;;
+      esac
       ;;
   esac
 done
@@ -306,15 +322,25 @@ FS_SIZE=$((${IMAGESIZE}-${PARTOFFSET}/2))
 if [ ${FS_SIZE} -lt 34816 ] && [ "${FSTYPE}" = "fat32" ]; then
   error "INFO: Image size too small for FAT32, using FAT16."
   FSTYPE="fat16"
-  PARTID="0x0e"
-  FATSIZE="16"
 fi
 if [ ${FS_SIZE} -gt 2097152 ] && [ "${FSTYPE}" = "fat16" ]; then
   error "INFO: Image size too big for FAT16, using FAT32."
   FSTYPE="fat32"
-  PARTID="0x0c"
-  FATSIZE="32"
 fi
+
+case "${LABELTYPE}:${FSTYPE}" in
+  dos:fat16) PARTID="0x0e" ;; # W95 FAT16 (LBA)
+  dos:fat32) PARTID="0x0c" ;; # W95 FAT32 (LBA)
+  dos:ext2)  PARTID="0x83" ;; # Linux
+  gpt:fat16) PARTID="EBD0A0A2-B9E5-4433-87C0-68B6B72699C7" ;; # Microsoft basic data
+  gpt:fat32) PARTID="EBD0A0A2-B9E5-4433-87C0-68B6B72699C7" ;; # Microsoft basic data
+  gpt:ext2)  PARTID="0FC63DAF-8483-4772-8E79-3D69D8477DE4" ;; # Linux filesystem
+esac
+
+case "${FSTYPE}" in
+  fat16) FATSIZE="16" ;;
+  fat32) FATSIZE="32" ;;
+esac
 
 log "Starting to generate image ${IMAGEFILE} ..."
 
@@ -338,10 +364,33 @@ case "${BUILDTYPE}" in
       clean_tempfiles
       exit 1
     fi
-    sfdisk --force -u S "${TEMP_HD_IMAGEFILE}" 1>/dev/null 2>/dev/null <<EOF
-${BOOTLOADER_PARTID:+${BOOTLOADER_OFFSET}, $((${PARTOFFSET}-${BOOTLOADER_OFFSET})),${BOOTLOADER_PARTID},*,}
-${PARTOFFSET}, ,${PARTID},*,
-EOF
+    {
+      echo "unit: sectors"
+      echo "label: ${LABELTYPE}"
+      echo "label-id: ${LABELID}"
+      if [ -n "$BOOTLOADER_PARTID" ]; then
+        echo -n "start=${BOOTLOADER_OFFSET}, "
+        echo -n "size=$((${PARTOFFSET}-${BOOTLOADER_OFFSET})), "
+        echo -n "type=${BOOTLOADER_PARTID}, "
+        echo -n "bootable, "
+        if [ "$LABELTYPE" = "gpt" ]; then
+          echo -n "uuid=${BOOTLOADER_PARTUUID}, "
+          # ChromeOS kernel partition
+          if [ "${BOOTLOADER_PARTID}" = "FE3A2A5D-4F32-41A7-B725-ACCC3285A309" ]; then
+            echo -n 'attrs="GUID:48 GUID:52 GUID:56", '
+          fi
+        fi
+        echo
+      fi
+      echo -n "start=${PARTOFFSET}, "
+      echo -n "size=+, "
+      echo -n "type=${PARTID}, "
+      echo -n "bootable, "
+      if [ "$LABELTYPE" = "gpt" ]; then
+        echo -n "uuid=${PARTUUID}, "
+      fi
+      echo
+    } | sfdisk --force "${TEMP_HD_IMAGEFILE}" 1>/dev/null 2>/dev/null
     ;;
 esac
 
@@ -349,7 +398,13 @@ case "${BUILDTYPE}" in
   complete|partition)
     log "Building filesystem ..."
     TEMP_FS_IMAGEFILE=$(mktemp)
-    TEMP_FS_IMAGESIZE=$((${IMAGESIZE}-${PARTOFFSET}/2)) # fs size in kB
+    if [ "$LABELTYPE" = "dos" ]; then
+      TEMP_FS_IMAGESIZE=$((${IMAGESIZE}-${PARTOFFSET}/2)) # fs size in kB
+    elif [ "$LABELTYPE" = "gpt" ]; then
+      # GPT backup header needs 33 sectors at the end of the disk,
+      # and sfdisk aligns partition ends to 1M bytes = 2048 sectors.
+      TEMP_FS_IMAGESIZE="$(( (((${IMAGESIZE}*2 - 33) & ~2047) - ${PARTOFFSET}) / 2 ))"
+    fi
     dd 2>/dev/null if=/dev/zero bs=1k of="${TEMP_FS_IMAGEFILE}" seek=$((${TEMP_FS_IMAGESIZE}-1)) count=1
     case "${FSTYPE}" in
       fat16|fat32)
@@ -371,8 +426,9 @@ case "${BUILDTYPE}" in
     dd 2>/dev/null if="${TEMP_HD_IMAGEFILE}" bs=512 count="${PARTOFFSET}" of="${IMAGEFILE}"
     ;;
   complete)
-    dd 2>/dev/null if="${TEMP_HD_IMAGEFILE}" bs=512 count="${PARTOFFSET}" of="${IMAGEFILE}"
-    cat "${TEMP_FS_IMAGEFILE}" >> "${IMAGEFILE}"
+    dd 2>/dev/null if="${TEMP_FS_IMAGEFILE}" bs=512 seek="${PARTOFFSET}" of="${TEMP_HD_IMAGEFILE}" conv=notrunc
+    mv "${TEMP_HD_IMAGEFILE}" "${IMAGEFILE}"
+    chmod +r "${IMAGEFILE}"
     ;;
   partition)
     mv "${TEMP_FS_IMAGEFILE}" "${IMAGEFILE}"

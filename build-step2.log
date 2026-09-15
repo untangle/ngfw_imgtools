@@ -1,0 +1,90 @@
+The SSH_KEY variable is not set. Defaulting to a blank string.
+The DISTRIBUTION variable is not set. Defaulting to a blank string.
+The ARCHITECTURE variable is not set. Defaulting to a blank string.
+The VERBOSE variable is not set. Defaulting to a blank string.
+The PACKAGE variable is not set. Defaulting to a blank string.
+The DEBUG variable is not set. Defaulting to a blank string.
+The VERSION variable is not set. Defaulting to a blank string.
+The SERIAL variable is not set. Defaulting to a blank string.
+The REGION variable is not set. Defaulting to a blank string.
+Creating ngfw_imgtools_build_run ... 
+Creating ngfw_imgtools_build_run ... done
+pkgtools version f1012c5
+Get:1 http://deb.debian.org/debian trixie InRelease [140 kB]
+Get:2 http://deb.debian.org/debian trixie-updates InRelease [47.3 kB]
+Get:3 http://deb.debian.org/debian-security trixie-security InRelease [43.4 kB]
+Get:4 http://deb.debian.org/debian trixie/main arm64 Packages [9607 kB]
+Get:5 http://package-server/public/trixie current InRelease [17.7 kB]
+Err:5 http://package-server/public/trixie current InRelease
+  Sub-process /usr/bin/sqv returned an error code (1), error message is: Missing key 735A9E18E8F62EDF413592460B9D6AE3627BF103, which is needed to verify signature.
+Get:6 http://deb.debian.org/debian trixie/main amd64 Packages [9671 kB]
+Get:7 http://deb.debian.org/debian trixie-updates/main arm64 Packages [5404 B]
+Get:8 http://deb.debian.org/debian trixie-updates/main amd64 Packages [5412 B]
+Get:9 http://deb.debian.org/debian-security trixie-security/main amd64 Packages [130 kB]
+Get:10 http://deb.debian.org/debian-security trixie-security/main arm64 Packages [130 kB]
+Reading package lists...
+W: http://package-server/public/trixie/dists/current/InRelease: The key(s) in the keyring /etc/apt/trusted.gpg.d/untangle.gpg are ignored as the file has an unsupported filetype.
+W: OpenPGP signature verification failed: http://package-server/public/trixie current InRelease: Sub-process /usr/bin/sqv returned an error code (1), error message is: Missing key 735A9E18E8F62EDF413592460B9D6AE3627BF103, which is needed to verify signature.
+E: The repository 'http://package-server/public/trixie current InRelease' is not signed.
+===  BEGIN installer-pkgs-modified/cdebconf
+... still waiting for PID 75 every 1s, next message in 30s
+===  SUCCESS installer-pkgs-modified/cdebconf 0.260+18.0.0+17.5.0..-1trixie
+===  BEGIN installer-pkgs-modified/pkgsel
+===  SUCCESS installer-pkgs-modified/pkgsel 0.73+18.0.0+17.5.0..-1trixie
+===  BEGIN installer-pkgs-modified/rootskel-gtk
+===  SUCCESS installer-pkgs-modified/rootskel-gtk 11.0.1+18.0.0+17.5.0..-1trixie
+===  BEGIN installer-pkgs-modified/base-installer
+===  SUCCESS installer-pkgs-modified/base-installer 1.215+18.0.0+17.5.0..-1trixie
+===  BEGIN d-i
+... still waiting for PID 11222 every 1s, next message in 30s
+... still waiting for PID 11222 every 1s, next message in 30s
+... still waiting for PID 11222 every 1s, next message in 30s
+... still waiting for PID 11222 every 1s, next message in 30s
+... still waiting for PID 11222 every 1s, next message in 30s
+... still waiting for PID 11222 every 1s, next message in 30s
+fatal: detected dubious ownership in repository at '/opt/untangle/build'
+To add an exception for this directory, call:
+
+	git config --global --add safe.directory /opt/untangle/build
+fatal: detected dubious ownership in repository at '/opt/untangle/build'
+To add an exception for this directory, call:
+
+	git config --global --add safe.directory /opt/untangle/build
+fatal: detected dubious ownership in repository at '/opt/untangle/build'
+To add an exception for this directory, call:
+
+	git config --global --add safe.directory /opt/untangle/build
+fatal: detected dubious ownership in repository at '/opt/untangle/build'
+To add an exception for this directory, call:
+
+	git config --global --add safe.directory /opt/untangle/build
+Setting version='20240821+18.0.0+17.5.0..-1trixie' distribution='current' timestamp=''
+libdistro-info-perl is not installed, Debian release names are not known.
+libdistro-info-perl is not installed, Ubuntu release names are not known.
+... done
+dpkg-parsechangelog: warning:     debian/changelog(l5): badly formatted trailer line
+LINE:  -- Untangle Buildbot <buildbot@untangle.com>  
+dpkg-parsechangelog: warning:     debian/changelog(l7): found start of entry where expected more change data or trailer
+LINE: debian-installer (20240821+18.0.0-1trixie) current; urgency=medium
+dpkg-parsechangelog: warning:     debian/changelog(l7): found end of file where expected more change data or trailer
+tar: Removing leading `../' from member names
+tar: Removing leading `../' from hard link targets
+
+WARNING: apt does not have a stable CLI interface. Use with caution in scripts.
+
+Note, using directory '.' to get the build dependencies
+Reading package lists...
+Building dependency tree...
+Reading state information...
+Some packages could not be installed. This may mean that you have
+requested an impossible situation or if you are using the unstable
+distribution that some required packages have not yet been created
+or been moved out of Incoming.
+The following information may help to resolve the situation:
+
+Unsatisfied dependencies:
+ builddeps:. : Depends: win32-loader (>= 0.7.2) but it is not installable
+Error: Unable to correct problems, you have held broken packages.
+FAILURE 20240821+18.0.0+17.5.0..-1trixie
+===  FAILURE d-i 20240821+18.0.0+17.5.0..-1trixie
+1

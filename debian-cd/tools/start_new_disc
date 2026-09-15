@@ -54,19 +54,19 @@ if [ $NUM_ARCHES = 1 ] ; then
     case $ARCHES in
         source)
             SOURCEDISK=1
-            export DISKINFO="$DISKINFO_DISTRO $DEBVERSION \"$CAPCODENAME\" - $OFFICIAL $DISKTYPE Source-$DISKNUM $BUILD_DATE"
+            export DISKINFO="$DISKINFO_DISTRO $DEBVERSION _${CAPCODENAME}_ - $OFFICIAL $DISKTYPE Source-$DISKNUM $BUILD_DATE"
             export VOLID="$VOLID_BASE Source $DISKNUM"
             export SOURCEONLY=yes
             ;;
         *)
             BINARYDISK=1
 	    DISKNUMSTRING="$DISKNUM"
-            export DISKINFO="$DISKINFO_DISTRO ${DEBIAN_KERNEL} $DEBVERSION \"$CAPCODENAME\" - $OFFICIAL $ARCHES $DISKTYPE Binary-${DISKNUM}${FIRMWARE_TEXT} $BUILD_DATE"
+            export DISKINFO="$DISKINFO_DISTRO ${DEBIAN_KERNEL} $DEBVERSION _${CAPCODENAME}_ - $OFFICIAL $ARCHES $DISKTYPE Binary-${DISKNUM}${FIRMWARE_TEXT} $BUILD_DATE"
 	    if [ $DISKTYPE = NETINST ]; then
 		# Use "n" as a "disknum" here, #858031
 		DISKNUMSTRING="n"
 		# Don't need a disknum here - only one netinst
-		export DISKINFO="$DISKINFO_DISTRO ${DEBIAN_KERNEL} $DEBVERSION \"$CAPCODENAME\" - $OFFICIAL $ARCHES $DISKTYPE${FIRMWARE_TEXT} $BUILD_DATE"
+		export DISKINFO="$DISKINFO_DISTRO ${DEBIAN_KERNEL} $DEBVERSION _${CAPCODENAME}_ - $OFFICIAL $ARCHES $DISKTYPE${FIRMWARE_TEXT} $BUILD_DATE"
 	    fi
             case "$ARCHES" in
                 ppc64el)
@@ -93,7 +93,7 @@ else
         *source*) SOURCEDISK=1;;
     esac
     export ARCHDEF=`echo $ARCHES | sed 's? ?/?g'`
-    export DISKINFO="$DISKINFO_DISTRO ${DEBIAN_KERNEL} $DEBVERSION \"$CAPCODENAME\" - $OFFICIAL Multi-architecture $ARCHDEF $DISKTYPE${FIRMWARE_TEXT} #$DISKNUM $BUILD_DATE"
+    export DISKINFO="$DISKINFO_DISTRO ${DEBIAN_KERNEL} $DEBVERSION _${CAPCODENAME}_ - $OFFICIAL Multi-architecture $ARCHDEF $DISKTYPE${FIRMWARE_TEXT} #$DISKNUM $BUILD_DATE"
     export VOLID="$VOLID_BASE M-A $DISKNUM"
 fi
 
@@ -343,7 +343,7 @@ cd $CDDIR
 
 SECTIONS="main"
 if [ "${NONFREE:-0}" != "0" -o "${EXTRANONFREE:-0}" != "0" ] ; then
-    SECTIONS="${SECTIONS} non-free"
+    SECTIONS="${SECTIONS} non-free-firmware"
 fi
 if [ "${CONTRIB:-0}" != "0" ] ; then
     SECTIONS="${SECTIONS} contrib"

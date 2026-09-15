@@ -910,7 +910,9 @@ sub finish_disc {
 	print "  Finishing off md5sum.txt\n";
 	# Just md5 the bits we won't have seen already
 	open(MD5LIST, ">>md5sum.txt") or die "Failed to open md5sum.txt file: $!\n";
-	find (\&md5_files_for_md5sum, ("./.disk", "./dists", "./firmware/dep11"));
+	my @md5_dirs = ("./.disk", "./dists");
+	push @md5_dirs, "./firmware/dep11" if -d "./firmware/dep11";
+	find (\&md5_files_for_md5sum, @md5_dirs);
 	close(MD5LIST);
 
 	# And sort; it should make things faster for people checking
@@ -1212,8 +1214,10 @@ sub add_firmware_stuff {
 
     msg_ap(0, "(Maybe) generate fw pattern file $dir/firmware/dep11/$p.patterns\n");
     push(@args, "--package", "$p");
-    push(@args, "$dep11_dir/Components-$arch.yml.gz");
-    system(@args) == 0 or die "generate_firmware_patterns failed: $?";
+    if (-f "$dep11_dir/Components-$arch.yml.gz") {
+        push(@args, "$dep11_dir/Components-$arch.yml.gz");
+        system(@args) == 0 or die "generate_firmware_patterns failed: $?";
+    }
     if (-f "$dir/firmware/dep11/$p.patterns") {
 	$blocks_added += get_file_blocks("$dir/firmware/dep11/$p.patterns");
     }

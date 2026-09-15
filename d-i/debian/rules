@@ -1,8 +1,8 @@
 #! /usr/bin/make -f
 
-ARCH=$(shell dpkg-architecture -qDEB_BUILD_ARCH)
+ARCH=$(shell dpkg-architecture -qDEB_HOST_ARCH)
 VERSION=$(shell LC_ALL=C dpkg-parsechangelog | grep ^Version: | cut -d ' ' -f 2)
-DATE=$(shell echo $(VERSION) | cut -d '.' -f 1)
+DATE=$(firstword $(subst +~, ,$(subst ., ,$(VERSION))))
 SOURCE_DATE_EPOCH = $(shell date -d "$$(dpkg-parsechangelog -SDate)" +%s)
 SUITE=$(shell LC_ALL=C dpkg-parsechangelog | grep ^Distribution: | cut -d ' ' -f 2)
 
@@ -12,19 +12,23 @@ USE_UDEBS_FROM=unstable
 TRANSSTATUS=
 BOOTMENU_BEEP=n
 else
-USE_UDEBS_FROM=bullseye
+USE_UDEBS_FROM=trixie
 USE_PROPOSED_UPDATES=0
 TRANSSTATUS=translation-status
 BOOTMENU_BEEP=y
 endif
 
 # Adjust for non-released ports if needed:
-RELEASE_ARCHES=amd64 arm64 armel armhf i386 mips mips64el mipsel ppc64el s390x
+RELEASE_ARCHES=amd64 arm64 armel armhf i386 mips mips64el mipsel ppc64el riscv64 s390x
 ifeq (,$(filter $(ARCH), $(RELEASE_ARCHES)))
 USE_UNRELEASED=1
 USE_UDEBS_FROM=unstable
 USE_PROPOSED_UPDATES=0
 endif
+
+# allow these aspects of the build to be overriden (see salsa-ci.yml)
+BUILD_TARGETS ?= all_build stats release
+ADDITIONAL_BUILD_PRODUCT ?= tarball
 
 ARCHIVEDIR=debian/tmp/installer-$(ARCH)
 DESTDIR=$(ARCHIVEDIR)/$(DATE)
@@ -43,11 +47,20 @@ clean:
 
 # Must run as root, so is not run as part of regular build.
 build-images:
-	$(MAKE) -C build all_build stats release \
+	$(MAKE) -C build $(BUILD_TARGETS) \
 		USE_UDEBS_FROM=$(USE_UDEBS_FROM) BUILD_DATE=$(DATE) \
 		USE_PROPOSED_UPDATES=$(USE_PROPOSED_UPDATES) \
 		USE_UNRELEASED=$(USE_UNRELEASED) \
+		PRESEED=$(PRESEED) \
+		$(addprefix LINUX_KERNEL_ABI=,$(LINUX_KERNEL_ABI)) \
 		TRANSSTATUS=$(TRANSSTATUS) BOOTMENU_BEEP=$(BOOTMENU_BEEP)
+
+publish-tarball:
+	./build/util/gen-tarball debian/tmp ../$(TARNAME)
+	dpkg-distaddfile $(TARNAME) raw-installer -
+
+publish-miniiso:
+	cp ./build/tmp/netboot-gtk/mini.iso ../debian-$(VERSION)-$(ARCH)-gtkmini.iso
 
 build: build-arch build-indep
 build-arch: build-stamp
@@ -85,8 +98,8 @@ binary-arch: install
 	dh_gencontrol
 	dh_md5sums
 	dh_builddeb
-	./build/util/gen-tarball debian/tmp ../$(TARNAME)
-	dpkg-distaddfile $(TARNAME) raw-installer -
+
+	debian/rules publish-$(ADDITIONAL_BUILD_PRODUCT)
 
 binary-indep:
 

@@ -1,5 +1,5 @@
-installer-pkgs-modified/cdebconf	bullseye
-installer-pkgs-modified/pkgsel		bullseye
-installer-pkgs-modified/rootskel-gtk	bullseye
-installer-pkgs-modified/base-installer	bullseye
-d-i					bullseye
+installer-pkgs-modified/cdebconf	trixie
+installer-pkgs-modified/pkgsel		trixie
+installer-pkgs-modified/rootskel-gtk	trixie
+installer-pkgs-modified/base-installer	trixie
+d-i					trixie

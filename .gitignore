@@ -23,3 +23,7 @@ profiles/waf.preseed
 profiles/ngfw.conf
 profiles/waf.conf
 profiles/default.preseed
+
+# Local build/staging dirs (do NOT commit binary artifacts)
+local-packages-backup/
+local-packages/

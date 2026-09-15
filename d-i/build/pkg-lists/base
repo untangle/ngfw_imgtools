@@ -24,7 +24,6 @@ ca-certificates-udeb
 #include "udev"
 
 kmod-udeb [linux]
-kldutils-udeb [kfreebsd]
 
 # Avoid entropy starvation issues (#923675):
 haveged-udeb [linux]

@@ -6,7 +6,7 @@ sub read_env {
     my $env_var = shift;
     my $default = shift;
 
-    if (exists($ENV{$env_var})) {
+    if (exists($ENV{$env_var}) && $ENV{$env_var} ne '') {
         return $ENV{$env_var};
     }
     # else
