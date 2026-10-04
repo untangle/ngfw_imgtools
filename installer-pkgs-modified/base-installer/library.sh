@@ -30,7 +30,7 @@ KERNEL_VERSION="$(uname -r | cut -d - -f 1)"
 # yield `6.12.85+3-untangle-untangle`). Bump this string each time the trixie
 # kernel ABI revs (untangle3 -> +3, untangle4 -> +4, etc.) until uname-derived
 # logic is rewritten for trixie naming.
-KERNEL_ABI="6.12.85+3-untangle"
+KERNEL_ABI="6.12.85+4-untangle"
 # original bookworm logic (broken on trixie naming):
 # KERNEL_ABI="$(uname -r | cut -d - -f 1,2)-untangle"
 KERNEL_FLAVOUR=$(uname -r | cut -d - -f 3-)
