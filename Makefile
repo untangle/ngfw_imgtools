@@ -39,7 +39,7 @@ ifeq ($(ARCHITECTURE),i386)
 else
   KERNEL_ARCH := $(ARCHITECTURE)
 endif
-KERNEL_VERSION := 6.12.85+3
+KERNEL_VERSION := 6.12.85+4
 # NGFW-15749: enable_signed=false config flip in ngfw_kernels emits the bare-named
 # kernel (no -unsigned suffix); this matches bookworm shape. Bump KERNEL_VERSION
 # on each kernel ABI rev (untangle3trixie -> +3, untangle4 -> +4, etc.).
