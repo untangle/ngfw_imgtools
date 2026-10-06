@@ -1,6 +1,8 @@
 +KERNEL+
 untangle-archive-keyring
-untangle-linux-config
+# Installed by late_command.sh after grub-installer has selected the
+# boot-mode-specific GRUB package. Installing it during pkgsel can pull in
+# grub-pc on UEFI systems and block grub-efi-amd64 from replacing it.
 untangle-bootsplash
 untangle-kernel-modules-trixie-amd64
 untangle-debconf-manager
