@@ -205,6 +205,10 @@ popularity-contest popularity-contest/participate boolean false
 # Grub is the default boot loader (for x86). If you want lilo installed
 # instead, uncomment this:
 d-i grub-installer/skip boolean false
+# On UEFI systems, write both the removable-media fallback loader and an
+# NVRAM boot entry. The fallback also covers firmware that ignores NVRAM.
+d-i grub-installer/force-efi-extra-removable boolean true
+d-i grub-installer/update-nvram boolean true
 # To also skip installing lilo, and install no bootloader, uncomment this
 # too:
 d-i lilo-installer/skip boolean true
