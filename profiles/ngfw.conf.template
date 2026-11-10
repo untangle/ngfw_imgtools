@@ -1,8 +1,8 @@
 # debian-cd from SVN
 debian_cd_dir="+IMGTOOLS_DIR+/debian-cd"
 
-# non-free (sun-java)
-mirror_components="main non-free non-free-firmware"
+# Trixie package-server maps upstream non-free-firmware into local main.
+mirror_components="main non-free"
 #mirror_components_extra="main upstream premium"
 
 # custom installer (using standard Debian Bookworm d-i images)

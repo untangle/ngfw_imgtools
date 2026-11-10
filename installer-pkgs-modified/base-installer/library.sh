@@ -23,14 +23,10 @@ case $KERNEL_NAME in
 	hurd)		KERNEL_NAME=gnumach ; KERNEL_MAJOR="$(uname -v | cut -d ' ' -f 2 | cut -d . -f 1)" ;;
 esac
 KERNEL_VERSION="$(uname -r | cut -d - -f 1)"
-# NGFW-15749: hardcode TARGET kernel ABI to trixie 6.12.85+3 (untangle3trixie
-# build, with bare-named kernel + 45 udebs from enable_signed=false config flip).
-# Cannot revert to uname-derived: trixie kernel naming `6.12.85+3-untangle-amd64`
-# breaks the bookworm-era `cut -d - -f 1,2` + append `-untangle` pattern (would
-# yield `6.12.85+3-untangle-untangle`). Bump this string each time the trixie
-# kernel ABI revs (untangle3 -> +3, untangle4 -> +4, etc.) until uname-derived
-# logic is rewritten for trixie naming.
-KERNEL_ABI="6.12.85+4-untangle"
+# Trixie kernel ABI for the target system. Keep in sync with
+# Makefile KERNEL_VERSION and d-i/build/config/common. The Trixie kernel
+# release naming does not fit the old uname-derived Bookworm parsing below.
+KERNEL_ABI="6.12.115.2-untangle"
 # original bookworm logic (broken on trixie naming):
 # KERNEL_ABI="$(uname -r | cut -d - -f 1,2)-untangle"
 KERNEL_FLAVOUR=$(uname -r | cut -d - -f 3-)

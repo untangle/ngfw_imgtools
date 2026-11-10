@@ -39,10 +39,8 @@ ifeq ($(ARCHITECTURE),i386)
 else
   KERNEL_ARCH := $(ARCHITECTURE)
 endif
-KERNEL_VERSION := 6.12.85+4
-# NGFW-15749: enable_signed=false config flip in ngfw_kernels emits the bare-named
-# kernel (no -unsigned suffix); this matches bookworm shape. Bump KERNEL_VERSION
-# on each kernel ABI rev (untangle3trixie -> +3, untangle4 -> +4, etc.).
+# Keep this package ABI in sync with the Trixie kernel build and d-i configs.
+KERNEL_VERSION := 6.12.115.2
 KERNEL := linux-image-$(KERNEL_VERSION)-untangle-$(KERNEL_ARCH)
 ISO_IMAGE := ngfw-+FLAVOR++REGION_NAME++SERIAL+-$(VERSION)_$(REPOSITORY)_$(ARCHITECTURE)_$(DISTRIBUTION)_$(shell date --iso-8601=seconds)_$(shell hostname -s).iso
 WAF_ISO_IMAGE := waf-+FLAVOR+-$(VERSION)_$(REPOSITORY)_$(ARCHITECTURE)_$(DISTRIBUTION)_$(shell date --iso-8601=seconds)_$(shell hostname -s).iso
@@ -165,6 +163,13 @@ ngfw/iso/%-image: iso/dependencies ngfw/iso/conf
 		cat $(IMGTOOLS_DIR)/tmp/mirror/conf/distributions.ngfw >> $(IMGTOOLS_DIR)/tmp/mirror/conf/distributions ; \
 		reprepro --ignore=undefinedtarget -Vb $(IMGTOOLS_DIR)/tmp/mirror copymatched $(REPOSITORY) $(DISTRIBUTION) '*' ; \
 	fi ; \
+	set -- $(IMGTOOLS_DIR)/d-i/build/localudebs/*$(KERNEL_VERSION)*.udeb; \
+	if [ ! -f "$$1" ]; then \
+		echo "No local kernel udebs found for ABI $(KERNEL_VERSION)" >&2; \
+		exit 1; \
+	fi; \
+	reprepro -Vb $(IMGTOOLS_DIR)/tmp/mirror includeudeb $(REPOSITORY) "$$@"; \
+	reprepro -Vb $(IMGTOOLS_DIR)/tmp/mirror export $(REPOSITORY); \
 	export CUSTOMSIZE=`du -s --block-size=2048 $(IMGTOOLS_DIR)/tmp/mirror | awk '{print int($$1 * 1.5)}'` ; \
 	echo $(CUSTOMSIZE) ; \
 	$(SERIAL_ENV_PRE_CMD) \
