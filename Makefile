@@ -40,7 +40,7 @@ else
   KERNEL_ARCH := $(ARCHITECTURE)
 endif
 # Keep this package ABI in sync with the Trixie kernel build and d-i configs.
-KERNEL_VERSION := 6.12.115.2
+KERNEL_VERSION := 6.12.115.3
 KERNEL := linux-image-$(KERNEL_VERSION)-untangle-$(KERNEL_ARCH)
 ISO_IMAGE := ngfw-+FLAVOR++REGION_NAME++SERIAL+-$(VERSION)_$(REPOSITORY)_$(ARCHITECTURE)_$(DISTRIBUTION)_$(shell date --iso-8601=seconds)_$(shell hostname -s).iso
 WAF_ISO_IMAGE := waf-+FLAVOR+-$(VERSION)_$(REPOSITORY)_$(ARCHITECTURE)_$(DISTRIBUTION)_$(shell date --iso-8601=seconds)_$(shell hostname -s).iso

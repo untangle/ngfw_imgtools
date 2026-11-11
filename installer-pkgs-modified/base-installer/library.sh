@@ -26,7 +26,7 @@ KERNEL_VERSION="$(uname -r | cut -d - -f 1)"
 # Trixie kernel ABI for the target system. Keep in sync with
 # Makefile KERNEL_VERSION and d-i/build/config/common. The Trixie kernel
 # release naming does not fit the old uname-derived Bookworm parsing below.
-KERNEL_ABI="6.12.115.2-untangle"
+KERNEL_ABI="6.12.115.3-untangle"
 # original bookworm logic (broken on trixie naming):
 # KERNEL_ABI="$(uname -r | cut -d - -f 1,2)-untangle"
 KERNEL_FLAVOUR=$(uname -r | cut -d - -f 3-)

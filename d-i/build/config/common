@@ -12,7 +12,7 @@
 # Default kernel ABI version to use. Append a kernel flavour to
 # produce KERNELVERSION. Keep in sync with the Trixie kernel build and
 # installer-pkgs-modified/base-installer/library.sh.
-LINUX_KERNEL_ABI ?= 6.12.115.2
+LINUX_KERNEL_ABI ?= 6.12.115.3
 
 # Make sure the mirror is sufficiently up-to-date, by checking minimal
 # version (list of package_version):
