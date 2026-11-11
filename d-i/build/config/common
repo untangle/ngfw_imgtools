@@ -10,13 +10,9 @@
 #DEBUG = y
 
 # Default kernel ABI version to use. Append a kernel flavour to
-# produce KERNELVERSION.
-# Trixie smoke test (Phase D): override stock 6.12.73+deb13 with bookworm 6.1.0-43.
-# We have 54 matching .udeb files in d-i/build/localudebs/ from prior bookworm builds.
-# TARGET kernel installed on the system is hardcoded in installer-pkgs-modified/
-# base-installer/library.sh as "6.12.85+1-untangle". Once trixie kernel build emits
-# its own di udebs (NGFW-15749 follow-up), revert this line to 6.12.85+1.
-LINUX_KERNEL_ABI ?= 6.12.85+4
+# produce KERNELVERSION. Keep in sync with the Trixie kernel build and
+# installer-pkgs-modified/base-installer/library.sh.
+LINUX_KERNEL_ABI ?= 6.12.115.2
 
 # Make sure the mirror is sufficiently up-to-date, by checking minimal
 # version (list of package_version):
