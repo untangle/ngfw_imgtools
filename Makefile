@@ -163,13 +163,6 @@ ngfw/iso/%-image: iso/dependencies ngfw/iso/conf
 		cat $(IMGTOOLS_DIR)/tmp/mirror/conf/distributions.ngfw >> $(IMGTOOLS_DIR)/tmp/mirror/conf/distributions ; \
 		reprepro --ignore=undefinedtarget -Vb $(IMGTOOLS_DIR)/tmp/mirror copymatched $(REPOSITORY) $(DISTRIBUTION) '*' ; \
 	fi ; \
-	set -- $(IMGTOOLS_DIR)/d-i/build/localudebs/*$(KERNEL_VERSION)*.udeb; \
-	if [ ! -f "$$1" ]; then \
-		echo "No local kernel udebs found for ABI $(KERNEL_VERSION)" >&2; \
-		exit 1; \
-	fi; \
-	reprepro -Vb $(IMGTOOLS_DIR)/tmp/mirror includeudeb $(REPOSITORY) "$$@"; \
-	reprepro -Vb $(IMGTOOLS_DIR)/tmp/mirror export $(REPOSITORY); \
 	export CUSTOMSIZE=`du -s --block-size=2048 $(IMGTOOLS_DIR)/tmp/mirror | awk '{print int($$1 * 1.5)}'` ; \
 	echo $(CUSTOMSIZE) ; \
 	$(SERIAL_ENV_PRE_CMD) \
